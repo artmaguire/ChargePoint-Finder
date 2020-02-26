@@ -52,7 +52,11 @@
         android:id="@+id/ratesFrag"
         android:name="com.example.chargepoint.ratesFrag"
         android:label="fragment_rates"
-        tools:layout="@layout/fragment_rates" />
+        tools:layout="@layout/fragment_rates" >
+        <action
+            android:id="@+id/action_ratesFrag_to_homeFrag"
+            app:destination="@id/homeFrag" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFrag"
         android:name="com.example.chargepoint.aboutFrag"
