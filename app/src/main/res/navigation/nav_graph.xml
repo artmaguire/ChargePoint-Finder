@@ -16,12 +16,19 @@
         <action
             android:id="@+id/action_homeFrag_to_mapFrag"
             app:destination="@id/mapFrag" />
+        <action
+            android:id="@+id/action_homeFrag_to_profileFrag"
+            app:destination="@id/profileFrag" />
     </fragment>
     <fragment
         android:id="@+id/signUpFrag"
         android:name="com.example.chargepoint.SignUpFrag"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFrag_to_homeFrag"
+            app:destination="@id/homeFrag" />
+    </fragment>
     <fragment
         android:id="@+id/welcomeFrag2"
         android:name="com.example.chargepoint.WelcomeFrag"
@@ -47,7 +54,11 @@
         android:id="@+id/conditionsFrag"
         android:name="com.example.chargepoint.ConditionsFrag"
         android:label="fragment_conditions"
-        tools:layout="@layout/fragment_conditions" />
+        tools:layout="@layout/fragment_conditions" >
+        <action
+            android:id="@+id/action_conditionsFrag_to_profileFrag"
+            app:destination="@id/profileFrag" />
+    </fragment>
     <fragment
         android:id="@+id/ratesFrag"
         android:name="com.example.chargepoint.ratesFrag"
@@ -61,7 +72,11 @@
         android:id="@+id/aboutFrag"
         android:name="com.example.chargepoint.aboutFrag"
         android:label="fragment_about"
-        tools:layout="@layout/fragment_about" />
+        tools:layout="@layout/fragment_about" >
+        <action
+            android:id="@+id/action_aboutFrag_to_profileFrag"
+            app:destination="@id/profileFrag" />
+    </fragment>
     <fragment
         android:id="@+id/receiptFrag"
         android:name="com.example.chargepoint.receiptFrag"
@@ -71,5 +86,48 @@
         android:id="@+id/mapFrag"
         android:name="com.example.chargepoint.mapFrag"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFrag_to_homeFrag"
+            app:destination="@id/homeFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFrag"
+        android:name="com.example.chargepoint.profileFrag"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFrag_to_homeFrag"
+            app:destination="@id/homeFrag" />
+        <action
+            android:id="@+id/action_profileFrag_to_updatePaymentDetailsFrag"
+            app:destination="@id/updatePaymentDetailsFrag" />
+        <action
+            android:id="@+id/action_profileFrag_to_updateInformationFrag"
+            app:destination="@id/updateInformationFrag" />
+        <action
+            android:id="@+id/action_profileFrag_to_aboutFrag"
+            app:destination="@id/aboutFrag" />
+        <action
+            android:id="@+id/action_profileFrag_to_conditionsFrag"
+            app:destination="@id/conditionsFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/updatePaymentDetailsFrag"
+        android:name="com.example.chargepoint.UpdatePaymentDetailsFrag"
+        android:label="fragment_update_payment_details"
+        tools:layout="@layout/fragment_update_payment_details" >
+        <action
+            android:id="@+id/action_updatePaymentDetailsFrag_to_profileFrag"
+            app:destination="@id/profileFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateInformationFrag"
+        android:name="com.example.chargepoint.UpdateInformationFrag"
+        android:label="fragment_update_information"
+        tools:layout="@layout/fragment_update_information" >
+        <action
+            android:id="@+id/action_updateInformationFrag_to_profileFrag"
+            app:destination="@id/profileFrag" />
+    </fragment>
 </navigation>
