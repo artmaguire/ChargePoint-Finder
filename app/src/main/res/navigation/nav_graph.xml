@@ -130,4 +130,22 @@
             android:id="@+id/action_updateInformationFrag_to_profileFrag"
             app:destination="@id/profileFrag" />
     </fragment>
+    <fragment
+        android:id="@+id/updateCarDetsFrag"
+        android:name="com.example.chargepoint.UpdateCarDetsFrag"
+        android:label="fragment_update_car_dets"
+        tools:layout="@layout/fragment_update_car_dets" >
+        <action
+            android:id="@+id/action_updateCarDetsFrag_to_profileFrag"
+            app:destination="@id/profileFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/receiptInfoPageFrag"
+        android:name="com.example.chargepoint.ReceiptInfoPageFrag"
+        android:label="fragment_receipt_info_page"
+        tools:layout="@layout/fragment_receipt_info_page" >
+        <action
+            android:id="@+id/action_receiptInfoPageFrag_to_receiptFrag"
+            app:destination="@id/receiptFrag" />
+    </fragment>
 </navigation>
