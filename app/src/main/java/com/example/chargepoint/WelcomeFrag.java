@@ -1,6 +1,7 @@
 package com.example.chargepoint;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 
 /**
@@ -35,11 +35,12 @@ public class WelcomeFrag extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button profile = view.findViewById(R.id.profileBtn);
+        Button profile = view.findViewById(R.id.profileBtn2);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_welcomeFrag2_to_profileFrag);
+                Intent intent = new Intent(getActivity(), Profile.class);
+                startActivity(intent);
             }
         });
     }

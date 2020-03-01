@@ -114,6 +114,9 @@
         <action
             android:id="@+id/action_profileFrag_to_conditionsFrag"
             app:destination="@id/conditionsFrag" />
+        <action
+            android:id="@+id/action_profileFrag_to_receiptInfoPageFrag"
+            app:destination="@id/receiptInfoPageFrag" />
     </fragment>
     <fragment
         android:id="@+id/updatePaymentDetailsFrag"

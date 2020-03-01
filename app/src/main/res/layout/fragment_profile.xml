@@ -7,42 +7,11 @@
     tools:context=".profileFrag">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/settingsRecyclerView"
-        android:layout_width="412dp"
-        android:layout_height="550dp"
+        android:id="@+id/recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/profleNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="177dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="177dp"
-        android:layout_marginBottom="20dp"
-        android:text="Art Maguire"
-        app:layout_constraintBottom_toTopOf="@+id/settingsRecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userImageView" />
-
-    <ImageView
-        android:id="@+id/userImageView"
-        android:layout_width="125dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="144dp"
-        android:src="@drawable/profile"
-        app:layout_constraintBottom_toTopOf="@+id/profleNameTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
