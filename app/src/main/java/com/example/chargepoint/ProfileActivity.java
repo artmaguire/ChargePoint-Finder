@@ -8,13 +8,15 @@ import android.preference.PreferenceFragment;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Profile extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_profile);
+
+        setTitle("Profile");
 
         FragmentManager fragMan = getFragmentManager();
         FragmentTransaction fragTrans = fragMan.beginTransaction();
@@ -29,7 +31,7 @@ public class Profile extends AppCompatActivity {
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            addPreferencesFromResource(R.xml.peferences);
+            addPreferencesFromResource(R.xml.preferences);
         }
     }
 }
