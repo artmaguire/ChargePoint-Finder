@@ -19,14 +19,8 @@
         <action
             android:id="@+id/action_homeFrag_to_profileFrag"
             app:destination="@id/profileFrag" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpFrag"
-        android:name="com.example.chargepoint.SignUpFrag"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFrag_to_homeFrag"
+            android:id="@+id/action_homeFrag_self"
             app:destination="@id/homeFrag" />
     </fragment>
     <fragment
@@ -35,19 +29,7 @@
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" >
         <action
-            android:id="@+id/action_welcomeFrag2_to_logInFrag2"
-            app:destination="@id/logInFrag2" />
-        <action
-            android:id="@+id/action_welcomeFrag2_to_signUpFrag"
-            app:destination="@id/signUpFrag" />
-    </fragment>
-    <fragment
-        android:id="@+id/logInFrag2"
-        android:name="com.example.chargepoint.LogInFrag"
-        android:label="fragment_log_in"
-        tools:layout="@layout/fragment_log_in" >
-        <action
-            android:id="@+id/action_logInFrag2_to_homeFrag"
+            android:id="@+id/action_welcomeFrag2_to_homeFrag"
             app:destination="@id/homeFrag" />
     </fragment>
     <fragment
