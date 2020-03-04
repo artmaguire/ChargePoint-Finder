@@ -33,5 +33,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             addPreferencesFromResource(R.xml.preferences);
         }
+
     }
 }

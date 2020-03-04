@@ -24,16 +24,20 @@
 
     <PreferenceCategory android:title="@string/general" />
     <SwitchPreference
+        android:id="@+id/dark_theme"
         android:icon="@drawable/ic_dark_mode_24px"
         android:summary="@string/change_theme"
         android:title="@string/dark_theme" />
 
     <SwitchPreference
+        android:id="@+id/biometrics"
         android:icon="@drawable/fingerprint24px"
         android:summary="@string/enable_fingerprint_unlock"
         android:title="@string/sign_in_with_biometrics" />
 
-    <PreferenceCategory android:gravity="bottom" />
+    <PreferenceCategory
+        android:id="@+id/other_preferences"
+        android:gravity="bottom" />
     <Preference
         android:gravity="bottom"
         android:icon="@drawable/ic_info_24px"
