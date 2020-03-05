@@ -11,9 +11,6 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFrag_to_ratesFrag"
-            app:destination="@id/ratesFrag" />
-        <action
             android:id="@+id/action_homeFrag_to_mapFrag"
             app:destination="@id/mapFrag" />
         <action
@@ -58,15 +55,6 @@
         <action
             android:id="@+id/action_conditionsFrag_to_profileFrag"
             app:destination="@id/profileFrag" />
-    </fragment>
-    <fragment
-        android:id="@+id/ratesFrag"
-        android:name="com.example.chargepoint.ratesFrag"
-        android:label="fragment_rates"
-        tools:layout="@layout/fragment_rates" >
-        <action
-            android:id="@+id/action_ratesFrag_to_homeFrag"
-            app:destination="@id/homeFrag" />
     </fragment>
     <fragment
         android:id="@+id/aboutFrag"

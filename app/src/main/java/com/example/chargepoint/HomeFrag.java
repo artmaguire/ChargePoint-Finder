@@ -49,7 +49,7 @@ public class HomeFrag extends Fragment {
         rate_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_homeFrag_to_ratesFrag);
+              
             }
         });
 
