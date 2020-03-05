@@ -22,4 +22,10 @@
         android:enabled="false"
         android:text="Sign Out" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="277dp"
+        app:srcCompat="@drawable/thunder" />
+
 </RelativeLayout>

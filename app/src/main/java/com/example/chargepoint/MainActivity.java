@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //test commit
 
         providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
