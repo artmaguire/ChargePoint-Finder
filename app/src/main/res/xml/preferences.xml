@@ -3,22 +3,32 @@
 
     <PreferenceCategory android:title="@string/user_information" />
     <Preference
+        android:id="@+id/account_preferences"
         android:icon="@drawable/ic_person_24px"
+        android:key="@string/account_details"
         android:summary="@string/name_email_password"
-        android:title="@string/account_details" />
+        android:title="@string/account_details">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.chargepoint"
+            android:targetClass="com.example.chargepoint.UpdateInformationFrag" />
+    </Preference>
 
     <Preference
         android:icon="@drawable/account_balance24px"
+        android:key="@string/payment_details"
         android:summary="@string/bank_details"
         android:title="@string/payment_details" />
 
     <Preference
         android:icon="@drawable/directions_car24px"
+        android:key="@string/car_details"
         android:summary="@string/car_type"
         android:title="@string/car_details" />
 
     <Preference
         android:icon="@drawable/ic_receipt_24px"
+        android:key="@string/payments_receipts"
         android:summary="@string/previous_payments"
         android:title="@string/payments_receipts" />
 
@@ -26,12 +36,14 @@
     <SwitchPreference
         android:id="@+id/dark_theme"
         android:icon="@drawable/ic_dark_mode_24px"
+        android:key="@string/dark_theme"
         android:summary="@string/change_theme"
         android:title="@string/dark_theme" />
 
     <SwitchPreference
         android:id="@+id/biometrics"
         android:icon="@drawable/fingerprint24px"
+        android:key="biometrics"
         android:summary="@string/enable_fingerprint_unlock"
         android:title="@string/sign_in_with_biometrics" />
 
@@ -41,12 +53,14 @@
     <Preference
         android:gravity="bottom"
         android:icon="@drawable/ic_info_24px"
+        android:key="@string/about_us"
         android:summary="@string/about_us_info"
         android:title="@string/about_us" />
 
     <Preference
         android:gravity="bottom"
         android:icon="@drawable/ic_sing_out_24px"
+        android:key="@string/sign_out"
         android:title="@string/sign_out" />
 
 </PreferenceScreen>
