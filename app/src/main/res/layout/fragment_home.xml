@@ -1,45 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/mapback"
     tools:context=".HomeFrag">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btn_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Home"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btn_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Maps"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_home" />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginBottom="379dp"
+            android:src="@drawable/chargepoint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp" />
 
-        <Button
-            android:id="@+id/btn_rates"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/simpletext"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rates"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_map" />
-
-        <Button
-            android:id="@+id/btn_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_rates" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/logo"
+            app:layout_gravity="center"
+            tools:layout_editor_absoluteX="0dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</RelativeLayout>
