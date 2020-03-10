@@ -30,30 +30,4 @@ public class HomeFrag extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @NonNull Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        Button home_button = view.findViewById(R.id.btn_home);
-
-        Button map_button = view.findViewById(R.id.btn_map);
-        map_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_homeFrag_to_mapFrag);
-            }
-        });
-
-        Button rate_button = view.findViewById(R.id.btn_rates);
-        rate_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_homeFrag_to_ratesFrag);
-            }
-        });
-
-        Button profile_button = view.findViewById(R.id.btn_profile);
-    }
-
 }

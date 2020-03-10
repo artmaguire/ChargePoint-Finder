@@ -11,7 +11,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.UpdateInformationActivity" />
         </Preference>
         <Preference
             android:title="@string/payment_details"
@@ -21,7 +21,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.UpdatePaymentDetailsActivity" />
         </Preference>
         <Preference
             android:title="@string/car_details"
@@ -31,7 +31,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.UpdateCarDetailsActivity" />
         </Preference>
         <Preference
             android:title="@string/payments_receipts"
@@ -41,7 +41,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.PaymentReceiptsActivity" />
         </Preference>
 
     </PreferenceCategory>
@@ -68,7 +68,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.AboutUsActivity" />
         </Preference>
         <Preference
             android:title="@string/sign_out"

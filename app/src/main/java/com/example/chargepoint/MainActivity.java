@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     List<AuthUI.IdpConfig> providers;
     Button btn_signout;
+    Button profileBtn;
     private static final int MY_REQUEST_CODE = 1234;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
                 new AuthUI.IdpConfig.GoogleBuilder().build()
         );
        showSignInOptions();
+
+        profileBtn = findViewById(R.id.profile_button);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void showSignInOptions() {
@@ -84,10 +94,6 @@ public class MainActivity extends AppCompatActivity {
             else{
                 Toast.makeText(this, ""+response.getError().getMessage(), Toast.LENGTH_SHORT).show();
             }
-
-
         }
-
-
     }
 }

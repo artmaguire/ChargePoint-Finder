@@ -28,4 +28,13 @@
         android:layout_height="277dp"
         app:srcCompat="@drawable/thunder" />
 
+    <Button
+        android:id="@+id/profile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="239dp"
+        android:text="@string/profile" />
+
 </RelativeLayout>
