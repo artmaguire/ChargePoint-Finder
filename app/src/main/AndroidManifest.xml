@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".PreviousReceiptsActivity" />
+        <activity android:name=".CarDetailsActivity" />
+        <activity android:name=".PaymentDetailsActivity" />
+        <activity android:name=".UpdateInformationActivity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
