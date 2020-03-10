@@ -2,7 +2,6 @@ package com.example.chargepoint;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.util.Log;
@@ -43,9 +42,6 @@ public class ProfileActivity extends AppCompatActivity implements Preference.OnP
 
     @Override
     public boolean onPreferenceClick (Preference preference) {
-        System.out.println("well");
-        SharedPreferences sp = getSharedPreferences("account_preferences", MODE_PRIVATE);
-        Log.d(TAG, "onPreferenceClick: "+ preference.getContext());
         String key = preference.getKey();
         Log.d(TAG, "onPreferenceClick: " + key);
         return !key.equals("");

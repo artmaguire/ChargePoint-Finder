@@ -39,5 +39,5 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.1'
     implementation 'com.android.support:recyclerview-v7:29.0.0'
     implementation 'androidx.preference:preference:1.1.0'
-
+    implementation 'de.hdodenhof:circleimageview:1.2.1'
 }
