@@ -25,4 +25,6 @@
     <string name="change_name">Change Name</string>
     <string name="change_email">Change Email</string>
     <string name="change_password">Change Password</string>
+    <string name="enter_new_email">Enter New Email</string>
+    <string name="enter_current_email">Enter Current Email</string>
 </resources>
