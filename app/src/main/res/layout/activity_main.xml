@@ -37,4 +37,13 @@
         android:layout_marginBottom="239dp"
         android:text="@string/profile" />
 
+    <Button
+        android:id="@+id/map_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="147dp"
+        android:text="map" />
+
 </RelativeLayout>

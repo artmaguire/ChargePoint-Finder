@@ -24,7 +24,16 @@ public class SignOutActivity extends Activity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(SignOutActivity.this);
         builder.setMessage("Are you sure you want to sign out?");
         builder.setCancelable(true);
-        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(SignOutActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 AuthUI.getInstance()
@@ -42,15 +51,6 @@ public class SignOutActivity extends Activity {
                         Toast.makeText(SignOutActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-        });
-
-        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(SignOutActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
 
