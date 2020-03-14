@@ -21,6 +21,8 @@ public class UpdateInformationActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(UpdateInformationActivity.this, ProfileActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

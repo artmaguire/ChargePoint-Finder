@@ -22,6 +22,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO update email address of user in the database
+                //TODO add Toast to say email successfully updated
                 Intent intent = new Intent(ChangeEmailActivity.this, UpdateInformationActivity.class);
                 startActivity(intent);
                 finish();

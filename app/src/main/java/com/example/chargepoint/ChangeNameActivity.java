@@ -22,6 +22,7 @@ public class ChangeNameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO Get Name and update in Firestore database
+                //TODO add Toast to say name successfully updated
                 finish();
             }
         });
