@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/backButton"
+    android:id="@+id/UpdateInformation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,13 +11,14 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/NameCard"
-        android:layout_width="300dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="168dp"
+        android:layout_width="296dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:background="#434343"
         android:onClick="changeName"
         android:textAlignment="center"
         app:cardBackgroundColor="#EAEAEA"
+        app:layout_constraintBottom_toTopOf="@+id/EmailCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,16 +27,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal">
+            android:id="@+id/cardLayout"
+            android:orientation="vertical"
+            android:padding="3dp">
 
             <TextView
+                android:id="@+id/changename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/change_name"
-                android:textSize="18sp">
+                android:layout_marginTop="3dp"
+                android:paddingLeft="10dp"
+                android:text="Change Name"
+                android:textColor="#676767"
+                android:textSize="10sp" />
 
-            </TextView>
+            <TextView
+                android:id="@+id/usersname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="10dp"
+                android:text="@string/users_name"
+                android:textColor="#E6000000"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -44,7 +59,7 @@
         android:id="@+id/EmailCard"
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:background="#434343"
         android:onClick="changeEmail"
         android:textAlignment="center"
@@ -74,7 +89,7 @@
         android:id="@+id/PasswordCard"
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:background="#434343"
         android:onClick="changePassword"
         android:textAlignment="center"
@@ -104,7 +119,7 @@
         android:id="@+id/backToUpdateInformation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="141dp"
+        android:layout_marginTop="355dp"
         android:layout_marginBottom="50dp"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
