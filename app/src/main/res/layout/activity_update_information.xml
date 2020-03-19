@@ -47,10 +47,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:hint="@string/users_name"
                 android:inputType="textPersonName"
+                android:onClick="changeName"
                 android:paddingLeft="10dp"
-                android:textColor="#E6000000"
+                android:text="@string/users_name"
+                android:textColor="#E6474747"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -94,10 +95,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:hint="art.maguire@gmail.com"
                 android:inputType="textEmailAddress"
+                android:onClick="changeEmail"
                 android:paddingLeft="10dp"
-                android:textColor="#E6000000"
+                android:text="art.maguire@gmail.com"
+                android:textColor="#E6474747"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -143,6 +145,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:inputType="textPassword"
+                android:onClick="changePassword"
                 android:paddingLeft="10dp"
                 android:text="art.maguire"
                 android:textColor="#E6474747"

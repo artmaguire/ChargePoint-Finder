@@ -17,11 +17,13 @@ import androidx.cardview.widget.CardView;
 
 public class UpdateInformationActivity extends AppCompatActivity {
     Button backBtn;
-    CardView card;
+    CardView nameCard;
+    CardView emailCard;
+    CardView passwordCard;
     LinearLayout nameLayout;
     LinearLayout emailLayout;
     LinearLayout passwordLayout;
-    TextView username;
+    TextView name;
     TextView email;
     TextView password;
 
@@ -46,9 +48,9 @@ public class UpdateInformationActivity extends AppCompatActivity {
     public void changeName(View v) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(UpdateInformationActivity.this);
 
-        card = findViewById(R.id.NameCard);
-        nameLayout = findViewById(card.getChildAt(0).getId());
-        username = findViewById(nameLayout.getChildAt(1).getId());
+        nameCard = findViewById(R.id.NameCard);
+        nameLayout = findViewById(nameCard.getChildAt(0).getId());
+        name = findViewById(nameLayout.getChildAt(1).getId());
 
         // Setting Dialog Title
         alertDialog.setTitle("Change Name");
@@ -66,7 +68,7 @@ public class UpdateInformationActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Write your code here to execute after dialog
-                        username.setText(input.getText().toString());
+                        name.setText(input.getText().toString());
 
                         //TODO: Add floating action button
                         Toast.makeText(getApplicationContext(),
@@ -92,9 +94,53 @@ public class UpdateInformationActivity extends AppCompatActivity {
     public void changeEmail(View v) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(UpdateInformationActivity.this);
 
-        card = findViewById(R.id.EmailCard);
-        nameLayout = findViewById(card.getChildAt(0).getId());
-        username = findViewById(nameLayout.getChildAt(1).getId());
+        emailCard = findViewById(R.id.EmailCard);
+        emailLayout = findViewById(emailLayout.getChildAt(0).getId());
+        email = findViewById(emailLayout.getChildAt(1).getId());
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Change Email");
+        // Set up the input
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        //TODO: Add user's name here
+//        input.setHint(R.string.);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        alertDialog.setView(input);
+
+
+        // Setting Positive "Yes" Btn
+        alertDialog.setPositiveButton("Save",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog
+                        email.setText(input.getText().toString());
+
+                        //TODO: Add floating action button
+                        Toast.makeText(getApplicationContext(),
+                                "Password updated", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                });
+
+        // Setting Negative "NO" Btn
+        alertDialog.setNegativeButton("Back",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog
+                    }
+                });
+
+        // Showing Alert Dialog
+        alertDialog.show();
+    }
+
+    public void changePassword(View v) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(UpdateInformationActivity.this);
+
+        passwordCard = findViewById(R.id.password);
+        passwordLayout = findViewById(passwordCard.getChildAt(0).getId());
+        password = findViewById(passwordLayout.getChildAt(1).getId());
 
         // Setting Dialog Title
         alertDialog.setTitle("Change Name");
@@ -112,11 +158,11 @@ public class UpdateInformationActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Write your code here to execute after dialog
-                        username.setText(input.getText().toString());
+                        password.setText(input.getText().toString());
 
                         //TODO: Add floating action button
                         Toast.makeText(getApplicationContext(),
-                                "Name updated", Toast.LENGTH_SHORT)
+                                "Password updated", Toast.LENGTH_SHORT)
                                 .show();
                     }
                 });
@@ -131,12 +177,5 @@ public class UpdateInformationActivity extends AppCompatActivity {
 
         // Showing Alert Dialog
         alertDialog.show();
-//        Intent intent = new Intent(UpdateInformationActivity.this, ChangeNameActivity.class);
-//        startActivity(intent);
-    }
-
-    public void changePassword(View v) {
-        Intent intent = new Intent(UpdateInformationActivity.this, ChangePasswordActivity.class);
-        startActivity(intent);
     }
 }
