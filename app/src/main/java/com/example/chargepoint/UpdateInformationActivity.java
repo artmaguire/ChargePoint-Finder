@@ -87,15 +87,13 @@ public class UpdateInformationActivity extends AppCompatActivity {
 
         // Showing Alert Dialog
         alertDialog.show();
-//        Intent intent = new Intent(UpdateInformationActivity.this, ChangeNameActivity.class);
-//        startActivity(intent);
     }
 
     public void changeEmail(View v) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(UpdateInformationActivity.this);
 
         emailCard = findViewById(R.id.EmailCard);
-        emailLayout = findViewById(emailLayout.getChildAt(0).getId());
+        emailLayout = findViewById(emailCard.getChildAt(0).getId());
         email = findViewById(emailLayout.getChildAt(1).getId());
 
         // Setting Dialog Title
@@ -105,7 +103,7 @@ public class UpdateInformationActivity extends AppCompatActivity {
         // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         //TODO: Add user's name here
 //        input.setHint(R.string.);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         alertDialog.setView(input);
 
 
@@ -138,7 +136,7 @@ public class UpdateInformationActivity extends AppCompatActivity {
     public void changePassword(View v) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(UpdateInformationActivity.this);
 
-        passwordCard = findViewById(R.id.password);
+        passwordCard = findViewById(R.id.PasswordCard);
         passwordLayout = findViewById(passwordCard.getChildAt(0).getId());
         password = findViewById(passwordLayout.getChildAt(1).getId());
 
@@ -149,7 +147,7 @@ public class UpdateInformationActivity extends AppCompatActivity {
         // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         //TODO: Add user's name here
 //        input.setHint(R.string.);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         alertDialog.setView(input);
 
 
