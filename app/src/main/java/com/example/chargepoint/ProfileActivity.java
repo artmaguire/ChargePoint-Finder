@@ -1,53 +1,54 @@
 package com.example.chargepoint;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceFragment;
-import android.util.Log;
-
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.Preference;
 
-public class ProfileActivity extends AppCompatActivity implements Preference.OnPreferenceClickListener {
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
 
-    private static final String TAG = "PROFILE_ACTIVITY";
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_profile);
 
-        setTitle("Profile");
+        //Initialise and assign variable
+        BottomNavigationView navigation = findViewById(R.id.bottomNavigationView);
 
-        FragmentManager fragMan = getFragmentManager();
-        FragmentTransaction fragTrans = fragMan.beginTransaction();
+        //set home selected
+        navigation.setSelectedItemId(R.id.profile);
 
-        SettingsFragment setFrag = new SettingsFragment();
-        fragTrans.add(android.R.id.content, setFrag, "SETTINGS_FRAGMENT");
-        fragTrans.commit();
+        //perform itemselectedlistener
+
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.maps:
+                        startActivity(new Intent(getApplicationContext()
+                                ,MapActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.profile:
+                        return true;
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext()
+                                ,MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.rates:
+                        startActivity(new Intent(getApplicationContext()
+                                ,RatesActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
-    public static class SettingsFragment extends PreferenceFragment {
-
-        @Override
-        public void onCreate(@Nullable Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-            addPreferencesFromResource(R.xml.preferences);
-        }
-    }
-
-    @Override
-    public boolean onPreferenceClick (Preference preference) {
-        System.out.println("well");
-        SharedPreferences sp = getSharedPreferences("account_preferences", MODE_PRIVATE);
-        Log.d(TAG, "onPreferenceClick: "+ preference.getContext());
-        String key = preference.getKey();
-        Log.d(TAG, "onPreferenceClick: " + key);
-        return !key.equals("");
-    }
 }
