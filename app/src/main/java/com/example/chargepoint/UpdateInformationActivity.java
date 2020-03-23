@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,10 +13,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+
 public class UpdateInformationActivity extends AppCompatActivity {
+    private static String TAG = "User ";
+    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
     Button backBtn;
     CardView nameCard;
     CardView emailCard;
@@ -34,6 +45,8 @@ public class UpdateInformationActivity extends AppCompatActivity {
 
         setTitle("Update Information");
 
+        updateUserInfo();
+
         backBtn = findViewById(R.id.backToUpdateInformation);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,14 +64,13 @@ public class UpdateInformationActivity extends AppCompatActivity {
         nameCard = findViewById(R.id.NameCard);
         nameLayout = findViewById(nameCard.getChildAt(0).getId());
         name = findViewById(nameLayout.getChildAt(1).getId());
+        name.setHint(currentUser.getDisplayName());
 
-        // Setting Dialog Title
         alertDialog.setTitle("Change Name");
-        // Set up the input
+
         final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        //TODO: Add user's name here
-        input.setHint(R.string.users_name);
+
+        input.setHint(currentUser.getDisplayName());
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         alertDialog.setView(input);
 
@@ -67,13 +79,25 @@ public class UpdateInformationActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("Save",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog
-                        name.setText(input.getText().toString());
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(input.getText().toString())
+                                .build();
 
-                        //TODO: Add floating action button
-                        Toast.makeText(getApplicationContext(),
-                                "Name updated", Toast.LENGTH_SHORT)
-                                .show();
+                        currentUser.updateProfile(profileUpdates)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d(TAG, "User Name updated.");
+
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Name updated", Toast.LENGTH_SHORT)
+                                                    .show();
+
+                                            updateUserInfo();
+                                        }
+                                    }
+                                });
                     }
                 });
 
@@ -85,7 +109,6 @@ public class UpdateInformationActivity extends AppCompatActivity {
                     }
                 });
 
-        // Showing Alert Dialog
         alertDialog.show();
     }
 
@@ -95,29 +118,32 @@ public class UpdateInformationActivity extends AppCompatActivity {
         emailCard = findViewById(R.id.EmailCard);
         emailLayout = findViewById(emailCard.getChildAt(0).getId());
         email = findViewById(emailLayout.getChildAt(1).getId());
+        name.setHint(currentUser.getEmail());
 
-        // Setting Dialog Title
         alertDialog.setTitle("Change Email");
-        // Set up the input
+
         final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        //TODO: Add user's name here
-//        input.setHint(R.string.);
+
+        input.setHint(currentUser.getEmail());
         input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         alertDialog.setView(input);
-
 
         // Setting Positive "Yes" Btn
         alertDialog.setPositiveButton("Save",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to execute after dialog
-                        email.setText(input.getText().toString());
+                        String emailAddress = input.getText().toString();
 
-                        //TODO: Add floating action button
-                        Toast.makeText(getApplicationContext(),
-                                "Password updated", Toast.LENGTH_SHORT)
-                                .show();
+                        currentUser.updateEmail(emailAddress)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d(TAG, "User email address updated.");
+                                            updateUserInfo();
+                                        }
+                                    }
+                                });
                     }
                 });
 
@@ -129,7 +155,6 @@ public class UpdateInformationActivity extends AppCompatActivity {
                     }
                 });
 
-        // Showing Alert Dialog
         alertDialog.show();
     }
 
@@ -140,16 +165,12 @@ public class UpdateInformationActivity extends AppCompatActivity {
         passwordLayout = findViewById(passwordCard.getChildAt(0).getId());
         password = findViewById(passwordLayout.getChildAt(1).getId());
 
-        // Setting Dialog Title
-        alertDialog.setTitle("Change Name");
-        // Set up the input
+        alertDialog.setTitle("Change Password");
+
         final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        //TODO: Add user's name here
-//        input.setHint(R.string.);
+
         input.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         alertDialog.setView(input);
-
 
         // Setting Positive "Yes" Btn
         alertDialog.setPositiveButton("Save",
@@ -158,10 +179,19 @@ public class UpdateInformationActivity extends AppCompatActivity {
                         // Write your code here to execute after dialog
                         password.setText(input.getText().toString());
 
-                        //TODO: Add floating action button
-                        Toast.makeText(getApplicationContext(),
-                                "Password updated", Toast.LENGTH_SHORT)
-                                .show();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        String newPassword = input.getText().toString();
+
+                        user.updatePassword(newPassword)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d(TAG, "User password updated.");
+                                            updateUserInfo();
+                                        }
+                                    }
+                                });
                     }
                 });
 
@@ -173,7 +203,18 @@ public class UpdateInformationActivity extends AppCompatActivity {
                     }
                 });
 
-        // Showing Alert Dialog
         alertDialog.show();
+    }
+
+    private void updateUserInfo() {
+        nameCard = findViewById(R.id.NameCard);
+        nameLayout = findViewById(nameCard.getChildAt(0).getId());
+        name = findViewById(nameLayout.getChildAt(1).getId());
+        name.setHint(currentUser.getDisplayName());
+
+        emailCard = findViewById(R.id.EmailCard);
+        emailLayout = findViewById(emailCard.getChildAt(0).getId());
+        email = findViewById(emailLayout.getChildAt(1).getId());
+        email.setHint(currentUser.getEmail());
     }
 }

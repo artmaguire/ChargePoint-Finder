@@ -50,7 +50,6 @@
                 android:inputType="textPersonName"
                 android:onClick="changeName"
                 android:paddingLeft="10dp"
-                android:text="@string/users_name"
                 android:textColor="#E6474747"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -98,7 +97,6 @@
                 android:inputType="textEmailAddress"
                 android:onClick="changeEmail"
                 android:paddingLeft="10dp"
-                android:text="art.maguire@gmail.com"
                 android:textColor="#E6474747"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -145,7 +143,7 @@
                 android:inputType="textPassword"
                 android:onClick="changePassword"
                 android:paddingLeft="10dp"
-                android:text="art.maguire"
+                android:text="**********"
                 android:textColor="#E6474747"
                 android:textSize="18sp" />
         </LinearLayout>
