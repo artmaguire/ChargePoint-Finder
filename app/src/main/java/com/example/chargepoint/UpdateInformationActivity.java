@@ -24,9 +24,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class UpdateInformationActivity extends AppCompatActivity {
-    private static String TAG = "User ";
-    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+    private static String TAG = "User";
+
+    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     Button backBtn;
     CardView nameCard;
     CardView emailCard;
