@@ -1,112 +1,30 @@
 package com.example.chargepoint;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Nullable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<AuthUI.IdpConfig> providers;
-    Button btn_signout;
-    Button profileBtn;
-    Button mapBtn;
-
-    private static final int MY_REQUEST_CODE = 1234;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        btn_signout = findViewById(R.id.btn_signout);
-        btn_signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AuthUI.getInstance()
-                        .signOut(MainActivity.this)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task){
-                                btn_signout.setEnabled(false);
-                                showSignInOptions();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-        //payment_receipts_card commit
-
-        providers = Arrays.asList(
-                new AuthUI.IdpConfig.EmailBuilder().build(),
-                new AuthUI.IdpConfig.GoogleBuilder().build()
-        );
-        //showSignInOptions();
-
-        profileBtn = findViewById(R.id.profile_button);
-        profileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        mapBtn = findViewById(R.id.map_button);
-        mapBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
-    private void showSignInOptions() {
-        startActivityForResult(
-                AuthUI.getInstance().createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .setTheme(R.style.Theme)
-                .build(), MY_REQUEST_CODE
-        );
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == MY_REQUEST_CODE){
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-            if(resultCode == RESULT_OK){
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                Toast.makeText(this, ""+user.getEmail(), Toast.LENGTH_SHORT).show();
-                btn_signout.setEnabled(true);
-            }
-            else{
-                Toast.makeText(this, ""+response.getError().getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_profile)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
     }
 }
