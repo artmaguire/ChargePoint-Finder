@@ -75,7 +75,6 @@ public class UpdateInformationActivity extends AppCompatActivity {
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         alertDialog.setView(input);
 
-
         // Setting Positive "Yes" Btn
         alertDialog.setPositiveButton("Save",
                 new DialogInterface.OnClickListener() {

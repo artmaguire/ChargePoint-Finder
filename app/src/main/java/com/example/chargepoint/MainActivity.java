@@ -56,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //test commit
+        //payment_receipts_card commit
 
         providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build()
         );
-       showSignInOptions();
+        //showSignInOptions();
 
         profileBtn = findViewById(R.id.profile_button);
         profileBtn.setOnClickListener(new View.OnClickListener() {
