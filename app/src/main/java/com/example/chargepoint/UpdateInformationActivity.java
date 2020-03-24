@@ -46,6 +46,8 @@ public class UpdateInformationActivity extends AppCompatActivity {
 
         setTitle("Update Information");
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         updateUserInfo();
 
         backBtn = findViewById(R.id.backToUpdateInformation);
@@ -217,4 +219,12 @@ public class UpdateInformationActivity extends AppCompatActivity {
         email = findViewById(emailLayout.getChildAt(1).getId());
         email.setHint(currentUser.getEmail());
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }
+
+

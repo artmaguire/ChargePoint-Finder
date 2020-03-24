@@ -10,8 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ReceiptsRecyclerAdapter extends RecyclerView.Adapter<ReceiptsRecyclerAdapter.ViewHolder> {
 
@@ -41,13 +45,12 @@ public class ReceiptsRecyclerAdapter extends RecyclerView.Adapter<ReceiptsRecycl
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Receipt receipt = receipts.get(position);
 
-        /*Date date = receipt.getDatetime();
-        String pattern = "MMMM dd yyyy";
+        Date date = receipt.getDatetime().toDate();
+        String pattern = "MMMM dd, yyyy";
         DateFormat df = new SimpleDateFormat(pattern, Locale.ENGLISH);
         String dateString = df.format(date);
 
-        holder.receiptDate.setText(dateString);*/
-        holder.receiptDate.setText("hello world");
+        holder.receiptDate.setText(dateString);
     }
 
     @Override

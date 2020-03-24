@@ -2,6 +2,8 @@ package com.example.chargepoint;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,17 +26,22 @@ public class PreviousReceiptsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private ReceiptsRecyclerAdapter adapter;
+    private ProgressBar pgsBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_previous_receipts);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerView = findViewById(R.id.receiptsRecyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ReceiptsRecyclerAdapter(this);
         recyclerView.setAdapter(adapter);
+
+        pgsBar = findViewById(R.id.receiptsPBar);
 
         db = FirebaseFirestore.getInstance();
 
@@ -45,9 +52,12 @@ public class PreviousReceiptsActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+
                             List<Receipt> receipts = task.getResult().toObjects(Receipt.class);
                             adapter.setReceipts(receipts);
                             adapter.notifyDataSetChanged();
+
+                            pgsBar.setVisibility(View.GONE);
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
@@ -61,5 +71,11 @@ public class PreviousReceiptsActivity extends AppCompatActivity {
 
         String invoiceID = UUID.randomUUID().toString();
         Log.d(TAG, "onCreate: " + invoiceID);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
