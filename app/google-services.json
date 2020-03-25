@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "120444106517",
+    "firebase_url": "https://chargepoint-84590.firebaseio.com",
+    "project_id": "chargepoint-84590",
+    "storage_bucket": "chargepoint-84590.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120444106517:android:138a532742d49049e0db1c",
+        "android_client_info": {
+          "package_name": "com.example.chargepoint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120444106517-ah5ibr5glievqoak842aqakshrc4jenq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chargepoint",
+            "certificate_hash": "d4fd68c70eafb0d0ef4021bf22c52ac4780b09a1"
+          }
+        },
+        {
+          "client_id": "120444106517-n5ki1uldfjp0qs5u0b6kthl23qgci834.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr5RmfzI0JEz9oXkwGeixFtfl7pjgCpvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120444106517-n5ki1uldfjp0qs5u0b6kthl23qgci834.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
