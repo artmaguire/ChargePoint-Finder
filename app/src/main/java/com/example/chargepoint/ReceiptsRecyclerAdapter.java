@@ -1,9 +1,10 @@
 package com.example.chargepoint;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,17 +20,22 @@ import java.util.Locale;
 
 public class ReceiptsRecyclerAdapter extends RecyclerView.Adapter<ReceiptsRecyclerAdapter.ViewHolder> {
 
+    private static final String TAG = "Receipt Adapter";
+
+    private final AdapterView.OnItemClickListener listener;
+
+
     private List<Receipt> receipts;
     private Context context;
 
     public ReceiptsRecyclerAdapter(Context context) {
         this.context = context;
         this.receipts = new ArrayList<>();
+        listener = null;
     }
 
     public void setReceipts(List<Receipt> receipts) {
         this.receipts = receipts;
-        Log.d("TAG", "setReceipts: " + receipts.size());
     }
 
     @NonNull
@@ -50,7 +56,16 @@ public class ReceiptsRecyclerAdapter extends RecyclerView.Adapter<ReceiptsRecycl
         DateFormat df = new SimpleDateFormat(pattern, Locale.ENGLISH);
         String dateString = df.format(date);
 
+        final double amount = receipt.getCost();
+
         holder.receiptDate.setText(dateString);
+        holder.receiptAmount.setText("€".concat(String.valueOf(amount)));
+
+        holder.cv.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ReceiptActivity.class);
+            intent.putExtra("receipt", receipt);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -62,11 +77,13 @@ public class ReceiptsRecyclerAdapter extends RecyclerView.Adapter<ReceiptsRecycl
         // each data item is just a string in this case
         CardView cv;
         TextView receiptDate;
+        TextView receiptAmount;
 
         ViewHolder(CardView view) {
             super(view);
             cv = view;
             receiptDate = view.findViewById(R.id.receiptDate);
+            receiptAmount = view.findViewById(R.id.receiptAmount);
         }
     }
 }
