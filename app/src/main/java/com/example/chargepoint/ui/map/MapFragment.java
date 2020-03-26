@@ -4,18 +4,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.chargepoint.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 
-public class MapFragment extends Fragment {
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
+    private MapView mapView;
+    private GoogleMap mMap;
     private MapViewModel mapViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -23,13 +27,49 @@ public class MapFragment extends Fragment {
         mapViewModel =
                 ViewModelProviders.of(this).get(MapViewModel.class);
         View root = inflater.inflate(R.layout.fragment_map, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        mapViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        mapView = root.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+
+        mapView.getMapAsync(this);
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        mMap = map;
+
+        LatLng ireland = new LatLng(53.4, -8);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ireland, 7));
+    }
+
+    @Override
+    public void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        mapView.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
     }
 }
