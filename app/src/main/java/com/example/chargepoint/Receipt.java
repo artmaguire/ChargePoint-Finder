@@ -37,6 +37,9 @@ public class Receipt implements Parcelable {
         this.map_id = map_id;
     }
 
+    public Receipt() {
+    }
+
     private Receipt(Parcel in) {
         invoiceID = in.readString();
         cost = in.readDouble();
