@@ -25,7 +25,7 @@ public class FirebaseHelper {
                 .addOnCompleteListener(listener);
     }
 
-    public void getAllMapPoints(OnCompleteListener<QuerySnapshot> listener) {
+    public void getAllChargePoints(OnCompleteListener<QuerySnapshot> listener) {
         db.collection("map")
                 .get()
                 .addOnCompleteListener(listener);

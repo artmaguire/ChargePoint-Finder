@@ -1,6 +1,7 @@
 package com.example.chargepoint.ui.map;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,18 +10,25 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.chargepoint.ChargePoint;
+import com.example.chargepoint.FirebaseHelper;
 import com.example.chargepoint.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private MapView mapView;
-    private GoogleMap mMap;
+    private final String TAG = "ChargeMap";
     private MapViewModel mapViewModel;
+    private GoogleMap map;
+    private List<ChargePoint> chargePoints;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -28,11 +36,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 ViewModelProviders.of(this).get(MapViewModel.class);
         View root = inflater.inflate(R.layout.fragment_map, container, false);
 
+        getChargePoints();
+
         mapView = root.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
         mapView.getMapAsync(this);
         return root;
+    }
+
+    private void getChargePoints() {
+        FirebaseHelper fbHelper = FirebaseHelper.getInstance();
+        fbHelper.getAllChargePoints(task -> {
+            if (task.isSuccessful()) {
+                chargePoints = task.getResult().toObjects(ChargePoint.class);
+                checkIfMapAndDbReady();
+            } else {
+                Log.d(TAG, "Error getting documents: ", task.getException());
+            }
+        });
     }
 
     @Override
@@ -43,10 +65,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap map) {
-        mMap = map;
+        this.map = map;
 
         LatLng ireland = new LatLng(53.4, -8);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ireland, 7));
+        this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(ireland, 7));
+
+        checkIfMapAndDbReady();
+    }
+
+    private void checkIfMapAndDbReady() {
+        if (map != null & chargePoints != null)
+            addChargePointsToMap();
+    }
+
+    private void addChargePointsToMap() {
+        for (ChargePoint cp : chargePoints) {
+            map.addMarker(new MarkerOptions()
+                    .position(cp.getLocationAsLatLng())
+                    .title(cp.getOperator()));
+        }
     }
 
     @Override
