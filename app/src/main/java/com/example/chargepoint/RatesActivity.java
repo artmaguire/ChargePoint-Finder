@@ -22,9 +22,9 @@ import java.util.ArrayList;
 
 public class RatesActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private RateAdapter adapter;
-    private ArrayList<Rate> rateArrayList;
+    RecyclerView recyclerView;
+    RateAdapter adapter;
+    ArrayList<Rate> rateArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,31 +48,18 @@ public class RatesActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
                             for(QueryDocumentSnapshot document : task.getResult()) {
-                                System.out.println(document.getId() + " - " + document.getData());
+                                System.out.println(document.getString("name") + " " + document.getString("a") + " " + document.getString("b") + " " + document.getString("c"));
                                 Rate rate = new Rate(document.getString("name"), document.getString("a"), document.getString("b"), document.getString("c"));
                                 rateArrayList.add(rate);
+                                adapter.notifyDataSetChanged();
                             }
                         }
                     }
                 });
 
+        System.out.println(rateArrayList.toString());
 
-        Rate rate = new Rate("Test", "a", "b", "c");
-        rateArrayList.add(rate);
-        rate = new Rate("Test1", "a", "b", "c");
-        rateArrayList.add(rate);
-        rate = new Rate("Test2", "a", "b", "c");
-        rateArrayList.add(rate);
-        rate = new Rate("Test3", "a", "b", "c");
-        rateArrayList.add(rate);
-        rate = new Rate("Test4", "a", "b", "c");
-        rateArrayList.add(rate);
-        rate = new Rate("Test5", "a", "b", "c");
-        rateArrayList.add(rate);
-        rate = new Rate("Test6", "a", "b", "c");
-        rateArrayList.add(rate);
 
-        adapter.notifyDataSetChanged();
 
         //Initialise and assign variable
         BottomNavigationView navigation = findViewById(R.id.bottomNavigationView);
