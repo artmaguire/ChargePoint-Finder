@@ -1,26 +1,49 @@
 package com.example.chargepoint;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.GeoPoint;
 
-public class Receipt {
+public class Receipt implements Parcelable {
     private String invoiceID;
-    private double euro;
-    private Timestamp datetime;
-    private GeoPoint location;
-    private String payment;
-    private double electricity;
+    public static final Creator<Receipt> CREATOR = new Creator<Receipt>() {
+        @Override
+        public Receipt createFromParcel(Parcel in) {
+            return new Receipt(in);
+        }
 
-    public Receipt(String invoiceID, double euro, Timestamp datetime, GeoPoint location, String payment, double electricity) {
+        @Override
+        public Receipt[] newArray(int size) {
+            return new Receipt[size];
+        }
+    };
+    private Timestamp datetime;
+    private double cost;
+    private double electricity;
+    private String card;
+    private String map_id;
+    private GeoPoint geopoint;
+
+    public Receipt(String invoiceID, double cost, Timestamp datetime, String card, double electricity, String map_id) {
         this.invoiceID = invoiceID;
-        this.euro = euro;
+        this.cost = cost;
         this.datetime = datetime;
-        this.location = location;
-        this.payment = payment;
+        this.card = card;
         this.electricity = electricity;
+        this.map_id = map_id;
     }
 
-    public Receipt() {
+    private Receipt(Parcel in) {
+        invoiceID = in.readString();
+        cost = in.readDouble();
+        datetime = in.readParcelable(Timestamp.class.getClassLoader());
+        card = in.readString();
+        electricity = in.readDouble();
+        map_id = in.readString();
     }
 
     public String getInvoiceID() {
@@ -31,12 +54,12 @@ public class Receipt {
         this.invoiceID = invoiceID;
     }
 
-    public double getEuro() {
-        return euro;
+    public double getCost() {
+        return cost;
     }
 
-    public void setEuro(double euro) {
-        this.euro = euro;
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public Timestamp getDatetime() {
@@ -47,20 +70,20 @@ public class Receipt {
         this.datetime = datetime;
     }
 
-    public GeoPoint getLocation() {
-        return location;
+    public GeoPoint getGeopoint() {
+        return geopoint;
     }
 
-    public void setLocation(GeoPoint location) {
-        this.location = location;
+    public void setGeopoint(GeoPoint geopoint) {
+        this.geopoint = geopoint;
     }
 
-    public String getPayment() {
-        return payment;
+    public String getCard() {
+        return card;
     }
 
-    public void setPayment(String payment) {
-        this.payment = payment;
+    public void setCard(String card) {
+        this.card = card;
     }
 
     public double getElectricity() {
@@ -69,5 +92,39 @@ public class Receipt {
 
     public void setElectricity(double electricity) {
         this.electricity = electricity;
+    }
+
+    public String getMap_id() {
+        return map_id;
+    }
+
+    public void setMap_id(String map_id) {
+        this.map_id = map_id;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(invoiceID);
+        dest.writeDouble(cost);
+        dest.writeParcelable(datetime, flags);
+        dest.writeString(card);
+        dest.writeDouble(electricity);
+        dest.writeString(map_id);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Invoice ID: " + invoiceID + "\n"
+                + "Cost: " + cost + "\n"
+                + "Datetime: " + datetime + "\n"
+                + "Card: " + card + "\n"
+                + "Electricity: " + electricity + "\n"
+                + "Map ID: " + map_id;
     }
 }
