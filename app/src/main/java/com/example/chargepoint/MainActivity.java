@@ -17,10 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-         bottomNavigationView.setOnNavigationItemReselectedListener((BottomNavigationView.OnNavigationItemReselectedListener) bottomNavMethod);
-         getSupportFragmentManager().beginTransaction().replace(R.id.container , new HomeFragment()).commit();
     }
 
 
