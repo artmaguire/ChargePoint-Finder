@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_map" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.chargepoint.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_rates"
+        android:name="com.example.chargepoint.ui.rates.RatesFragment"
+        android:label="@string/title_rates"
+        tools:layout="@layout/fragment_rates" />
 
     <fragment
         android:id="@+id/navigation_profile"

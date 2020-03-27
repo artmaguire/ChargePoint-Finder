@@ -10,15 +10,13 @@
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RateActivity"></activity>
-        <activity android:name=".ReceiptActivity"></activity>
+        <activity android:name=".ReceiptActivity" />
         <activity android:name=".SignOutActivity" />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".PreviousReceiptsActivity" />
         <activity android:name=".UpdateCarDetailsActivity" />
         <activity android:name=".PaymentDetailsActivity" />
         <activity android:name=".UpdateInformationActivity" />
-        <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,9 +31,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBMW4vQXfXez2PzBmoRL_tngFIvziLmTCA" />
-        <activity android:name=".RatesActivity" />
-        <activity android:name=".PaymentDetailsActivity" />
-
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_test_QSvOv2icygrK8v"

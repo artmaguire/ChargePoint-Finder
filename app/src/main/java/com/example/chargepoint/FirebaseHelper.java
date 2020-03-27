@@ -1,3 +1,10 @@
+/*
+ * Created by Art.
+ * Helper file for connection to the Firebase db.
+ * All firebase code should go here, to ensure only one connection to the db is opened.
+ * Access to Firebase by: FirebaseHelper fbHelper = FirebaseHelp.getInstance()
+ */
+
 package com.example.chargepoint;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,9 +38,15 @@ public class FirebaseHelper {
                 .addOnCompleteListener(listener);
     }
 
-    public void getMapPoint(String map_id, OnCompleteListener<DocumentSnapshot> listener) {
+    public void getChargePoint(String map_id, OnCompleteListener<DocumentSnapshot> listener) {
         db.collection("map")
                 .document(map_id)
+                .get()
+                .addOnCompleteListener(listener);
+    }
+
+    public void getAllRates(OnCompleteListener<QuerySnapshot> listener) {
+        db.collection("rates")
                 .get()
                 .addOnCompleteListener(listener);
     }

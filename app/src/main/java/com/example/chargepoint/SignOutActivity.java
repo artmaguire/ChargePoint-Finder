@@ -27,7 +27,7 @@ public class SignOutActivity extends Activity {
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(SignOutActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(SignOutActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }

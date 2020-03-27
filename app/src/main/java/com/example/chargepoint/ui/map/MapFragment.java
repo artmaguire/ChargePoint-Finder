@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -49,6 +50,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
         fbHelper.getAllChargePoints(task -> {
             if (task.isSuccessful()) {
+                //TODO: ART -> fields starting with 'is' not setting properly
                 chargePoints = task.getResult().toObjects(ChargePoint.class);
                 checkIfMapAndDbReady();
             } else {
@@ -61,6 +63,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_map);
     }
 
     @Override
