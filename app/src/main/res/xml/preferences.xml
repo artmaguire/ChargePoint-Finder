@@ -19,7 +19,7 @@
             android:title="@string/payment_details">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetClass="com.example.chargepoint.UpdatePaymentDetailsActivity"
+                android:targetClass="com.example.chargepoint.PaymentDetailsActivity"
                 android:targetPackage="com.example.chargepoint" />
         </Preference>
         <Preference

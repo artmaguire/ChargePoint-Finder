@@ -3,12 +3,13 @@ package com.example.chargepoint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.Preference;
+//import androidx.preference.Preference;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity implements Preference.OnP
         Log.d(TAG, "User Email: " + currentUser.getEmail());
         Log.d(TAG, "User ID: " + currentUser.getUid());
 
-        setTitle("Profile");
+        setTitle("Profiles");
 
         FragmentManager fragMan = getFragmentManager();
         FragmentTransaction fragTrans = fragMan.beginTransaction();

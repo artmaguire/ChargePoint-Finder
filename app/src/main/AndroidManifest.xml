@@ -33,6 +33,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBMW4vQXfXez2PzBmoRL_tngFIvziLmTCA" />
         <activity android:name=".RatesActivity" />
+        <activity android:name=".PaymentDetailsActivity" />
 
         <meta-data
             android:name="com.razorpay.ApiKey"
