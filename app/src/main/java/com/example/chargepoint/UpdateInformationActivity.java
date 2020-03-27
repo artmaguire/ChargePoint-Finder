@@ -109,7 +109,7 @@ public class UpdateInformationActivity extends AppCompatActivity {
         emailCard = findViewById(R.id.EmailCard);
         emailLayout = findViewById(emailCard.getChildAt(0).getId());
         email = findViewById(emailLayout.getChildAt(1).getId());
-        name.setHint(currentUser.getEmail());
+        email.setHint(currentUser.getEmail());
 
         alertDialog.setTitle("Change Email");
 
