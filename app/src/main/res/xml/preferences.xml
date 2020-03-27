@@ -1,47 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="User Information">
         <Preference
-            android:title="@string/account_details"
-            android:key="@string/account_details"
             android:icon="@drawable/ic_person_24px"
-            android:summary="Name, Email, Password">
+            android:key="@string/account_details"
+            android:summary="Name, Email, Password"
+            android:title="@string/account_details">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.UpdateInformationActivity"
+                android:targetPackage="com.example.chargepoint" />
         </Preference>
         <Preference
-            android:title="@string/payment_details"
-            android:key="@string/payment_details"
             android:icon="@drawable/account_balance24px"
-            android:summary="Band details">
+            android:key="@string/payment_details"
+            android:summary="Band details"
+            android:title="@string/payment_details">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.UpdatePaymentDetailsActivity"
+                android:targetPackage="com.example.chargepoint" />
         </Preference>
         <Preference
-            android:title="@string/car_details"
-            android:key="@string/car_details"
             android:icon="@drawable/directions_car24px"
-            android:summary="Car type">
+            android:key="@string/car_details"
+            android:summary="Car type"
+            android:title="@string/car_details">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.UpdateCarDetailsActivity"
+                android:targetPackage="com.example.chargepoint" />
         </Preference>
         <Preference
-            android:title="@string/payments_receipts"
-            android:key="@string/payments_receipts"
             android:icon="@drawable/ic_receipt_24px"
-            android:summary="Previous receipts">
+            android:key="@string/payments_receipts"
+            android:summary="Previous receipts"
+            android:title="@string/payments_receipts">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.PreviousReceiptsActivity"
+                android:targetPackage="com.example.chargepoint" />
         </Preference>
 
     </PreferenceCategory>
@@ -68,7 +67,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.AboutUsActivity" />
         </Preference>
         <Preference
             android:title="@string/sign_out"
@@ -77,7 +76,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.MainActivity" />
+                android:targetClass="com.example.chargepoint.SignOutActivity" />
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

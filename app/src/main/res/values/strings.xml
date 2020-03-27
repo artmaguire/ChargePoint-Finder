@@ -21,4 +21,24 @@
     <string name="previous_payments">Previous payments</string>
     <string name="about_us_info">Read more information about the ChargePoint App</string>
     <string name="profile">Profile</string>
+    <string name="save">Save</string>
+    <string name="change_name">Change Name</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_password">Change Password</string>
+    <string name="enter_new_email">Enter New Email</string>
+    <string name="enter_current_email">Enter Current Email</string>
+    <string name="find_nearest_charge_point">Find Nearest Charge Point</string>
+    <string name="enter_current_password">Enter current password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="first_name">First Name</string>
+    <string name="second_name">Second Name</string>
+    <string name="users_name">Art Maguire</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_map">Map</string>
+    <string name="go_to_receipt">Go to receipt</string>
 </resources>
