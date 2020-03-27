@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         //set home selected
         navigation.setSelectedItemId(R.id.home);
-
+    //
         //perform itemselectedlistener
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
