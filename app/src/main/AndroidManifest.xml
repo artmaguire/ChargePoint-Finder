@@ -15,7 +15,7 @@
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".PreviousReceiptsActivity" />
         <activity android:name=".UpdateCarDetailsActivity" />
-        <activity android:name=".UpdatePaymentDetailsActivity" />
+        <activity android:name=".PaymentDetailsActivity" />
         <activity android:name=".UpdateInformationActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity">
