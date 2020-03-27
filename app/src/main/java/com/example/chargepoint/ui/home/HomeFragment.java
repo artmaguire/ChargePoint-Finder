@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build()
         );
-        //showSignInOptions();
+        showSignInOptions();
 
         return root;
     }
