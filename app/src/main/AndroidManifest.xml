@@ -32,6 +32,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBMW4vQXfXez2PzBmoRL_tngFIvziLmTCA" />
+        <activity android:name=".RatesActivity" />
+
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_QSvOv2icygrK8v"
+            />
     </application>
 
 </manifest>
