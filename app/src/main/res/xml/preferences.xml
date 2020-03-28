@@ -27,10 +27,7 @@
             android:key="@string/car_details"
             android:summary="Car type"
             android:title="@string/car_details">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:targetClass="com.example.chargepoint.activities.UpdateCarDetailsActivity"
-                android:targetPackage="com.example.chargepoint" />
+            <!--TODO: Needs to reference fragment-->
         </Preference>
         <Preference
             android:icon="@drawable/ic_receipt_24px"
