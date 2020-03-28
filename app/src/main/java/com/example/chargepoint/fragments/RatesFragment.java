@@ -87,6 +87,25 @@ public class RatesFragment extends Fragment {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     String county = document.getString("address.county");
+                    county = county.trim();
+                    if(county.contains("Co ")) {
+                        county = county.replace("Co ", "");
+                    }
+                    if(county.contains("Co. ")) {
+                        county = county.replace("Co. ", "");
+                    }
+                    if(county.contains("County ")) {
+                        county = county.replace("County ", "");
+                    }
+                    if(county.contains("Limerick City")) {
+                        county = "Limerick";
+                    }
+                    if(county.contains("KILDARE")) {
+                        county = "Kildare";
+                    }
+                    if(county.contains("Dublin")) {
+                        county = "Dublin";
+                    }
                     if(!spinnerArray.contains(county)) {
                         spinnerArray.add(county);
                     }
@@ -103,6 +122,7 @@ public class RatesFragment extends Fragment {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Rate rate = new Rate(document.getString("address.town"), document.getString("address.county"), document.getString("address.line1"), document.getString("address.title"));
+
                     rateArrayList.add(rate);
                     adapter.notifyDataSetChanged();
                 }
@@ -115,7 +135,7 @@ public class RatesFragment extends Fragment {
         fbHelper.getAllChargePoints(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    if(Objects.equals(document.getString("address.county"), county)) {
+                    if(Objects.requireNonNull(document.getString("address.county")).contains(county)) {
                         Rate rate = new Rate(document.getString("address.town"), document.getString("address.county"), document.getString("address.line1"), document.getString("address.title"));
                         rateArrayList.add(rate);
                         adapter.notifyDataSetChanged();
