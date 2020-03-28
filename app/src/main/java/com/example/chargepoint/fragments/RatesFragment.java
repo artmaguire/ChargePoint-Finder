@@ -18,6 +18,8 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.RateAdapter;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.Rate;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -121,8 +123,17 @@ public class RatesFragment extends Fragment {
         fbHelper.getAllChargePoints(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    Rate rate = new Rate(document.getString("address.town"), document.getString("address.county"), document.getString("address.line1"), document.getString("address.title"));
+                    boolean isOp = false;
+                    boolean isFastC = false;
+                    ArrayList<String> list = (ArrayList<String>) document.get("connections");
+                    if(list.toString().contains("isFastChargeCapable=true")) {
+                        isFastC = true;
+                    }
+                    if(list.toString().contains("isOperational=true")) {
+                        isOp = true;
+                    }
 
+                    Rate rate = new Rate(document.getString("address.town"), document.getString("address.title"), document.getString("address.line1"), isOp, isFastC);
                     rateArrayList.add(rate);
                     adapter.notifyDataSetChanged();
                 }
@@ -136,7 +147,16 @@ public class RatesFragment extends Fragment {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     if(Objects.requireNonNull(document.getString("address.county")).contains(county)) {
-                        Rate rate = new Rate(document.getString("address.town"), document.getString("address.county"), document.getString("address.line1"), document.getString("address.title"));
+                        boolean isOp = false;
+                        boolean isFastC = false;
+                        ArrayList<String> list = (ArrayList<String>) document.get("connections");
+                        if(list.toString().contains("isFastChargeCapable=true")) {
+                            isFastC = true;
+                        }
+                        if(list.toString().contains("isOperational=true")) {
+                            isOp = true;
+                        }
+                        Rate rate = new Rate(document.getString("address.town"), document.getString("address.title"), document.getString("address.line1"), isOp, isFastC);
                         rateArrayList.add(rate);
                         adapter.notifyDataSetChanged();
                     }

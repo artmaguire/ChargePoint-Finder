@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp">
+    android:layout_height="135dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -20,13 +20,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="391dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/txtName"
+                android:id="@+id/town"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -34,22 +34,28 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtA"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/txtB"
+                android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/txtC"
+                android:id="@+id/isOp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="Operational : " />
+
+            <TextView
+                android:id="@+id/isFastC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fast charge : " />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
