@@ -55,7 +55,7 @@
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/bankcardId"
+                    android:id="@+id/aboutCard"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp"
@@ -101,6 +101,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="160dp"
+                    android:id="@+id/newsCard"
                     android:layout_height="190dp"
                     android:layout_margin="10dp"
                     android:clickable="true"
@@ -155,6 +156,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="160dp"
                     android:layout_height="190dp"
+                    android:id="@+id/termsCard"
                     android:layout_margin="10dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -200,6 +202,7 @@
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp"
+                    android:id="@+id/carDetailsCard"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground">
 

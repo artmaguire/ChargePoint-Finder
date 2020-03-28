@@ -12,9 +12,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ReceiptActivity" />
         <activity android:name=".SignOutActivity" />
-        <activity android:name=".AboutUsActivity" />
         <activity android:name=".PreviousReceiptsActivity" />
-        <activity android:name=".UpdateCarDetailsActivity" />
         <activity android:name=".PaymentDetailsActivity" />
         <activity android:name=".UpdateInformationActivity" />
         <activity android:name=".MainActivity">

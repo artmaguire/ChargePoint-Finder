@@ -9,7 +9,20 @@
         android:id="@+id/navigation_home"
         android:name="com.example.chargepoint.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_about"
+            app:destination="@id/fragment_about" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_news"
+            app:destination="@id/fragment_news" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_terms"
+            app:destination="@id/fragment_terms" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_car_details"
+            app:destination="@id/fragment_car_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_map"
@@ -28,4 +41,28 @@
         android:name="com.example.chargepoint.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/fragment_about"
+        android:name="com.example.chargepoint.ui.about.AboutFragment"
+        android:label="@string/title_about"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/fragment_news"
+        android:name="com.example.chargepoint.NewsFragment"
+        android:label="@string/title_news"
+        tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/fragment_terms"
+        android:name="com.example.chargepoint.TermsFragment"
+        android:label="@string/title_terms"
+        tools:layout="@layout/fragment_terms" />
+
+    <fragment
+        android:id="@+id/fragment_car_details"
+        android:name="com.example.chargepoint.CarDetailsFragment"
+        android:label="@string/title_car_details"
+        tools:layout="@layout/fragment_car_details" />
 </navigation>

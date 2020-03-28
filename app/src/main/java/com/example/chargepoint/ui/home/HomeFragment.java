@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
 import com.firebase.ui.auth.AuthUI;
@@ -38,6 +39,24 @@ public class HomeFragment extends Fragment {
         context = root.getContext();
 
         showSignInOptions();
+
+        // Dashboard Navigation by navGraph
+        root.findViewById(R.id.aboutCard).setOnClickListener(v -> {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_about);
+        });
+
+        root.findViewById(R.id.newsCard).setOnClickListener(v -> {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_news);
+        });
+
+        root.findViewById(R.id.termsCard).setOnClickListener(v -> {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_terms);
+        });
+
+        root.findViewById(R.id.carDetailsCard).setOnClickListener(v -> {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_car_details);
+        });
+
         return root;
     }
 
