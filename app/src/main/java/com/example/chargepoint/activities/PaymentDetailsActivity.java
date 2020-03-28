@@ -1,6 +1,4 @@
-package com.example.chargepoint;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.chargepoint.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.chargepoint.R;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
@@ -25,8 +26,8 @@ public class PaymentDetailsActivity extends AppCompatActivity implements Payment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_details);
 
-        startpayment = (Button) findViewById(R.id.startpayment);
-        orderamount = (EditText) findViewById(R.id.orderamount);
+        startpayment = findViewById(R.id.startpayment);
+        orderamount = findViewById(R.id.orderamount);
 
         startpayment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,13 +76,13 @@ public class PaymentDetailsActivity extends AppCompatActivity implements Payment
 
     @Override
     public void onPaymentSuccess(String s) {
-       Log.e(TAG, "Payment successful "+s.toString());
+        Log.e(TAG, "Payment successful " + s);
        Toast.makeText(this, "Payment successfully done! " +s, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onPaymentError(int i, String s) {
-        Log.e(TAG, "error code"+String.valueOf(i)+" -- Payment Failed "+s.toString());
+        Log.e(TAG, "error code" + i + " -- Payment Failed " + s);
         try {
             Toast.makeText(this, "Payment error please try again", Toast.LENGTH_SHORT).show();
         }catch (Exception e){

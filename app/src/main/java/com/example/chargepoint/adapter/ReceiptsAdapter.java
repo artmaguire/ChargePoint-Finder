@@ -1,4 +1,4 @@
-package com.example.chargepoint;
+package com.example.chargepoint.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chargepoint.R;
+import com.example.chargepoint.activities.ReceiptActivity;
+import com.example.chargepoint.pojo.Receipt;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ReceiptsRecyclerAdapter extends RecyclerView.Adapter<ReceiptsRecyclerAdapter.ViewHolder> {
+public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHolder> {
 
     private static final String TAG = "Receipt Adapter";
 
@@ -28,7 +32,7 @@ public class ReceiptsRecyclerAdapter extends RecyclerView.Adapter<ReceiptsRecycl
     private List<Receipt> receipts;
     private Context context;
 
-    public ReceiptsRecyclerAdapter(Context context) {
+    public ReceiptsAdapter(Context context) {
         this.context = context;
         this.receipts = new ArrayList<>();
         listener = null;
@@ -40,7 +44,7 @@ public class ReceiptsRecyclerAdapter extends RecyclerView.Adapter<ReceiptsRecycl
 
     @NonNull
     @Override
-    public ReceiptsRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReceiptsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView v = (CardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.payment_receipts_card, parent, false);
 

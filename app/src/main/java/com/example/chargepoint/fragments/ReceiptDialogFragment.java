@@ -1,4 +1,4 @@
-package com.example.chargepoint;
+package com.example.chargepoint.fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;

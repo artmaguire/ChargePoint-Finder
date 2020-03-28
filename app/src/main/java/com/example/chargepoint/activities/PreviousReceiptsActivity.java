@@ -1,4 +1,4 @@
-package com.example.chargepoint;
+package com.example.chargepoint.activities;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chargepoint.R;
+import com.example.chargepoint.adapter.ReceiptsAdapter;
+import com.example.chargepoint.db.FirebaseHelper;
+import com.example.chargepoint.pojo.Receipt;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +22,7 @@ public class PreviousReceiptsActivity extends AppCompatActivity {
     private static final String TAG = "Payment_Receipt";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ReceiptsRecyclerAdapter adapter;
+    private ReceiptsAdapter adapter;
     private ProgressBar pgsBar;
 
     @Override
@@ -30,7 +35,7 @@ public class PreviousReceiptsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.receiptsRecyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new ReceiptsRecyclerAdapter(this);
+        adapter = new ReceiptsAdapter(this);
         recyclerView.setAdapter(adapter);
 
         pgsBar = findViewById(R.id.receiptsPBar);

@@ -9,7 +9,7 @@
             android:title="@string/account_details">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetClass="com.example.chargepoint.UpdateInformationActivity"
+                android:targetClass="com.example.chargepoint.activities.UpdateInformationActivity"
                 android:targetPackage="com.example.chargepoint" />
         </Preference>
         <Preference
@@ -19,7 +19,7 @@
             android:title="@string/payment_details">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetClass="com.example.chargepoint.PaymentDetailsActivity"
+                android:targetClass="com.example.chargepoint.activities.PaymentDetailsActivity"
                 android:targetPackage="com.example.chargepoint" />
         </Preference>
         <Preference
@@ -29,7 +29,7 @@
             android:title="@string/car_details">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetClass="com.example.chargepoint.UpdateCarDetailsActivity"
+                android:targetClass="com.example.chargepoint.activities.UpdateCarDetailsActivity"
                 android:targetPackage="com.example.chargepoint" />
         </Preference>
         <Preference
@@ -39,7 +39,7 @@
             android:title="@string/payments_receipts">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetClass="com.example.chargepoint.PreviousReceiptsActivity"
+                android:targetClass="com.example.chargepoint.activities.PreviousReceiptsActivity"
                 android:targetPackage="com.example.chargepoint" />
         </Preference>
 
@@ -64,10 +64,6 @@
             android:key="@string/about_us"
             android:icon="@drawable/ic_info_24px"
             android:summary="@string/about_us_info">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.AboutUsActivity" />
         </Preference>
         <Preference
             android:title="@string/sign_out"
@@ -76,7 +72,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.SignOutActivity" />
+                android:targetClass="com.example.chargepoint.activities.SignOutActivity" />
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

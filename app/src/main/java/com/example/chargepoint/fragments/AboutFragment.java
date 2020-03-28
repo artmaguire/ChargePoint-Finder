@@ -1,4 +1,4 @@
-package com.example.chargepoint.ui.about;
+package com.example.chargepoint.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -10,12 +10,12 @@
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReceiptActivity" />
-        <activity android:name=".SignOutActivity" />
-        <activity android:name=".PreviousReceiptsActivity" />
-        <activity android:name=".PaymentDetailsActivity" />
-        <activity android:name=".UpdateInformationActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.chargepoint.activities.ReceiptActivity" />
+        <activity android:name="com.example.chargepoint.activities.SignOutActivity" />
+        <activity android:name="com.example.chargepoint.activities.PreviousReceiptsActivity" />
+        <activity android:name="com.example.chargepoint.activities.PaymentDetailsActivity" />
+        <activity android:name="com.example.chargepoint.activities.UpdateInformationActivity" />
+        <activity android:name="com.example.chargepoint.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

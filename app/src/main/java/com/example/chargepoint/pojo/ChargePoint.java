@@ -1,4 +1,4 @@
-package com.example.chargepoint;
+package com.example.chargepoint.pojo;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;

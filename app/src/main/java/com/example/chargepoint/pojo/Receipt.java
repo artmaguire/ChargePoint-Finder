@@ -1,4 +1,4 @@
-package com.example.chargepoint;
+package com.example.chargepoint.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;

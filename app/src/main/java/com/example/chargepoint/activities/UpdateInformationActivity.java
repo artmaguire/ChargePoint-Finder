@@ -1,4 +1,4 @@
-package com.example.chargepoint;
+package com.example.chargepoint.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.chargepoint.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

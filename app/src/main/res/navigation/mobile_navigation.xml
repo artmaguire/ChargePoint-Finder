@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.chargepoint.ui.home.HomeFragment"
+        android:name="com.example.chargepoint.fragments.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -26,43 +26,43 @@
 
     <fragment
         android:id="@+id/navigation_map"
-        android:name="com.example.chargepoint.ui.map.MapFragment"
+        android:name="com.example.chargepoint.fragments.MapFragment"
         android:label="@string/title_map"
         tools:layout="@layout/fragment_map" />
 
     <fragment
         android:id="@+id/navigation_rates"
-        android:name="com.example.chargepoint.ui.rates.RatesFragment"
+        android:name="com.example.chargepoint.fragments.RatesFragment"
         android:label="@string/title_rates"
         tools:layout="@layout/fragment_rates" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.chargepoint.ui.profile.ProfileFragment"
+        android:name="com.example.chargepoint.fragments.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/fragment_about"
-        android:name="com.example.chargepoint.ui.about.AboutFragment"
+        android:name="com.example.chargepoint.fragments.AboutFragment"
         android:label="@string/title_about"
         tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/fragment_news"
-        android:name="com.example.chargepoint.NewsFragment"
+        android:name="com.example.chargepoint.fragments.NewsFragment"
         android:label="@string/title_news"
         tools:layout="@layout/fragment_news" />
 
     <fragment
         android:id="@+id/fragment_terms"
-        android:name="com.example.chargepoint.TermsFragment"
+        android:name="com.example.chargepoint.fragments.TermsFragment"
         android:label="@string/title_terms"
         tools:layout="@layout/fragment_terms" />
 
     <fragment
         android:id="@+id/fragment_car_details"
-        android:name="com.example.chargepoint.CarDetailsFragment"
+        android:name="com.example.chargepoint.fragments.CarDetailsFragment"
         android:label="@string/title_car_details"
         tools:layout="@layout/fragment_car_details" />
 </navigation>

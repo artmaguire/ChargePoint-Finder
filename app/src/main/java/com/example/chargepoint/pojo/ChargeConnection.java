@@ -1,4 +1,4 @@
-package com.example.chargepoint;
+package com.example.chargepoint.pojo;
 
 class ChargeConnection {
     private String title;

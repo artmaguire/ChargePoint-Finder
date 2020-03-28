@@ -1,10 +1,13 @@
-package com.example.chargepoint;
+package com.example.chargepoint.activities;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.chargepoint.R;
+import com.example.chargepoint.pojo.Receipt;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -5,7 +5,7 @@
  * Access to Firebase by: FirebaseHelper fbHelper = FirebaseHelp.getInstance()
  */
 
-package com.example.chargepoint;
+package com.example.chargepoint.db;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentSnapshot;

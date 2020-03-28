@@ -1,4 +1,4 @@
-package com.example.chargepoint.ui.profile;
+package com.example.chargepoint.fragments;
 
 import android.os.Bundle;
 

@@ -1,4 +1,4 @@
-package com.example.chargepoint.ui.rates;
+package com.example.chargepoint.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.chargepoint.FirebaseHelper;
 import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.RateAdapter;
+import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.Rate;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
