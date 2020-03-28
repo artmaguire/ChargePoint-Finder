@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,19 +18,36 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.RateAdapter;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.Rate;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class RatesFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RateAdapter adapter;
     private ArrayList<Rate> rateArrayList;
+    private ArrayList<String> spinnerArray;
+    private ArrayAdapter<String> spinnerAdapter;
+    FirebaseHelper fbHelper = FirebaseHelper.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_rates, container, false);
+
+        Spinner spinner = root.findViewById(R.id.sort_cities);
+        spinnerArray = new ArrayList<>();
+        spinnerAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, spinnerArray);
+
+        spinner.setAdapter(spinnerAdapter);
+
+        loadCounty();
 
         recyclerView = root.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -35,19 +55,22 @@ public class RatesFragment extends Fragment {
         adapter = new RateAdapter(getContext(), rateArrayList);
         recyclerView.setAdapter(adapter);
 
-        FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-        fbHelper.getAllRates(task -> {
-            if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    System.out.println(document.getString("name") + " " + document.getString("a") + " " + document.getString("b") + " " + document.getString("c"));
-                    Rate rate = new Rate(document.getString("name"), document.getString("a"), document.getString("b"), document.getString("c"));
-                    rateArrayList.add(rate);
-                    adapter.notifyDataSetChanged();
-                }
+        loadRates();
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println(spinner.getSelectedItem().toString());
+                rateArrayList.clear();
+                adapter.notifyDataSetChanged();
+                loadRatesWithCounty(spinner.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
-
-        System.out.println(rateArrayList.toString());
 
         return root;
     }
@@ -57,4 +80,49 @@ public class RatesFragment extends Fragment {
         super.onResume();
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_rates);
     }
+
+    private void loadCounty() {
+
+        fbHelper.getAllChargePoints(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    String county = document.getString("address.county");
+                    if(!spinnerArray.contains(county)) {
+                        spinnerArray.add(county);
+                    }
+                    Collections.sort(spinnerArray);
+                    spinnerAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
+    private void loadRates() {
+
+        fbHelper.getAllChargePoints(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Rate rate = new Rate(document.getString("address.town"), document.getString("address.county"), document.getString("address.line1"), document.getString("address.title"));
+                    rateArrayList.add(rate);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
+    private void loadRatesWithCounty(String county) {
+
+        fbHelper.getAllChargePoints(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    if(Objects.equals(document.getString("address.county"), county)) {
+                        Rate rate = new Rate(document.getString("address.town"), document.getString("address.county"), document.getString("address.line1"), document.getString("address.title"));
+                        rateArrayList.add(rate);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+    }
+
 }
