@@ -18,14 +18,6 @@ public class ReceiptActivity extends AppCompatActivity {
 
     private static final String TAG = "GET RECEIPT";
 
-    private TextView dateView;
-    private TextView invoiceView;
-    private TextView electricityView;
-    private TextView timeView;
-    private TextView locationView;
-    private TextView cardView;
-    private TextView euroView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,32 +26,29 @@ public class ReceiptActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Receipt receipt = getIntent().getParcelableExtra("receipt");
-        Log.d(TAG, "onCreate: " + receipt.toString());
 
         Date timeToDate = receipt.getDatetime().toDate();
         String time = String.valueOf(timeToDate.getTime());
-        Log.d(TAG, "onCreate: " + timeView);
 
         Date date = receipt.getDatetime().toDate();
         String pattern = "MMMM dd, yyyy";
         DateFormat df = new SimpleDateFormat(pattern, Locale.ENGLISH);
         String dateString = df.format(date);
 
-        dateView = findViewById(R.id.receiptDate);
-        invoiceView = findViewById(R.id.receiptInvoiceID);
-        electricityView = findViewById(R.id.receiptAmountElectricity);
-        timeView = findViewById(R.id.receiptTime);
-        locationView = findViewById(R.id.receiptLocation);
-        cardView = findViewById(R.id.receiptPayment);
-        euroView = findViewById(R.id.receiptAmountEuro);
+        TextView dateR = findViewById(R.id.date);
+        TextView location = findViewById(R.id.location);
+        TextView mapId = findViewById(R.id.mapId);
+        TextView consumption = findViewById(R.id.consumption);
+        TextView card = findViewById(R.id.card);
+        TextView amount = findViewById(R.id.amount);
 
-        dateView.setText(dateString);
-        invoiceView.setText(receipt.getInvoiceID());
-        electricityView.setText(receipt.getElectricity() + "kWh");
-        timeView.setText(time);
-        locationView.setText("No where");
-        cardView.setText("Paid with: ".concat(receipt.getCard()));
-        euroView.setText("€" + receipt.getCost());
+        dateR.setText(" Receipt from : " + dateString);
+        location.setText(" Location : ");
+        mapId.setText(" Map id : " + receipt.getMap_id());
+        consumption.setText(" Consumption : " + receipt.getElectricity());
+        card.setText(" Card : " + receipt.getCard());
+        amount.setText(" Amount : €" + receipt.getCost());
+
     }
 
     @Override

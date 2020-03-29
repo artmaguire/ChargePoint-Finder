@@ -6,72 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ReceiptDialogFragment">
 
-    <TextView
-        android:id="@+id/receiptDialogDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textSize="24sp"
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="380dp"
+        android:layout_height="153dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/receiptDialogInvoice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/receiptDialogDate" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="152dp"
+            android:orientation="vertical"
+            android:background="@drawable/border_textview" >
 
-    <TextView
-        android:id="@+id/receiptDialogElectricity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/receiptDialogInvoice" />
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:text="TextView"
+                android:textSize="20sp"
+                android:background="@drawable/border_textview" />
 
-    <TextView
-        android:id="@+id/receiptDialogTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@id/receiptDialogElectricity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="TextView"
+                android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/receiptDialogLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@id/receiptDialogElectricity"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/mapId"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="TextView"
+                android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/receiptDialogPayment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/receiptDialogTime" />
+            <TextView
+                android:id="@+id/consumption"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="TextView"
+                android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/receiptDialogEuro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/receiptDialogPayment" />
-
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:text="TextView"
+                android:textSize="20sp"
+                android:background="@drawable/border_textview" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
