@@ -4,24 +4,25 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.chargepoint.activities.ReceiptActivity" />
-        <activity android:name="com.example.chargepoint.activities.SignOutActivity" />
-        <activity android:name="com.example.chargepoint.activities.PreviousReceiptsActivity" />
-        <activity android:name="com.example.chargepoint.activities.PaymentDetailsActivity" />
-        <activity android:name="com.example.chargepoint.activities.UpdateInformationActivity" />
-        <activity android:name="com.example.chargepoint.activities.MainActivity">
+        <activity android:name=".activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.ReceiptActivity" />
+        <activity android:name=".activities.SignOutActivity" />
+        <activity android:name=".activities.PreviousReceiptsActivity" />
+        <activity android:name=".activities.PaymentDetailsActivity" />
+        <activity android:name=".activities.UpdateInformationActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -31,8 +32,7 @@
             android:value="AIzaSyBMW4vQXfXez2PzBmoRL_tngFIvziLmTCA" />
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_QSvOv2icygrK8v"
-            />
+            android:value="rzp_test_QSvOv2icygrK8v" />
     </application>
 
 </manifest>
