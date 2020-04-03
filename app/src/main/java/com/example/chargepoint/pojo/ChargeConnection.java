@@ -1,6 +1,8 @@
 package com.example.chargepoint.pojo;
 
-class ChargeConnection {
+import java.io.Serializable;
+
+public class ChargeConnection implements Serializable {
     private String title;
     private int amps;
     private int voltage;

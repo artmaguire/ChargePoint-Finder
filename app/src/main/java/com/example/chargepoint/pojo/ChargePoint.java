@@ -3,10 +3,11 @@ package com.example.chargepoint.pojo;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class ChargePoint {
+public class ChargePoint implements Serializable {
     private String operator;
     private String usageType;
     private boolean isPayAtLocation;

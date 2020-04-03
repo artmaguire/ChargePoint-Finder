@@ -28,7 +28,11 @@
         android:id="@+id/navigation_map"
         android:name="com.example.chargepoint.fragments.MapFragment"
         android:label="@string/title_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_navigation_map_to_fragment_buy_power"
+            app:destination="@id/fragment_buy_power" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_rates"
@@ -65,4 +69,10 @@
         android:name="com.example.chargepoint.fragments.CarDetailsFragment"
         android:label="@string/title_car_details"
         tools:layout="@layout/fragment_car_details" />
+
+    <fragment
+        android:id="@+id/fragment_buy_power"
+        android:name="com.example.chargepoint.fragments.BuyPowerFragment"
+        android:label="@string/title_buy_power"
+        tools:layout="@layout/fragment_buy_power" />
 </navigation>

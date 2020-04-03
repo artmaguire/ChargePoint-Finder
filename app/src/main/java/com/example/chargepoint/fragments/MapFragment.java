@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
+import com.example.chargepoint.adapter.ChargePointInfoWindowAdapter;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,20 +20,22 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private MapView mapView;
     private final String TAG = "ChargeMap";
     private GoogleMap map;
     private List<ChargePoint> chargePoints;
+    private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_map, container, false);
+        root = inflater.inflate(R.layout.fragment_map, container, false);
 
         getChargePoints();
 
@@ -69,6 +73,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         LatLng ireland = new LatLng(53.4, -8);
         this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(ireland, 7));
 
+        this.map.setInfoWindowAdapter(new ChargePointInfoWindowAdapter(getContext()));
+        this.map.setOnInfoWindowClickListener(this);
+
         checkIfMapAndDbReady();
     }
 
@@ -79,10 +86,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private void addChargePointsToMap() {
         for (ChargePoint cp : chargePoints) {
-            map.addMarker(new MarkerOptions()
+            Marker m = map.addMarker(new MarkerOptions()
                     .position(cp.getLocationAsLatLng())
                     .title(cp.getOperator()));
+            m.setTag(cp);
         }
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        ChargePoint cp = (ChargePoint) marker.getTag();
+        Bundle b = new Bundle();
+        b.putSerializable("ChargePoint", cp);
+        Navigation.findNavController(root).navigate(R.id.action_navigation_map_to_fragment_buy_power, b);
     }
 
     @Override
