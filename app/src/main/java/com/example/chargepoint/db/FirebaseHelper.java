@@ -8,13 +8,17 @@
 package com.example.chargepoint.db;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class FirebaseHelper {
     private static FirebaseHelper instance;
     private FirebaseFirestore db;
+    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     private FirebaseHelper() {
         this.db = FirebaseFirestore.getInstance();
@@ -26,8 +30,11 @@ public class FirebaseHelper {
         return instance;
     }
 
-    public void getAllReceipts(OnCompleteListener<QuerySnapshot> listener) {
+    public void getAllReceiptsFromUser(OnCompleteListener<QuerySnapshot> listener) {
+        // TODO: Order receipts by data, working with specific user
         db.collection("receipts")
+                .whereEqualTo("user", currentFirebaseUser.getUid())
+                .orderBy("datetime", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(listener);
     }

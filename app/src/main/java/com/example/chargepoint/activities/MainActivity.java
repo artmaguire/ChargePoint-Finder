@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        showSignInOptions();
+        if (FirebaseAuth.getInstance().getCurrentUser() == null)
+            showSignInOptions();
     }
 
 

@@ -42,7 +42,7 @@ public class PreviousReceiptsActivity extends AppCompatActivity {
 
         //TODO: Get user receipts currently in database
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-        fbHelper.getAllReceipts(task -> {
+        fbHelper.getAllReceiptsFromUser(task -> {
             if (task.isSuccessful()) {
                 List<Receipt> receipts = task.getResult().toObjects(Receipt.class);
                 adapter.setReceipts(receipts);
