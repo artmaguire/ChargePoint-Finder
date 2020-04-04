@@ -43,4 +43,10 @@
     <string name="title_news">News</string>
     <string name="title_terms">Terms and Conditions</string>
     <string name="title_car_details">Car Details</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="update_information">Update Information</string>
+    <string name="previous_receipts">Previous Receipts</string>
+    <string name="receipt">Receipt</string>
 </resources>

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chargepoint.activities.PaymentDetailsActivity">
+    android:orientation="vertical"
+    tools:context=".fragments.PaymentDetailsFragment">
 
     <EditText
         android:id="@+id/orderamount"
@@ -20,6 +21,5 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="#02b89a"
-        android:text="START PAYMENT"
-        />
+        android:text="START PAYMENT" />
 </LinearLayout>

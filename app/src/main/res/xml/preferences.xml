@@ -7,20 +7,12 @@
             android:key="@string/account_details"
             android:summary="Name, Email, Password"
             android:title="@string/account_details">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:targetClass="com.example.chargepoint.activities.UpdateInformationActivity"
-                android:targetPackage="com.example.chargepoint" />
         </Preference>
         <Preference
             android:icon="@drawable/account_balance24px"
             android:key="@string/payment_details"
             android:summary="Band details"
             android:title="@string/payment_details">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:targetClass="com.example.chargepoint.activities.PaymentDetailsActivity"
-                android:targetPackage="com.example.chargepoint" />
         </Preference>
         <Preference
             android:icon="@drawable/directions_car24px"
@@ -34,10 +26,6 @@
             android:key="@string/payments_receipts"
             android:summary="Previous receipts"
             android:title="@string/payments_receipts">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:targetClass="com.example.chargepoint.activities.PreviousReceiptsActivity"
-                android:targetPackage="com.example.chargepoint" />
         </Preference>
 
     </PreferenceCategory>
@@ -66,10 +54,6 @@
             android:title="@string/sign_out"
             android:key="@string/sign_out"
             android:icon="@drawable/ic_sign_out_24px">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.chargepoint"
-                android:targetClass="com.example.chargepoint.activities.SignOutActivity" />
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

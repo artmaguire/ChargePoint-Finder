@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void showSignInOptions() {
+    public void showSignInOptions() {
         providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build()
