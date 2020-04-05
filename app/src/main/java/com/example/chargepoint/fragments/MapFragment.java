@@ -1,104 +1,86 @@
 package com.example.chargepoint.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.adapter.ChargePointInfoWindowAdapter;
-import com.example.chargepoint.db.FirebaseHelper;
+import com.example.chargepoint.activities.MainViewModel;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener {
 
+    MainViewModel mainViewModel;
     private MapView mapView;
     private final String TAG = "ChargeMap";
     private GoogleMap map;
     private List<ChargePoint> chargePoints;
-    private View root;
+    private boolean saved = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_map, container, false);
+        View root = inflater.inflate(R.layout.fragment_map, container, false);
 
-        getChargePoints();
+        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+        mainViewModel.getObservableChargePoints().observe(getViewLifecycleOwner(), chargePoints -> {
+            this.chargePoints = chargePoints;
+            checkIfMapAndDbReady();
+        });
+
+        setRetainInstance(true);
 
         mapView = root.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
+        // First incarnation of this activity.
+        saved = savedInstanceState != null;
+
         mapView.getMapAsync(this);
         return root;
-    }
-
-    private void getChargePoints() {
-        FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-        fbHelper.getAllChargePoints(task -> {
-            if (task.isSuccessful()) {
-                //TODO: ART -> fields starting with 'is' not setting properly
-                chargePoints = task.getResult().toObjects(ChargePoint.class);
-                checkIfMapAndDbReady();
-            } else {
-                Log.d(TAG, "Error getting documents: ", task.getException());
-            }
-        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mapView.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_map);
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
         this.map = map;
 
-        LatLng ireland = new LatLng(53.4, -8);
-        this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(ireland, 7));
+        this.map.setOnCameraMoveListener(this);
 
-        this.map.setInfoWindowAdapter(new ChargePointInfoWindowAdapter(getContext()));
-        this.map.setOnInfoWindowClickListener(this);
+        if (!saved) {
+            this.map.moveCamera(CameraUpdateFactory.newCameraPosition(mainViewModel.getMapCameraPosition()));
+        }
 
         checkIfMapAndDbReady();
     }
 
     private void checkIfMapAndDbReady() {
-        if (map != null & chargePoints != null)
+        if (map != null && chargePoints != null)
             addChargePointsToMap();
     }
 
     private void addChargePointsToMap() {
         for (ChargePoint cp : chargePoints) {
-            Marker m = map.addMarker(new MarkerOptions()
+            map.addMarker(new MarkerOptions()
                     .position(cp.getLocationAsLatLng())
                     .title(cp.getOperator()));
-            m.setTag(cp);
         }
-    }
-
-    @Override
-    public void onInfoWindowClick(Marker marker) {
-        ChargePoint cp = (ChargePoint) marker.getTag();
-        Bundle b = new Bundle();
-        b.putSerializable("ChargePoint", cp);
-        Navigation.findNavController(root).navigate(R.id.action_navigation_map_to_fragment_buy_power, b);
     }
 
     @Override
@@ -123,5 +105,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onCameraMove() {
+        mainViewModel.setMapCameraPosition(map.getCameraPosition());
     }
 }
