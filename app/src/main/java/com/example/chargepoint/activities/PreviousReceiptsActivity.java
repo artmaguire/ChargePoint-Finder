@@ -14,6 +14,7 @@ import com.example.chargepoint.adapter.ReceiptsAdapter;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.Receipt;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,11 +41,13 @@ public class PreviousReceiptsActivity extends AppCompatActivity {
 
         pgsBar = findViewById(R.id.receiptsPBar);
 
-        //TODO: Get user receipts currently in database
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
         fbHelper.getAllReceiptsFromUser(task -> {
             if (task.isSuccessful()) {
                 List<Receipt> receipts = task.getResult().toObjects(Receipt.class);
+                Collections.sort(receipts);
+                Log.d(TAG, "onCreate: " + receipts.toString());
+
                 adapter.setReceipts(receipts);
                 adapter.notifyDataSetChanged();
 
