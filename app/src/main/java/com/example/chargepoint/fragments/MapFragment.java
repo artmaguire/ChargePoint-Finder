@@ -1,11 +1,14 @@
 package com.example.chargepoint.fragments;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -23,12 +26,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.maps.android.clustering.ClusterManager;
 
-import java.util.Iterator;
 import java.util.List;
+
+import static androidx.core.content.PermissionChecker.checkSelfPermission;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener, ClusterManager.OnClusterItemInfoWindowClickListener<ChargePointCluster> {
 
-    private final String TAG = "ChargeMap";
+    private final String TAG = "CHARGE_MAP";
 
     private View root;
     private MapViewModel mapViewModel;
@@ -57,6 +61,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         saved = savedInstanceState != null;
 
         mapView.getMapAsync(this);
+
+        requestLocation();
+
         return root;
     }
 
@@ -76,12 +83,28 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             this.map.moveCamera(CameraUpdateFactory.newCameraPosition(mapViewModel.getMapCameraPosition()));
         }
 
+        if (haveLocationPermission())
+            if (map != null) map.setMyLocationEnabled(true);
+
         clusterManager = new ClusterManager<>(getContext(), map);
         ChargePointClusterRenderer renderer = new ChargePointClusterRenderer(getContext(), map, clusterManager);
         clusterManager.setRenderer(renderer);
 
         map.setOnCameraIdleListener(clusterManager);
         map.setOnMarkerClickListener(clusterManager);
+
+        checkIfMapAndDbReady();
+    }
+
+    private void checkIfMapAndDbReady() {
+        if (clusterManager != null && chargePoints != null)
+            addChargePointsToMap();
+    }
+
+    private void addChargePointsToMap() {
+        for (ChargePoint cp : chargePoints) {
+            clusterManager.addItem(new ChargePointCluster(cp.getLocationAsLatLng(), cp.getOperator(), cp));
+        }
 
         clusterManager.getMarkerCollection().setOnInfoWindowAdapter(new ChargePointInfoWindowAdapter(getContext()));
         map.setInfoWindowAdapter(clusterManager.getMarkerManager());
@@ -91,27 +114,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         clusterManager.setOnClusterClickListener(cluster -> {
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            Iterator<ChargePointCluster> iterator = cluster.getItems().iterator();
-            while (iterator.hasNext()) {
-                builder.include(iterator.next().getPosition());
+            for (ChargePointCluster chargePointCluster : cluster.getItems()) {
+                builder.include(chargePointCluster.getPosition());
             }
             LatLngBounds bounds = builder.build();
             map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
             return true;
         });
 
-        checkIfMapAndDbReady();
-    }
-
-    private void checkIfMapAndDbReady() {
-        if (map != null && chargePoints != null)
-            addChargePointsToMap();
-    }
-
-    private void addChargePointsToMap() {
-        for (ChargePoint cp : chargePoints) {
-            clusterManager.addItem(new ChargePointCluster(cp.getLocationAsLatLng(), cp.getOperator(), cp));
-        }
+        clusterManager.cluster();
     }
 
     @Override
@@ -148,5 +159,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onCameraMove() {
         mapViewModel.setMapCameraPosition(map.getCameraPosition());
+    }
+
+    private void requestLocation() {
+        if (haveLocationPermission()) {
+            if (map != null) map.setMyLocationEnabled(true);
+        } else {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, getResources().getInteger(R.integer.LOCATION_REQUEST_CODE));
+        }
+    }
+
+    private boolean haveLocationPermission() {
+        return checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PermissionChecker.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == getResources().getInteger(R.integer.LOCATION_REQUEST_CODE)) {
+            for (int gResult : grantResults) {
+                if (gResult == PackageManager.PERMISSION_GRANTED)
+                    if (map != null)
+                        map.setMyLocationEnabled(true);
+            }
+        }
     }
 }
