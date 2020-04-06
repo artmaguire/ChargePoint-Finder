@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.chargepoint.R;
+import com.example.chargepoint.map.MapViewModel;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        MainViewModel mvm = ViewModelProviders.of(this).get(MainViewModel.class);
+        MapViewModel mvm = ViewModelProviders.of(this).get(MapViewModel.class);
         mvm.loadChargePoints();
 
         // Passing each menu ID as a set of Ids because each

@@ -1,4 +1,4 @@
-package com.example.chargepoint.activities;
+package com.example.chargepoint.map;
 
 import android.util.Log;
 
@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-public class MainViewModel extends ViewModel {
+public class MapViewModel extends ViewModel {
     private MutableLiveData<List<ChargePoint>> chargePoints;
     private CameraPosition mapCameraPosition = new CameraPosition(new LatLng(53.4, -8), 7, 0, 0);
 

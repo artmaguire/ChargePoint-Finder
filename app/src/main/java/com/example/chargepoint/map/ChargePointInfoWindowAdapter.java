@@ -1,4 +1,4 @@
-package com.example.chargepoint.adapter;
+package com.example.chargepoint.map;
 
 import android.content.Context;
 import android.view.LayoutInflater;

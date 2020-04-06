@@ -8,33 +8,42 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.activities.MainViewModel;
+import com.example.chargepoint.map.ChargePointCluster;
+import com.example.chargepoint.map.ChargePointClusterRenderer;
+import com.example.chargepoint.map.ChargePointInfoWindowAdapter;
+import com.example.chargepoint.map.MapViewModel;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.maps.android.clustering.ClusterManager;
 
+import java.util.Iterator;
 import java.util.List;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener, ClusterManager.OnClusterItemInfoWindowClickListener<ChargePointCluster> {
 
-    MainViewModel mainViewModel;
-    private MapView mapView;
     private final String TAG = "ChargeMap";
+
+    private View root;
+    private MapViewModel mapViewModel;
+    private MapView mapView;
     private GoogleMap map;
+    private ClusterManager<ChargePointCluster> clusterManager;
     private List<ChargePoint> chargePoints;
     private boolean saved = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_map, container, false);
+        root = inflater.inflate(R.layout.fragment_map, container, false);
 
-        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
-        mainViewModel.getObservableChargePoints().observe(getViewLifecycleOwner(), chargePoints -> {
+        mapViewModel = ViewModelProviders.of(getActivity()).get(MapViewModel.class);
+        mapViewModel.getObservableChargePoints().observe(getViewLifecycleOwner(), chargePoints -> {
             this.chargePoints = chargePoints;
             checkIfMapAndDbReady();
         });
@@ -58,14 +67,38 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
     @Override
-    public void onMapReady(GoogleMap map) {
-        this.map = map;
+    public void onMapReady(GoogleMap m) {
+        this.map = m;
 
-        this.map.setOnCameraMoveListener(this);
+        map.setOnCameraMoveListener(this);
 
         if (!saved) {
-            this.map.moveCamera(CameraUpdateFactory.newCameraPosition(mainViewModel.getMapCameraPosition()));
+            this.map.moveCamera(CameraUpdateFactory.newCameraPosition(mapViewModel.getMapCameraPosition()));
         }
+
+        clusterManager = new ClusterManager<>(getContext(), map);
+        ChargePointClusterRenderer renderer = new ChargePointClusterRenderer(getContext(), map, clusterManager);
+        clusterManager.setRenderer(renderer);
+
+        map.setOnCameraIdleListener(clusterManager);
+        map.setOnMarkerClickListener(clusterManager);
+
+        clusterManager.getMarkerCollection().setOnInfoWindowAdapter(new ChargePointInfoWindowAdapter(getContext()));
+        map.setInfoWindowAdapter(clusterManager.getMarkerManager());
+
+        clusterManager.setOnClusterItemInfoWindowClickListener(this);
+        map.setOnInfoWindowClickListener(clusterManager);
+
+        clusterManager.setOnClusterClickListener(cluster -> {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            Iterator<ChargePointCluster> iterator = cluster.getItems().iterator();
+            while (iterator.hasNext()) {
+                builder.include(iterator.next().getPosition());
+            }
+            LatLngBounds bounds = builder.build();
+            map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
+            return true;
+        });
 
         checkIfMapAndDbReady();
     }
@@ -77,10 +110,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     private void addChargePointsToMap() {
         for (ChargePoint cp : chargePoints) {
-            map.addMarker(new MarkerOptions()
-                    .position(cp.getLocationAsLatLng())
-                    .title(cp.getOperator()));
+            clusterManager.addItem(new ChargePointCluster(cp.getLocationAsLatLng(), cp.getOperator(), cp));
         }
+    }
+
+    @Override
+    public void onClusterItemInfoWindowClick(ChargePointCluster chargePointCluster) {
+        Bundle b = new Bundle();
+        b.putSerializable("ChargePoint", chargePointCluster.getChargePoint());
+        Navigation.findNavController(root).navigate(R.id.action_navigation_map_to_fragment_buy_power, b);
     }
 
     @Override
@@ -109,6 +147,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     @Override
     public void onCameraMove() {
-        mainViewModel.setMapCameraPosition(map.getCameraPosition());
+        mapViewModel.setMapCameraPosition(map.getCameraPosition());
     }
 }

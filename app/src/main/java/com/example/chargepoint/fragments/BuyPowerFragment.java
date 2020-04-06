@@ -3,9 +3,11 @@ package com.example.chargepoint.fragments;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
@@ -27,6 +29,8 @@ public class BuyPowerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        this.setHasOptionsMenu(true);
+
         Bundle b = getArguments();
         if (b != null) {
             ChargePoint cp = (ChargePoint) b.getSerializable("ChargePoint");
@@ -34,5 +38,11 @@ public class BuyPowerFragment extends Fragment {
         }
 
         return inflater.inflate(R.layout.fragment_buy_power, container, false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        getActivity().onBackPressed();
+        return super.onOptionsItemSelected(item);
     }
 }

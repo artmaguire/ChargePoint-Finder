@@ -14,7 +14,7 @@
         android:maxWidth="140dp"
         android:maxLines="1"
         android:text="TITLE"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
