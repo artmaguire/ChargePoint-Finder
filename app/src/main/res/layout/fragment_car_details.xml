@@ -6,9 +6,43 @@
     tools:context=".fragments.CarDetailsFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:id="@+id/toptext"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Blank Fragment" />
+        android:text="Select details about your Car"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:paddingTop="30dp"
+        android:hint="Select Manufacturer"
+        android:shadowColor=""
+        />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="103dp"
+        android:gravity="center"
+        android:spinnerMode="dropdown"
+        />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="153dp"
+        android:gravity="center"
+        android:spinnerMode="dropdown" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Button"
+        android:layout_marginTop="203dp"/>
+
 
 </FrameLayout>
