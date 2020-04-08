@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
 
@@ -15,6 +16,7 @@ import com.example.chargepoint.R;
  */
 public class CarDetailsFragment extends Fragment {
 
+    Spinner spinnerManufacturer, spinnerModel   ;
     public CarDetailsFragment() {
         // Required empty public constructor
     }
