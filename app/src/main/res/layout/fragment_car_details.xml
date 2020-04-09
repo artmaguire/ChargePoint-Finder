@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragments.CarDetailsFragment"
-    android:padding="30dp">
+    android:padding="10dp">
 
 
     <TextView
