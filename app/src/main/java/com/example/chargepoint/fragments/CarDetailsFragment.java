@@ -51,7 +51,7 @@ public class CarDetailsFragment extends Fragment {
         arrayList_parent.add("Hyundai");
         arrayList_parent.add("Mahindra");
 
-        arrayAdapter_parent = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, arrayList_parent);
+        arrayAdapter_parent = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.textview_blue, arrayList_parent);
 
         spinnerManufacturer.setAdapter(arrayAdapter_parent);
 
@@ -84,25 +84,25 @@ public class CarDetailsFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 if(position == 0){
-                    arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, arrayList_Renault);
+                    arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.textview_red, arrayList_Renault);
                 }
 
                 if(position == 1){
-                    arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, arrayList_tesla);
+                    arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.textview_red, arrayList_tesla);
                 }
 
                 if(position == 2){
-                    arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, arrayList_volkswagen);
+                    arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.textview_red, arrayList_volkswagen);
 
                 }
 
                 if(position == 3){
-                    arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, arrayList_hyundai);
+                    arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.textview_red, arrayList_hyundai);
 
                 }
 
                 if(position == 4){
-                    arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, arrayList_mahindra);
+                    arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.textview_red, arrayList_mahindra);
                 }
 
                 spinnerModel.setAdapter(arrayAdapter_child);
