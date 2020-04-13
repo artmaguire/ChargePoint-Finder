@@ -54,4 +54,11 @@ public class FirebaseHelper {
                 .get()
                 .addOnCompleteListener(listener);
     }
+
+    public void getCards(OnCompleteListener<QuerySnapshot> listener) {
+        db.collection("cards")
+                .whereEqualTo("uid", currentFirebaseUser.getUid())
+                .get()
+                .addOnCompleteListener(listener);
+    }
 }

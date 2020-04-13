@@ -103,7 +103,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     private void addChargePointsToMap() {
         for (ChargePoint cp : chargePoints) {
-            clusterManager.addItem(new ChargePointCluster(cp.getLocationAsLatLng(), cp.getOperator(), cp));
+            clusterManager.addItem(new ChargePointCluster(cp.getLocation(), cp.getOperator(), cp));
         }
 
         clusterManager.getMarkerCollection().setOnInfoWindowAdapter(new ChargePointInfoWindowAdapter(getContext()));
