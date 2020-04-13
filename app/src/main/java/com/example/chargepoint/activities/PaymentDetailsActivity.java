@@ -19,17 +19,15 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
+
 
 import com.example.chargepoint.R;
-import com.razorpay.Checkout;
-import com.razorpay.PaymentResultListener;
 
-import org.json.JSONObject;
+
 
 import java.util.Calendar;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
+
 public class PaymentDetailsActivity extends AppCompatActivity {
 
     DatePickerDialog datePickerDialog;

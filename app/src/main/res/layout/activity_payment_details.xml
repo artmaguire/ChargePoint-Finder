@@ -57,9 +57,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextcardnumber"
         android:layout_marginTop="22dp"
-        android:inputType="number"
+        android:inputType="textPersonName"
         android:textAlignment="center"
-        android:hint="@string/enter_card_number"
+        android:hint="@string/name"
         />
 
     <Button
@@ -67,7 +67,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editcardname"
         android:layout_marginTop="76dp"
-        android:text="@string/save_card"
-        />
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="@string/save_card" />
 
 </RelativeLayout>
