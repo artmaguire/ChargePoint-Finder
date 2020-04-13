@@ -1,26 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.chargepoint.activities.PaymentDetailsActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_marginLeft="16sp"
+    android:layout_marginRight="16sp"
+    >
+
+    <TextView
+        android:id="@+id/titlepage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="@string/enter_debit_card_information_here"
+        android:textAlignment="center"
+        android:textAppearance="@style/ThemeOverlay.AppCompat.Dark"
+        android:textSize="25dp"
+        />
 
     <EditText
-        android:id="@+id/orderamount"
+        android:id="@+id/editTextcardnumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:hint="amount"
+        android:layout_below="@+id/titlepage"
+        android:layout_marginTop="22dp"
         android:inputType="number"
-        android:textAppearance="@color/fui_bgTwitter" />
+        android:textAlignment="center"
+        android:hint="@string/enter_card_number"
+        />
+
+    <RelativeLayout
+        android:id="@+id/calender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextcardnumber"
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/txtMonthYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="MM/YYYY"
+            android:textSize="18sp"
+            android:paddingTop="20sp"/>
+
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/editcardname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextcardnumber"
+        android:layout_marginTop="22dp"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:hint="@string/enter_card_number"
+        />
 
     <Button
-        android:id="@+id/startpayment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="#02b89a"
-        android:text="START PAYMENT"
+        android:layout_below="@+id/editcardname"
+        android:layout_marginTop="76dp"
+        android:text="@string/save_card"
         />
-</LinearLayout>
+
+</RelativeLayout>
