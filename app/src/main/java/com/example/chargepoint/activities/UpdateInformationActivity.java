@@ -44,6 +44,9 @@ public class UpdateInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_information);
 
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d(TAG, "onCreateME: " + currentFirebaseUser.getPhoneNumber());
+
         setTitle("Update Information");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

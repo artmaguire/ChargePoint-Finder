@@ -8,8 +8,7 @@ import androidx.annotation.NonNull;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.GeoPoint;
 
-public class Receipt implements Parcelable {
-    private String invoiceID;
+public class Receipt implements Parcelable, Comparable<Receipt> {
     public static final Creator<Receipt> CREATOR = new Creator<Receipt>() {
         @Override
         public Receipt createFromParcel(Parcel in) {
@@ -26,10 +25,11 @@ public class Receipt implements Parcelable {
     private double electricity;
     private String card;
     private String map_id;
+    private String invoice_id;
     private GeoPoint geopoint;
 
-    public Receipt(String invoiceID, double cost, Timestamp datetime, String card, double electricity, String map_id) {
-        this.invoiceID = invoiceID;
+    public Receipt(String invoice_id, double cost, Timestamp datetime, String card, double electricity, String map_id) {
+        this.invoice_id = invoice_id;
         this.cost = cost;
         this.datetime = datetime;
         this.card = card;
@@ -41,7 +41,7 @@ public class Receipt implements Parcelable {
     }
 
     private Receipt(Parcel in) {
-        invoiceID = in.readString();
+        invoice_id = in.readString();
         cost = in.readDouble();
         datetime = in.readParcelable(Timestamp.class.getClassLoader());
         card = in.readString();
@@ -49,12 +49,12 @@ public class Receipt implements Parcelable {
         map_id = in.readString();
     }
 
-    public String getInvoiceID() {
-        return invoiceID;
+    public String getInvoice_Id() {
+        return invoice_id;
     }
 
-    public void setInvoiceID(String invoiceID) {
-        this.invoiceID = invoiceID;
+    public void setInvoice_Id(String invoice_id) {
+        this.invoice_id = invoice_id;
     }
 
     public double getCost() {
@@ -112,7 +112,7 @@ public class Receipt implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(invoiceID);
+        dest.writeString(invoice_id);
         dest.writeDouble(cost);
         dest.writeParcelable(datetime, flags);
         dest.writeString(card);
@@ -123,11 +123,16 @@ public class Receipt implements Parcelable {
     @NonNull
     @Override
     public String toString() {
-        return "Invoice ID: " + invoiceID + "\n"
+        return "Invoice ID: " + invoice_id + "\n"
                 + "Cost: " + cost + "\n"
                 + "Datetime: " + datetime + "\n"
                 + "Card: " + card + "\n"
                 + "Electricity: " + electricity + "\n"
                 + "Map ID: " + map_id;
+    }
+
+    @Override
+    public int compareTo(Receipt r) {
+        return r.getDatetime().compareTo(datetime);
     }
 }

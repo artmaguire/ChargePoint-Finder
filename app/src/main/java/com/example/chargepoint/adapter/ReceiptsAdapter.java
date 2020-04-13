@@ -28,7 +28,6 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
 
     private final AdapterView.OnItemClickListener listener;
 
-
     private List<Receipt> receipts;
     private Context context;
 

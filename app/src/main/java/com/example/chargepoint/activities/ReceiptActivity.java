@@ -1,5 +1,6 @@
 package com.example.chargepoint.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -7,9 +8,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chargepoint.R;
+import com.example.chargepoint.db.FirebaseHelper;
+import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.pojo.Receipt;
 
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -25,7 +29,9 @@ public class ReceiptActivity extends AppCompatActivity {
     private TextView locationView;
     private TextView cardView;
     private TextView euroView;
+    private TextView operatorView;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +43,10 @@ public class ReceiptActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: " + receipt.toString());
 
         Date timeToDate = receipt.getDatetime().toDate();
-        String time = String.valueOf(timeToDate.getTime());
-        Log.d(TAG, "onCreate: " + timeView);
+        Format formatter = new SimpleDateFormat("HH:mm:ss");
+        String time = formatter.format(timeToDate);
+
+        Log.d(TAG, "onCreateTime: " + time);
 
         Date date = receipt.getDatetime().toDate();
         String pattern = "MMMM dd, yyyy";
@@ -52,14 +60,41 @@ public class ReceiptActivity extends AppCompatActivity {
         locationView = findViewById(R.id.receiptLocation);
         cardView = findViewById(R.id.receiptPayment);
         euroView = findViewById(R.id.receiptAmountEuro);
+        operatorView = findViewById(R.id.chargePointOperator);
 
         dateView.setText(dateString);
-        invoiceView.setText(receipt.getInvoiceID());
-        electricityView.setText(receipt.getElectricity() + "kWh");
+        invoiceView.setText("Receipt ID: " + receipt.getInvoice_Id());
+        electricityView.setText("Amount (kWh): " + receipt.getElectricity() + "kWh");
         timeView.setText(time);
-        locationView.setText("No where");
         cardView.setText("Paid with: ".concat(receipt.getCard()));
-        euroView.setText("€" + receipt.getCost());
+        euroView.setText("Amount (€): " + "€" + receipt.getCost());
+
+        FirebaseHelper fbHelper = FirebaseHelper.getInstance();
+        fbHelper.getChargePoint(receipt.getMap_id(), task -> {
+            if (task.isSuccessful()) {
+                ChargePoint cp = task.getResult().toObject(ChargePoint.class);
+                String title, line1, town, county;
+                if (cp.getAddress().containsKey("title") && !cp.getAddress().get("title").equals(""))
+                    title = cp.getAddress().get("title");
+                else
+                    title = "";
+                if (cp.getAddress().containsKey("line1") && !cp.getAddress().get("line1").equals(""))
+                    line1 = cp.getAddress().get("line1");
+                else
+                    line1 = "";
+                if (cp.getAddress().containsKey("town") && !cp.getAddress().get("town").equals(""))
+                    town = cp.getAddress().get("town");
+                else
+                    town = "";
+                if (cp.getAddress().containsKey("county") && !cp.getAddress().get("county").equals(""))
+                    county = cp.getAddress().get("county");
+                else
+                    county = "County not provided.";
+
+                locationView.setText("Address:\n" + title + ",\n" + line1 + ",\n" + town + ",\n" + county);
+                operatorView.setText("Operator:\n" + cp.getOperator());
+            }
+        });
     }
 
     @Override

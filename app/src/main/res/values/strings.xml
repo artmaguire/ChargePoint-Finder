@@ -47,4 +47,8 @@
     <string name="enter_debit_card_information_here">Enter Debit Card Information Here</string>
     <string name="save_card">SAVE CARD</string>
     <string name="name">Enter Name on Card</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_buy_power">Buy Power</string>
 </resources>

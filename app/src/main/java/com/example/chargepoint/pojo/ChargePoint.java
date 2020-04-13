@@ -3,17 +3,19 @@ package com.example.chargepoint.pojo;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class ChargePoint {
+public class ChargePoint implements Serializable {
     private String operator;
     private String usageType;
     private boolean isPayAtLocation;
     private boolean isMembershipRequired;
     private boolean isOperational;
     private int numberOfPoints;
-    private GeoPoint location;
+    private double latitude;
+    private double longitude;
     private Map<String, String> address;
     private List<ChargeConnection> connections;
 
@@ -73,16 +75,13 @@ public class ChargePoint {
         this.numberOfPoints = numberOfPoints;
     }
 
-    public GeoPoint getLocation() {
-        return location;
+    public LatLng getLocation() {
+        return new LatLng(latitude, longitude);
     }
 
     public void setLocation(GeoPoint location) {
-        this.location = location;
-    }
-
-    public LatLng getLocationAsLatLng() {
-        return new LatLng(location.getLatitude(), location.getLongitude());
+        this.latitude = location.getLatitude();
+        this.longitude = location.getLongitude();
     }
 
     public Map<String, String> getAddress() {
@@ -101,6 +100,24 @@ public class ChargePoint {
         this.connections = connections;
     }
 
+    public String getSimpleAddress() {
+        StringBuilder sb = new StringBuilder();
+        if (address.containsKey("title"))
+            sb.append(address.get("title"));
+        else if (address.containsKey("line1"))
+            sb.append(address.get("line1"));
+
+        if (sb.length() > 0)
+            sb.append(", ");
+
+        if (address.containsKey("county"))
+            sb.append(address.get("county"));
+        else if (address.containsKey("town"))
+            sb.append(address.get("town"));
+
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         return "ChargePoint{" +
@@ -110,7 +127,7 @@ public class ChargePoint {
                 ", isMembershipRequired=" + isMembershipRequired +
                 ", isOperational=" + isOperational +
                 ", numberOfPoints=" + numberOfPoints +
-                ", location=" + location +
+                ", location={lat: " + latitude + ", long: " + longitude + "}" +
                 ", address=" + address +
                 ", connections=" + connections +
                 '}';

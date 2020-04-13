@@ -40,19 +40,12 @@
         android:id="@+id/receiptDialogTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@id/receiptDialogElectricity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/receiptDialogLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="278dp"
         android:layout_marginEnd="16dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@id/receiptDialogElectricity"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/receiptDialogElectricity" />
 
     <TextView
         android:id="@+id/receiptDialogPayment"
