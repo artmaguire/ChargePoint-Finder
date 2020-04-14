@@ -18,25 +18,19 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.RateAdapter;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.Rate;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 public class RatesFragment extends Fragment {
 
-    private RecyclerView recyclerView;
+    private FirebaseHelper fbHelper = FirebaseHelper.getInstance();
     private RateAdapter adapter;
     private ArrayList<Rate> rateArrayList;
     private ArrayList<String> spinnerArray;
     private ArrayAdapter<String> spinnerAdapter;
-    FirebaseHelper fbHelper = FirebaseHelper.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,13 +39,13 @@ public class RatesFragment extends Fragment {
 
         Spinner spinner = root.findViewById(R.id.sort_cities);
         spinnerArray = new ArrayList<>();
-        spinnerAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, spinnerArray);
+        spinnerAdapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_list_item_1, spinnerArray);
 
         spinner.setAdapter(spinnerAdapter);
 
         loadCounty();
 
-        recyclerView = root.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         rateArrayList = new ArrayList<>();
         adapter = new RateAdapter(getContext(), rateArrayList);
@@ -90,25 +84,25 @@ public class RatesFragment extends Fragment {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     String county = document.getString("address.county");
                     county = county.trim();
-                    if(county.contains("Co ")) {
+                    if (county.contains("Co ")) {
                         county = county.replace("Co ", "");
                     }
-                    if(county.contains("Co. ")) {
+                    if (county.contains("Co. ")) {
                         county = county.replace("Co. ", "");
                     }
-                    if(county.contains("County ")) {
+                    if (county.contains("County ")) {
                         county = county.replace("County ", "");
                     }
-                    if(county.contains("Limerick City")) {
+                    if (county.contains("Limerick City")) {
                         county = "Limerick";
                     }
-                    if(county.contains("KILDARE")) {
+                    if (county.contains("KILDARE")) {
                         county = "Kildare";
                     }
-                    if(county.contains("Dublin")) {
+                    if (county.contains("Dublin")) {
                         county = "Dublin";
                     }
-                    if(!spinnerArray.contains(county)) {
+                    if (!spinnerArray.contains(county)) {
                         spinnerArray.add(county);
                     }
                     Collections.sort(spinnerArray);
@@ -126,10 +120,10 @@ public class RatesFragment extends Fragment {
                     boolean isOp = false;
                     boolean isFastC = false;
                     ArrayList<String> list = (ArrayList<String>) document.get("connections");
-                    if(list.toString().contains("isFastChargeCapable=true")) {
+                    if (list.toString().contains("isFastChargeCapable=true")) {
                         isFastC = true;
                     }
-                    if(list.toString().contains("isOperational=true")) {
+                    if (list.toString().contains("isOperational=true")) {
                         isOp = true;
                     }
 
@@ -146,14 +140,14 @@ public class RatesFragment extends Fragment {
         fbHelper.getAllChargePoints(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    if(Objects.requireNonNull(document.getString("address.county")).contains(county)) {
+                    if (Objects.requireNonNull(document.getString("address.county")).contains(county)) {
                         boolean isOp = false;
                         boolean isFastC = false;
                         ArrayList<String> list = (ArrayList<String>) document.get("connections");
-                        if(list.toString().contains("isFastChargeCapable=true")) {
+                        if (list.toString().contains("isFastChargeCapable=true")) {
                             isFastC = true;
                         }
-                        if(list.toString().contains("isOperational=true")) {
+                        if (list.toString().contains("isOperational=true")) {
                             isOp = true;
                         }
                         Rate rate = new Rate(document.getString("address.town"), document.getString("address.title"), document.getString("address.line1"), isOp, isFastC);
@@ -164,5 +158,4 @@ public class RatesFragment extends Fragment {
             }
         });
     }
-
 }
