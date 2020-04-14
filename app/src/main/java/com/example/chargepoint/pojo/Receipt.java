@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.GeoPoint;
 
 public class Receipt implements Parcelable, Comparable<Receipt> {
     public static final Creator<Receipt> CREATOR = new Creator<Receipt>() {
@@ -26,7 +25,6 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
     private String card;
     private String map_id;
     private String invoice_id;
-    private GeoPoint geopoint;
 
     public Receipt(String invoice_id, double cost, Timestamp datetime, String card, double electricity, String map_id) {
         this.invoice_id = invoice_id;
@@ -71,14 +69,6 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
 
     public void setDatetime(Timestamp datetime) {
         this.datetime = datetime;
-    }
-
-    public GeoPoint getGeopoint() {
-        return geopoint;
-    }
-
-    public void setGeopoint(GeoPoint geopoint) {
-        this.geopoint = geopoint;
     }
 
     public String getCard() {

@@ -10,7 +10,9 @@ import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapViewModel extends ViewModel {
@@ -30,7 +32,14 @@ public class MapViewModel extends ViewModel {
             chargePoints = new MutableLiveData<>();
             FirebaseHelper fbHelper = FirebaseHelper.getInstance();
             fbHelper.getAllChargePoints(task -> {
-                List<ChargePoint> cps = task.getResult().toObjects(ChargePoint.class);
+                List<ChargePoint> cps = new ArrayList<>();
+                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                    ChargePoint cp = doc.toObject(ChargePoint.class);
+                    if (cp != null) {
+                        cp.setMap_id(doc.getId());
+                        cps.add(cp);
+                    }
+                }
                 Log.d("VIEW_MODEL", "" + cps.size());
                 chargePoints.postValue(cps);
             });

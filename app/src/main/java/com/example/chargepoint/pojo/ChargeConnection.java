@@ -1,5 +1,9 @@
 package com.example.chargepoint.pojo;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.firestore.PropertyName;
+
 import java.io.Serializable;
 
 public class ChargeConnection implements Serializable {
@@ -60,18 +64,22 @@ public class ChargeConnection implements Serializable {
         this.quantity = quantity;
     }
 
+    @PropertyName("isFastChargeCapable")
     public boolean isFastChargeCapable() {
         return isFastChargeCapable;
     }
 
+    @PropertyName("isFastChargeCapable")
     public void setFastChargeCapable(boolean fastChargeCapable) {
         isFastChargeCapable = fastChargeCapable;
     }
 
+    @PropertyName("isOperational")
     public boolean isOperational() {
         return isOperational;
     }
 
+    @PropertyName("isOperational")
     public void setOperational(boolean operational) {
         isOperational = operational;
     }
@@ -84,6 +92,7 @@ public class ChargeConnection implements Serializable {
         this.currentTitle = currentTitle;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "ChargeConnection{" +

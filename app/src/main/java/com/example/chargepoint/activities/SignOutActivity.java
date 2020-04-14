@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.chargepoint.R;
+import com.example.chargepoint.db.FirebaseHelper;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,6 +43,7 @@ public class SignOutActivity extends Activity {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
+                                FirebaseHelper.destroyInstance();
                                 Intent main = new Intent(SignOutActivity.this, MainActivity.class);
                                 startActivity(main);
                                 finish();

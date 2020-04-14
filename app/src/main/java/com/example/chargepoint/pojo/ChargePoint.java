@@ -1,13 +1,17 @@
 package com.example.chargepoint.pojo;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.PropertyName;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 public class ChargePoint implements Serializable {
+    private String map_id;
     private String operator;
     private String usageType;
     private boolean isPayAtLocation;
@@ -27,6 +31,14 @@ public class ChargePoint implements Serializable {
     public ChargePoint() {
     }
 
+    public String getMap_id() {
+        return map_id;
+    }
+
+    public void setMap_id(String map_id) {
+        this.map_id = map_id;
+    }
+
     public String getOperator() {
         return operator;
     }
@@ -43,27 +55,33 @@ public class ChargePoint implements Serializable {
         this.usageType = usageType;
     }
 
+    @PropertyName("isPayAtLocation")
     public boolean isPayAtLocation() {
         return isPayAtLocation;
     }
 
-    public void setIsPayAtLocation(boolean payAtLocation) {
+    @PropertyName("isPayAtLocation")
+    public void setPayAtLocation(boolean payAtLocation) {
         isPayAtLocation = payAtLocation;
     }
 
+    @PropertyName("isMembershipRequired")
     public boolean isMembershipRequired() {
         return isMembershipRequired;
     }
 
-    public void setIsMembershipRequired(boolean membershipRequired) {
+    @PropertyName("isMembershipRequired")
+    public void setMembershipRequired(boolean membershipRequired) {
         isMembershipRequired = membershipRequired;
     }
 
+    @PropertyName("isOperational")
     public boolean isOperational() {
         return isOperational;
     }
 
-    public void setIsOperational(boolean isOperational) {
+    @PropertyName("isOperational")
+    public void setOperational(boolean isOperational) {
         this.isOperational = isOperational;
     }
 
@@ -118,9 +136,11 @@ public class ChargePoint implements Serializable {
         return sb.toString();
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "ChargePoint{" +
+                "map_id='" + map_id + '\'' +
                 "operator='" + operator + '\'' +
                 ", usageType='" + usageType + '\'' +
                 ", isPayAtLocation=" + isPayAtLocation +
