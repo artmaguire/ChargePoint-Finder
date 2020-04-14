@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.NewsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Blank Fragment" />
+        android:layout_height="wrap_content"
+        android:text="NEWS"
+        android:textColor="@color/darkblue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@color/black_overlay"
+        android:padding="10dp"
+        android:textAlignment="center"/>
 
-</FrameLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:columnCount="2"
+        android:rowCount="2">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="0"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:text="Button" />
+
+    </GridLayout>
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:id="@+id/recyclerView"/>
+
+
+
+
+
+</LinearLayout>
