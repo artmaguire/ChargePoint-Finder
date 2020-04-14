@@ -6,10 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chargepoint.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.Calendar;
 
@@ -18,13 +25,14 @@ public class PaymentDetailsActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     EditText txtMonthYear;
     Button savecardbutton;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_details);
 
-
+        mAuth = FirebaseAuth.getInstance();
         textcardnumber = (EditText) findViewById(R.id.editTextcardnumber);
         textcardname = (EditText) findViewById(R.id.editcardname);
 
@@ -44,18 +52,50 @@ public class PaymentDetailsActivity extends AppCompatActivity {
             datePickerDialog.show();
         });
 
-        textcardnumber.setOnClickListener(new View.OnClickListener() {
+
+
+        savecardbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                saveUserInformation();
             }
+
         });
 
-        textcardname.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
+
+    private void saveUserInformation() {
+        String displayName = textcardname.getText().toString();
+        int cardnumber = textcardname.getInputType();
+        if(displayName.isEmpty()){
+            textcardname.setError("Name Required");
+            textcardname.requestFocus();
+            return;
+        }
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if(user != null){
+            UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(displayName)
+                    .setDisplayName(String.valueOf(cardnumber))
+
+                    .build();
+
+            user.updateProfile(profile).addOnCompleteListener(
+                    new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(PaymentDetailsActivity.this, "Card Details saved successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+            );
+
+        }
+    }
+
+
 }
