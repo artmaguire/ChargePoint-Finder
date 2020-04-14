@@ -1,5 +1,6 @@
 package com.example.chargepoint.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,11 +20,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.pojo.Receipt;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.DecimalFormat;
@@ -47,7 +50,6 @@ public class BuyPowerFragment extends Fragment {
     private EditText amountEditText;
     private Button payButton;
     private List<String> spinnerTimes;
-    private double cost;
 
     // TODO: Get rate from db
     private double rate = 0.33;
@@ -114,7 +116,6 @@ public class BuyPowerFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
-                    cost = Double.parseDouble(spinnerTimes.get(position));
                     setCost(Integer.parseInt(spinnerTimes.get(position)));
                 } else if (spinnerTimes.get(0).equals("--"))
                     payButton.setEnabled(false);
@@ -145,21 +146,30 @@ public class BuyPowerFragment extends Fragment {
         });
 
         payButton.setOnClickListener(v -> {
-            Log.d(TAG, "Cost: " + cost);
+            ProgressDialog dialog = ProgressDialog.show(getActivity(), "",
+                    "Generating Receipt...", true);
+
+            double cost = Double.parseDouble(amountEditText.getText().toString());
+            int time = Integer.parseInt(timeSpinner.getSelectedItem().toString());
+
             FirebaseHelper fbHelper = FirebaseHelper.getInstance();
             fbHelper.getCards(task -> {
                 Log.d(TAG, "Task: " + task.isSuccessful());
                 if (!task.getResult().isEmpty()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Receipt r = new Receipt(UUID.randomUUID().toString(), cost, now(),
+                        Receipt r = new Receipt(UUID.randomUUID().toString(), cost, time, now(),
                                 document.getString("cardno"),
                                 Double.parseDouble(amountEditText.getText().toString()),
-                                cp.getMap_id());
+                                cp.getMap_id(), FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                        fbHelper.addReceiptToDB(r, task1 -> Log.d(TAG, "Receipt added to Firestore."));
+                        fbHelper.addReceiptToDB(r, task1 -> {
+                            dialog.dismiss();
+                            Navigation.findNavController(view).popBackStack();
+                        });
                         Log.d(TAG, "name" + " " + document.getString("cardno") + "\n" + document.getString("uid") + "\n" + document.getString("cardname"));
                     }
                 } else {
+                    dialog.dismiss();
                     Toast.makeText(getContext(), "No card available for this user.", Toast.LENGTH_SHORT).show();
                     // TODO: Got to payment details page, will complete after merge
                     Log.d(TAG, "onViewCreated: No card for this user.");
@@ -184,7 +194,6 @@ public class BuyPowerFragment extends Fragment {
     }
 
     private void setTime(double cost) {
-        Log.d(TAG, String.valueOf(cost));
         if (cost <= 0) {
             payButton.setEnabled(false);
             return;

@@ -19,20 +19,24 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
             return new Receipt[size];
         }
     };
+    private String invoice_id;
     private Timestamp datetime;
     private double cost;
+    private int duration;
     private double electricity;
     private String card;
     private String map_id;
-    private String invoice_id;
+    private String user_id;
 
-    public Receipt(String invoice_id, double cost, Timestamp datetime, String card, double electricity, String map_id) {
+    public Receipt(String invoice_id, double cost, int duration, Timestamp datetime, String card, double electricity, String map_id, String user_id) {
         this.invoice_id = invoice_id;
         this.cost = cost;
+        this.duration = duration;
         this.datetime = datetime;
         this.card = card;
         this.electricity = electricity;
         this.map_id = map_id;
+        this.user_id = user_id;
     }
 
     public Receipt() {
@@ -41,17 +45,19 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
     private Receipt(Parcel in) {
         invoice_id = in.readString();
         cost = in.readDouble();
+        duration = in.readInt();
         datetime = in.readParcelable(Timestamp.class.getClassLoader());
         card = in.readString();
         electricity = in.readDouble();
         map_id = in.readString();
+        user_id = in.readString();
     }
 
-    public String getInvoice_Id() {
+    public String getInvoice_id() {
         return invoice_id;
     }
 
-    public void setInvoice_Id(String invoice_id) {
+    public void setInvoice_id(String invoice_id) {
         this.invoice_id = invoice_id;
     }
 
@@ -61,6 +67,14 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public Timestamp getDatetime() {
@@ -95,6 +109,14 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
         this.map_id = map_id;
     }
 
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -104,10 +126,12 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(invoice_id);
         dest.writeDouble(cost);
+        dest.writeInt(duration);
         dest.writeParcelable(datetime, flags);
         dest.writeString(card);
         dest.writeDouble(electricity);
         dest.writeString(map_id);
+        dest.writeString(user_id);
     }
 
     @NonNull
@@ -115,10 +139,12 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
     public String toString() {
         return "Invoice ID: " + invoice_id + "\n"
                 + "Cost: " + cost + "\n"
+                + "Duration: " + duration + "\n"
                 + "Datetime: " + datetime + "\n"
                 + "Card: " + card + "\n"
                 + "Electricity: " + electricity + "\n"
-                + "Map ID: " + map_id;
+                + "Map ID: " + map_id + "\n"
+                + "User ID: " + user_id;
     }
 
     @Override

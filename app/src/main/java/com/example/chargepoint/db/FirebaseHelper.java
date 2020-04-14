@@ -18,17 +18,19 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class FirebaseHelper {
     private static FirebaseHelper instance;
-    private FirebaseFirestore db;
     private FirebaseUser currentFirebaseUser;
+    private FirebaseFirestore db;
 
     private FirebaseHelper() {
-        this.currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         this.db = FirebaseFirestore.getInstance();
+        this.currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     public static FirebaseHelper getInstance() {
         if (instance == null)
             instance = new FirebaseHelper();
+        else
+            instance.setCurrentFirebaseUser();
         return instance;
     }
 
@@ -36,9 +38,14 @@ public class FirebaseHelper {
         instance = null;
     }
 
+    private void setCurrentFirebaseUser() {
+        if (this.currentFirebaseUser == null)
+            this.currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    }
+
     public void getAllReceiptsFromUser(OnCompleteListener<QuerySnapshot> listener) {
         db.collection("receipts")
-                .whereEqualTo("user", currentFirebaseUser.getUid())
+                .whereEqualTo("user_id", currentFirebaseUser.getUid())
                 .get()
                 .addOnCompleteListener(listener);
     }

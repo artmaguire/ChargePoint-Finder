@@ -63,7 +63,7 @@ public class ReceiptActivity extends AppCompatActivity {
         operatorView = findViewById(R.id.chargePointOperator);
 
         dateView.setText(dateString);
-        invoiceView.setText("Receipt ID: " + receipt.getInvoice_Id());
+        invoiceView.setText("Receipt ID: " + receipt.getInvoice_id());
         electricityView.setText("Amount (kWh): " + receipt.getElectricity() + "kWh");
         timeView.setText(time);
         cardView.setText("Paid with: ".concat(receipt.getCard()));
