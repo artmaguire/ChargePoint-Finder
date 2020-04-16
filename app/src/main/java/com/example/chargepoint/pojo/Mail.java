@@ -24,11 +24,11 @@ public class Mail {
     public static void sendMail(String to, Receipt receipt) {
 
         // Password email : aTeXDEQbCwt7GJc
-        // Password application : ficoyrsmauyhoerz
+        // Password application : fnfmkdlsssbhbkeu
         // Email : chargerpoint.app@gmail.com
 
         final String username = "chargerpoint.app@gmail.com";
-        final String password = "ficoyrsmauyhoerz";
+        final String password = "fnfmkdlsssbhbkeu";
 
         final String host = "smtp.gmail.com";
 
@@ -70,8 +70,8 @@ public class Mail {
                     "    </thead>\n" +
                     "    <tbody>\n" +
                     "        <tr>\n" +
-                    "            <td style='border: 1px solid black;'>MapId </td>\n" +
-                    "            <td style='border: 1px solid black;'>" + receipt.getMap_id() + "</td>\n" +
+                    "            <td style='border: 1px solid black;'>Receipt Id </td>\n" +
+                    "            <td style='border: 1px solid black;'>" + receipt.getInvoice_id() + "</td>\n" +
                     "        </tr>\n" +
                     "              <tr>\n" +
                     "            <td style='border: 1px solid black;'>Card </td>\n" +

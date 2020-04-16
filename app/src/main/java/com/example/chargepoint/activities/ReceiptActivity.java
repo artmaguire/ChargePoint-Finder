@@ -48,7 +48,7 @@ public class ReceiptActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Receipt receipt = getIntent().getParcelableExtra("receipt");
+        receipt = getIntent().getParcelableExtra("receipt");
         Log.d(TAG, "onCreate: " + receipt.toString());
 
         Date timeToDate = receipt.getDatetime().toDate();
@@ -121,13 +121,13 @@ public class ReceiptActivity extends AppCompatActivity {
 
         if(isEmailAdress(email.getText().toString())) {
 
-            Mail.sendMail("aarthur.francois@gmail.com", receipt);
+            String to = email.getText().toString().trim();
+            Mail.sendMail(to, receipt);
 
             statement.setText("Email sent !");
         } else {
             statement.setText("Wrong email address.");
         }
-
 
     }
 
@@ -136,10 +136,12 @@ public class ReceiptActivity extends AppCompatActivity {
         TextView specified = findViewById(R.id.specified);
         EditText email = findViewById(R.id.email);
         Button button_send = findViewById(R.id.button_send);
+        Button button_email = findViewById(R.id.button_email);
 
         specified.setVisibility(View.VISIBLE);
         email.setVisibility(View.VISIBLE);
         button_send.setVisibility(View.VISIBLE);
+        button_email.setVisibility(View.INVISIBLE);
 
     }
 

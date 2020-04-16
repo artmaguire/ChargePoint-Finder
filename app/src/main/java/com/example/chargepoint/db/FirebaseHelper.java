@@ -44,6 +44,7 @@ public class FirebaseHelper {
     }
 
     public void getAllReceiptsFromUser(OnCompleteListener<QuerySnapshot> listener) {
+        System.out.println(currentFirebaseUser.getUid());
         db.collection("receipts")
                 .whereEqualTo("user_id", currentFirebaseUser.getUid())
                 .get()
