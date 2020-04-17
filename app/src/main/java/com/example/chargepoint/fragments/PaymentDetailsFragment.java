@@ -9,36 +9,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.Calendar;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class PaymentDetailsFragment extends Fragment {
 
-    private Button startpayment;
-    private EditText orderamount;
-    private String TAG = "main";
+    private EditText textcardnumber, textcardname;
+    private DatePickerDialog datePickerDialog;
+    private EditText txtMonthYear;
+    private Button savecardbutton;
+    private FirebaseAuth mAuth;
 
-    DatePickerDialog datePickerDialog;
-    EditText txtMonthYear;
-
-    public PaymentDetailsFragment() {
-        // Required empty public constructor
-    }
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.setHasOptionsMenu(true);
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_payment_details, container, false);
     }
 
@@ -46,8 +41,13 @@ public class PaymentDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mAuth = FirebaseAuth.getInstance();
+        textcardnumber = view.findViewById(R.id.editTextcardnumber);
+        textcardname = view.findViewById(R.id.editcardname);
+        savecardbutton = view.findViewById(R.id.saverbutton);
         txtMonthYear = view.findViewById(R.id.txtMonthYear);
 
+        //on click functionality to select the month and date of the card
         txtMonthYear.setOnClickListener(v -> {
             Calendar c = Calendar.getInstance();
             int mYear = c.get(Calendar.YEAR);
@@ -56,10 +56,45 @@ public class PaymentDetailsFragment extends Fragment {
 
             datePickerDialog = new DatePickerDialog(getContext(),
                     AlertDialog.THEME_HOLO_DARK,
-                    (viewD, year, monthOfYear, dayOfMonth) -> txtMonthYear.setText((monthOfYear + 1) + "/" + year), mYear, mMonth, mDay);
+                    (dateView, year, monthOfYear, dayOfMonth) -> txtMonthYear.setText((monthOfYear + 1) + "/" + year), mYear, mMonth, mDay);
             datePickerDialog.getDatePicker().findViewById(getResources().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
             datePickerDialog.show();
         });
+
+
+        try {
+            savecardbutton.setOnClickListener(v -> saveUserInformation());
+        } catch (NullPointerException ignored) {
+
+        }
+    }
+
+    private void saveUserInformation() {
+        String displayName = textcardname.getText().toString();
+        int cardnumber = textcardname.getInputType();
+        if (displayName.isEmpty()) {
+            textcardname.setError("Name Required");
+            textcardname.requestFocus();
+            return;
+        }
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(displayName)
+                    .setDisplayName(String.valueOf(cardnumber))
+
+                    .build();
+
+            user.updateProfile(profile).addOnCompleteListener(
+                    task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getContext(), "Card Details saved successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+        }
     }
 
     @Override

@@ -1,24 +1,20 @@
 package com.example.chargepoint.activities;
 
-import android.animation.Animator;
-import android.animation.TimeInterpolator;
-import android.content.Context;
-import android.content.Intent;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class ProgressBarAnimation extends Animation {
-    private Context context;
+    private SplashScreen activity;
     private ProgressBar progressBar;
     private TextView textView;
     private float from;
     private float to;
 
-    public ProgressBarAnimation(Context context, ProgressBar progressBar, TextView textView, float from, float to){
+    public ProgressBarAnimation(SplashScreen activity, ProgressBar progressBar, TextView textView, float from, float to) {
 
-        this.context = context;
+        this.activity = activity;
         this.progressBar = progressBar;
         this.textView = textView;
         this.from = from;
@@ -34,7 +30,7 @@ public class ProgressBarAnimation extends Animation {
         textView.setText((int)value+" %");
 
         if(value == to){
-            context.startActivity(new Intent(context, MainActivity.class));
+            activity.next();
         }
     }
 }

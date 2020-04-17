@@ -136,7 +136,8 @@ public class ReceiptFragment extends Fragment {
         statement.setVisibility(View.VISIBLE);
 
         if (isEmailAdress(email.getText().toString())) {
-            Mail.sendMail("aarthur.francois@gmail.com", receipt);
+            String to = email.getText().toString().trim();
+            Mail.sendMail(to, receipt);
 
             statement.setText("Email sent !");
         } else {
@@ -148,10 +149,12 @@ public class ReceiptFragment extends Fragment {
         TextView specified = view.findViewById(R.id.specified);
         EditText email = view.findViewById(R.id.email);
         Button button_send = view.findViewById(R.id.button_send);
+        Button button_email = view.findViewById(R.id.button_email);
 
         specified.setVisibility(View.VISIBLE);
         email.setVisibility(View.VISIBLE);
         button_send.setVisibility(View.VISIBLE);
+        button_email.setVisibility(View.INVISIBLE);
     }
 
     private boolean isEmailAdress(String email) {

@@ -6,17 +6,6 @@
     android:orientation="vertical"
     tools:context=".fragments.NewsFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NEWS"
-        android:textColor="@color/darkblue"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:background="@color/black_overlay"
-        android:padding="10dp"
-        android:textAlignment="center"/>
-
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
