@@ -19,8 +19,6 @@ public class AboutFragment extends Fragment {
         this.setHasOptionsMenu(true);
         final View root = inflater.inflate(R.layout.fragment_about, container, false);
 
-
-
         return root;
     }
 

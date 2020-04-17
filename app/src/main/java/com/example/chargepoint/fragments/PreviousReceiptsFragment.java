@@ -19,6 +19,7 @@ import com.example.chargepoint.adapter.ReceiptsAdapter;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.Receipt;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,6 +48,7 @@ public class PreviousReceiptsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         RecyclerView recyclerView = view.findViewById(R.id.receiptsRecyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -55,11 +57,13 @@ public class PreviousReceiptsFragment extends Fragment {
 
         pgsBar = view.findViewById(R.id.receiptsPBar);
 
-        //TODO: Get user receipts currently in database
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-        fbHelper.getAllReceipts(task -> {
+        fbHelper.getAllReceiptsFromUser(task -> {
             if (task.isSuccessful()) {
                 List<Receipt> receipts = task.getResult().toObjects(Receipt.class);
+                Collections.sort(receipts);
+                Log.d(TAG, "onCreate: " + receipts.toString());
+
                 adapter.setReceipts(receipts);
                 adapter.notifyDataSetChanged();
 

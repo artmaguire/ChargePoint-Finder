@@ -1,6 +1,5 @@
 package com.example.chargepoint.fragments;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.InputType;
@@ -18,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -53,7 +53,6 @@ public class UpdateInformationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         name = view.findViewById(R.id.usersName);
         email = view.findViewById(R.id.userEmail);
-        TextView password = view.findViewById(R.id.userPassword);
 
         view.findViewById(R.id.NameCard).setOnClickListener(this::changeName);
         view.findViewById(R.id.EmailCard).setOnClickListener(this::changeEmail);
@@ -64,7 +63,7 @@ public class UpdateInformationFragment extends Fragment {
 
     private void changeName(View v) {
         name.setHint(currentUser.getDisplayName());
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        MaterialAlertDialogBuilder alertDialog = new MaterialAlertDialogBuilder(getContext());
 
         alertDialog.setTitle("Change Name");
 
@@ -110,7 +109,8 @@ public class UpdateInformationFragment extends Fragment {
 
     private void changeEmail(View v) {
         email.setHint(currentUser.getEmail());
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+
+        MaterialAlertDialogBuilder alertDialog = new MaterialAlertDialogBuilder(getContext());
 
         alertDialog.setTitle("Change Email");
 
@@ -148,7 +148,7 @@ public class UpdateInformationFragment extends Fragment {
     }
 
     private void changePassword(View v) {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        MaterialAlertDialogBuilder alertDialog = new MaterialAlertDialogBuilder(getContext());
 
         alertDialog.setTitle("Change Password");
 

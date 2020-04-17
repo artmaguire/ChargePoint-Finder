@@ -40,6 +40,7 @@
             android:title="@string/sign_in_with_biometrics"
             android:key="@string/sign_in_with_biometrics"
             android:icon="@drawable/fingerprint24px"
+            android:enabled="false"
             android:summary="Enable fingerprint sign in">
         </SwitchPreference>
     </PreferenceCategory>
