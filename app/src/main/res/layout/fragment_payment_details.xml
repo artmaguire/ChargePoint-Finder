@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.PaymentDetailsFragment">
+
+    <EditText
+        android:id="@+id/orderamount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="amount"
+        android:inputType="number"
+        android:textAppearance="@color/fui_bgTwitter" />
+
+    <Button
+        android:id="@+id/startpayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#02b89a"
+        android:text="START PAYMENT" />
+</LinearLayout>

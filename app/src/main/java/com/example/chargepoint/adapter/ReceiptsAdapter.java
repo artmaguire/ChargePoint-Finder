@@ -1,18 +1,17 @@
 package com.example.chargepoint.adapter;
 
-import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.activities.ReceiptActivity;
 import com.example.chargepoint.pojo.Receipt;
 
 import java.text.DateFormat;
@@ -26,15 +25,12 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
 
     private static final String TAG = "Receipt Adapter";
 
-    private final AdapterView.OnItemClickListener listener;
-
     private List<Receipt> receipts;
-    private Context context;
+    private View root;
 
-    public ReceiptsAdapter(Context context) {
-        this.context = context;
+    public ReceiptsAdapter(View root) {
+        this.root = root;
         this.receipts = new ArrayList<>();
-        listener = null;
     }
 
     public void setReceipts(List<Receipt> receipts) {
@@ -65,9 +61,9 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
         holder.receiptAmount.setText("€".concat(String.valueOf(amount)));
 
         holder.cv.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ReceiptActivity.class);
-            intent.putExtra("receipt", receipt);
-            context.startActivity(intent);
+            Bundle b = new Bundle();
+            b.putParcelable("Receipt", receipt);
+            Navigation.findNavController(root).navigate(R.id.action_fragment_previous_receipts_to_fragment_receipt, b);
         });
     }
 
@@ -77,7 +73,6 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         CardView cv;
         TextView receiptDate;
         TextView receiptAmount;

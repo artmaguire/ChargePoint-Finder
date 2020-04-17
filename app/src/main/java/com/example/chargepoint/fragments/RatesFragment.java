@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,12 +68,6 @@ public class RatesFragment extends Fragment {
         });
 
         return root;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_rates);
     }
 
     private void loadCounty() {

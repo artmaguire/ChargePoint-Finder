@@ -2,12 +2,14 @@ package com.example.chargepoint.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
@@ -32,9 +34,10 @@ public class CarDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        this.setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         View v;
         v = inflater.inflate(R.layout.fragment_car_details, container, false);
@@ -93,18 +96,15 @@ public class CarDetailsFragment extends Fragment {
 
                 if(position == 2){
                     arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.textview_red, arrayList_volkswagen);
-
                 }
 
                 if(position == 3){
                     arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.textview_red, arrayList_hyundai);
-
                 }
 
                 if(position == 4){
                     arrayAdapter_child = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.textview_red, arrayList_mahindra);
                 }
-
                 spinnerModel.setAdapter(arrayAdapter_child);
             }
 
@@ -113,10 +113,13 @@ public class CarDetailsFragment extends Fragment {
 
             }
         });
-        //child process ends
+
         return v;
+    }
 
-
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        getActivity().onBackPressed();
+        return super.onOptionsItemSelected(item);
     }
 }

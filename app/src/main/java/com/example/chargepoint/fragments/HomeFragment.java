@@ -1,6 +1,5 @@
 package com.example.chargepoint.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +14,9 @@ import com.example.chargepoint.R;
 
 public class HomeFragment extends Fragment {
 
-    Context context;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
-        context = root.getContext();
 
         // Dashboard Navigation by navGraph
         root.findViewById(R.id.aboutCard).setOnClickListener(v -> {
@@ -43,9 +39,9 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        super.onStart();
     }
 
     @Override

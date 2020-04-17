@@ -44,7 +44,20 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.chargepoint.fragments.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_navigation_profile_to_fragment_about"
+            app:destination="@id/fragment_about" />
+        <action
+            android:id="@+id/action_navigation_profile_to_fragment_update_information"
+            app:destination="@id/fragment_update_information" />
+        <action
+            android:id="@+id/action_navigation_profile_to_fragment_previous_receipts"
+            app:destination="@id/fragment_previous_receipts" />
+        <action
+            android:id="@+id/action_navigation_profile_to_fragment_payment_details"
+            app:destination="@id/fragment_payment_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_about"
@@ -75,4 +88,32 @@
         android:name="com.example.chargepoint.fragments.BuyPowerFragment"
         android:label="@string/title_buy_power"
         tools:layout="@layout/fragment_buy_power" />
+
+    <fragment
+        android:id="@+id/fragment_update_information"
+        android:name="com.example.chargepoint.fragments.UpdateInformationFragment"
+        android:label="@string/update_information"
+        tools:layout="@layout/fragment_update_information" />
+
+    <fragment
+        android:id="@+id/fragment_previous_receipts"
+        android:name="com.example.chargepoint.fragments.PreviousReceiptsFragment"
+        android:label="@string/previous_receipts"
+        tools:layout="@layout/fragment_previous_receipts">
+        <action
+            android:id="@+id/action_fragment_previous_receipts_to_fragment_receipt"
+            app:destination="@id/fragment_receipt" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_receipt"
+        android:name="com.example.chargepoint.fragments.ReceiptFragment"
+        android:label="@string/receipt"
+        tools:layout="@layout/fragment_receipt" />
+
+    <fragment
+        android:id="@+id/fragment_payment_details"
+        android:name="com.example.chargepoint.fragments.PaymentDetailsFragment"
+        android:label="@string/payment_details"
+        tools:layout="@layout/fragment_payment_details" />
 </navigation>

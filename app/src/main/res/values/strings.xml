@@ -51,4 +51,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_buy_power">Buy Power</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="update_information">Update Information</string>
+    <string name="previous_receipts">Previous Receipts</string>
+    <string name="receipt">Receipt</string>
 </resources>
