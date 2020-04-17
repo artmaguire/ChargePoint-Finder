@@ -33,8 +33,8 @@ public class PaymentDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment_details);
 
         mAuth = FirebaseAuth.getInstance();
-        textcardnumber = (EditText) findViewById(R.id.editTextcardnumber);
-        textcardname = (EditText) findViewById(R.id.editcardname);
+        textcardnumber =  findViewById(R.id.editTextcardnumber);
+        textcardname = findViewById(R.id.editcardname);
 
         txtMonthYear = findViewById(R.id.txtMonthYear);
 
@@ -51,21 +51,14 @@ public class PaymentDetailsActivity extends AppCompatActivity {
             datePickerDialog.getDatePicker().findViewById(getResources().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
             datePickerDialog.show();
         });
-
-
-
-        savecardbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveUserInformation();
-            }
-
-        });
-
-
+        try {
+            savecardbutton.setOnClickListener(v -> saveUserInformation());
+        }catch(NullPointerException ignored){
+            
+        }
     }
 
-    private void saveUserInformation() {
+    public void saveUserInformation() {
         String displayName = textcardname.getText().toString();
         int cardnumber = textcardname.getInputType();
         if(displayName.isEmpty()){
@@ -84,12 +77,9 @@ public class PaymentDetailsActivity extends AppCompatActivity {
                     .build();
 
             user.updateProfile(profile).addOnCompleteListener(
-                    new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(PaymentDetailsActivity.this, "Card Details saved successfully", Toast.LENGTH_SHORT).show();
-                            }
+                    task -> {
+                        if(task.isSuccessful()){
+                            Toast.makeText(PaymentDetailsActivity.this, "Card Details saved successfully", Toast.LENGTH_SHORT).show();
                         }
                     }
             );
