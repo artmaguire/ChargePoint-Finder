@@ -93,12 +93,12 @@ public class MainActivity extends AppCompatActivity {
                     .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                            FragmentManager fm = getSupportFragmentManager();
-                            TermsFragment callfragment = new TermsFragment();
-                            fm.beginTransaction().replace(R.id.container, callfragment).commit();
 
-                            //System.exit(0);
+                            //FragmentManager fm = getSupportFragmentManager();
+                            //TermsFragment callfragment;
+                            //fm.beginTransaction().replace(R.id.container, callfragment).commit();
+                            finish();
+                            System.exit(0);
                         }
                     })
                     .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
