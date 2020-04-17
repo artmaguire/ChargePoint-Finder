@@ -6,21 +6,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class CarDetailsFragment extends Fragment {
 
+    Button savebutton;
     Spinner spinnerManufacturer, spinnerModel   ;
 
     ArrayList<String> arrayList_parent;
     ArrayAdapter arrayAdapter_parent;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+    Member member = new Member();
+    int maxid = 0;
 
     ArrayList<String> arrayList_Renault,arrayList_tesla,arrayList_volkswagen,arrayList_hyundai,arrayList_mahindra ;
     ArrayAdapter<String> arrayAdapter_child;
@@ -35,6 +48,8 @@ public class CarDetailsFragment extends Fragment {
         View v;
         v = inflater.inflate(R.layout.fragment_car_details, container, false);
 
+        reference = database.getInstance().getReference().child("Spinner");
+        savebutton = (Button) v.findViewById(R.id.savebutton);
         //Mapping of Dropdown list in the layout page to the Spinner objects
         spinnerManufacturer = (Spinner) v.findViewById(R.id.spinner1);
         spinnerModel = (Spinner) v.findViewById(R.id.spinner2);
@@ -110,7 +125,31 @@ public class CarDetailsFragment extends Fragment {
             }
         });
         //child process ends
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    maxid = (int)dataSnapshot.getChildrenCount();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        savebutton.setOnClickListener(v1 -> {
+
+            member.setSpinner(spinnerModel.getSelectedItem().toString());
+            Toast.makeText(getActivity(), "Model Stored Successfully", Toast.LENGTH_SHORT).show();
+
+            reference.child(String.valueOf(maxid+1)).setValue(member);
+        });
         return v;
+
 
 
 
