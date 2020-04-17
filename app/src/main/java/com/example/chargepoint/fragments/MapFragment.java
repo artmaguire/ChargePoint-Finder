@@ -12,6 +12,7 @@ import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.map.ChargePointCluster;
@@ -24,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
@@ -76,6 +78,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onMapReady(GoogleMap m) {
         this.map = m;
+
+        boolean enabled = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("Dark Theme", true);
+        if (enabled) {
+            map.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.maps_dark_mode));
+        }
 
         map.setOnCameraMoveListener(this);
 

@@ -27,12 +27,6 @@ public class ChargePointInfoWindowAdapter implements GoogleMap.InfoWindowAdapter
 
     @Override
     public View getInfoWindow(Marker marker) {
-        return null;
-    }
-
-    @Override
-    public View getInfoContents(Marker marker) {
-
         ChargePoint cp = (ChargePoint) marker.getTag();
 
         TextView iw_operator = iw_view.findViewById(R.id.iw_operator);
@@ -57,5 +51,10 @@ public class ChargePointInfoWindowAdapter implements GoogleMap.InfoWindowAdapter
         iw_powerKW.setText(powerKW);
 
         return iw_view;
+    }
+
+    @Override
+    public View getInfoContents(Marker marker) {
+        return null;
     }
 }
