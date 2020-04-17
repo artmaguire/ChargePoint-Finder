@@ -1,12 +1,18 @@
 package com.example.chargepoint.activities;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -14,6 +20,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.chargepoint.R;
+import com.example.chargepoint.fragments.TermsFragment;
 import com.example.chargepoint.map.MapViewModel;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -39,13 +46,16 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int MY_REQUEST_CODE = 1234;
     private static final String TAG = "User_db";
+    AlertDialog alertDialog;
     List<AuthUI.IdpConfig> providers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //
+        onFirst();
+        //
         Intent intent  = getIntent();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -66,6 +76,44 @@ public class MainActivity extends AppCompatActivity {
             showSignInOptions();
     }
 
+
+    // <------------------------------------------------------------------------------------>
+
+
+    public void alert(View v){
+    }
+
+    public void onFirst(){
+        boolean beginRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("beginRun", true);
+
+        if (beginRun){
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Terms&Condition")
+                    .setMessage("Click on link below to see terms and conditions")
+                    .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            //FragmentManager fm = getSupportFragmentManager();
+                            //TermsFragment callfragment;
+                            //fm.beginTransaction().replace(R.id.container, callfragment).commit();
+                            finish();
+                            System.exit(0);
+                        }
+                    })
+                    .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                            .edit()
+                            .putBoolean("beginRun", false)
+                            .apply();
+                        }
+                    }).show();
+        }
+    }
+
+    // <------------------------------------------------------------------------------------>
 
     private void showSignInOptions() {
         providers = Arrays.asList(
@@ -133,4 +181,5 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }
