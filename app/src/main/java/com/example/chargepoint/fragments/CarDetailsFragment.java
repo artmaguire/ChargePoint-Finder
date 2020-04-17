@@ -6,25 +6,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CarDetailsFragment extends Fragment {
 
-    Spinner spinnerManufacturer, spinnerModel   ;
-
-    ArrayList<String> arrayList_parent;
+    private Button savebutton;
+    private Spinner spinnerManufacturer, spinnerModel   ;
+    FirebaseAuth auth;
+    private ArrayList<String> arrayList_parent;
     ArrayAdapter arrayAdapter_parent;
+
+
+
+    int maxid = 0;
 
     ArrayList<String> arrayList_Renault,arrayList_tesla,arrayList_volkswagen,arrayList_hyundai,arrayList_mahindra ;
     ArrayAdapter<String> arrayAdapter_child;
@@ -39,6 +51,9 @@ public class CarDetailsFragment extends Fragment {
         View v;
         v = inflater.inflate(R.layout.fragment_car_details, container, false);
 
+        auth = FirebaseAuth.getInstance();
+
+        savebutton = (Button) v.findViewById(R.id.savebutton);
         //Mapping of Dropdown list in the layout page to the Spinner objects
         spinnerManufacturer = (Spinner) v.findViewById(R.id.spinner1);
         spinnerModel = (Spinner) v.findViewById(R.id.spinner2);
@@ -114,9 +129,37 @@ public class CarDetailsFragment extends Fragment {
             }
         });
         //child process ends
+
+
+        try {
+            savebutton.setOnClickListener(v1 -> savecardetails());
+        }catch (NullPointerException ignored){
+
+        }
         return v;
 
 
+
+
+    }
+
+    private void savecardetails() {
+        String model = spinnerModel.getSelectedItem().toString().trim();
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        if(user != null){
+            UserProfileChangeRequest userprofile = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(model).build();
+
+            user.updateProfile(userprofile).addOnCompleteListener(
+                    task -> {
+                     if(task.isSuccessful()){
+                         Toast.makeText(getActivity(),"Model Type Saved" , Toast.LENGTH_SHORT).show();
+                     }
+                    }
+            );
+        }
 
     }
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".activities.SplashScreen"
     android:background="#FFFFFF">
 
@@ -13,7 +14,28 @@
         android:layout_height="197dp"
         android:layout_centerInParent="true"
         android:contentDescription="@string/appbar_scrolling_view_behavior"
-        tools:src="@drawable/chargepoint" />
+        tools:src="@drawable/charg" />
+
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:paddingTop="12in"
+        android:padding="12dp"
+        style="@style/Widget.AppCompat.ProgressBar"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:id="@+id/text_view"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/progressbar"/>
     <TextView
         android:id="@+id/tvSplash"
         android:layout_width="fill_parent"
@@ -23,6 +45,6 @@
         android:textColor="#454545"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:text="www.chargepoint.ie"/>
+        android:text="@string/www_chargepoint_ie"/>
 
 </RelativeLayout>

@@ -13,7 +13,7 @@
     </style>
 
     <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground"> @drawable/chargepoint </item>
+        <item name="android:windowBackground"> @drawable/charg </item>
 
 
     </style>
