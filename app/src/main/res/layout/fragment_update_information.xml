@@ -6,21 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.chargepoint.activities.UpdateInformationActivity">
-
+    android:padding="16dp"
+    tools:context="com.example.chargepoint.fragments.UpdateInformationFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/NameCard"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="#434343"
-        android:onClick="changeName"
+        android:layout_marginTop="8dp"
         android:textAlignment="center"
-        app:cardBackgroundColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/EmailCard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -35,21 +30,19 @@
                 android:id="@+id/changeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="3dp"
-                android:paddingLeft="10dp"
                 android:text="Change Name"
-                android:textColor="@color/textColour"
-                android:textSize="10sp" />
+                android:textColor="@color/textColourPrimary"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/usersName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:inputType="textPersonName"
-                android:onClick="changeName"
-                android:paddingLeft="10dp"
                 android:textColor="#E6474747"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -58,16 +51,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/EmailCard"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#434343"
-        android:onClick="changeEmail"
-        android:textAlignment="center"
-        app:cardBackgroundColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/PasswordCard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NameCard">
 
@@ -82,21 +69,19 @@
                 android:id="@+id/changeEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="3dp"
-                android:paddingLeft="10dp"
                 android:text="@string/change_email"
-                android:textColor="@color/textColour"
-                android:textSize="10sp" />
+                android:textColor="@color/textColourPrimary"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/userEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:inputType="textEmailAddress"
-                android:onClick="changeEmail"
-                android:paddingLeft="10dp"
                 android:textColor="#E6474747"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -105,15 +90,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/PasswordCard"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#434343"
-        android:onClick="changePassword"
-        android:textAlignment="center"
-        app:cardBackgroundColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EmailCard">
 
@@ -128,21 +108,19 @@
                 android:id="@+id/changePassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="3dp"
-                android:paddingStart="10dp"
                 android:text="@string/change_password"
-                android:textColor="@color/textColour"
-                android:textSize="10sp" />
+                android:textColor="@color/textColourPrimary"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/userPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:inputType="textPassword"
-                android:onClick="changePassword"
-                android:paddingLeft="10dp"
                 android:text="**********"
                 android:textColor="#E6474747"
                 android:textSize="18sp" />

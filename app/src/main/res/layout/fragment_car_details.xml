@@ -66,5 +66,4 @@
         android:paddingRight="30dp"
         android:text="@string/save" />
 
-
 </LinearLayout>

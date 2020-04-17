@@ -3,8 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:padding="8dp">
+    android:background="#00000000">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/iw_content_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/infoWindowBackground"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     <TextView
         android:id="@+id/iw_operator"
@@ -17,13 +26,14 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/textColourPrimary"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/iw_separator"
         android:layout_width="140dp"
         android:layout_height="1dp"
-        android:background="@android:color/holo_red_dark"
+        android:background="@color/colorAccent"
         android:maxWidth="140dp"
         app:layout_constraintEnd_toStartOf="@id/iw_right_arrow"
         app:layout_constraintStart_toStartOf="@id/iw_operator"
@@ -39,6 +49,7 @@
         android:text="# Charge Points: 99"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/textColourHint"
         app:layout_constraintTop_toBottomOf="@id/iw_separator" />
 
     <TextView
@@ -50,6 +61,7 @@
         android:maxWidth="140dp"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/textColourHint"
         app:layout_constraintTop_toBottomOf="@id/iw_no_charge_points" />
 
     <!--<ImageView
@@ -70,5 +82,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_drop_down_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iw_content_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

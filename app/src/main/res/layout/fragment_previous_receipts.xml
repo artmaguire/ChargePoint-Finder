@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chargepoint.activities.PreviousReceiptsActivity">
+    tools:context=".fragments.PreviousReceiptsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/receiptsRecyclerView"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:max="100"
-        android:minWidth="250dp"
+        android:minWidth="50dp"
         android:minHeight="50dp"
         android:progress="1"
         android:visibility="visible"
