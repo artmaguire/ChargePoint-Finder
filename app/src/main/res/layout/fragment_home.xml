@@ -69,7 +69,7 @@
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:background="@drawable/circlebackgroundpurple"
+                            android:background="@drawable/circle_background_purple"
                             android:padding="10dp"
                             android:src="@drawable/ic_map_black_24dp" />
 
@@ -114,7 +114,7 @@
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:background="@drawable/circlebackgroundpink"
+                            android:background="@drawable/circle_background_pink"
                             android:padding="10dp"
                             android:src="@drawable/ic_assignment_black_24dp" />
 
@@ -168,7 +168,7 @@
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:background="@drawable/circlebackgroundgreen"
+                            android:background="@drawable/circle_background_green"
                             android:padding="10dp"
                             android:src="@drawable/ic_profile_black_24dp" />
 
@@ -213,7 +213,7 @@
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:background="@drawable/circlebackgroundyellow"
+                            android:background="@drawable/circle_background_yellow"
                             android:padding="10dp"
                             android:src="@drawable/ic_directions_car_black_24dp" />
 
@@ -267,7 +267,7 @@
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:background="@drawable/circlebackgroundpurple"
+                            android:background="@drawable/circle_background_purple"
                             android:padding="10dp"
                             android:src="@drawable/ic_comment_black_24dp" />
 
