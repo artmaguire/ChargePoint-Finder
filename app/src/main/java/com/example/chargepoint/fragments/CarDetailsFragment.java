@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,14 +28,14 @@ import java.util.Objects;
 
 public class CarDetailsFragment extends Fragment {
 
-    Button savebutton;
-    Spinner spinnerManufacturer, spinnerModel   ;
-
-    ArrayList<String> arrayList_parent;
+    private Button savebutton;
+    private Spinner spinnerManufacturer, spinnerModel   ;
+    FirebaseAuth auth;
+    private ArrayList<String> arrayList_parent;
     ArrayAdapter arrayAdapter_parent;
-    FirebaseDatabase database;
-    DatabaseReference reference;
-    Member member = new Member();
+
+
+
     int maxid = 0;
 
     ArrayList<String> arrayList_Renault,arrayList_tesla,arrayList_volkswagen,arrayList_hyundai,arrayList_mahindra ;
@@ -48,7 +51,8 @@ public class CarDetailsFragment extends Fragment {
         View v;
         v = inflater.inflate(R.layout.fragment_car_details, container, false);
 
-        reference = database.getInstance().getReference().child("Spinner");
+        auth = FirebaseAuth.getInstance();
+
         savebutton = (Button) v.findViewById(R.id.savebutton);
         //Mapping of Dropdown list in the layout page to the Spinner objects
         spinnerManufacturer = (Spinner) v.findViewById(R.id.spinner1);
@@ -126,32 +130,36 @@ public class CarDetailsFragment extends Fragment {
         });
         //child process ends
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    maxid = (int)dataSnapshot.getChildrenCount();
-                }
 
-            }
+        try {
+            savebutton.setOnClickListener(v1 -> savecardetails());
+        }catch (NullPointerException ignored){
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        savebutton.setOnClickListener(v1 -> {
-
-            member.setSpinner(spinnerModel.getSelectedItem().toString());
-            Toast.makeText(getActivity(), "Model Stored Successfully", Toast.LENGTH_SHORT).show();
-
-            reference.child(String.valueOf(maxid+1)).setValue(member);
-        });
+        }
         return v;
 
 
 
+
+    }
+
+    private void savecardetails() {
+        String model = spinnerModel.getSelectedItem().toString().trim();
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        if(user != null){
+            UserProfileChangeRequest userprofile = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(model).build();
+
+            user.updateProfile(userprofile).addOnCompleteListener(
+                    task -> {
+                     if(task.isSuccessful()){
+                         Toast.makeText(getActivity(),"Model Type Saved" , Toast.LENGTH_SHORT).show();
+                     }
+                    }
+            );
+        }
 
     }
 }

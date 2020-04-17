@@ -35,7 +35,7 @@ public class PaymentDetailsActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         textcardnumber =  findViewById(R.id.editTextcardnumber);
         textcardname = findViewById(R.id.editcardname);
-
+        savecardbutton = findViewById(R.id.saverbutton);
         txtMonthYear = findViewById(R.id.txtMonthYear);
 
         //on click functionality to select the month and date of the card
@@ -51,10 +51,12 @@ public class PaymentDetailsActivity extends AppCompatActivity {
             datePickerDialog.getDatePicker().findViewById(getResources().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
             datePickerDialog.show();
         });
+
+
         try {
             savecardbutton.setOnClickListener(v -> saveUserInformation());
         }catch(NullPointerException ignored){
-            
+
         }
     }
 
