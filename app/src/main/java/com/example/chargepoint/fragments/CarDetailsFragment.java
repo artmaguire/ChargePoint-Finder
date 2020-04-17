@@ -15,10 +15,6 @@ import com.example.chargepoint.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CarDetailsFragment extends Fragment {
 
     Spinner spinnerManufacturer, spinnerModel   ;
