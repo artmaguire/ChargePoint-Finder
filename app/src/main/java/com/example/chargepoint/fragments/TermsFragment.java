@@ -13,10 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TermsFragment extends Fragment {
 
     public TermsFragment() {
@@ -24,12 +20,11 @@ public class TermsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_terms, container, false);
-        WebView webView = (WebView)v.findViewById(R.id.webview);
+        WebView webView = v.findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("https://embersoft.ru/en/Terms-and-Conditions-Coffee-Space-Android/");

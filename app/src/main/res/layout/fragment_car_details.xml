@@ -4,29 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.CarDetailsFragment"
-    android:padding="10dp">
-
+    android:padding="10dp"
+    tools:context=".fragments.CarDetailsFragment">
 
     <TextView
         android:id="@+id/toptext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:paddingTop="30dp"
-        android:layout_marginTop="40dp"
         android:text="Select Details about your Car"
-        android:textStyle="bold"
         android:textAlignment="center"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Manufacturer"
         android:textColor="#00f"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
+
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
@@ -34,17 +33,16 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:hint="Select Manufacturer"
-        android:spinnerMode="dropdown"
-        />
+        android:spinnerMode="dropdown" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:text="Select Model"
         android:textColor="#f00"
-        android:textSize="20dp"
-        android:layout_marginTop="100dp"
-        />
+        android:textSize="20dp" />
+
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="match_parent"
@@ -52,9 +50,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:hint="Select Manufacturer"
-        android:spinnerMode="dropdown"
-        />
-
+        android:spinnerMode="dropdown" />
 
     <Button
         android:id="@+id/savebutton"

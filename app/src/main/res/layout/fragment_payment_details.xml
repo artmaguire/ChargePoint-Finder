@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/titlepage"
         android:layout_marginTop="22dp"
-        android:inputType="number"
         android:hint="@string/enter_card_number"
+        android:inputType="number"
         android:textAlignment="center" />
 
     <RelativeLayout
@@ -44,7 +44,6 @@
             android:paddingTop="20sp"
             android:text="MM/YYYY"
             android:textSize="18sp" />
-
 
     </RelativeLayout>
 

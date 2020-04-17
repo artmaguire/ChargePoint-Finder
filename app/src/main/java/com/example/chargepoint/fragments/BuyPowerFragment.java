@@ -36,10 +36,6 @@ import java.util.UUID;
 
 import static com.google.firebase.Timestamp.now;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class BuyPowerFragment extends Fragment {
 
     private String TAG = "BUY_POWER";
@@ -60,8 +56,7 @@ public class BuyPowerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         this.setHasOptionsMenu(true);
 
@@ -146,8 +141,7 @@ public class BuyPowerFragment extends Fragment {
         });
 
         payButton.setOnClickListener(v -> {
-            ProgressDialog dialog = ProgressDialog.show(getActivity(), "",
-                    "Generating Receipt...", true);
+            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Generating Receipt...", true);
 
             double cost = Double.parseDouble(amountEditText.getText().toString());
             int time = Integer.parseInt(timeSpinner.getSelectedItem().toString());

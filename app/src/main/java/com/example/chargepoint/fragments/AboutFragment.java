@@ -14,12 +14,10 @@ import com.example.chargepoint.R;
 public class AboutFragment extends Fragment {
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.setHasOptionsMenu(true);
-        final View root = inflater.inflate(R.layout.fragment_about, container, false);
 
-        return root;
+        return inflater.inflate(R.layout.fragment_about, container, false);
     }
 
     @Override

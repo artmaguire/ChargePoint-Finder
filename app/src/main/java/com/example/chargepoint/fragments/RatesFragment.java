@@ -31,8 +31,7 @@ public class RatesFragment extends Fragment {
     private ArrayList<String> spinnerArray;
     private ArrayAdapter<String> spinnerAdapter;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_rates, container, false);
 

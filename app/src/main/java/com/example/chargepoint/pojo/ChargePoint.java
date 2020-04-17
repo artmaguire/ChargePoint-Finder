@@ -139,17 +139,6 @@ public class ChargePoint implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return "ChargePoint{" +
-                "map_id='" + map_id + '\'' +
-                "operator='" + operator + '\'' +
-                ", usageType='" + usageType + '\'' +
-                ", isPayAtLocation=" + isPayAtLocation +
-                ", isMembershipRequired=" + isMembershipRequired +
-                ", isOperational=" + isOperational +
-                ", numberOfPoints=" + numberOfPoints +
-                ", location={lat: " + latitude + ", long: " + longitude + "}" +
-                ", address=" + address +
-                ", connections=" + connections +
-                '}';
+        return "ChargePoint{" + "map_id='" + map_id + '\'' + "operator='" + operator + '\'' + ", usageType='" + usageType + '\'' + ", isPayAtLocation=" + isPayAtLocation + ", isMembershipRequired=" + isMembershipRequired + ", isOperational=" + isOperational + ", numberOfPoints=" + numberOfPoints + ", location={lat: " + latitude + ", long: " + longitude + "}" + ", address=" + address + ", connections=" + connections + '}';
     }
 }

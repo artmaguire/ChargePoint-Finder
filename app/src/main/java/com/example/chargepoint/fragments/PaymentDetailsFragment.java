@@ -61,7 +61,6 @@ public class PaymentDetailsFragment extends Fragment {
             datePickerDialog.show();
         });
 
-
         try {
             savecardbutton.setOnClickListener(v -> saveUserInformation());
         } catch (NullPointerException ignored) {
@@ -87,13 +86,11 @@ public class PaymentDetailsFragment extends Fragment {
 
                     .build();
 
-            user.updateProfile(profile).addOnCompleteListener(
-                    task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "Card Details saved successfully", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-            );
+            user.updateProfile(profile).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getContext(), "Card Details saved successfully", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

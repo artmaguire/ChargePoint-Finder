@@ -13,6 +13,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.activities.SplashScreen;
+import com.example.chargepoint.db.FirebaseHelper;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -62,7 +63,7 @@ public class ProfileFragment extends PreferenceFragmentCompat {
         alertDialog.setPositiveButton("Yes", (dialog, which) -> AuthUI.getInstance()
                 .signOut(getContext())
                 .addOnCompleteListener(task -> {
-                    // TODO: Intent to new splash screen, if applicable
+                    FirebaseHelper.destroyInstance();
                     Intent i = new Intent(getActivity(), SplashScreen.class);
                     startActivity(i);
                     getActivity().finish();

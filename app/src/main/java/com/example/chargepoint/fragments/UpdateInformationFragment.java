@@ -22,10 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class UpdateInformationFragment extends Fragment {
 
     private static String TAG = "USER";
@@ -39,8 +35,7 @@ public class UpdateInformationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.setHasOptionsMenu(true);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -82,23 +77,18 @@ public class UpdateInformationFragment extends Fragment {
                             .setDisplayName(input.getText().toString())
                             .build();
 
-                    currentUser.updateProfile(profileUpdates)
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    Log.d(TAG, "User Name updated.");
+                    currentUser.updateProfile(profileUpdates).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User Name updated.");
 
-                                    Toast.makeText(getContext(),
-                                            "Name updated", Toast.LENGTH_SHORT)
-                                            .show();
+                            Toast.makeText(getContext(), "Name updated", Toast.LENGTH_SHORT).show();
 
-                                    updateUserInfo();
-                                } else {
-                                    Toast.makeText(getContext(),
-                                            "Failed to update name.", Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                                pg.dismiss();
-                            });
+                            updateUserInfo();
+                        } else {
+                            Toast.makeText(getContext(), "Failed to update name.", Toast.LENGTH_SHORT).show();
+                        }
+                        pg.dismiss();
+                    });
                 });
 
         // Setting Negative "NO" Btn
@@ -121,25 +111,20 @@ public class UpdateInformationFragment extends Fragment {
         alertDialog.setView(input);
 
         // Setting Positive "Yes" Btn
-        alertDialog.setPositiveButton("Save",
-                (dialog, which) -> {
-                    ProgressDialog pg = ProgressDialog.show(getContext(), "",
-                            "Updating. Please wait...", true);
-                    String emailAddress = input.getText().toString();
+        alertDialog.setPositiveButton("Save", (dialog, which) -> {
+            ProgressDialog pg = ProgressDialog.show(getContext(), "", "Updating. Please wait...", true);
+            String emailAddress = input.getText().toString();
 
-                    currentUser.updateEmail(emailAddress)
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    Log.d(TAG, "User email address updated.");
-                                    updateUserInfo();
-                                } else {
-                                    Toast.makeText(getContext(),
-                                            "Failed to update name.", Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                                pg.dismiss();
-                            });
-                });
+            currentUser.updateEmail(emailAddress).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "User email address updated.");
+                    updateUserInfo();
+                } else {
+                    Toast.makeText(getContext(), "Failed to update name.", Toast.LENGTH_SHORT).show();
+                }
+                pg.dismiss();
+            });
+        });
 
         // Setting Negative "NO" Btn
         alertDialog.setNegativeButton("Back", null);
@@ -158,28 +143,23 @@ public class UpdateInformationFragment extends Fragment {
         alertDialog.setView(input);
 
         // Setting Positive "Yes" Btn
-        alertDialog.setPositiveButton("Save",
-                (dialog, which) -> {
-                    ProgressDialog pg = ProgressDialog.show(getContext(), "",
-                            "Updating. Please wait...", true);
-                    //password.setText(input.getText().toString());
+        alertDialog.setPositiveButton("Save", (dialog, which) -> {
+            ProgressDialog pg = ProgressDialog.show(getContext(), "", "Updating. Please wait...", true);
+            //password.setText(input.getText().toString());
 
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    String newPassword = input.getText().toString();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String newPassword = input.getText().toString();
 
-                    user.updatePassword(newPassword)
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    Log.d(TAG, "User password updated.");
-                                    updateUserInfo();
-                                } else {
-                                    Toast.makeText(getContext(),
-                                            "Failed to update name.", Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                                pg.dismiss();
-                            });
-                });
+            user.updatePassword(newPassword).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "User password updated.");
+                    updateUserInfo();
+                } else {
+                    Toast.makeText(getContext(), "Failed to update name.", Toast.LENGTH_SHORT).show();
+                }
+                pg.dismiss();
+            });
+        });
 
         // Setting Negative "NO" Btn
         alertDialog.setNegativeButton("Back", null);

@@ -6,55 +6,49 @@
             android:icon="@drawable/ic_person_24px"
             android:key="@string/account_details"
             android:summary="Name, Email, Password"
-            android:title="@string/account_details">
-        </Preference>
+            android:title="@string/account_details" />
         <Preference
             android:icon="@drawable/account_balance24px"
             android:key="@string/payment_details"
             android:summary="Band details"
-            android:title="@string/payment_details">
-        </Preference>
+            android:title="@string/payment_details" />
         <Preference
             android:icon="@drawable/directions_car24px"
             android:key="@string/car_details"
             android:summary="Car type"
             android:title="@string/car_details">
-            <!--TODO: Needs to reference fragment-->
         </Preference>
         <Preference
             android:icon="@drawable/ic_receipt_24px"
             android:key="@string/payments_receipts"
             android:summary="Previous receipts"
-            android:title="@string/payments_receipts">
-        </Preference>
-
+            android:title="@string/payments_receipts" />
     </PreferenceCategory>
+
     <PreferenceCategory android:title="General">
         <SwitchPreference
-            android:title="@string/dark_theme"
-            android:key="@string/dark_theme"
             android:icon="@drawable/ic_dark_mode_24px"
-            android:summary="Change Theme">
-        </SwitchPreference>
+            android:key="@string/dark_theme"
+            android:summary="Change Theme"
+            android:title="@string/dark_theme" />
         <SwitchPreference
-            android:title="@string/sign_in_with_biometrics"
-            android:key="@string/sign_in_with_biometrics"
-            android:icon="@drawable/fingerprint24px"
             android:enabled="false"
-            android:summary="Enable fingerprint sign in">
-        </SwitchPreference>
+            android:icon="@drawable/fingerprint24px"
+            android:key="@string/sign_in_with_biometrics"
+            android:summary="Enable fingerprint sign in"
+            android:title="@string/sign_in_with_biometrics" />
     </PreferenceCategory>
+
     <PreferenceCategory android:title="">
         <Preference
-            android:title="@string/about_us"
-            android:key="@string/about_us"
             android:icon="@drawable/ic_info_24px"
-            android:summary="@string/about_us_info">
-        </Preference>
+            android:key="@string/about_us"
+            android:summary="@string/about_us_info"
+            android:title="@string/about_us" />
         <Preference
-            android:title="@string/sign_out"
+            android:icon="@drawable/ic_sign_out_24px"
             android:key="@string/sign_out"
-            android:icon="@drawable/ic_sign_out_24px">
-        </Preference>
+            android:title="@string/sign_out" />
     </PreferenceCategory>
+
 </PreferenceScreen>

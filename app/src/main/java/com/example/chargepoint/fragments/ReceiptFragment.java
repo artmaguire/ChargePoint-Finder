@@ -49,10 +49,8 @@ public class ReceiptFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_receipt, container, false);
@@ -129,6 +127,18 @@ public class ReceiptFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    private void showEmail(View view) {
+        TextView specified = view.findViewById(R.id.specified);
+        EditText email = view.findViewById(R.id.email);
+        Button button_send = view.findViewById(R.id.button_send);
+        Button button_email = view.findViewById(R.id.button_email);
+
+        specified.setVisibility(View.VISIBLE);
+        email.setVisibility(View.VISIBLE);
+        button_send.setVisibility(View.VISIBLE);
+        button_email.setVisibility(View.INVISIBLE);
+    }
+
     @SuppressLint("SetTextI18n")
     private void sendEmail(View view) {
         EditText email = view.findViewById(R.id.email);
@@ -143,18 +153,6 @@ public class ReceiptFragment extends Fragment {
         } else {
             statement.setText("Wrong email address.");
         }
-    }
-
-    private void showEmail(View view) {
-        TextView specified = view.findViewById(R.id.specified);
-        EditText email = view.findViewById(R.id.email);
-        Button button_send = view.findViewById(R.id.button_send);
-        Button button_email = view.findViewById(R.id.button_email);
-
-        specified.setVisibility(View.VISIBLE);
-        email.setVisibility(View.VISIBLE);
-        button_send.setVisibility(View.VISIBLE);
-        button_email.setVisibility(View.INVISIBLE);
     }
 
     private boolean isEmailAdress(String email) {

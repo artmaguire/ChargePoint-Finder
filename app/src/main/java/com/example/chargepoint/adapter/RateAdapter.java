@@ -43,7 +43,6 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateHolder> {
         return rates.size();
     }
 
-
     class RateHolder extends RecyclerView.ViewHolder {
 
         private TextView town, title, line, isOp, isFastC;
@@ -63,18 +62,16 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateHolder> {
             title.setText(rate.getTitle());
             line.setText(rate.getLine());
             String op = "❌";
-            if(rate.getIsOp()) {
+            if (rate.getIsOp()) {
                 op = "✔️";
             }
             isOp.setText("Operational : " + op);
             String fast = "❌";
-            if(rate.getIsFastC()) {
+            if (rate.getIsFastC()) {
                 fast = "✔️";
             }
             isFastC.setText("Fast charge : " + fast);
         }
     }
-
-
 
 }
