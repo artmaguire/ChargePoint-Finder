@@ -3,6 +3,7 @@ package com.example.chargepoint.fragments;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,20 +15,25 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
+import com.example.chargepoint.db.FirebaseHelper;
+import com.example.chargepoint.pojo.Card;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.Calendar;
 
 public class PaymentDetailsFragment extends Fragment {
 
-    private EditText textcardnumber, textcardname;
-    private DatePickerDialog datePickerDialog;
+    private String TAG = "PAYMENT_DETAILS";
+
+    private EditText cardName;
+    private EditText cardNumber;
+    private EditText cardSecurityNumber;
     private EditText txtMonthYear;
-    private Button savecardbutton;
+
+    private DatePickerDialog datePickerDialog;
     private FirebaseAuth mAuth;
 
     @Nullable
@@ -42,10 +48,12 @@ public class PaymentDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
-        textcardnumber = view.findViewById(R.id.editTextcardnumber);
-        textcardname = view.findViewById(R.id.editcardname);
-        savecardbutton = view.findViewById(R.id.saverbutton);
+
+        cardName = view.findViewById(R.id.editcardname);
+        cardNumber = view.findViewById(R.id.editTextcardnumber);
         txtMonthYear = view.findViewById(R.id.txtMonthYear);
+        cardSecurityNumber = view.findViewById(R.id.securityNumber);
+        Button saveCardButton = view.findViewById(R.id.saverbutton);
 
         //on click functionality to select the month and date of the card
         txtMonthYear.setOnClickListener(v -> {
@@ -61,37 +69,38 @@ public class PaymentDetailsFragment extends Fragment {
             datePickerDialog.show();
         });
 
-        try {
-            savecardbutton.setOnClickListener(v -> saveUserInformation());
-        } catch (NullPointerException ignored) {
+        // Send card to Firestore when save is clicked
+        saveCardButton.setOnClickListener(v -> {
+            String name = "";
+            String number = "";
+            String date = "";
+            String securityNumber = "";
 
-        }
-    }
+            // Check if user inputted information
+            if (cardName.getText().toString().equals("") || cardNumber.getText().toString().equals("") || cardSecurityNumber.getText()
+                    .toString()
+                    .equals("") || txtMonthYear.getText().toString().equals("")) {
+                Toast.makeText(getContext(), "Missing information.", Toast.LENGTH_SHORT).show();
+            } else if (cardNumber.getText().length() < 16) {
+                Toast.makeText(getContext(), "Card number provided is not long enough.", Toast.LENGTH_SHORT).show();
+            } else {
+                name = cardName.getText().toString();
+                number = cardNumber.getText().toString();
+                date = txtMonthYear.getText().toString();
+                securityNumber = cardSecurityNumber.getText().toString();
 
-    private void saveUserInformation() {
-        String displayName = textcardname.getText().toString();
-        int cardnumber = textcardname.getInputType();
-        if (displayName.isEmpty()) {
-            textcardname.setError("Name Required");
-            textcardname.requestFocus();
-            return;
-        }
+                // Create bew card object
+                Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
+                Log.d(TAG, "onViewCreated: " + card.toString());
 
-        FirebaseUser user = mAuth.getCurrentUser();
-
-        if (user != null) {
-            UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(displayName)
-                    .setDisplayName(String.valueOf(cardnumber))
-
-                    .build();
-
-            user.updateProfile(profile).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    Toast.makeText(getContext(), "Card Details saved successfully", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+                // Send card to database
+                FirebaseHelper fbHelper = FirebaseHelper.getInstance();
+                fbHelper.addCardToDB(card, task -> {
+                    Toast.makeText(getContext(), "Card successfully added.", Toast.LENGTH_SHORT).show();
+                    Navigation.findNavController(view).popBackStack();
+                });
+            }
+        });
     }
 
     @Override

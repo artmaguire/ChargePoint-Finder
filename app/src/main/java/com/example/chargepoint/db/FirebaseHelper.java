@@ -7,6 +7,7 @@
 
 package com.example.chargepoint.db;
 
+import com.example.chargepoint.pojo.Card;
 import com.example.chargepoint.pojo.Receipt;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,7 +79,10 @@ public class FirebaseHelper {
     }
 
     public void addReceiptToDB(Receipt r, OnCompleteListener<DocumentReference> listener) {
-        db.collection("receipts").add(r)
-                .addOnCompleteListener(listener);
+        db.collection("receipts").add(r).addOnCompleteListener(listener);
+    }
+
+    public void addCardToDB(Card c, OnCompleteListener<DocumentReference> listener) {
+        db.collection("cards").add(c).addOnCompleteListener(listener);
     }
 }
