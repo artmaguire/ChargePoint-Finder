@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
  */
 public class ReceiptFragment extends Fragment {
     private static final String TAG = "GET RECEIPT";
+
     private Receipt receipt;
 
     private TextView dateView;
@@ -60,7 +61,7 @@ public class ReceiptFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Receipt receipt = getArguments().getParcelable("Receipt");
+        receipt = getArguments().getParcelable("Receipt");
         Log.d(TAG, "onCreate: " + receipt.toString());
 
         Date timeToDate = receipt.getDatetime().toDate();
