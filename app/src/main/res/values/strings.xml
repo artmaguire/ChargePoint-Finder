@@ -35,7 +35,7 @@
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_rates">Rates</string>
+    <string name="title_rates">ChargePoints</string>
     <string name="title_profile">Profile</string>
     <string name="title_map">Map</string>
     <string name="go_to_receipt">Go to receipt</string>
@@ -58,4 +58,5 @@
     <string name="receipt">Receipt</string>
     <string name="save_details" />
     <string name="www_chargepoint_ie">www.chargepoint.ie</string>
+    <string name="sort_by_county">Sort by county :</string>
 </resources>

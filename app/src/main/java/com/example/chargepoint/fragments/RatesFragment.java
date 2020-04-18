@@ -1,27 +1,34 @@
 package com.example.chargepoint.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.RateAdapter;
+import com.example.chargepoint.adapter.ReceiptsAdapter;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.Rate;
+import com.example.chargepoint.pojo.Receipt;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class RatesFragment extends Fragment {
 
@@ -30,26 +37,43 @@ public class RatesFragment extends Fragment {
     private ArrayList<Rate> rateArrayList;
     private ArrayList<String> spinnerArray;
     private ArrayAdapter<String> spinnerAdapter;
+    private ProgressBar progressBar;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public RatesFragment() {
+        // Required empty public constructor
+    }
 
-        View root = inflater.inflate(R.layout.fragment_rates, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.setHasOptionsMenu(true);
 
-        Spinner spinner = root.findViewById(R.id.sort_cities);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_rates, container, false);
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Spinner spinner = view.findViewById(R.id.sort_cities);
         spinnerArray = new ArrayList<>();
-        spinnerAdapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_list_item_1, spinnerArray);
+        spinnerAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, spinnerArray);
 
         spinner.setAdapter(spinnerAdapter);
 
+        progressBar = view.findViewById(R.id.receiptsPBar);
+
         loadCounty();
 
-        RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         rateArrayList = new ArrayList<>();
         adapter = new RateAdapter(getContext(), rateArrayList);
         recyclerView.setAdapter(adapter);
 
         loadRates();
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -66,8 +90,8 @@ public class RatesFragment extends Fragment {
             }
         });
 
-        return root;
     }
+
 
     private void loadCounty() {
 
@@ -123,6 +147,7 @@ public class RatesFragment extends Fragment {
                     rateArrayList.add(rate);
                     adapter.notifyDataSetChanged();
                 }
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -147,6 +172,7 @@ public class RatesFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                     }
                 }
+
             }
         });
     }
