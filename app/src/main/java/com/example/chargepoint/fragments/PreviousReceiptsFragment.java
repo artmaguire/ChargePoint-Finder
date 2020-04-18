@@ -3,14 +3,12 @@ package com.example.chargepoint.fragments;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-public class PreviousReceiptsFragment extends Fragment {
+public class PreviousReceiptsFragment extends BackFragment {
 
     private static final String TAG = "PAYMENT_RECEIPT";
     private ReceiptsAdapter adapter;
@@ -35,7 +33,6 @@ public class PreviousReceiptsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_previous_receipts, container, false);
     }
@@ -70,11 +67,5 @@ public class PreviousReceiptsFragment extends Fragment {
 
         String invoiceID = UUID.randomUUID().toString();
         Log.d(TAG, "onCreate: " + invoiceID);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -32,7 +31,7 @@ import java.util.regex.Pattern;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReceiptFragment extends Fragment {
+public class ReceiptFragment extends BackFragment {
     private static final String TAG = "GET RECEIPT";
     private Receipt receipt;
 
@@ -45,7 +44,6 @@ public class ReceiptFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_receipt, container, false);
     }
@@ -114,12 +112,6 @@ public class ReceiptFragment extends Fragment {
                 operatorView.setText("Operator:\n" + cp.getOperator());
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 
     private void showEmail(View view) {

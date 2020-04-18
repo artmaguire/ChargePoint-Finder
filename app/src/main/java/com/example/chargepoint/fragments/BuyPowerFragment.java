@@ -6,7 +6,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,7 +18,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
@@ -36,7 +34,7 @@ import java.util.UUID;
 
 import static com.google.firebase.Timestamp.now;
 
-public class BuyPowerFragment extends Fragment {
+public class BuyPowerFragment extends BackFragment {
 
     private final String TAG = "BUY_POWER";
 
@@ -57,9 +55,6 @@ public class BuyPowerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        this.setHasOptionsMenu(true);
-
         return inflater.inflate(R.layout.fragment_buy_power, container, false);
     }
 
@@ -197,11 +192,5 @@ public class BuyPowerFragment extends Fragment {
 
         setTimeSpinnerAdapter();
         payButton.setEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 }

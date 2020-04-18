@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +20,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.Calendar;
 
-public class PaymentDetailsFragment extends Fragment {
+public class PaymentDetailsFragment extends BackFragment {
 
     private EditText textcardnumber, textcardname;
     private DatePickerDialog datePickerDialog;
@@ -33,7 +31,6 @@ public class PaymentDetailsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_payment_details, container, false);
     }
 
@@ -92,11 +89,5 @@ public class PaymentDetailsFragment extends Fragment {
                 }
             });
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -22,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-public class UpdateInformationFragment extends Fragment {
+public class UpdateInformationFragment extends BackFragment {
 
     private final static String TAG = "USER";
 
@@ -36,7 +34,6 @@ public class UpdateInformationFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.setHasOptionsMenu(true);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Inflate the layout for this fragment
@@ -170,11 +167,5 @@ public class UpdateInformationFragment extends Fragment {
     private void updateUserInfo() {
         name.setHint(currentUser.getDisplayName());
         email.setHint(currentUser.getEmail());
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 }
