@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapViewModel extends ViewModel {
+    private final static String TAG = "MAP_VM";
+
     private MutableLiveData<List<ChargePoint>> chargePoints;
     private CameraPosition mapCameraPosition = new CameraPosition(new LatLng(53.4, -8), 7, 0, 0);
 
@@ -32,6 +34,8 @@ public class MapViewModel extends ViewModel {
             chargePoints = new MutableLiveData<>();
             FirebaseHelper fbHelper = FirebaseHelper.getInstance();
             fbHelper.getAllChargePoints(task -> {
+                if (task.getResult() == null) return;
+
                 List<ChargePoint> cps = new ArrayList<>();
                 for (DocumentSnapshot doc : task.getResult().getDocuments()) {
                     ChargePoint cp = doc.toObject(ChargePoint.class);
@@ -40,7 +44,7 @@ public class MapViewModel extends ViewModel {
                         cps.add(cp);
                     }
                 }
-                Log.d("VIEW_MODEL", "" + cps.size());
+                Log.i(TAG, "" + cps.size());
                 chargePoints.postValue(cps);
             });
         }

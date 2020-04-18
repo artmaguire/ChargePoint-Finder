@@ -43,7 +43,7 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateHolder> {
         return rates.size();
     }
 
-    class RateHolder extends RecyclerView.ViewHolder {
+    static class RateHolder extends RecyclerView.ViewHolder {
 
         private TextView town, title, line, isOp, isFastC;
 

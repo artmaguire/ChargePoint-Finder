@@ -24,7 +24,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class UpdateInformationFragment extends Fragment {
 
-    private static String TAG = "USER";
+    private final static String TAG = "USER";
 
     private FirebaseUser currentUser;
     private TextView name;

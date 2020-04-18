@@ -1,7 +1,6 @@
 package com.example.chargepoint.map;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,23 +10,20 @@ import com.example.chargepoint.pojo.ChargePoint;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
-/**
- * Created by Eoin on 23/03/2018.
- * Custom InfoWindowAdapter uses layout info_window_stop.xml
- * Design needs to be the same as website info window
- */
-
 public class ChargePointInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     private final View iw_view;
 
     public ChargePointInfoWindowAdapter(Context context) {
-        this.iw_view = LayoutInflater.from(context).inflate(R.layout.info_window_charge_point, null);
+        this.iw_view = View.inflate(context, R.layout.info_window_charge_point, null);
     }
 
+    // Set the InfoWindow View Elements to the Clicked ChargePoint Marker
     @Override
     public View getInfoWindow(Marker marker) {
         ChargePoint cp = (ChargePoint) marker.getTag();
+
+        if (cp == null) return null;
 
         TextView iw_operator = iw_view.findViewById(R.id.iw_operator);
         String operator = cp.getOperator();
@@ -39,16 +35,16 @@ public class ChargePointInfoWindowAdapter implements GoogleMap.InfoWindowAdapter
         iw_noChargePoints.setText(numberOfChargers);
 
         TextView iw_powerKW = iw_view.findViewById(R.id.iw_powerKW);
-        String powerKW = "";
+        StringBuilder powerKW = new StringBuilder();
         for (ChargeConnection cc : cp.getConnections()) {
             if (cc.getPowerKW() > -1) {
-                if (powerKW.isEmpty())
-                    powerKW += cc.getPowerKW() + "KW";
+                if (powerKW.length() == 0)
+                    powerKW.append(cc.getPowerKW()).append("KW");
                 else
-                    powerKW += " - " + cc.getPowerKW() + "KW";
+                    powerKW.append(" - ").append(cc.getPowerKW()).append("KW");
             }
         }
-        iw_powerKW.setText(powerKW);
+        iw_powerKW.setText(powerKW.toString());
 
         return iw_view;
     }

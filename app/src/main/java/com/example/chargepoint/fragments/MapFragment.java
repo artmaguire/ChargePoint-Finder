@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
@@ -34,7 +35,7 @@ import static androidx.core.content.PermissionChecker.checkSelfPermission;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener, ClusterManager.OnClusterItemInfoWindowClickListener<ChargePointCluster> {
 
-    private final String TAG = "CHARGE_MAP";
+    private final static String TAG = "CHARGE_MAP";
 
     private View root;
     private MapViewModel mapViewModel;
@@ -48,7 +49,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_map, container, false);
 
-        mapViewModel = ViewModelProviders.of(getActivity()).get(MapViewModel.class);
+        return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mapViewModel = new ViewModelProvider(requireActivity()).get(MapViewModel.class);
         mapViewModel.getObservableChargePoints().observe(getViewLifecycleOwner(), chargePoints -> {
             this.chargePoints = chargePoints;
             checkIfMapAndDbReady();
@@ -56,7 +64,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         setRetainInstance(true);
 
-        mapView = root.findViewById(R.id.mapView);
+        mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
         // First incarnation of this activity.
@@ -65,23 +73,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         mapView.getMapAsync(this);
 
         requestLocation();
-
-        return root;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
     }
 
     @Override
     public void onMapReady(GoogleMap m) {
         this.map = m;
 
-        boolean enabled = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("Dark Theme", true);
+        boolean enabled = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean("Dark Theme", false);
         if (enabled) {
-            map.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.maps_dark_mode));
+            map.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.maps_dark_mode));
         }
 
         map.setOnCameraMoveListener(this);
@@ -93,8 +93,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         if (haveLocationPermission())
             if (map != null) map.setMyLocationEnabled(true);
 
-        clusterManager = new ClusterManager<>(getContext(), map);
-        ChargePointClusterRenderer renderer = new ChargePointClusterRenderer(getContext(), map, clusterManager);
+        clusterManager = new ClusterManager<>(requireContext(), map);
+        ChargePointClusterRenderer renderer = new ChargePointClusterRenderer(requireContext(), map, clusterManager);
         clusterManager.setRenderer(renderer);
 
         map.setOnCameraIdleListener(clusterManager);
@@ -140,6 +140,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
     public void onPause() {
         mapView.onPause();
         super.onPause();
@@ -158,7 +164,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
@@ -177,7 +183,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
     private boolean haveLocationPermission() {
-        return checkSelfPermission(getContext(),
+        return checkSelfPermission(requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION) == PermissionChecker.PERMISSION_GRANTED;
     }
 

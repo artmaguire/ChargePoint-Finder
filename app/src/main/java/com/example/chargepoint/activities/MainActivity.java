@@ -2,10 +2,9 @@ package com.example.chargepoint.activities;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -15,6 +14,7 @@ import androidx.preference.PreferenceManager;
 import com.example.chargepoint.R;
 import com.example.chargepoint.map.MapViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        MapViewModel mvm = ViewModelProviders.of(this).get(MapViewModel.class);
+        MapViewModel mvm = new ViewModelProvider(this).get(MapViewModel.class);
         mvm.loadChargePoints();
 
         // Passing each menu ID as a set of Ids because each
@@ -45,16 +45,17 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
-    public void onFirst() {
+    private void onFirst() {
         boolean beginRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("beginRun", true);
 
         if (beginRun) {
-            new AlertDialog.Builder(MainActivity.this)
+            new MaterialAlertDialogBuilder(this)
                     .setTitle("Terms&Condition")
-                    .setMessage("Click on link below to see terms and conditions").setNegativeButton("Decline", (dialog, which) -> {
-                finish();
-                System.exit(0);
-            }).setPositiveButton("Accept", (dialog, which) -> getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("beginRun", false).apply()).show();
+                    .setMessage("Click on link below to see terms and conditions")
+                    .setNegativeButton("Decline", (dialog, which) -> {
+                        finish();
+                        System.exit(0);
+                    }).setPositiveButton("Accept", (dialog, which) -> getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("beginRun", false).apply()).show();
         }
     }
 }

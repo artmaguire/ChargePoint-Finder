@@ -38,7 +38,7 @@ import static com.google.firebase.Timestamp.now;
 
 public class BuyPowerFragment extends Fragment {
 
-    private String TAG = "BUY_POWER";
+    private final String TAG = "BUY_POWER";
 
     private ChargePoint cp;
 
@@ -48,7 +48,7 @@ public class BuyPowerFragment extends Fragment {
     private List<String> spinnerTimes;
 
     // TODO: Get rate from db
-    private double rate = 0.33;
+    private final double rate = 0.33;
     private double kwhr;
 
     public BuyPowerFragment() {
@@ -83,7 +83,6 @@ public class BuyPowerFragment extends Fragment {
         Bundle b = getArguments();
         if (b != null) {
             cp = (ChargePoint) b.getSerializable("ChargePoint");
-            Log.d(TAG, cp.toString());
         }
 
         Log.d(TAG, cp.getOperator());

@@ -18,21 +18,17 @@ public class HomeFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Dashboard Navigation by navGraph
-        root.findViewById(R.id.aboutCard).setOnClickListener(v -> {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_about);
-        });
+        root.findViewById(R.id.aboutCard).setOnClickListener(v ->
+                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_about));
 
-        root.findViewById(R.id.newsCard).setOnClickListener(v -> {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_news);
-        });
+        root.findViewById(R.id.newsCard).setOnClickListener(v ->
+                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_news));
 
-        root.findViewById(R.id.termsCard).setOnClickListener(v -> {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_terms);
-        });
+        root.findViewById(R.id.termsCard).setOnClickListener(v ->
+                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_terms));
 
-        root.findViewById(R.id.carDetailsCard).setOnClickListener(v -> {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_car_details);
-        });
+        root.findViewById(R.id.carDetailsCard).setOnClickListener(v ->
+                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_car_details));
 
         return root;
     }

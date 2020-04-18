@@ -6,9 +6,9 @@ import com.google.maps.android.clustering.ClusterItem;
 
 public class ChargePointCluster implements ClusterItem {
 
-    private LatLng latLng;
-    private String title;
-    private ChargePoint chargePoint;
+    private final LatLng latLng;
+    private final String title;
+    private final ChargePoint chargePoint;
 
     public ChargePointCluster(LatLng latLng, String title, ChargePoint chargePoint) {
         this.latLng = latLng;

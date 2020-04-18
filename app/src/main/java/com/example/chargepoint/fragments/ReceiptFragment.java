@@ -36,13 +36,7 @@ public class ReceiptFragment extends Fragment {
     private static final String TAG = "GET RECEIPT";
     private Receipt receipt;
 
-    private TextView dateView;
-    private TextView invoiceView;
-    private TextView electricityView;
-    private TextView timeView;
     private TextView locationView;
-    private TextView cardView;
-    private TextView euroView;
     private TextView operatorView;
 
     public ReceiptFragment() {
@@ -60,11 +54,12 @@ public class ReceiptFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Receipt receipt = getArguments().getParcelable("Receipt");
+        receipt = getArguments().getParcelable("Receipt");
         Log.d(TAG, "onCreate: " + receipt.toString());
 
         Date timeToDate = receipt.getDatetime().toDate();
-        Format formatter = new SimpleDateFormat("HH:mm:ss");
+        Locale current = getResources().getConfiguration().locale;
+        Format formatter = new SimpleDateFormat("HH:mm:ss", current);
         String time = formatter.format(timeToDate);
 
         Log.d(TAG, "onCreateTime: " + time);
@@ -77,13 +72,13 @@ public class ReceiptFragment extends Fragment {
         view.findViewById(R.id.button_email).setOnClickListener(v -> showEmail(view));
         view.findViewById(R.id.button_send).setOnClickListener(v -> sendEmail(view));
 
-        dateView = view.findViewById(R.id.receiptDate);
-        invoiceView = view.findViewById(R.id.receiptInvoiceID);
-        electricityView = view.findViewById(R.id.receiptAmountElectricity);
-        timeView = view.findViewById(R.id.receiptTime);
+        TextView dateView = view.findViewById(R.id.receiptDate);
+        TextView invoiceView = view.findViewById(R.id.receiptInvoiceID);
+        TextView electricityView = view.findViewById(R.id.receiptAmountElectricity);
+        TextView timeView = view.findViewById(R.id.receiptTime);
         locationView = view.findViewById(R.id.receiptLocation);
-        cardView = view.findViewById(R.id.receiptPayment);
-        euroView = view.findViewById(R.id.receiptAmountEuro);
+        TextView cardView = view.findViewById(R.id.receiptPayment);
+        TextView euroView = view.findViewById(R.id.receiptAmountEuro);
         operatorView = view.findViewById(R.id.chargePointOperator);
 
         dateView.setText(dateString);
@@ -145,7 +140,7 @@ public class ReceiptFragment extends Fragment {
         TextView statement = view.findViewById(R.id.statement);
         statement.setVisibility(View.VISIBLE);
 
-        if (isEmailAdress(email.getText().toString())) {
+        if (isEmailAddress(email.getText().toString())) {
             String to = email.getText().toString().trim();
             Mail.sendMail(to, receipt);
 
@@ -155,7 +150,7 @@ public class ReceiptFragment extends Fragment {
         }
     }
 
-    private boolean isEmailAdress(String email) {
+    private boolean isEmailAddress(String email) {
         Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
         Matcher m = p.matcher(email.toUpperCase());
         return m.matches();
