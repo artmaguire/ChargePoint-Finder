@@ -58,4 +58,14 @@
     <string name="receipt">Receipt</string>
     <string name="save_details" />
     <string name="www_chargepoint_ie">www.chargepoint.ie</string>
+    <string name="date_time">Date Time</string>
+    <string name="invoiceid">InvoiceID</string>
+    <string name="electricity">Electricity</string>
+    <string name="receipt_time">Receipt Time</string>
+    <string name="receipt_payment">Receipt Payment</string>
+    <string name="euro">Euro €</string>
+    <string name="location">Location</string>
+    <string name="operator">Operator</string>
+    <string name="send_by_email">Send by email</string>
+    <string name="please_specified_the_email_address">Please specified the email address :</string>
 </resources>

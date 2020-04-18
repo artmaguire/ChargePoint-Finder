@@ -26,6 +26,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,13 +38,7 @@ public class ReceiptFragment extends Fragment {
 
     private Receipt receipt;
 
-    private TextView dateView;
-    private TextView invoiceView;
-    private TextView electricityView;
-    private TextView timeView;
     private TextView locationView;
-    private TextView cardView;
-    private TextView euroView;
     private TextView operatorView;
 
     public ReceiptFragment() {
@@ -57,15 +52,17 @@ public class ReceiptFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_receipt, container, false);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        assert getArguments() != null;
         receipt = getArguments().getParcelable("Receipt");
-        Log.d(TAG, "onCreate: " + receipt.toString());
 
+        assert receipt != null;
         Date timeToDate = receipt.getDatetime().toDate();
-        Format formatter = new SimpleDateFormat("HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") Format formatter = new SimpleDateFormat("HH:mm:ss");
         String time = formatter.format(timeToDate);
 
         Log.d(TAG, "onCreateTime: " + time);
@@ -78,13 +75,13 @@ public class ReceiptFragment extends Fragment {
         view.findViewById(R.id.button_email).setOnClickListener(v -> showEmail(view));
         view.findViewById(R.id.button_send).setOnClickListener(v -> sendEmail(view));
 
-        dateView = view.findViewById(R.id.receiptDate);
-        invoiceView = view.findViewById(R.id.receiptInvoiceID);
-        electricityView = view.findViewById(R.id.receiptAmountElectricity);
-        timeView = view.findViewById(R.id.receiptTime);
+        TextView dateView = view.findViewById(R.id.receiptDate);
+        TextView invoiceView = view.findViewById(R.id.receiptInvoiceID);
+        TextView electricityView = view.findViewById(R.id.receiptAmountElectricity);
+        TextView timeView = view.findViewById(R.id.receiptTime);
         locationView = view.findViewById(R.id.receiptLocation);
-        cardView = view.findViewById(R.id.receiptPayment);
-        euroView = view.findViewById(R.id.receiptAmountEuro);
+        TextView cardView = view.findViewById(R.id.receiptPayment);
+        TextView euroView = view.findViewById(R.id.receiptAmountEuro);
         operatorView = view.findViewById(R.id.chargePointOperator);
 
         dateView.setText(dateString);
@@ -97,21 +94,22 @@ public class ReceiptFragment extends Fragment {
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
         fbHelper.getChargePoint(receipt.getMap_id(), task -> {
             if (task.isSuccessful()) {
-                ChargePoint cp = task.getResult().toObject(ChargePoint.class);
+                ChargePoint cp = Objects.requireNonNull(task.getResult()).toObject(ChargePoint.class);
                 String title, line1, town, county;
-                if (cp.getAddress().containsKey("title") && !cp.getAddress().get("title").equals(""))
+                assert cp != null;
+                if (cp.getAddress().containsKey("title") && !Objects.equals(cp.getAddress().get("title"), ""))
                     title = cp.getAddress().get("title");
                 else
                     title = "";
-                if (cp.getAddress().containsKey("line1") && !cp.getAddress().get("line1").equals(""))
+                if (cp.getAddress().containsKey("line1") && !Objects.equals(cp.getAddress().get("line1"), ""))
                     line1 = cp.getAddress().get("line1");
                 else
                     line1 = "";
-                if (cp.getAddress().containsKey("town") && !cp.getAddress().get("town").equals(""))
+                if (cp.getAddress().containsKey("town") && !Objects.equals(cp.getAddress().get("town"), ""))
                     town = cp.getAddress().get("town");
                 else
                     town = "";
-                if (cp.getAddress().containsKey("county") && !cp.getAddress().get("county").equals(""))
+                if (cp.getAddress().containsKey("county") && !Objects.equals(cp.getAddress().get("county"), ""))
                     county = cp.getAddress().get("county");
                 else
                     county = "County not provided.";
@@ -124,7 +122,7 @@ public class ReceiptFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
+        Objects.requireNonNull(getActivity()).onBackPressed();
         return super.onOptionsItemSelected(item);
     }
 
@@ -147,6 +145,7 @@ public class ReceiptFragment extends Fragment {
         statement.setVisibility(View.VISIBLE);
 
         if (isEmailAdress(email.getText().toString())) {
+
             String to = email.getText().toString().trim();
             Mail.sendMail(to, receipt);
 
