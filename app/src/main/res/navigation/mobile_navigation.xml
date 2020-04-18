@@ -90,7 +90,11 @@
         android:id="@+id/fragment_buy_power"
         android:name="com.example.chargepoint.fragments.BuyPowerFragment"
         android:label="@string/title_buy_power"
-        tools:layout="@layout/fragment_buy_power" />
+        tools:layout="@layout/fragment_buy_power">
+        <action
+            android:id="@+id/action_fragment_buy_power_to_fragment_payment_details"
+            app:destination="@id/fragment_payment_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_update_information"

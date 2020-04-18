@@ -46,6 +46,9 @@ public class BuyPowerFragment extends Fragment {
     private EditText amountEditText;
     private Button payButton;
     private List<String> spinnerTimes;
+    private List<String> spinnerCards;
+    private Spinner cardSpinner;
+    private String cardNumber;
 
     // TODO: Get rate from db
     private double rate = 0.33;
@@ -79,6 +82,9 @@ public class BuyPowerFragment extends Fragment {
         timeSpinner = view.findViewById(R.id.timeSpinner);
         amountEditText = view.findViewById(R.id.amountCostEditText);
         payButton = view.findViewById(R.id.payButton);
+        cardSpinner = view.findViewById(R.id.cardSpinner);
+
+        cardNumber = "";
 
         Bundle b = getArguments();
         if (b != null) {
@@ -99,6 +105,25 @@ public class BuyPowerFragment extends Fragment {
 
         voltsView.setText(voltage + " V");
         ampsView.setText(ampere + " A");
+
+        getCards();
+
+        cardSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0)
+                    return;
+                if (position == spinnerCards.size() - 1) {
+                    Navigation.findNavController(view).navigate(R.id.action_fragment_buy_power_to_fragment_payment_details);
+                    return;
+                }
+
+                cardNumber = spinnerCards.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         spinnerTimes = new ArrayList<>();
         spinnerTimes.add("--");
@@ -141,34 +166,25 @@ public class BuyPowerFragment extends Fragment {
         });
 
         payButton.setOnClickListener(v -> {
-            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Generating Receipt...", true);
+            if (!cardNumber.equals("")) {
+                ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Generating Receipt...", true);
 
-            double cost = Double.parseDouble(amountEditText.getText().toString());
-            int time = Integer.parseInt(timeSpinner.getSelectedItem().toString());
+                double cost = Double.parseDouble(amountEditText.getText().toString());
+                int time = Integer.parseInt(timeSpinner.getSelectedItem().toString());
 
-            FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-            fbHelper.getCards(task -> {
-                Log.d(TAG, "Task: " + task.isSuccessful());
-                if (!task.getResult().isEmpty()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Receipt r = new Receipt(UUID.randomUUID().toString(), cost, time, now(),
-                                document.getString("cardno"),
-                                Double.parseDouble(amountEditText.getText().toString()),
-                                cp.getMap_id(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+                FirebaseHelper fbHelper = FirebaseHelper.getInstance();
 
-                        fbHelper.addReceiptToDB(r, task1 -> {
-                            dialog.dismiss();
-                            Navigation.findNavController(view).popBackStack();
-                        });
-                        Log.d(TAG, "name" + " " + document.getString("cardno") + "\n" + document.getString("uid") + "\n" + document.getString("cardname"));
-                    }
-                } else {
+                Receipt r = new Receipt(UUID.randomUUID()
+                        .toString(), cost, time, now(), cardNumber, Double.parseDouble(amountEditText.getText()
+                        .toString()), cp.getMap_id(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                fbHelper.addReceiptToDB(r, task1 -> {
                     dialog.dismiss();
-                    Toast.makeText(getContext(), "No card available for this user.", Toast.LENGTH_SHORT).show();
-                    // TODO: Got to payment details page, will complete after merge
-                    Log.d(TAG, "onViewCreated: No card for this user.");
-                }
-            });
+                    Navigation.findNavController(view).popBackStack();
+                });
+            } else {
+                Toast.makeText(getContext(), "No card selected.", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -176,6 +192,31 @@ public class BuyPowerFragment extends Fragment {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, spinnerTimes);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         timeSpinner.setAdapter(arrayAdapter);
+    }
+
+    private void getCards() {
+        FirebaseHelper fbHelper = FirebaseHelper.getInstance();
+        fbHelper.getCards(task -> {
+            spinnerCards = new ArrayList<>();
+            spinnerCards.add("Select Card...");
+            if (!task.getResult().isEmpty()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    spinnerCards.add(document.getString("cardNumber"));
+                }
+                spinnerCards.add("Create New Card...");
+            } else {
+                spinnerCards.add("Create New Card...");
+                Log.d(TAG, "onViewCreated: No card for this user.");
+            }
+
+            setCardSpinnerAdapter();
+        });
+    }
+
+    private void setCardSpinnerAdapter() {
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, spinnerCards);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cardSpinner.setAdapter(arrayAdapter);
     }
 
     private void setCost(int time) {

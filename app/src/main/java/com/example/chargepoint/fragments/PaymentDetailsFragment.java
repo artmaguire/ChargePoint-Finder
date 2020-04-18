@@ -2,6 +2,7 @@ package com.example.chargepoint.fragments;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -71,10 +72,10 @@ public class PaymentDetailsFragment extends Fragment {
 
         // Send card to Firestore when save is clicked
         saveCardButton.setOnClickListener(v -> {
-            String name = "";
-            String number = "";
-            String date = "";
-            String securityNumber = "";
+            String name;
+            String number;
+            String date;
+            String securityNumber;
 
             // Check if user inputted information
             if (cardName.getText().toString().equals("") || cardNumber.getText().toString().equals("") || cardSecurityNumber.getText()
@@ -84,6 +85,7 @@ public class PaymentDetailsFragment extends Fragment {
             } else if (cardNumber.getText().length() < 16) {
                 Toast.makeText(getContext(), "Card number provided is not long enough.", Toast.LENGTH_SHORT).show();
             } else {
+                ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Adding Card...", true);
                 name = cardName.getText().toString();
                 number = cardNumber.getText().toString();
                 date = txtMonthYear.getText().toString();
@@ -97,6 +99,7 @@ public class PaymentDetailsFragment extends Fragment {
                 FirebaseHelper fbHelper = FirebaseHelper.getInstance();
                 fbHelper.addCardToDB(card, task -> {
                     Toast.makeText(getContext(), "Card successfully added.", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                     Navigation.findNavController(view).popBackStack();
                 });
             }

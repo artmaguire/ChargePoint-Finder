@@ -71,15 +71,12 @@ public class FirebaseHelper {
                 .addOnCompleteListener(listener);
     }
 
-    public void getCards(OnCompleteListener<QuerySnapshot> listener) {
-        db.collection("cards")
-                .whereEqualTo("uid", currentFirebaseUser.getUid())
-                .get()
-                .addOnCompleteListener(listener);
-    }
-
     public void addReceiptToDB(Receipt r, OnCompleteListener<DocumentReference> listener) {
         db.collection("receipts").add(r).addOnCompleteListener(listener);
+    }
+
+    public void getCards(OnCompleteListener<QuerySnapshot> listener) {
+        db.collection("cards").whereEqualTo("user_id", currentFirebaseUser.getUid()).get().addOnCompleteListener(listener);
     }
 
     public void addCardToDB(Card c, OnCompleteListener<DocumentReference> listener) {
