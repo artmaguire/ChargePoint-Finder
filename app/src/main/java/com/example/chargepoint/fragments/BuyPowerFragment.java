@@ -20,12 +20,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.pojo.Receipt;
+import com.example.chargepoint.viewmodel.ReceiptViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -170,16 +172,18 @@ public class BuyPowerFragment extends Fragment {
                 ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Generating Receipt...", true);
 
                 double cost = Double.parseDouble(amountEditText.getText().toString());
-                int time = Integer.parseInt(timeSpinner.getSelectedItem().toString());
+                int duration = Integer.parseInt(timeSpinner.getSelectedItem().toString());
 
                 FirebaseHelper fbHelper = FirebaseHelper.getInstance();
 
                 Receipt r = new Receipt(UUID.randomUUID()
-                        .toString(), cost, time, now(), cardNumber, Double.parseDouble(amountEditText.getText()
+                        .toString()
+                        .substring(0, 17), cost, duration, now(), cardNumber, Double.parseDouble(amountEditText.getText()
                         .toString()), cp.getMap_id(), FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                 fbHelper.addReceiptToDB(r, task1 -> {
                     dialog.dismiss();
+                    new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class).destroyReceipts();
                     Navigation.findNavController(view).popBackStack();
                 });
             } else {

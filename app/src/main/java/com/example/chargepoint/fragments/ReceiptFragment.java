@@ -45,6 +45,7 @@ public class ReceiptFragment extends Fragment {
     private TextView cardView;
     private TextView euroView;
     private TextView operatorView;
+    private TextView durationView;
 
     public ReceiptFragment() {
         // Required empty public constructor
@@ -86,6 +87,7 @@ public class ReceiptFragment extends Fragment {
         cardView = view.findViewById(R.id.receiptPayment);
         euroView = view.findViewById(R.id.receiptAmountEuro);
         operatorView = view.findViewById(R.id.chargePointOperator);
+        durationView = view.findViewById(R.id.receiptDuration);
 
         dateView.setText(dateString);
         invoiceView.setText("Receipt ID: " + receipt.getInvoice_id());
@@ -93,6 +95,7 @@ public class ReceiptFragment extends Fragment {
         timeView.setText(time);
         cardView.setText("Paid with: ".concat(receipt.getCard()));
         euroView.setText("Amount (€): " + "€" + receipt.getCost());
+        durationView.setText("Time: " + receipt.getDuration() + "mins");
 
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
         fbHelper.getChargePoint(receipt.getMap_id(), task -> {
@@ -118,6 +121,9 @@ public class ReceiptFragment extends Fragment {
 
                 locationView.setText("Address:\n" + title + ",\n" + line1 + ",\n" + town + ",\n" + county);
                 operatorView.setText("Operator:\n" + cp.getOperator());
+
+                view.findViewById(R.id.receipt_view).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.receiptPBar).setVisibility(View.GONE);
             }
         });
     }

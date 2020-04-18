@@ -1,7 +1,6 @@
 package com.example.chargepoint.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,17 +10,13 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.ReceiptsAdapter;
-import com.example.chargepoint.db.FirebaseHelper;
-import com.example.chargepoint.pojo.Receipt;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import com.example.chargepoint.viewmodel.ReceiptViewModel;
 
 public class PreviousReceiptsFragment extends Fragment {
 
@@ -52,24 +47,13 @@ public class PreviousReceiptsFragment extends Fragment {
 
         pgsBar = view.findViewById(R.id.receiptsPBar);
 
-        FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-        fbHelper.getAllReceiptsFromUser(task -> {
-            if (task.isSuccessful()) {
-                List<Receipt> receipts = task.getResult().toObjects(Receipt.class);
-                Collections.sort(receipts);
-                Log.d(TAG, "onCreate: " + receipts.toString());
+        ReceiptViewModel receiptViewModel = new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class);
+        receiptViewModel.getObservableReceipts().observe(getViewLifecycleOwner(), receipts -> {
+            adapter.setReceipts(receipts);
+            adapter.notifyDataSetChanged();
 
-                adapter.setReceipts(receipts);
-                adapter.notifyDataSetChanged();
-
-                pgsBar.setVisibility(View.GONE);
-            } else {
-                Log.d(TAG, "Error getting documents: ", task.getException());
-            }
+            pgsBar.setVisibility(View.GONE);
         });
-
-        String invoiceID = UUID.randomUUID().toString();
-        Log.d(TAG, "onCreate: " + invoiceID);
     }
 
     @Override
