@@ -85,7 +85,7 @@ public class SplashScreen extends AppCompatActivity {
 
     public void progressAnimation() {
         ProgressBarAnimation amin = new ProgressBarAnimation(this, progressBar, textView, 0f, 100f);
-        amin.setDuration(8000);
+        amin.setDuration(5000);
         progressBar.setAnimation(amin);
     }
 
