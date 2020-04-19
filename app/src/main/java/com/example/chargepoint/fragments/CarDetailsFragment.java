@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
@@ -24,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class CarDetailsFragment extends BackFragment {
 
@@ -63,7 +61,7 @@ public class CarDetailsFragment extends BackFragment {
         String[] car_brands = getResources().getStringArray(R.array.car_brands);
         manufacturerList = new ArrayList<>(Arrays.asList(car_brands));
 
-        ArrayAdapter arrayAdapter_parent = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, manufacturerList);
+        ArrayAdapter arrayAdapter_parent = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, manufacturerList);
         manufacturerSpinner.setAdapter(arrayAdapter_parent);
 
         //child spinner process start
@@ -87,27 +85,27 @@ public class CarDetailsFragment extends BackFragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, renaultModels);
+                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, renaultModels);
                         manufacturer = manufacturerList.get(0);
                         break;
                     case 1:
-                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, teslaModels);
+                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, teslaModels);
                         manufacturer = manufacturerList.get(1);
                         break;
                     case 2:
-                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, volkswagenModels);
+                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, volkswagenModels);
                         manufacturer = manufacturerList.get(2);
                         break;
                     case 3:
-                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, hyundaiModels);
+                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, hyundaiModels);
                         manufacturer = manufacturerList.get(3);
                         break;
                     case 4:
-                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, mahindraModels);
+                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, mahindraModels);
                         manufacturer = manufacturerList.get(4);
                         break;
                     case 5:
-                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, renaultModels);
+                        modelAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, renaultModels);
                         manufacturer = manufacturerList.get(5);
                         break;
                 }
@@ -147,39 +145,14 @@ public class CarDetailsFragment extends BackFragment {
         });
 
         saveCar.setOnClickListener(v -> {
-            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Adding Car...", true);
+            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.adding_car), true);
             Car c = new Car(manufacturer, model, FirebaseAuth.getInstance().getUid());
             FirebaseHelper.getInstance().addCarToDB(c, listener -> {
                 Log.d(TAG, "onViewCreated: Car Added to dB.");
-                Toast.makeText(getContext(), "Car Added Successfully.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.car_added), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
                 Navigation.findNavController(view).popBackStack();
             });
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
-        return super.onOptionsItemSelected(item);
-
-    }
-
-    private void savecardetails() {
-        String model = spinnerModel.getSelectedItem().toString().trim();
-
-        FirebaseUser user = auth.getCurrentUser();
-
-        if(user != null){
-            UserProfileChangeRequest userprofile = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(model).build();
-
-            user.updateProfile(userprofile).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    Toast.makeText(getActivity(), "Model Type Saved", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
     }
 }

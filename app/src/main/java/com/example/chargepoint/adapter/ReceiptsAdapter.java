@@ -58,8 +58,8 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
         final double amount = receipt.getCost();
 
         holder.receiptDate.setText(dateString);
-        holder.receiptAmount.setText("€".concat(String.valueOf(amount)));
-        holder.receiptDuration.setText(String.valueOf(receipt.getDuration()).concat(" mins"));
+        holder.receiptAmount.setText(root.getContext().getString(R.string.currency_symbol_with_amount, amount));
+        holder.receiptDuration.setText(root.getContext().getString(R.string.time_mins, receipt.getDuration()));
 
         holder.cv.setOnClickListener(v -> {
             Bundle b = new Bundle();

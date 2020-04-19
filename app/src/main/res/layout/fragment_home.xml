@@ -93,7 +93,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="@string/check_bank_details"
+                            android:text="@string/check_about_us"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -290,7 +290,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Charge Time"
+                            android:text="@string/charge_time"
                             android:textStyle="bold" />
 
                         <View
@@ -304,7 +304,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="No car charging at the moment"
+                            android:text="@string/no_car_charging"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>

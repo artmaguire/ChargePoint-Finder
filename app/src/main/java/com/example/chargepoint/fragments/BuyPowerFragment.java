@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -163,9 +162,8 @@ public class BuyPowerFragment extends BackFragment {
         });
 
         payButton.setOnClickListener(v -> {
-            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.generateing_receipt), true);
             if (!cardNumber.equals("")) {
-                ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Generating Receipt...", true);
+                ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.generateing_receipt), true);
 
                 double cost = Double.parseDouble(amountEditText.getText().toString());
                 int duration = Integer.parseInt(timeSpinner.getSelectedItem().toString());
@@ -198,14 +196,15 @@ public class BuyPowerFragment extends BackFragment {
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
         fbHelper.getCards(task -> {
             spinnerCards = new ArrayList<>();
-            spinnerCards.add("Select Card...");
+            spinnerCards.add(getString(R.string.select_card));
             if (!task.getResult().isEmpty()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    spinnerCards.add(document.getString("cardNumber"));
+                    if (document.contains("cardNumber"))
+                        spinnerCards.add(document.getString("cardNumber"));
                 }
-                spinnerCards.add("Create New Card...");
+                spinnerCards.add(getString(R.string.create_card));
             } else {
-                spinnerCards.add("Create New Card...");
+                spinnerCards.add(getString(R.string.create_card));
                 Log.d(TAG, "onViewCreated: No card for this user.");
             }
 

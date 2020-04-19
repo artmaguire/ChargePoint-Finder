@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
@@ -79,11 +78,11 @@ public class PaymentDetailsFragment extends BackFragment {
             if (cardName.getText().toString().equals("") || cardNumber.getText().toString().equals("") || cardSecurityNumber.getText()
                     .toString()
                     .equals("") || txtMonthYear.getText().toString().equals("")) {
-                Toast.makeText(getContext(), "Missing information.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.missing_information), Toast.LENGTH_SHORT).show();
             } else if (cardNumber.getText().length() < 16) {
-                Toast.makeText(getContext(), "Card number provided is not long enough.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.card_num_not_long_enough), Toast.LENGTH_SHORT).show();
             } else {
-                ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Adding Card...", true);
+                ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.adding_card), true);
                 name = cardName.getText().toString();
                 number = cardNumber.getText().toString();
                 date = txtMonthYear.getText().toString();

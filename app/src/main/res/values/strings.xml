@@ -36,7 +36,7 @@
     <string name="sign_out">Sign Out</string>
 
     <!-- Home -->
-    <string name="check_bank_details">Check your bank activities</string>
+    <string name="check_about_us">Read more about the ChargePoint app</string>
     <string name="check_news">Check the latest news from ChargePoint</string>
     <string name="check_terms">See our Terms &amp; Conditions</string>
     <string name="check_car_details">Check and update your car details</string>
@@ -44,6 +44,8 @@
     <string name="go_to_news_page">Go to News Page</string>
     <string name="go_to_terms_and_conditions_page">Go to Terms and Conditions Page</string>
     <string name="go_to_car_details_page">Go to Car Details Page</string>
+    <string name="charge_time">Charge Time</string>
+    <string name="no_car_charging">No car charging at the moment</string>
 
     <!-- Rates -->
     <string name="sort_by_county">Sort by County: </string>
@@ -61,13 +63,20 @@
     <string name="car_details_about">Select Details about your Car</string>
     <string name="select_manufacturer">Select Manufacturer</string>
     <string name="select_model">Select Model</string>
+    <string name="adding_car">Adding Car…</string>
+    <string name="car_added">Car Added Successfully</string>
 
     <!-- Buy Power -->
     <string name="rate">Rate: €0.33 per KWhr</string>
     <string name="time">Time:</string>
+    <string name="time_left">Time Left:</string>
+    <string name="time_mins">%1$d mins</string>
     <string name="mins">mins</string>
     <string name="cost">Cost:</string>
     <string name="currency_symbol">€</string>
+    <string name="currency_symbol_with_amount">€%1$.2f</string>
+    <string name="select_card">Select Card…</string>
+    <string name="create_card">Create New Card…</string>
 
     <!-- Receipt -->
     <string name="go_to_receipt">Go to receipt</string>
@@ -105,12 +114,9 @@
     <string name="enter_card_number">Enter Card Number</string>
     <string name="enter_debit_card_information_here">Enter Debit Card Information Here</string>
     <string name="card_name">Name on Card</string>
-
-    <!-- ChargePoint -->
-    <string name="num_chargepoints"># Charge Points:  </string>
-    <string name="chargepoint_operational">Operational: %1$s</string>
-    <string name="chargepoint_fast_charge">Fast Charge: %1$s</string>
-    <string name="go_to_buy_power_page">Go To Buy Power Page</string>
+    <string name="missing_information">Missing information</string>
+    <string name="card_num_not_long_enough">Card number provided is not long enough</string>
+    <string name="adding_card">Adding Card…</string>
 
     <!-- Card -->
     <string name="no_cards_available">No card available for this user.</string>
@@ -118,6 +124,13 @@
     <string name="card_saved">Card Details saved successfully</string>
     <string name="mm_yy">MM/YY</string>
     <string name="ccv">CCV</string>
+
+    <!-- ChargePoint -->
+    <string name="num_chargepoints"># Charge Points:  </string>
+    <string name="chargepoint_operational">Operational: %1$s</string>
+    <string name="chargepoint_fast_charge">Fast Charge: %1$s</string>
+    <string name="go_to_buy_power_page">Go To Buy Power Page</string>
+
 
     <!-- Dialogs -->
     <string name="sign_out_question">Are you sure you want to sign out?</string>
@@ -134,7 +147,7 @@
 
     <!-- Units with placeholder-->
     <string name="kilowatt">%1$.2f kW</string>
-    <string name="kilowatt_hour">%1$.2f kWr</string>
+    <string name="kilowatt_hour">%1$.2f kWh</string>
     <string name="voltage">%1$s V</string>
     <string name="amp">%1$s A</string>
 
