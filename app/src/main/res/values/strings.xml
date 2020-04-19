@@ -59,4 +59,7 @@
     <string name="www_chargepoint_ie">www.chargepoint.ie</string>
     <string name="mm_yy">MM/YY</string>
     <string name="ccv">CCV</string>
+    <string name="button">Button</string>
+    <string name="search">SEARCH</string>
+    <string name="title">TITLE</string>
 </resources>
