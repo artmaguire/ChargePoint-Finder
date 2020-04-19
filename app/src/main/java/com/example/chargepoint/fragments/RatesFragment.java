@@ -56,15 +56,10 @@ public class RatesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Spinner spinner = view.findViewById(R.id.sort_cities);
-        spinnerArray = new ArrayList<>();
-        spinnerAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, spinnerArray);
-
-        spinner.setAdapter(spinnerAdapter);
-
         progressBar = view.findViewById(R.id.receiptsPBar);
 
         loadCounty();
+        loadRates();
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -72,8 +67,10 @@ public class RatesFragment extends Fragment {
         adapter = new RateAdapter(getContext(), rateArrayList);
         recyclerView.setAdapter(adapter);
 
-        loadRates();
-
+        Spinner spinner = view.findViewById(R.id.sort_cities);
+        spinnerArray = new ArrayList<>();
+        spinnerAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, spinnerArray);
+        spinner.setAdapter(spinnerAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -145,8 +142,8 @@ public class RatesFragment extends Fragment {
 
                     Rate rate = new Rate(document.getString("address.town"), document.getString("address.title"), document.getString("address.line1"), isOp, isFastC);
                     rateArrayList.add(rate);
-                    adapter.notifyDataSetChanged();
                 }
+                adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
             }
         });
