@@ -272,7 +272,7 @@
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:background="@drawable/circle_background_purple"
+                            android:background="@drawable/circle_background_red"
                             android:padding="10dp"
                             android:src="@drawable/ic_access_time_black_24dp" />
 
