@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
 
@@ -30,7 +28,7 @@ public class TermsFragment extends Fragment {
         /*WebView webView = (WebView)v.findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://embersoft.ru/en/Terms-and-Conditions-Coffee-Space-Android/");
-        return v;*/
+        webView.loadUrl("https://embersoft.ru/en/Terms-and-Conditions-Coffee-Space-Android/");*/
+        return v;
     }
 }
