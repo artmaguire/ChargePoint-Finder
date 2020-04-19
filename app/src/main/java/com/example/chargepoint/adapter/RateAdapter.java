@@ -63,12 +63,12 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateHolder> {
             line.setText(rate.getLine());
             String op = "❌";
             if (rate.getIsOp()) {
-                op = "✔️";
+                op = "✅";
             }
             isOp.setText("Operational : " + op);
             String fast = "❌";
             if (rate.getIsFastC()) {
-                fast = "✔️";
+                fast = "✅";
             }
             isFastC.setText("Fast charge : " + fast);
         }
