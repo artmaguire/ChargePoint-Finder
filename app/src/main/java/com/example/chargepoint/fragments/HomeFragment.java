@@ -35,6 +35,12 @@ public class HomeFragment extends Fragment {
             Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_car_details);
         });
 
+        // TODO: Impelment a duration timer when a user buys electricity add a ChargePoint
+        // If no timer, the 'Charge Time' card goes to the map
+        root.findViewById(R.id.durationCard).setOnClickListener(v -> {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_navigation_map);
+        });
+
         return root;
     }
 
