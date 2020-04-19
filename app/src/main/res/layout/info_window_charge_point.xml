@@ -77,7 +77,7 @@
             android:id="@+id/iw_right_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Right arrow"
+            android:contentDescription="@string/go_to_buy_power_page"
             android:src="@drawable/ic_chevron_right_48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

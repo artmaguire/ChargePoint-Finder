@@ -100,7 +100,7 @@
         android:layout_width="180dp"
         android:layout_height="24dp"
         android:layout_marginTop="36dp"
-        android:text="Rate: €0.33 per KWhr"
+        android:text="@string/rate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/connectionCard" />
@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="12dp"
                     android:layout_weight="0.25"
-                    android:text="Time:"
+                    android:text="@string/time"
                     android:textAlignment="textEnd"
                     android:textSize="12sp" />
 
@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="12dp"
                     android:layout_weight="0.25"
-                    android:text="mins"
+                    android:text="@string/mins"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -164,7 +164,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:layout_weight="0.25"
-                    android:text="Cost:"
+                    android:text="@string/cost"
                     android:textAlignment="textEnd"
                     android:textSize="12sp" />
 
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:ems="10"
-                    android:hint="€"
+                    android:hint="@string/currency_symbol"
                     android:inputType="number"
                     android:textSize="12sp" />
 
@@ -185,7 +185,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:layout_weight="0.25"
-                    android:text="€" />
+                    android:text="@string/currency_symbol" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -197,7 +197,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:enabled="false"
-        android:text="Pay"
+        android:text="@string/pay"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

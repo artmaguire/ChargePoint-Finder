@@ -1,6 +1,5 @@
 package com.example.chargepoint.fragments;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,11 +79,11 @@ public class ReceiptFragment extends BackFragment {
         operatorView = view.findViewById(R.id.chargePointOperator);
 
         dateView.setText(dateString);
-        invoiceView.setText("Receipt ID: " + receipt.getInvoice_id());
-        electricityView.setText("Amount (kWh): " + receipt.getElectricity() + "kWh");
+        invoiceView.setText(getString(R.string.receipt_id, receipt.getInvoice_id()));
+        electricityView.setText(getString(R.string.receipt_power_amount, receipt.getElectricity()));
         timeView.setText(time);
-        cardView.setText("Paid with: ".concat(receipt.getCard()));
-        euroView.setText("Amount (€): " + "€" + receipt.getCost());
+        cardView.setText(getString(R.string.receipt_paid_with, receipt.getCard()));
+        euroView.setText(getString(R.string.receipt_amount, receipt.getCost()));
 
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
         fbHelper.getChargePoint(receipt.getMap_id(), task -> {
@@ -106,10 +105,10 @@ public class ReceiptFragment extends BackFragment {
                 if (cp.getAddress().containsKey("county") && !cp.getAddress().get("county").equals(""))
                     county = cp.getAddress().get("county");
                 else
-                    county = "County not provided.";
+                    county = getString(R.string.receipt_missing_county);
 
-                locationView.setText("Address:\n" + title + ",\n" + line1 + ",\n" + town + ",\n" + county);
-                operatorView.setText("Operator:\n" + cp.getOperator());
+                locationView.setText(getString(R.string.receipt_address, title, line1, town, county));
+                operatorView.setText(getString(R.string.receipt_operator, cp.getOperator()));
             }
         });
     }
@@ -126,7 +125,6 @@ public class ReceiptFragment extends BackFragment {
         button_email.setVisibility(View.INVISIBLE);
     }
 
-    @SuppressLint("SetTextI18n")
     private void sendEmail(View view) {
         EditText email = view.findViewById(R.id.email);
         TextView statement = view.findViewById(R.id.statement);
@@ -136,9 +134,9 @@ public class ReceiptFragment extends BackFragment {
             String to = email.getText().toString().trim();
             Mail.sendMail(to, receipt);
 
-            statement.setText("Email sent !");
+            statement.setText(getString(R.string.email_sent));
         } else {
-            statement.setText("Wrong email address.");
+            statement.setText(getString(R.string.email_wrong_address));
         }
     }
 

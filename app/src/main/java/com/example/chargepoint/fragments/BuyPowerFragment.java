@@ -86,13 +86,13 @@ public class BuyPowerFragment extends BackFragment {
         chargePointAddress.setText(cp.getSimpleAddress());
 
         kwhr = cp.getConnections().get(0).getPowerKW();
-        kWhView.setText(kwhr + " kWh");
+        kWhView.setText(getString(R.string.kilowatt_hour, kwhr));
 
         String voltage = cp.getConnections().get(0).getVoltage() != -1 ? String.valueOf(cp.getConnections().get(0).getVoltage()) : "--";
         String ampere = cp.getConnections().get(0).getAmps() != -1 ? String.valueOf(cp.getConnections().get(0).getAmps()) : "--";
 
-        voltsView.setText(voltage + " V");
-        ampsView.setText(ampere + " A");
+        voltsView.setText(getString(R.string.voltage, voltage));
+        ampsView.setText(getString(R.string.amp, ampere));
 
         spinnerTimes = new ArrayList<>();
         spinnerTimes.add("--");
@@ -135,7 +135,7 @@ public class BuyPowerFragment extends BackFragment {
         });
 
         payButton.setOnClickListener(v -> {
-            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Generating Receipt...", true);
+            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.generateing_receipt), true);
 
             double cost = Double.parseDouble(amountEditText.getText().toString());
             int time = Integer.parseInt(timeSpinner.getSelectedItem().toString());
@@ -158,7 +158,7 @@ public class BuyPowerFragment extends BackFragment {
                     }
                 } else {
                     dialog.dismiss();
-                    Toast.makeText(getContext(), "No card available for this user.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.no_cards_available), Toast.LENGTH_SHORT).show();
                     // TODO: Got to payment details page, will complete after merge
                     Log.d(TAG, "onViewCreated: No card for this user.");
                 }

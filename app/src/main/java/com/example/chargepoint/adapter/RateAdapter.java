@@ -1,6 +1,5 @@
 package com.example.chargepoint.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +34,16 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateHolder> {
     @Override
     public void onBindViewHolder(@NonNull RateHolder holder, int position) {
         Rate rate = rates.get(position);
-        holder.setDetails(rate);
+
+        holder.town.setText(rate.getTown());
+        holder.title.setText(rate.getTitle());
+        holder.line.setText(rate.getLine());
+
+        String op = rate.getIsOp() ? "✔" : "❌";
+        holder.isOp.setText(context.getString(R.string.chargepoint_operational, op));
+
+        String fast = rate.getIsFastC() ? "✔" : "❌";
+        holder.isFastC.setText((context.getString(R.string.chargepoint_fast_charge, fast)));
     }
 
     @Override
@@ -54,23 +62,6 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateHolder> {
             line = itemView.findViewById(R.id.line);
             isOp = itemView.findViewById(R.id.isOp);
             isFastC = itemView.findViewById(R.id.isFastC);
-        }
-
-        @SuppressLint("SetTextI18n")
-        void setDetails(Rate rate) {
-            town.setText(rate.getTown());
-            title.setText(rate.getTitle());
-            line.setText(rate.getLine());
-            String op = "❌";
-            if (rate.getIsOp()) {
-                op = "✔️";
-            }
-            isOp.setText("Operational : " + op);
-            String fast = "❌";
-            if (rate.getIsFastC()) {
-                fast = "✔️";
-            }
-            isFastC.setText("Fast charge : " + fast);
         }
     }
 

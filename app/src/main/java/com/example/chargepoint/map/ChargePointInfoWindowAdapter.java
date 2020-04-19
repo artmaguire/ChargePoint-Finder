@@ -13,8 +13,10 @@ import com.google.android.gms.maps.model.Marker;
 public class ChargePointInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     private final View iw_view;
+    private final Context context;
 
     public ChargePointInfoWindowAdapter(Context context) {
+        this.context = context;
         this.iw_view = View.inflate(context, R.layout.info_window_charge_point, null);
     }
 
@@ -30,7 +32,7 @@ public class ChargePointInfoWindowAdapter implements GoogleMap.InfoWindowAdapter
         iw_operator.setText(operator);
 
         TextView iw_noChargePoints = iw_view.findViewById(R.id.iw_no_charge_points);
-        String numberOfChargers = "# Charge Points:  ";
+        String numberOfChargers = context.getString(R.string.num_chargepoints);
         numberOfChargers += cp.getNumberOfPoints();
         iw_noChargePoints.setText(numberOfChargers);
 
@@ -39,9 +41,9 @@ public class ChargePointInfoWindowAdapter implements GoogleMap.InfoWindowAdapter
         for (ChargeConnection cc : cp.getConnections()) {
             if (cc.getPowerKW() > -1) {
                 if (powerKW.length() == 0)
-                    powerKW.append(cc.getPowerKW()).append("KW");
+                    powerKW.append(context.getString(R.string.kilowatt, cc.getPowerKW()));
                 else
-                    powerKW.append(" - ").append(cc.getPowerKW()).append("KW");
+                    powerKW.append(" - ").append(context.getString(R.string.kilowatt, cc.getPowerKW()));
             }
         }
         iw_powerKW.setText(powerKW.toString());

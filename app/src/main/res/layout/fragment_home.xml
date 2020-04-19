@@ -78,7 +78,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="About"
+                            android:text="@string/title_about"
                             android:textStyle="bold" />
 
                         <View
@@ -92,7 +92,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check your bank activities"
+                            android:text="@string/check_bank_details"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -124,7 +124,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="News"
+                            android:text="@string/title_news"
                             android:textStyle="bold" />
 
                         <View
@@ -138,7 +138,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check your bank activities"
+                            android:text="@string/check_news"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -179,7 +179,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Terms and Conditions"
+                            android:text="@string/title_terms"
                             android:textStyle="bold" />
 
                         <View
@@ -193,7 +193,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check your bank activities"
+                            android:text="@string/check_terms"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -225,7 +225,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Car Details"
+                            android:text="@string/title_car_details"
                             android:textStyle="bold" />
 
                         <View
@@ -239,7 +239,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check your bank activities"
+                            android:text="@string/check_car_details"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>

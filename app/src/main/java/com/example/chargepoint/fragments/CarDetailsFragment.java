@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class CarDetailsFragment extends BackFragment {
@@ -45,39 +46,28 @@ public class CarDetailsFragment extends BackFragment {
         spinnerModel = v.findViewById(R.id.spinner2);
 
         //Adding items of parent spinner "Select Manufacturer"
-        arrayList_parent = new ArrayList<>();
-        arrayList_parent.add("Renault");
-        arrayList_parent.add("Tesla");
-        arrayList_parent.add("Volkswagen");
-        arrayList_parent.add("Hyundai");
-        arrayList_parent.add("Mahindra");
+        String[] car_brands = getResources().getStringArray(R.array.car_brands);
+        arrayList_parent = new ArrayList<>(Arrays.asList(car_brands));
 
         arrayAdapter_parent = new ArrayAdapter<>(Objects.requireNonNull(getActivity()).getApplicationContext(), R.layout.textview_blue, arrayList_parent);
 
         spinnerManufacturer.setAdapter(arrayAdapter_parent);
 
         //child spinner process start
-        arrayList_Renault = new ArrayList<>();
-        arrayList_Renault.add("Fluence Z.E.");
-        arrayList_Renault.add("Zoe");
-        arrayList_Renault.add("Twizy");
+        String[] renault_models = getResources().getStringArray(R.array.renault_models);
+        arrayList_Renault = new ArrayList<>(Arrays.asList(renault_models));
 
-        arrayList_tesla = new ArrayList<>();
-        arrayList_tesla.add("Model X");
-        arrayList_tesla.add("Model 3");
-        arrayList_tesla.add("Model S");
+        String[] tesla_models = getResources().getStringArray(R.array.tesla_models);
+        arrayList_tesla = new ArrayList<>(Arrays.asList(tesla_models));
 
-        arrayList_volkswagen = new ArrayList<>();
-        arrayList_volkswagen.add("e-Golf");
-        arrayList_volkswagen.add("e-Up");
+        String[] volkswagen_models = getResources().getStringArray(R.array.volkswagen_models);
+        arrayList_volkswagen = new ArrayList<>(Arrays.asList(volkswagen_models));
 
-        arrayList_hyundai = new ArrayList<>();
-        arrayList_hyundai.add("Ioniq Electric");
-        arrayList_hyundai.add("Kona Electric");
+        String[] hyundai_models = getResources().getStringArray(R.array.hyundai_models);
+        arrayList_hyundai = new ArrayList<>(Arrays.asList(hyundai_models));
 
-        arrayList_mahindra = new ArrayList<>();
-        arrayList_mahindra.add("e20 Plus");
-        arrayList_mahindra.add("e-Verito");
+        String[] mahindra_models = getResources().getStringArray(R.array.mahindra_models);
+        arrayList_mahindra = new ArrayList<>(Arrays.asList(mahindra_models));
 
         spinnerManufacturer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -112,7 +102,6 @@ public class CarDetailsFragment extends BackFragment {
         });
 
         //child process ends
-
         try {
             savebutton.setOnClickListener(v1 -> savecardetails());
         } catch (NullPointerException ignored) {
@@ -132,10 +121,9 @@ public class CarDetailsFragment extends BackFragment {
 
             user.updateProfile(userprofile).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getActivity(), "Model Type Saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.model_type_saved), Toast.LENGTH_SHORT).show();
                 }
             });
         }
-
     }
 }

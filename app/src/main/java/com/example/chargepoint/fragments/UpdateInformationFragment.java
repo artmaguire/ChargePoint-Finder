@@ -3,7 +3,6 @@ package com.example.chargepoint.fragments;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,7 @@ public class UpdateInformationFragment extends BackFragment {
         name.setHint(currentUser.getDisplayName());
         MaterialAlertDialogBuilder alertDialog = new MaterialAlertDialogBuilder(getContext());
 
-        alertDialog.setTitle("Change Name");
+        alertDialog.setTitle(getString(R.string.change_name));
 
         final EditText input = new EditText(getContext());
 
@@ -66,30 +65,27 @@ public class UpdateInformationFragment extends BackFragment {
         alertDialog.setView(input);
 
         // Setting Positive "Yes" Btn
-        alertDialog.setPositiveButton("Save",
+        alertDialog.setPositiveButton(getString(R.string.save),
                 (dialog, which) -> {
                     ProgressDialog pg = ProgressDialog.show(getContext(), "",
-                            "Updating. Please wait...", true);
+                            getString(R.string.updating), true);
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                             .setDisplayName(input.getText().toString())
                             .build();
 
                     currentUser.updateProfile(profileUpdates).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "User Name updated.");
-
-                            Toast.makeText(getContext(), "Name updated", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getContext(), getString(R.string.user_name_changed), Toast.LENGTH_SHORT).show();
                             updateUserInfo();
                         } else {
-                            Toast.makeText(getContext(), "Failed to update name.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getString(R.string.user_name_change_fail), Toast.LENGTH_SHORT).show();
                         }
                         pg.dismiss();
                     });
                 });
 
         // Setting Negative "NO" Btn
-        alertDialog.setNegativeButton("Back", null);
+        alertDialog.setNegativeButton(R.string.back, null);
 
         alertDialog.show();
     }
@@ -99,7 +95,7 @@ public class UpdateInformationFragment extends BackFragment {
 
         MaterialAlertDialogBuilder alertDialog = new MaterialAlertDialogBuilder(getContext());
 
-        alertDialog.setTitle("Change Email");
+        alertDialog.setTitle(getString(R.string.user_change_email));
 
         final EditText input = new EditText(getContext());
 
@@ -108,23 +104,23 @@ public class UpdateInformationFragment extends BackFragment {
         alertDialog.setView(input);
 
         // Setting Positive "Yes" Btn
-        alertDialog.setPositiveButton("Save", (dialog, which) -> {
-            ProgressDialog pg = ProgressDialog.show(getContext(), "", "Updating. Please wait...", true);
+        alertDialog.setPositiveButton(getString(R.string.save), (dialog, which) -> {
+            ProgressDialog pg = ProgressDialog.show(getContext(), "", getString(R.string.updating), true);
             String emailAddress = input.getText().toString();
 
             currentUser.updateEmail(emailAddress).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Log.d(TAG, "User email address updated.");
+                    Toast.makeText(getContext(), getString(R.string.user_email_changed), Toast.LENGTH_SHORT).show();
                     updateUserInfo();
                 } else {
-                    Toast.makeText(getContext(), "Failed to update name.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.user_email_change_fail), Toast.LENGTH_SHORT).show();
                 }
                 pg.dismiss();
             });
         });
 
         // Setting Negative "NO" Btn
-        alertDialog.setNegativeButton("Back", null);
+        alertDialog.setNegativeButton(getString(R.string.back), null);
 
         alertDialog.show();
     }
@@ -132,7 +128,7 @@ public class UpdateInformationFragment extends BackFragment {
     private void changePassword(View v) {
         MaterialAlertDialogBuilder alertDialog = new MaterialAlertDialogBuilder(getContext());
 
-        alertDialog.setTitle("Change Password");
+        alertDialog.setTitle(getString(R.string.user_change_password));
 
         final EditText input = new EditText(getContext());
 
@@ -140,8 +136,8 @@ public class UpdateInformationFragment extends BackFragment {
         alertDialog.setView(input);
 
         // Setting Positive "Yes" Btn
-        alertDialog.setPositiveButton("Save", (dialog, which) -> {
-            ProgressDialog pg = ProgressDialog.show(getContext(), "", "Updating. Please wait...", true);
+        alertDialog.setPositiveButton(getString(R.string.save), (dialog, which) -> {
+            ProgressDialog pg = ProgressDialog.show(getContext(), "", getString(R.string.updating), true);
             //password.setText(input.getText().toString());
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -149,17 +145,17 @@ public class UpdateInformationFragment extends BackFragment {
 
             user.updatePassword(newPassword).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Log.d(TAG, "User password updated.");
+                    Toast.makeText(getContext(), getString(R.string.user_password_changed), Toast.LENGTH_SHORT).show();
                     updateUserInfo();
                 } else {
-                    Toast.makeText(getContext(), "Failed to update name.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.user_password_change_fail), Toast.LENGTH_SHORT).show();
                 }
                 pg.dismiss();
             });
         });
 
         // Setting Negative "NO" Btn
-        alertDialog.setNegativeButton("Back", null);
+        alertDialog.setNegativeButton(getString(R.string.back), null);
 
         alertDialog.show();
     }

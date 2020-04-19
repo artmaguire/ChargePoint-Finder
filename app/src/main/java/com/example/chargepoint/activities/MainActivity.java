@@ -57,12 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (beginRun) {
             new MaterialAlertDialogBuilder(this)
-                    .setTitle("Terms&Condition")
-                    .setMessage("Click on link below to see terms and conditions")
-                    .setNegativeButton("Decline", (dialog, which) -> {
+                    .setTitle(getString(R.string.title_terms))
+                    .setMessage(getString(R.string.see_terms))
+                    .setNegativeButton(getString(R.string.decline), (dialog, which) -> {
                         finish();
                         System.exit(0);
-                    }).setPositiveButton("Accept", (dialog, which) -> getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("beginRun", false).apply()).show();
+                    }).setPositiveButton(R.string.decline, (dialog, which) -> getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("beginRun", false).apply()).show();
         }
     }
 }

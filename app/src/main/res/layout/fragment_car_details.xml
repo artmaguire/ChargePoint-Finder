@@ -14,7 +14,7 @@
         android:layout_marginTop="40dp"
         android:gravity="center"
         android:paddingTop="30dp"
-        android:text="Select Details about your Car"
+        android:text="@string/car_details_about"
         android:textAlignment="center"
         android:textSize="30dp"
         android:textStyle="bold" />
@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Manufacturer"
+        android:text="@string/select_manufacturer"
         android:textColor="#00f"
         android:textSize="20dp" />
 
@@ -32,14 +32,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:hint="Select Manufacturer"
+        android:hint="@string/select_manufacturer"
         android:spinnerMode="dropdown" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="Select Model"
+        android:text="@string/select_model"
         android:textColor="#f00"
         android:textSize="20dp" />
 
@@ -49,14 +49,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:hint="Select Manufacturer"
+        android:hint="@string/select_model"
         android:spinnerMode="dropdown" />
 
     <Button
         android:id="@+id/savebutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner2"
         android:layout_marginTop="76dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"

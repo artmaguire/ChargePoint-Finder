@@ -69,7 +69,7 @@ public class PaymentDetailsFragment extends BackFragment {
         String displayName = textcardname.getText().toString();
         int cardnumber = textcardname.getInputType();
         if (displayName.isEmpty()) {
-            textcardname.setError("Name Required");
+            textcardname.setError(getString(R.string.card_name_required));
             textcardname.requestFocus();
             return;
         }
@@ -85,7 +85,7 @@ public class PaymentDetailsFragment extends BackFragment {
 
             user.updateProfile(profile).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getContext(), "Card Details saved successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
                 }
             });
         }
