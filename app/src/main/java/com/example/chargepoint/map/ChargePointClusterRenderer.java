@@ -23,7 +23,7 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 
 public class ChargePointClusterRenderer extends DefaultClusterRenderer<ChargePointCluster> {
 
-    private Context context;
+    private final Context context;
 
     public ChargePointClusterRenderer(Context context, GoogleMap map, ClusterManager<ChargePointCluster> clusterManager) {
         super(context, map, clusterManager);
@@ -58,7 +58,7 @@ public class ChargePointClusterRenderer extends DefaultClusterRenderer<ChargePoi
         paint.getTextBounds(countString, 0, countString.length(), bounds);
 
         Canvas canvas = new Canvas(bm);
-        canvas.drawText(countString, bm.getWidth() / 2 - bounds.centerX(), bm.getHeight() / 2 - bounds.centerY(), paint);
+        canvas.drawText(countString, bm.getWidth() / (float) 2 - bounds.centerX(), bm.getHeight() / (float) 2 - bounds.centerY(), paint);
 
         return BitmapDescriptorFactory.fromBitmap(bm);
     }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ChargePoint</string>
+    <string name="chargepoint_website">www.chargepoint.ie</string>
+
+    <string name="name_art">Art</string>
+    <string name="name_michael">Michael</string>
+    <string name="name_corentin">Corentin</string>
+    <string name="name_arthur">Arthur</string>
+</resources>

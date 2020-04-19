@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="car_brands">
+        <item>Renault</item>
+        <item>Tesla</item>
+        <item>Volkswagen</item>
+        <item>Hyundai</item>
+        <item>Mahindra</item>
+    </string-array>
+
+    <string-array name="renault_models">
+        <item>Fluence Z.E.</item>
+        <item>Zoe</item>
+        <item>Twizy</item>
+    </string-array>
+
+    <string-array name="tesla_models">
+        <item>Model 3</item>
+        <item>Model S</item>
+        <item>Model X</item>
+        <item>Cybertruck</item>
+    </string-array>
+
+    <string-array name="volkswagen_models">
+        <item>e-Golf</item>
+        <item>e-Up</item>
+    </string-array>
+
+    <string-array name="hyundai_models">
+        <item>Ioniq Electric</item>
+        <item>Kona Electric</item>
+    </string-array>
+
+    <string-array name="mahindra_models">
+        <item>e20 Plus</item>
+        <item>e-Verito</item>
+    </string-array>
+</resources>

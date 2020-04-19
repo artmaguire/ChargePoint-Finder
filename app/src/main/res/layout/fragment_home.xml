@@ -58,7 +58,8 @@
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="12dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -71,13 +72,14 @@
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_purple"
                             android:padding="10dp"
+                            android:contentDescription="@string/go_to_about_page"
                             android:src="@drawable/ic_map_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="About"
+                            android:text="@string/title_about"
                             android:textStyle="bold" />
 
                         <View
@@ -91,7 +93,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Find out more about ChargePoint"
+                            android:text="@string/check_bank_details"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -103,7 +105,8 @@
                     android:layout_height="190dp"
                     android:layout_margin="12dp"
                     android:background="@color/windowBackground"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -116,13 +119,14 @@
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_pink"
                             android:padding="10dp"
+                            android:contentDescription="@string/go_to_news_page"
                             android:src="@drawable/ic_assignment_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="News"
+                            android:text="@string/title_news"
                             android:textStyle="bold" />
 
                         <View
@@ -136,7 +140,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check out news on electric cars"
+                            android:text="@string/check_news"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -157,7 +161,8 @@
                     android:layout_height="190dp"
                     android:layout_margin="12dp"
                     android:background="@color/windowBackground"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -170,13 +175,14 @@
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_green"
                             android:padding="10dp"
+                            android:contentDescription="@string/go_to_terms_and_conditions_page"
                             android:src="@drawable/ic_profile_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Terms and Conditions"
+                            android:text="@string/title_terms"
                             android:textStyle="bold" />
 
                         <View
@@ -190,7 +196,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check out our Terms and Conditions"
+                            android:text="@string/check_terms"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -202,7 +208,8 @@
                     android:layout_height="190dp"
                     android:layout_margin="12dp"
                     android:background="@color/windowBackground"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -215,13 +222,14 @@
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_yellow"
                             android:padding="10dp"
+                            android:contentDescription="@string/go_to_car_details_page"
                             android:src="@drawable/ic_directions_car_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Car Details"
+                            android:text="@string/title_car_details"
                             android:textStyle="bold" />
 
                         <View
@@ -235,7 +243,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check / Add your car details"
+                            android:text="@string/check_car_details"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -259,7 +267,8 @@
                     android:background="@color/windowBackground"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="4dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <LinearLayout
 

@@ -9,15 +9,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
 
-public class TermsFragment extends Fragment {
+public class TermsFragment extends BackFragment {
 
     public TermsFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_terms, container, false);
         /*WebView webView = (WebView)v.findViewById(R.id.webview);

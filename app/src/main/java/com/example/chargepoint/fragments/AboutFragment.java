@@ -2,18 +2,20 @@ package com.example.chargepoint.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.GridAdapter;
 
-public class AboutFragment extends Fragment {
+public class AboutFragment extends BackFragment {
+
+    public AboutFragment() {
+        // Required empty public constructor
+    }
 
     GridView gridView;
 
@@ -33,7 +35,7 @@ public class AboutFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.setHasOptionsMenu(true);
+        return inflater.inflate(R.layout.fragment_about, container, false);
 
         View root = inflater.inflate(R.layout.fragment_about, container, false);
 
@@ -42,11 +44,5 @@ public class AboutFragment extends Fragment {
         gridView.setAdapter(gridAdapter);
 
         return root;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -6,7 +6,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -38,9 +37,9 @@ import java.util.UUID;
 
 import static com.google.firebase.Timestamp.now;
 
-public class BuyPowerFragment extends Fragment {
+public class BuyPowerFragment extends BackFragment {
 
-    private String TAG = "BUY_POWER";
+    private final String TAG = "BUY_POWER";
 
     private ChargePoint cp;
 
@@ -53,7 +52,7 @@ public class BuyPowerFragment extends Fragment {
     private String cardNumber;
 
     // TODO: Get rate from db
-    private double rate = 0.33;
+    private final double rate = 0.33;
     private double kwhr;
 
     public BuyPowerFragment() {
@@ -62,9 +61,6 @@ public class BuyPowerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        this.setHasOptionsMenu(true);
-
         return inflater.inflate(R.layout.fragment_buy_power, container, false);
     }
 
@@ -91,7 +87,6 @@ public class BuyPowerFragment extends Fragment {
         Bundle b = getArguments();
         if (b != null) {
             cp = (ChargePoint) b.getSerializable("ChargePoint");
-            Log.d(TAG, cp.toString());
         }
 
         Log.d(TAG, cp.getOperator());
@@ -100,13 +95,13 @@ public class BuyPowerFragment extends Fragment {
         chargePointAddress.setText(cp.getSimpleAddress());
 
         kwhr = cp.getConnections().get(0).getPowerKW();
-        kWhView.setText(kwhr + " kWh");
+        kWhView.setText(getString(R.string.kilowatt_hour, kwhr));
 
         String voltage = cp.getConnections().get(0).getVoltage() != -1 ? String.valueOf(cp.getConnections().get(0).getVoltage()) : "--";
         String ampere = cp.getConnections().get(0).getAmps() != -1 ? String.valueOf(cp.getConnections().get(0).getAmps()) : "--";
 
-        voltsView.setText(voltage + " V");
-        ampsView.setText(ampere + " A");
+        voltsView.setText(getString(R.string.voltage, voltage));
+        ampsView.setText(getString(R.string.amp, ampere));
 
         getCards();
 
@@ -168,6 +163,7 @@ public class BuyPowerFragment extends Fragment {
         });
 
         payButton.setOnClickListener(v -> {
+            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.generateing_receipt), true);
             if (!cardNumber.equals("")) {
                 ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Generating Receipt...", true);
 
@@ -181,13 +177,13 @@ public class BuyPowerFragment extends Fragment {
                         .substring(0, 17), cost, duration, now(), cardNumber, Double.parseDouble(amountEditText.getText()
                         .toString()), cp.getMap_id(), FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                fbHelper.addReceiptToDB(r, task1 -> {
-                    dialog.dismiss();
-                    new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class).destroyReceipts();
-                    Navigation.findNavController(view).popBackStack();
-                });
+                        fbHelper.addReceiptToDB(r, task1 -> {
+                            dialog.dismiss();
+                            new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class).destroyReceipts();
+                            Navigation.findNavController(view).popBackStack();
+                        });
             } else {
-                Toast.makeText(getContext(), "No card selected.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.no_cards_available), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -243,11 +239,5 @@ public class BuyPowerFragment extends Fragment {
 
         setTimeSpinnerAdapter();
         payButton.setEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 }

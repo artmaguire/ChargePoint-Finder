@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 
-public class PaymentDetailsFragment extends Fragment {
+public class PaymentDetailsFragment extends BackFragment {
 
     private String TAG = "PAYMENT_DETAILS";
 
@@ -40,7 +39,6 @@ public class PaymentDetailsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_payment_details, container, false);
     }
 
@@ -98,17 +96,11 @@ public class PaymentDetailsFragment extends Fragment {
                 // Send card to database
                 FirebaseHelper fbHelper = FirebaseHelper.getInstance();
                 fbHelper.addCardToDB(card, task -> {
-                    Toast.makeText(getContext(), "Card successfully added.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     Navigation.findNavController(view).popBackStack();
                 });
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 }

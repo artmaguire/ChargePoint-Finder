@@ -1,63 +1,145 @@
 <resources>
-    <string name="app_name">ChargePoint</string>
 
+    <!-- Fragment Titles -->
+    <string name="title_home">Home</string>
+    <string name="title_map">Map</string>
+    <string name="title_rates">ChargePoints</string>
+    <string name="title_profile">Profile</string>
+
+    <string name="title_about">About</string>
+    <string name="title_news">News</string>
+    <string name="title_terms">Terms and Conditions</string>
+    <string name="title_car_details">Car Details</string>
+
+    <string name="title_buy_power">Buy Power</string>
+    <string name="receipt">Receipt</string>
+    <string name="update_information">Update Information</string>
+
+    <!-- Preferences -->
+    <string name="user_information">User Information</string>
     <string name="account_details">Account Details</string>
+    <string name="name_email_password">Name, Email, Password</string>
     <string name="payment_details">Payment Details</string>
+    <string name="bank_details">Bank Details</string>
     <string name="car_details">Car Details</string>
-    <string name="payments_receipts">Payments Receipts</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="about_us">About Us</string>
+    <string name="car_type">Car Type</string>
+    <string name="payment_receipts">Payment Receipts</string>
+    <string name="previous_receipts">Previous Receipts</string>
+
+    <string name="general">General</string>
     <string name="dark_theme">Dark Theme</string>
     <string name="change_theme">Change Theme</string>
-    <string name="sign_in_with_biometrics">Sign in with biometics</string>
-    <string name="enable_fingerprint_unlock">Enable fingerpint unlock</string>
-    <string name="general">General</string>
-    <string name="user_information">User Information</string>
-    <string name="name_email_password">Name, Email, Password</string>
-    <string name="bank_details">Bank details</string>
-    <string name="car_type">Car type</string>
-    <string name="previous_payments">Previous payments</string>
+    <string name="sign_in_with_biometrics">Sign in with biometrics</string>
+    <string name="enable_fingerprint_unlock">Enable fingerprint unlock</string>
+    <string name="about_us">About Us</string>
     <string name="about_us_info">Read more information about the ChargePoint App</string>
-    <string name="profile">Profile</string>
-    <string name="save">Save</string>
+    <string name="sign_out">Sign Out</string>
+
+    <!-- Home -->
+    <string name="check_bank_details">Check your bank activities</string>
+    <string name="check_news">Check the latest news from ChargePoint</string>
+    <string name="check_terms">See our Terms &amp; Conditions</string>
+    <string name="check_car_details">Check and update your car details</string>
+    <string name="go_to_about_page">Go to About Page</string>
+    <string name="go_to_news_page">Go to News Page</string>
+    <string name="go_to_terms_and_conditions_page">Go to Terms and Conditions Page</string>
+    <string name="go_to_car_details_page">Go to Car Details Page</string>
+
+    <!-- Rates -->
+    <string name="sort_by_county">Sort by County: </string>
+
+    <!-- About -->
+    <string name="about_the_project">About the project</string>
+    <string name="project_description">This project was born thanks to the Mobile Development module. The aim of this project was to create an application useful for the electric car users.</string>
+    <string name="group_description">We are a group of 4 students at the University of Limerick. We are studying Computer Sciences.</string>
+
+    <!-- Terms & Conditions -->
+    <string name="see_terms">Click on link below to see terms and conditions.</string>
+
+    <!-- Car Details -->
+    <string name="model_type_saved">Model Type Saved</string>
+    <string name="car_details_about">Select Details about your Car</string>
+    <string name="select_manufacturer">Select Manufacturer</string>
+    <string name="select_model">Select Model</string>
+
+    <!-- Buy Power -->
+    <string name="rate">Rate: €0.33 per KWhr</string>
+    <string name="time">Time:</string>
+    <string name="mins">mins</string>
+    <string name="cost">Cost:</string>
+    <string name="currency_symbol">€</string>
+
+    <!-- Receipt -->
+    <string name="go_to_receipt">Go to receipt</string>
+    <string name="generateing_receipt">Generating Receipt…</string>
+    <string name="receipt_id">Receipt ID: %1$s</string>
+    <string name="receipt_power_amount">Amount: %1$.2f kWh</string>
+    <string name="receipt_paid_with">Paid With: %1$s</string>
+    <string name="receipt_amount">Amount: €%1$.2f</string>
+    <string name="receipt_operator">Operator:\n %1$s</string>
+    <string name="receipt_address">Address:\n%1$s,\n%2$s,\n%3$s,\n%4$s</string>
+    <string name="receipt_missing_county">County not provided.</string>
+
+    <!-- User -->
     <string name="change_name">Change Name</string>
     <string name="change_email">Change Email</string>
     <string name="change_password">Change Password</string>
+    <string name="user_name_changed">Name updated</string>
+    <string name="user_name_change_fail">Failed to update name</string>
+    <string name="user_change_email">Change Email</string>
+    <string name="user_email_changed">Email updated</string>
+    <string name="user_email_change_fail">Failed to update email</string>
+    <string name="user_change_password">Change Password</string>
+    <string name="user_password_changed">Password updated</string>
+    <string name="user_password_change_fail">Failed to update password</string>
+    <string name="user_password_stars">**********</string>
+
     <string name="enter_new_email">Enter New Email</string>
     <string name="enter_current_email">Enter Current Email</string>
     <string name="find_nearest_charge_point">Find Nearest Charge Point</string>
     <string name="enter_current_password">Enter current password</string>
     <string name="enter_new_password">Enter new password</string>
     <string name="confirm_new_password">Confirm new password</string>
-    <string name="first_name">First Name</string>
-    <string name="second_name">Second Name</string>
-    <string name="users_name">Art Maguire</string>
-    <string name="title_activity_main2">MainActivity2</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_rates">ChargePoints</string>
-    <string name="title_profile">Profile</string>
-    <string name="title_map">Map</string>
-    <string name="go_to_receipt">Go to receipt</string>
-    <string name="title_about">About</string>
-    <string name="title_news">News</string>
-    <string name="title_terms">Terms and Conditions</string>
-    <string name="title_car_details">Car Details</string>
-    <string name="enter_card_number">Card Number</string>
+
+    <!-- Payment Details -->
+    <string name="enter_card_number">Enter Card Number</string>
     <string name="enter_debit_card_information_here">Enter Debit Card Information Here</string>
     <string name="card_name">Name on Card</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_buy_power">Buy Power</string>
+    <!-- ChargePoint -->
+    <string name="num_chargepoints"># Charge Points:  </string>
+    <string name="chargepoint_operational">Operational: %1$s</string>
+    <string name="chargepoint_fast_charge">Fast Charge: %1$s</string>
+    <string name="go_to_buy_power_page">Go To Buy Power Page</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="update_information">Update Information</string>
-    <string name="previous_receipts">Previous Receipts</string>
-    <string name="receipt">Receipt</string>
-    <string name="save_details" />
-    <string name="www_chargepoint_ie">www.chargepoint.ie</string>
+    <!-- Card -->
+    <string name="no_cards_available">No card available for this user.</string>
+    <string name="card_name_required">Name Required</string>
+    <string name="card_saved">Card Details saved successfully</string>
     <string name="mm_yy">MM/YY</string>
     <string name="ccv">CCV</string>
-    <string name="sort_by_county">Sort by county :</string>
+
+    <!-- Dialogs -->
+    <string name="sign_out_question">Are you sure you want to sign out?</string>
+    <string name="updating">Updating. Please wait…</string>
+
+    <!-- Buttons -->
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="pay">Pay</string>
+
+    <!-- Units with placeholder-->
+    <string name="kilowatt">%1$.2f kW</string>
+    <string name="kilowatt_hour">%1$.2f kWr</string>
+    <string name="voltage">%1$s V</string>
+    <string name="amp">%1$s A</string>
+
+    <!-- Email -->
+    <string name="email_sent">Email sent!</string>
+    <string name="email_wrong_address">Wrong email address.</string>
+
 </resources>

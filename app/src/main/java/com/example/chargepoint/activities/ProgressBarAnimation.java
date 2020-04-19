@@ -5,14 +5,14 @@ import android.view.animation.Transformation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class ProgressBarAnimation extends Animation {
-    private SplashScreen activity;
-    private ProgressBar progressBar;
-    private TextView textView;
-    private float from;
-    private float to;
+class ProgressBarAnimation extends Animation {
+    private final SplashScreen activity;
+    private final ProgressBar progressBar;
+    private final TextView textView;
+    private final float from;
+    private final float to;
 
-    public ProgressBarAnimation(SplashScreen activity, ProgressBar progressBar, TextView textView, float from, float to) {
+    ProgressBarAnimation(SplashScreen activity, ProgressBar progressBar, TextView textView, float from, float to) {
 
         this.activity = activity;
         this.progressBar = progressBar;

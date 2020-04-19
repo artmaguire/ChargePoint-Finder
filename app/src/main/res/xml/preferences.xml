@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="User Information">
+    <PreferenceCategory android:title="@string/user_information">
         <Preference
             android:icon="@drawable/ic_person_24px"
             android:key="@string/account_details"
-            android:summary="Name, Email, Password"
+            android:summary="@string/name_email_password"
             android:title="@string/account_details" />
         <Preference
             android:icon="@drawable/account_balance24px"
             android:key="@string/payment_details"
-            android:summary="Band details"
+            android:summary="@string/bank_details"
             android:title="@string/payment_details" />
         <Preference
             android:icon="@drawable/directions_car24px"
             android:key="@string/car_details"
-            android:summary="Car type"
+            android:summary="@string/car_type"
             android:title="@string/car_details">
         </Preference>
         <Preference
             android:icon="@drawable/ic_receipt_24px"
-            android:key="@string/payments_receipts"
-            android:summary="Previous receipts"
-            android:title="@string/payments_receipts" />
+            android:key="@string/payment_receipts"
+            android:summary="@string/previous_receipts"
+            android:title="@string/payment_receipts" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="General">
+    <PreferenceCategory android:title="@string/general">
         <SwitchPreference
             android:icon="@drawable/ic_dark_mode_24px"
             android:key="@string/dark_theme"
-            android:summary="Change Theme"
+            android:summary="@string/change_theme"
             android:title="@string/dark_theme" />
         <SwitchPreference
             android:enabled="false"
             android:icon="@drawable/fingerprint24px"
             android:key="@string/sign_in_with_biometrics"
-            android:summary="Enable fingerprint sign in"
+            android:summary="@string/enable_fingerprint_unlock"
             android:title="@string/sign_in_with_biometrics" />
     </PreferenceCategory>
 

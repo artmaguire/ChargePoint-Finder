@@ -42,7 +42,7 @@ public class ProfileFragment extends PreferenceFragmentCompat {
             Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_fragment_payment_details);
         else if (pk.equals(getString(R.string.car_details)))
             Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_fragment_car_details);
-        else if (pk.equals(getString(R.string.payments_receipts)))
+        else if (pk.equals(getString(R.string.payment_receipts)))
             Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_fragment_previous_receipts);
         else if (pk.equals(getString(R.string.dark_theme)))
             getActivity().recreate();
@@ -56,11 +56,11 @@ public class ProfileFragment extends PreferenceFragmentCompat {
 
     private void signOut() {
         final MaterialAlertDialogBuilder alertDialog = new MaterialAlertDialogBuilder(getContext());
-        alertDialog.setMessage("Are you sure you want to sign out?");
+        alertDialog.setMessage(getString(R.string.sign_out_question));
         alertDialog.setCancelable(true);
-        alertDialog.setNegativeButton("No", null);
+        alertDialog.setNegativeButton(R.string.no, null);
 
-        alertDialog.setPositiveButton("Yes", (dialog, which) -> AuthUI.getInstance()
+        alertDialog.setPositiveButton(R.string.yes, (dialog, which) -> AuthUI.getInstance()
                 .signOut(getContext())
                 .addOnCompleteListener(task -> {
                     FirebaseHelper.destroyInstance();

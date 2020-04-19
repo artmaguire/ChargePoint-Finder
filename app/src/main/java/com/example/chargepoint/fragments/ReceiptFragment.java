@@ -1,10 +1,8 @@
 package com.example.chargepoint.fragments;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,10 +28,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ReceiptFragment extends Fragment {
+public class ReceiptFragment extends BackFragment {
     private static final String TAG = "GET RECEIPT";
 
     private Receipt receipt;
@@ -48,22 +43,20 @@ public class ReceiptFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_receipt, container, false);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        assert getArguments() != null;
         receipt = getArguments().getParcelable("Receipt");
+        Log.d(TAG, "onCreate: " + receipt.toString());
 
-        assert receipt != null;
         Date timeToDate = receipt.getDatetime().toDate();
-        @SuppressLint("SimpleDateFormat") Format formatter = new SimpleDateFormat("HH:mm:ss");
+        Locale current = getResources().getConfiguration().locale;
+        Format formatter = new SimpleDateFormat("HH:mm:ss", current);
         String time = formatter.format(timeToDate);
 
         Log.d(TAG, "onCreateTime: " + time);
@@ -87,49 +80,42 @@ public class ReceiptFragment extends Fragment {
         durationView = view.findViewById(R.id.receiptDuration);
 
         dateView.setText(dateString);
-        invoiceView.setText("Receipt ID: " + receipt.getInvoice_id());
-        electricityView.setText("Amount (kWh): " + receipt.getElectricity() + "kWh");
+        invoiceView.setText(getString(R.string.receipt_id, receipt.getInvoice_id()));
+        electricityView.setText(getString(R.string.receipt_power_amount, receipt.getElectricity()));
         timeView.setText(time);
-        cardView.setText("Paid with: ".concat(receipt.getCard()));
-        euroView.setText("Amount (€): " + "€" + receipt.getCost());
+        cardView.setText(getString(R.string.receipt_paid_with, receipt.getCard()));
+        euroView.setText(getString(R.string.receipt_amount, receipt.getCost()));
         durationView.setText("Time: " + receipt.getDuration() + "mins");
 
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
         fbHelper.getChargePoint(receipt.getMap_id(), task -> {
             if (task.isSuccessful()) {
-                ChargePoint cp = Objects.requireNonNull(task.getResult()).toObject(ChargePoint.class);
+                ChargePoint cp = task.getResult().toObject(ChargePoint.class);
                 String title, line1, town, county;
-                assert cp != null;
-                if (cp.getAddress().containsKey("title") && !Objects.equals(cp.getAddress().get("title"), ""))
+                if (cp.getAddress().containsKey("title") && !cp.getAddress().get("title").equals(""))
                     title = cp.getAddress().get("title");
                 else
                     title = "";
-                if (cp.getAddress().containsKey("line1") && !Objects.equals(cp.getAddress().get("line1"), ""))
+                if (cp.getAddress().containsKey("line1") && !cp.getAddress().get("line1").equals(""))
                     line1 = cp.getAddress().get("line1");
                 else
                     line1 = "";
-                if (cp.getAddress().containsKey("town") && !Objects.equals(cp.getAddress().get("town"), ""))
+                if (cp.getAddress().containsKey("town") && !cp.getAddress().get("town").equals(""))
                     town = cp.getAddress().get("town");
                 else
                     town = "";
-                if (cp.getAddress().containsKey("county") && !Objects.equals(cp.getAddress().get("county"), ""))
+                if (cp.getAddress().containsKey("county") && !cp.getAddress().get("county").equals(""))
                     county = cp.getAddress().get("county");
                 else
-                    county = "County not provided.";
+                    county = getString(R.string.receipt_missing_county);
 
-                locationView.setText("Address:\n" + title + ",\n" + line1 + ",\n" + town + ",\n" + county);
-                operatorView.setText("Operator:\n" + cp.getOperator());
+                locationView.setText(getString(R.string.receipt_address, title, line1, town, county));
+                operatorView.setText(getString(R.string.receipt_operator, cp.getOperator()));
 
                 view.findViewById(R.id.receipt_view).setVisibility(View.VISIBLE);
                 view.findViewById(R.id.receiptPBar).setVisibility(View.GONE);
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Objects.requireNonNull(getActivity()).onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 
     private void showEmail(View view) {
@@ -144,24 +130,22 @@ public class ReceiptFragment extends Fragment {
         button_email.setVisibility(View.INVISIBLE);
     }
 
-    @SuppressLint("SetTextI18n")
     private void sendEmail(View view) {
         EditText email = view.findViewById(R.id.email);
         TextView statement = view.findViewById(R.id.statement);
         statement.setVisibility(View.VISIBLE);
 
-        if (isEmailAdress(email.getText().toString())) {
-
+        if (isEmailAddress(email.getText().toString())) {
             String to = email.getText().toString().trim();
             Mail.sendMail(to, receipt);
 
-            statement.setText("Email sent !");
+            statement.setText(getString(R.string.email_sent));
         } else {
-            statement.setText("Wrong email address.");
+            statement.setText(getString(R.string.email_wrong_address));
         }
     }
 
-    private boolean isEmailAdress(String email) {
+    private boolean isEmailAddress(String email) {
         Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
         Matcher m = p.matcher(email.toUpperCase());
         return m.matches();

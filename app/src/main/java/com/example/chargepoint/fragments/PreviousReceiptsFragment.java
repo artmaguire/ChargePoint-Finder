@@ -2,7 +2,6 @@ package com.example.chargepoint.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -18,7 +17,7 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.ReceiptsAdapter;
 import com.example.chargepoint.viewmodel.ReceiptViewModel;
 
-public class PreviousReceiptsFragment extends Fragment {
+public class PreviousReceiptsFragment extends BackFragment {
 
     private static final String TAG = "PAYMENT_RECEIPT";
     private ReceiptsAdapter adapter;
@@ -30,7 +29,6 @@ public class PreviousReceiptsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_previous_receipts, container, false);
     }
@@ -54,11 +52,5 @@ public class PreviousReceiptsFragment extends Fragment {
 
             pgsBar.setVisibility(View.GONE);
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        getActivity().onBackPressed();
-        return super.onOptionsItemSelected(item);
     }
 }

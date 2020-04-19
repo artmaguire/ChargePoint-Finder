@@ -92,15 +92,12 @@ public class Mail {
 
             message.setContent(multipart);
 
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Transport.send(message);
-                        System.out.println("Sent !");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            Thread thread = new Thread(() -> {
+                try {
+                    Transport.send(message);
+                    System.out.println("Sent !");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             });
 

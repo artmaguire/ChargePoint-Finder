@@ -8,7 +8,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
@@ -16,11 +15,8 @@ import androidx.preference.PreferenceManager;
 import com.example.chargepoint.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
@@ -34,10 +30,9 @@ public class SplashScreen extends AppCompatActivity {
 
     private static final int MY_REQUEST_CODE = 1234;
     private static final String TAG = "User_db";
-    List<AuthUI.IdpConfig> providers;
 
-    ProgressBar progressBar;
-    TextView textView;
+    private ProgressBar progressBar;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,14 +78,14 @@ public class SplashScreen extends AppCompatActivity {
         finish();
     }
 
-    public void progressAnimation() {
-        ProgressBarAnimation amin = new ProgressBarAnimation(this, progressBar, textView, 0f, 100f);
-        amin.setDuration(8000);
-        progressBar.setAnimation(amin);
+    private void progressAnimation() {
+        ProgressBarAnimation anim = new ProgressBarAnimation(this, progressBar, textView, 0f, 100f);
+        anim.setDuration(8000);
+        progressBar.setAnimation(anim);
     }
 
     private void showSignInOptions() {
-        providers = Arrays.asList(
+        List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build()
         );
@@ -139,18 +134,10 @@ public class SplashScreen extends AppCompatActivity {
 
                         firebaseFirestore.collection("users")
                                 .add(userData)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.w(TAG, "Error adding document", e);
-                                    }
-                                });
+                                .addOnSuccessListener(documentReference ->
+                                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId()))
+                                .addOnFailureListener(e ->
+                                        Log.w(TAG, "Error adding document", e));
                     }
                 });
     }

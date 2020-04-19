@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,8 +23,10 @@ import com.example.chargepoint.pojo.Car;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
-public class CarDetailsFragment extends Fragment {
+public class CarDetailsFragment extends BackFragment {
 
     private String TAG = "CAR_DETAILS";
     private ArrayList<String> renaultModels, teslaModels, volkswagenModels, hyundaiModels, mahindraModels;
@@ -41,8 +42,7 @@ public class CarDetailsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.setHasOptionsMenu(true);
-
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_car_details, container, false);
     }
 
@@ -59,43 +59,28 @@ public class CarDetailsFragment extends Fragment {
         Spinner manufacturerSpinner = view.findViewById(R.id.spinner1);
         modelSpinner = view.findViewById(R.id.spinner2);
 
-        // Adding items of parent spinner "Select Manufacturer"
-        manufacturerList = new ArrayList<>();
-        manufacturerList.add("Renault");
-        manufacturerList.add("Tesla");
-        manufacturerList.add("Volkswagen");
-        manufacturerList.add("Hyundai");
-        manufacturerList.add("Mahindra");
+        //Adding items of parent spinner "Select Manufacturer"
+        String[] car_brands = getResources().getStringArray(R.array.car_brands);
+        manufacturerList = new ArrayList<>(Arrays.asList(car_brands));
 
         ArrayAdapter arrayAdapter_parent = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, manufacturerList);
         manufacturerSpinner.setAdapter(arrayAdapter_parent);
 
-        // Renault Models
-        renaultModels = new ArrayList<>();
-        renaultModels.add("Fluence Z.E.");
-        renaultModels.add("Zoe");
-        renaultModels.add("Twizy");
+        //child spinner process start
+        String[] renault_models = getResources().getStringArray(R.array.renault_models);
+        renaultModels = new ArrayList<>(Arrays.asList(renault_models));
 
-        // Tesla Models
-        teslaModels = new ArrayList<>();
-        teslaModels.add("Model X");
-        teslaModels.add("Model 3");
-        teslaModels.add("Model S");
+        String[] tesla_models = getResources().getStringArray(R.array.tesla_models);
+        teslaModels = new ArrayList<>(Arrays.asList(tesla_models));
 
-        // Volkswagen Models
-        volkswagenModels = new ArrayList<>();
-        volkswagenModels.add("e-Golf");
-        volkswagenModels.add("e-Up");
+        String[] volkswagen_models = getResources().getStringArray(R.array.volkswagen_models);
+        volkswagenModels = new ArrayList<>(Arrays.asList(volkswagen_models));
 
-        // Hyundai Models
-        hyundaiModels = new ArrayList<>();
-        hyundaiModels.add("Ioniq Electric");
-        hyundaiModels.add("Kona Electric");
+        String[] hyundai_models = getResources().getStringArray(R.array.hyundai_models);
+        hyundaiModels = new ArrayList<>(Arrays.asList(hyundai_models));
 
-        // Mahindra Models
-        mahindraModels = new ArrayList<>();
-        mahindraModels.add("e20 Plus");
-        mahindraModels.add("e-Verito");
+        String[] mahindra_models = getResources().getStringArray(R.array.mahindra_models);
+        mahindraModels = new ArrayList<>(Arrays.asList(mahindra_models));
 
         manufacturerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -177,5 +162,24 @@ public class CarDetailsFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         getActivity().onBackPressed();
         return super.onOptionsItemSelected(item);
+
+    }
+
+    private void savecardetails() {
+        String model = spinnerModel.getSelectedItem().toString().trim();
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        if(user != null){
+            UserProfileChangeRequest userprofile = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(model).build();
+
+            user.updateProfile(userprofile).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getActivity(), "Model Type Saved", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
     }
 }
