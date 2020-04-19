@@ -59,6 +59,7 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
 
         holder.receiptDate.setText(dateString);
         holder.receiptAmount.setText("€".concat(String.valueOf(amount)));
+        holder.receiptDuration.setText(String.valueOf(receipt.getDuration()).concat(" mins"));
 
         holder.cv.setOnClickListener(v -> {
             Bundle b = new Bundle();
@@ -76,12 +77,14 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
         CardView cv;
         TextView receiptDate;
         TextView receiptAmount;
+        TextView receiptDuration;
 
         ViewHolder(CardView view) {
             super(view);
             cv = view;
             receiptDate = view.findViewById(R.id.receiptDate);
             receiptAmount = view.findViewById(R.id.receiptAmount);
+            receiptDuration = view.findViewById(R.id.receiptDuration);
         }
     }
 }

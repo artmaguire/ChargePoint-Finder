@@ -57,7 +57,7 @@
                     android:id="@+id/aboutCard"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="12dp"
                     android:clickable="true">
 
                     <LinearLayout
@@ -83,7 +83,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="10dp"
+                            android:layout_margin="12dp"
                             android:background="@color/textColourHint" />
 
                         <TextView
@@ -91,7 +91,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check your bank activities"
+                            android:text="Find out more about ChargePoint"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -101,7 +101,7 @@
                     android:id="@+id/newsCard"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="12dp"
                     android:background="@color/windowBackground"
                     android:clickable="true">
 
@@ -128,7 +128,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="10dp"
+                            android:layout_margin="12dp"
                             android:background="@color/textColourHint" />
 
                         <TextView
@@ -136,7 +136,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check your bank activities"
+                            android:text="Check out news on electric cars"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -155,7 +155,7 @@
                     android:id="@+id/termsCard"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="12dp"
                     android:background="@color/windowBackground"
                     android:clickable="true">
 
@@ -182,7 +182,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="10dp"
+                            android:layout_margin="12dp"
                             android:background="@color/textColourHint" />
 
                         <TextView
@@ -190,7 +190,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check your bank activities"
+                            android:text="Check out our Terms and Conditions"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -200,7 +200,7 @@
                     android:id="@+id/carDetailsCard"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="12dp"
                     android:background="@color/windowBackground"
                     android:clickable="true">
 
@@ -227,7 +227,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="10dp"
+                            android:layout_margin="12dp"
                             android:background="@color/textColourHint" />
 
                         <TextView
@@ -235,7 +235,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check your bank activities"
+                            android:text="Check / Add your car details"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
@@ -248,18 +248,23 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="340dp"
-                    android:layout_height="150dp"
-                    android:layout_margin="10dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/windowBackground"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="4dp"
                     android:clickable="true">
 
                     <LinearLayout
 
                         android:layout_width="match_parent"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -269,19 +274,19 @@
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_purple"
                             android:padding="10dp"
-                            android:src="@drawable/ic_comment_black_24dp" />
+                            android:src="@drawable/ic_access_time_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Add"
+                            android:text="Charge Time"
                             android:textStyle="bold" />
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="10dp"
+                            android:layout_margin="12dp"
                             android:background="@color/textColourHint" />
 
                         <TextView
@@ -289,7 +294,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check your bank activities"
+                            android:text="No car charging at the moment"
                             android:textColor="@color/textColourHint" />
 
                     </LinearLayout>
