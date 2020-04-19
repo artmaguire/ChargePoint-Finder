@@ -1,6 +1,7 @@
 package com.example.chargepoint.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -17,6 +18,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
+import com.example.chargepoint.activities.SplashScreen;
+import com.example.chargepoint.db.FirebaseHelper;
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -119,6 +123,7 @@ public class UpdateInformationFragment extends Fragment {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "User email address updated.");
                     updateUserInfo();
+                    signOut();
                 } else {
                     Toast.makeText(getContext(), "Failed to update name.", Toast.LENGTH_SHORT).show();
                 }
@@ -154,6 +159,7 @@ public class UpdateInformationFragment extends Fragment {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "User password updated.");
                     updateUserInfo();
+                    signOut();
                 } else {
                     Toast.makeText(getContext(), "Failed to update name.", Toast.LENGTH_SHORT).show();
                 }
@@ -170,6 +176,15 @@ public class UpdateInformationFragment extends Fragment {
     private void updateUserInfo() {
         name.setHint(currentUser.getDisplayName());
         email.setHint(currentUser.getEmail());
+    }
+
+    private void signOut() {
+        AuthUI.getInstance().signOut(requireContext()).addOnCompleteListener(task -> {
+            FirebaseHelper.destroyInstance();
+            Intent i = new Intent(getActivity(), SplashScreen.class);
+            startActivity(i);
+            getActivity().finish();
+        }).addOnFailureListener(e -> Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     @Override
