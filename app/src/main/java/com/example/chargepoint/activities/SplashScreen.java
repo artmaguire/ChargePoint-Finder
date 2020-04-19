@@ -54,15 +54,14 @@ public class SplashScreen extends AppCompatActivity {
         startActivityForResult(
                 AuthUI.getInstance().createSignInIntentBuilder()
                         .setAvailableProviders(providers)
-                        .setTheme(R.style.FirebaseUITheme)
-                        .build(), getResources().getInteger(R.integer.LOCATION_REQUEST_CODE)
+                        .setTheme(R.style.FirebaseUITheme).build(), getResources().getInteger(R.integer.FIREBASE_REQUEST_CODE)
         );
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == getResources().getInteger(R.integer.LOCATION_REQUEST_CODE)) {
+        if (requestCode == getResources().getInteger(R.integer.FIREBASE_REQUEST_CODE)) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
                 goToMainActivity();
