@@ -27,10 +27,10 @@ public class TermsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_terms, container, false);
-        WebView webView = (WebView)v.findViewById(R.id.webview);
+        /*WebView webView = (WebView)v.findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("https://embersoft.ru/en/Terms-and-Conditions-Coffee-Space-Android/");
-        return v;
+        return v;*/
     }
 }
