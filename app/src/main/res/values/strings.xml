@@ -40,6 +40,10 @@
     <string name="check_news">Check the latest news from ChargePoint</string>
     <string name="check_terms">See our Terms &amp; Conditions</string>
     <string name="check_car_details">Check and update your car details</string>
+    <string name="go_to_about_page">Go to About Page</string>
+    <string name="go_to_news_page">Go to News Page</string>
+    <string name="go_to_terms_and_conditions_page">Go to Terms and Conditions Page</string>
+    <string name="go_to_car_details_page">Go to Car Details Page</string>
 
     <!-- Rates -->
     <string name="sort_by_county">Sort by County: </string>

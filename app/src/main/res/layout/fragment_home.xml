@@ -72,6 +72,7 @@
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_purple"
                             android:padding="10dp"
+                            android:contentDescription="@string/go_to_about_page"
                             android:src="@drawable/ic_map_black_24dp" />
 
                         <TextView
@@ -118,6 +119,7 @@
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_pink"
                             android:padding="10dp"
+                            android:contentDescription="@string/go_to_news_page"
                             android:src="@drawable/ic_assignment_black_24dp" />
 
                         <TextView
@@ -173,6 +175,7 @@
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_green"
                             android:padding="10dp"
+                            android:contentDescription="@string/go_to_terms_and_conditions_page"
                             android:src="@drawable/ic_profile_black_24dp" />
 
                         <TextView
@@ -219,6 +222,7 @@
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_yellow"
                             android:padding="10dp"
+                            android:contentDescription="@string/go_to_car_details_page"
                             android:src="@drawable/ic_directions_car_black_24dp" />
 
                         <TextView
