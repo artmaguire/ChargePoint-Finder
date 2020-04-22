@@ -4,23 +4,23 @@
     <PreferenceCategory android:title="@string/user_information">
         <Preference
             android:icon="@drawable/ic_person_24px"
-            android:key="@string/account_details"
+            android:key="@string/key_account_details"
             android:summary="@string/name_email_password"
             android:title="@string/account_details" />
         <Preference
             android:icon="@drawable/account_balance24px"
-            android:key="@string/payment_details"
+            android:key="@string/key_payment_details"
             android:summary="@string/bank_details"
             android:title="@string/payment_details" />
         <Preference
             android:icon="@drawable/directions_car24px"
-            android:key="@string/car_details"
+            android:key="@string/key_car_details"
             android:summary="@string/car_type"
             android:title="@string/car_details">
         </Preference>
         <Preference
             android:icon="@drawable/ic_receipt_24px"
-            android:key="@string/payment_receipts"
+            android:key="@string/key_payment_receipts"
             android:summary="@string/previous_receipts"
             android:title="@string/payment_receipts" />
     </PreferenceCategory>
@@ -28,26 +28,35 @@
     <PreferenceCategory android:title="@string/general">
         <SwitchPreference
             android:icon="@drawable/ic_dark_mode_24px"
-            android:key="@string/dark_theme"
+            android:key="@string/key_dark_mode"
             android:summary="@string/change_theme"
             android:title="@string/dark_theme" />
         <SwitchPreference
             android:enabled="false"
             android:icon="@drawable/fingerprint24px"
-            android:key="@string/sign_in_with_biometrics"
+            android:key="@string/key_biometrics"
             android:summary="@string/enable_fingerprint_unlock"
             android:title="@string/sign_in_with_biometrics" />
+        <ListPreference
+            android:defaultValue="@string/language_default"
+            android:entries="@array/languages"
+            android:entryValues="@array/language_aliases"
+            android:icon="@drawable/ic_language_black_24dp"
+            android:key="@string/key_language"
+            android:negativeButtonText="@string/back"
+            android:summary="@string/select_language"
+            android:title="@string/language" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="">
         <Preference
             android:icon="@drawable/ic_info_24px"
-            android:key="@string/about_us"
+            android:key="@string/key_about_us"
             android:summary="@string/about_us_info"
             android:title="@string/about_us" />
         <Preference
             android:icon="@drawable/ic_sign_out_24px"
-            android:key="@string/sign_out"
+            android:key="@string/key_sign_out"
             android:title="@string/sign_out" />
     </PreferenceCategory>
 

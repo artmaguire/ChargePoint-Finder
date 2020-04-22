@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ChargePoint</string>
-    <string name="chargepoint_website">www.chargepoint.ie</string>
+    <string name="app_name" translatable="false">ChargePoint</string>
+    <string name="chargepoint_website" translatable="false">www.chargepoint.ie</string>
+
+    <!-- Preferences keys -->
+    <string name="key_account_details" translatable="false">account_details</string>
+    <string name="key_payment_details" translatable="false">payment_details</string>
+    <string name="key_car_details" translatable="false">car_details</string>
+    <string name="key_payment_receipts" translatable="false">payment_receipts</string>
+    <string name="key_dark_mode" translatable="false">dark_mode</string>
+    <string name="key_biometrics" translatable="false">biometrics</string>
+    <string name="key_language" translatable="false">language</string>
+    <string name="key_about_us" translatable="false">about_us</string>
+    <string name="key_sign_out" translatable="false">sign_out</string>
 
     <string-array name="group_members">
         <item>Art</item>

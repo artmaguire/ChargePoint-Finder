@@ -1,0 +1,167 @@
+<resources>
+
+    <!-- Fragment Titles -->
+    <string name="title_home">(FR)Home</string>
+    <string name="title_map">(FR)Map</string>
+    <string name="title_rates">(FR)ChargePoints</string>
+    <string name="title_profile">(FR)Profile</string>
+
+    <string name="title_about">(FR)About</string>
+    <string name="title_news">(FR)News</string>
+    <string name="title_terms">(FR)Terms and Conditions</string>
+    <string name="title_car_details">(FR)Car Details</string>
+
+    <string name="title_buy_power">(FR)Buy Power</string>
+    <string name="receipt">(FR)Receipt</string>
+    <string name="update_information">(FR)Update Information</string>
+
+    <!-- Preferences -->
+    <string name="user_information">(FR)User Information</string>
+    <string name="account_details">(FR)Account Details</string>
+    <string name="name_email_password">(FR)Name, Email, Password</string>
+    <string name="payment_details">(FR)Payment Details</string>
+    <string name="bank_details">(FR)Bank Details</string>
+    <string name="car_details">(FR)Car Details</string>
+    <string name="car_type">(FR)Car Type</string>
+    <string name="payment_receipts">(FR)Payment Receipts</string>
+    <string name="previous_receipts">(FR)Previous Receipts</string>
+
+    <string name="general">(FR)General</string>
+    <string name="dark_theme">(FR)Dark Theme</string>
+    <string name="change_theme">(FR)Change Theme</string>
+    <string name="sign_in_with_biometrics">(FR)Sign in with biometrics</string>
+    <string name="enable_fingerprint_unlock">(FR)Enable fingerprint unlock</string>
+    <string name="language">(FR)Language</string>
+    <string name="select_language">(FR)Select App Language</string>
+
+    <string name="about_us">(FR)About Us</string>
+    <string name="about_us_info">(FR)Read more information about the ChargePoint App</string>
+    <string name="sign_out">(FR)Sign Out</string>
+
+    <string-array name="languages">
+        <item>(FR)Follow System Language</item>
+        <item>(FR)English (UK)</item>
+        <item>(FR)French (France)</item>
+    </string-array>
+
+    <!-- Home -->
+    <string name="check_about_us">(FR)Read more about the ChargePoint app</string>
+    <string name="check_news">(FR)Check the latest news from ChargePoint</string>
+    <string name="check_terms">(FR)See our Terms &amp; Conditions</string>
+    <string name="check_car_details">(FR)Check and update your car details</string>
+    <string name="go_to_about_page">(FR)Go to About Page</string>
+    <string name="go_to_news_page">(FR)Go to News Page</string>
+    <string name="go_to_terms_and_conditions_page">(FR)Go to Terms and Conditions Page</string>
+    <string name="go_to_car_details_page">(FR)Go to Car Details Page</string>
+    <string name="charge_time">(FR)Charge Time</string>
+    <string name="no_car_charging">(FR)No car charging at the moment</string>
+
+    <!-- Rates -->
+    <string name="sort_by_county">(FR)Sort by County: </string>
+
+    <!-- About -->
+    <string name="about_the_project">(FR)About the project</string>
+    <string name="project_description">(FR)This project was born thanks to the Mobile Development module. The aim of this project was to create an application useful for the electric car users.</string>
+    <string name="group_description">(FR)We are a group of 4 students at the University of Limerick. We are studying Computer Sciences.</string>
+
+    <!-- Terms & Conditions -->
+    <string name="see_terms">(FR)Click on link below to see terms and conditions.</string>
+
+    <!-- Car Details -->
+    <string name="model_type_saved">(FR)Model Type Saved</string>
+    <string name="car_details_about">(FR)Select Details about your Car</string>
+    <string name="select_manufacturer">(FR)Select Manufacturer</string>
+    <string name="select_model">(FR)Select Model</string>
+    <string name="adding_car">(FR)Adding Car…</string>
+    <string name="car_added">(FR)Car Added Successfully</string>
+
+    <!-- Buy Power -->
+    <string name="rate">(FR)Rate: €0.33 per KWhr</string>
+    <string name="time">(FR)Time:</string>
+    <string name="time_left">(FR)Time Left:</string>
+    <string name="time_mins">(FR)%1$d mins</string>
+    <string name="mins">(FR)mins</string>
+    <string name="cost">(FR)Cost:</string>
+    <string name="currency_symbol" translatable="false">(FR)€</string>
+    <string name="currency_symbol_with_amount">(FR)€%1$.2f</string>
+    <string name="select_card">(FR)Select Card…</string>
+    <string name="create_card">(FR)Create New Card…</string>
+
+    <!-- Receipt -->
+    <string name="go_to_receipt">(FR)Go to receipt</string>
+    <string name="generateing_receipt">(FR)Generating Receipt…</string>
+    <string name="receipt_id">(FR)Receipt ID: %1$s</string>
+    <string name="receipt_power_amount">(FR)Amount: %1$.2f kWh</string>
+    <string name="receipt_paid_with">(FR)Paid With: %1$s</string>
+    <string name="receipt_amount">(FR)Amount: €%1$.2f</string>
+    <string name="receipt_operator">(FR)Operator:\n %1$s</string>
+    <string name="receipt_address">(FR)Address:\n%1$s,\n%2$s,\n%3$s,\n%4$s</string>
+    <string name="receipt_missing_county">(FR)County not provided.</string>
+
+    <!-- User -->
+    <string name="change_name">(FR)Change Name</string>
+    <string name="change_email">(FR)Change Email</string>
+    <string name="change_password">(FR)Change Password</string>
+    <string name="user_name_changed">(FR)Name updated</string>
+    <string name="user_name_change_fail">(FR)Failed to update name</string>
+    <string name="user_change_email">(FR)Change Email</string>
+    <string name="user_email_changed">(FR)Email updated</string>
+    <string name="user_email_change_fail">(FR)Failed to update email</string>
+    <string name="user_change_password">(FR)Change Password</string>
+    <string name="user_password_changed">(FR)Password updated</string>
+    <string name="user_password_change_fail">(FR)Failed to update password</string>
+    <string name="user_password_stars">(FR)**********</string>
+
+    <string name="enter_new_email">(FR)Enter New Email</string>
+    <string name="enter_current_email">(FR)Enter Current Email</string>
+    <string name="find_nearest_charge_point">(FR)Find Nearest Charge Point</string>
+    <string name="enter_current_password">(FR)Enter current password</string>
+    <string name="enter_new_password">(FR)Enter new password</string>
+    <string name="confirm_new_password">(FR)Confirm new password</string>
+
+    <!-- Payment Details -->
+    <string name="enter_card_number">(FR)Enter Card Number</string>
+    <string name="enter_debit_card_information_here">(FR)Enter Debit Card Information Here</string>
+    <string name="card_name">(FR)Name on Card</string>
+    <string name="missing_information">(FR)Missing information</string>
+    <string name="card_num_not_long_enough">(FR)Card number provided is not long enough</string>
+    <string name="adding_card">(FR)Adding Card…</string>
+
+    <!-- Card -->
+    <string name="no_cards_available">(FR)No card available for this user.</string>
+    <string name="card_name_required">(FR)Name Required</string>
+    <string name="card_saved">(FR)Card Details saved successfully</string>
+    <string name="mm_yy">(FR)MM/YY</string>
+    <string name="ccv">(FR)CCV</string>
+
+    <!-- ChargePoint -->
+    <string name="num_chargepoints">(FR)# Charge Points:  </string>
+    <string name="chargepoint_operational">(FR)Operational: %1$s</string>
+    <string name="chargepoint_fast_charge">(FR)Fast Charge: %1$s</string>
+    <string name="go_to_buy_power_page">(FR)Go To Buy Power Page</string>
+
+
+    <!-- Dialogs -->
+    <string name="sign_out_question">(FR)Are you sure you want to sign out?</string>
+    <string name="updating">(FR)Updating. Please wait…</string>
+
+    <!-- Buttons -->
+    <string name="accept">(FR)Accept</string>
+    <string name="decline">(FR)Decline</string>
+    <string name="save">(FR)Save</string>
+    <string name="back">(FR)Back</string>
+    <string name="yes">(FR)Yes</string>
+    <string name="no">(FR)No</string>
+    <string name="pay">(FR)Pay</string>
+
+    <!-- Units with placeholder-->
+    <string name="kilowatt">%1$.2f kW</string>
+    <string name="kilowatt_hour">%1$.2f kWh</string>
+    <string name="voltage">%1$s V</string>
+    <string name="amp">%1$s A</string>
+
+    <!-- Email -->
+    <string name="email_sent">(FR)Email sent!</string>
+    <string name="email_wrong_address">(FR)Wrong email address.</string>
+
+</resources>
