@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     .setNegativeButton(getString(R.string.decline), (dialog, which) -> {
                         finish();
                         System.exit(0);
-                    }).setPositiveButton(R.string.decline, (dialog, which) -> getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("beginRun", false).apply()).show();
+                    }).setPositiveButton(R.string.accept, (dialog, which) -> getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("beginRun", false).apply()).show();
         }
     }
 }
