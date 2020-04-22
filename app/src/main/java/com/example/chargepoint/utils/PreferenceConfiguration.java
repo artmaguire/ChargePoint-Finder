@@ -71,4 +71,12 @@ public class PreferenceConfiguration {
         conf.setLocale(locale);
         res.updateConfiguration(conf, dm);
     }
+
+    public static boolean isNightMode(Context context) {
+        int nightModeFlags =
+                context.getResources().getConfiguration().uiMode &
+                        Configuration.UI_MODE_NIGHT_MASK;
+
+        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+    }
 }
