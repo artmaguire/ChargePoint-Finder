@@ -41,7 +41,8 @@
     <string-array name="languages">
         <item>Follow System Language</item>
         <item>English (UK)</item>
-        <item>French (France)</item>
+        <item>French (FR)</item>
+        <item>German (DE)</item>
     </string-array>
 
     <!-- Home -->
