@@ -136,7 +136,7 @@
     <string name="ccv">(FR)CCV</string>
 
     <!-- ChargePoint -->
-    <string name="num_chargepoints">(FR)# Charge Points:  </string>
+    <string name="num_chargepoints">(FR)# ChargePoints:</string>
     <string name="chargepoint_operational">(FR)Operational: %1$s</string>
     <string name="chargepoint_fast_charge">(FR)Fast Charge: %1$s</string>
     <string name="go_to_buy_power_page">(FR)Go To Buy Power Page</string>

@@ -33,7 +33,7 @@ public class ChargePointInfoWindowAdapter implements GoogleMap.InfoWindowAdapter
 
         TextView iw_noChargePoints = iw_view.findViewById(R.id.iw_no_charge_points);
         String numberOfChargers = context.getString(R.string.num_chargepoints);
-        numberOfChargers += cp.getNumberOfPoints();
+        numberOfChargers += " " + cp.getNumberOfPoints();
         iw_noChargePoints.setText(numberOfChargers);
 
         TextView iw_powerKW = iw_view.findViewById(R.id.iw_powerKW);

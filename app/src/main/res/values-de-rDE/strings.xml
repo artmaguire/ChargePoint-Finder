@@ -14,7 +14,7 @@
     <string name="title_car_details">Autodetails</string>
 
     <string name="title_buy_power">Power kaufen</string>
-    <string name="receipt">Kassenbon</string>
+    <string name="receipt">Beleg</string>
     <string name="update_information">Informationen aktualisieren</string>
 
 
@@ -24,17 +24,18 @@
     <string name="payment_details">Zahlungsdetails</string>
     <string name="bank_details">Bankdaten</string>
     <string name="car_details">Autodetails</string>
-    <string name="car_type">Auto Typ</string>
+    <string name="car_type">Autotyp</string>
     <string name="payment_receipts">Zahlungsbelege</string>
     <string name="previous_receipts">Vorherige Belege</string>
 
     <string name="general">Allgemeines</string>
-    <string name="dark_theme">Dunkles Thema</string>
+    <string name="dark_theme">Dark Mode</string>
     <string name="change_theme">Thema ändern</string>
     <string name="sign_in_with_biometrics">Melden Sie sich mit Biometrie an</string>
     <string name="enable_fingerprint_unlock">Aktivieren Sie die Entsperrung von Fingerabdrücken</string>
     <string name="language">Sprache</string>
-    <string name="select_language">Wählen Sie App Language</string>
+    <string name="select_language">Wählen Sie die App-Sprache</string>
+    <!-- Systemsprache benutzen -->
 
     <string name="about_us">Über uns</string>
     <string name="about_us_info">Lesen Sie weitere Informationen zur ChargePoint App</string>
@@ -42,7 +43,7 @@
 
     <string-array name="languages">
         <item>Folgen Sie der Systemsprache</item>
-        <item>Englisch (UK)</item>
+        <item>Englisch (GB)</item>
         <item>Französisch (FR)</item>
         <item>Deutsch (DE)</item>
     </string-array>
@@ -50,7 +51,7 @@
 
     <string name="check_about_us">Lesen Sie mehr über die ChargePoint-App</string>
     <string name="check_news">Überprüfen Sie die neuesten Nachrichten von ChargePoint</string>
-    <string name="check_terms">Siehe unsere Bedingungen</string>
+    <string name="check_terms">Sehen Sie unsere Geschäftsbedingungen</string>
     <string name="check_car_details">Überprüfen und aktualisieren Sie Ihre Fahrzeugdaten</string>
     <string name="go_to_about_page">Gehen Sie zur Info-Seite</string>
     <string name="go_to_news_page">Gehen Sie zur Nachrichtenseite</string>
@@ -64,7 +65,7 @@
 
 
     <string name="about_the_project">Über das Projekt</string>
-    <string name="project_description">Dieses Projekt wurde dank des Moduls Mobile Development geboren. Ziel dieses Projekts war es, eine Anwendung zu erstellen, die für die Benutzer von Elektroautos nützlich ist.</string>
+    <string name="project_description">Das Projekt wurde als Teil des Kurses Mobile Development erstellt. Ziel des Projekts war es, eine App zu entwickeln, die für Benutzer von Elektroautos nützlich ist.</string>
     <string name="group_description">Wir sind eine Gruppe von 4 Studenten an der Universität von Limerick. Wir studieren Informatik.</string>
 
 
@@ -72,23 +73,23 @@
 
 
     <string name="model_type_saved">Modelltyp gespeichert</string>
-    <string name="car_details_about">Wählen Sie Details zu Ihrem Auto</string>
-    <string name="select_manufacturer">Wählen Sie Hersteller</string>
-    <string name="select_model">Wählen Sie Modell</string>
-    <string name="adding_car">Auto hinzufügen…</string>
+    <string name="car_details_about">Wählen Sie Details zu Ihrem Auto aus</string>
+    <string name="select_manufacturer">Wählen Sie den Hersteller</string>
+    <string name="select_model">Wählen Sie das Modell</string>
+    <string name="adding_car">Auto wird hinzugefügt…</string>
     <string name="car_added">Auto erfolgreich hinzugefügt</string>
 
 
     <string name="rate">Preis: 0,33 € pro kWh</string>
     <string name="time">Zeit:</string>
     <string name="time_left">Übrige Zeit:</string>
-    <string name="time_mins">%1$d min</string>
-    <string name="mins">min</string>
+    <string name="time_mins">%1$d Min</string>
+    <string name="mins">Min</string>
     <string name="cost">Kosten:</string>
     <string name="currency_symbol" translatable="false">€</string>
     <string name="currency_symbol_with_amount">%1$.2f €</string>
-    <string name="select_card">Karte auswählen…</string>
-    <string name="create_card">Neue Karte erstellen…</string>
+    <string name="select_card">Bankkarte auswählen…</string>
+    <string name="create_card">Neue Bankkarte erstellen…</string>
 
 
     <string name="go_to_receipt">Gehe zur Quittung</string>
@@ -97,14 +98,14 @@
     <string name="receipt_power_amount">Menge: %1$.2f kWh</string>
     <string name="receipt_paid_with">Bezahlt mit: %1$s</string>
     <string name="receipt_amount">Betrag: %1$.2f €</string>
-    <string name="receipt_operator">Operator: \n%1$s</string>
+    <string name="receipt_operator">Anbieter: \n%1$s</string>
     <string name="receipt_address">Adresse: \n%1$s, \n%2$s, \n%3$s, \n%4$s</string>
     <string name="receipt_missing_county">Grafschaft nicht vorgesehen.</string>
 
 
     <string name="change_name">Namen ändern</string>
     <string name="change_email">Ändern Sie die E-Mail</string>
-    <string name="change_password">Ändere das Passwort</string>
+    <string name="change_password">Ändern Sie das Passwort</string>
     <string name="user_name_changed">Name aktualisiert</string>
     <string name="user_name_change_fail">Name konnte nicht aktualisiert werden</string>
     <string name="user_change_email">Ändern Sie die E-Mail</string>
@@ -134,23 +135,23 @@
     <string name="no_cards_available">Für diesen Benutzer ist keine Karte verfügbar.</string>
     <string name="card_name_required">Name erforderlich</string>
     <string name="card_saved">Kartendetails erfolgreich gespeichert</string>
-    <string name="mm_yy">MM/YY</string>
+    <string name="mm_yy">MM/JJ</string>
     <string name="ccv">CCV</string>
 
 
-    <string name="num_chargepoints"># Charge Points:  </string>
+    <string name="num_chargepoints"># ChargePoints:</string>
     <string name="chargepoint_operational">Betriebsbereit: %1$s</string>
     <string name="chargepoint_fast_charge">Schnellladung: %1$s</string>
     <string name="go_to_buy_power_page">Gehen Sie zur Power-Seite kaufen</string>
 
 
     <string name="sign_out_question">Sind Sie sicher, dass Sie sich abmelden möchten?</string>
-    <string name="updating">Aktualisierung. Warten Sie mal…</string>
+    <string name="updating">Wird aktualisiert. Bitte warten Sie…</string>
 
 
     <string name="accept">Akzeptieren</string>
     <string name="decline">Ablehnen</string>
-    <string name="save">sparen</string>
+    <string name="save">Speichern</string>
     <string name="back">Zurück</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
