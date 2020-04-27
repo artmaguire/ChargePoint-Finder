@@ -154,5 +154,6 @@
     <!-- Email -->
     <string name="email_sent">Email sent!</string>
     <string name="email_wrong_address">Wrong email address.</string>
+    <string name="no_receipts">You have no receipts.</string>
 
 </resources>

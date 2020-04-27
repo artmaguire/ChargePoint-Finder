@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +22,7 @@ public class PreviousReceiptsFragment extends BackFragment {
     private static final String TAG = "PAYMENT_RECEIPT";
     private ReceiptsAdapter adapter;
     private ProgressBar pgsBar;
+    private TextView noReceiptsView;
 
     public PreviousReceiptsFragment() {
         // Required empty public constructor
@@ -45,10 +46,16 @@ public class PreviousReceiptsFragment extends BackFragment {
 
         pgsBar = view.findViewById(R.id.receiptsPBar);
 
+        noReceiptsView = view.findViewById(R.id.noReceiptsView);
+
         ReceiptViewModel receiptViewModel = new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class);
         receiptViewModel.getObservableReceipts().observe(getViewLifecycleOwner(), receipts -> {
             adapter.setReceipts(receipts);
             adapter.notifyDataSetChanged();
+
+            if (adapter.getItemCount() == 0) {
+                noReceiptsView.setVisibility(View.VISIBLE);
+            }
 
             pgsBar.setVisibility(View.GONE);
         });
