@@ -102,6 +102,8 @@
     <string name="user_password_changed">Password updated</string>
     <string name="user_password_change_fail">Failed to update password</string>
     <string name="user_password_stars">**********</string>
+    <string name="user_reauthenticated">User re-authenticated</string>
+    <string name="user_incorrect_email_format">Email not in the correct format</string>
 
     <string name="enter_new_email">Enter New Email</string>
     <string name="enter_current_email">Enter Current Email</string>

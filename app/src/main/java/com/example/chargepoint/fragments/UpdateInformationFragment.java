@@ -1,9 +1,9 @@
 package com.example.chargepoint.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.activities.SplashScreen;
-import com.example.chargepoint.db.FirebaseHelper;
-import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 public class UpdateInformationFragment extends BackFragment {
 
@@ -56,6 +58,18 @@ public class UpdateInformationFragment extends BackFragment {
         updateUserInfo();
     }
 
+    private static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+
+        return result;
+    }
+
     private void changeName(View v) {
         name.setHint(currentUser.getDisplayName());
         MaterialAlertDialogBuilder alertDialog = new MaterialAlertDialogBuilder(getContext());
@@ -64,13 +78,15 @@ public class UpdateInformationFragment extends BackFragment {
 
         final EditText input = new EditText(getContext());
 
-        input.setHint(currentUser.getDisplayName());
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         alertDialog.setView(input);
 
         // Setting Positive "Yes" Btn
         alertDialog.setPositiveButton(getString(R.string.save),
                 (dialog, which) -> {
+                    if (input.getText().toString().isEmpty())
+                        return;
+
                     ProgressDialog pg = ProgressDialog.show(getContext(), "",
                             getString(R.string.updating), true);
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -103,26 +119,19 @@ public class UpdateInformationFragment extends BackFragment {
 
         final EditText input = new EditText(getContext());
 
-        input.setHint(currentUser.getEmail());
         input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         alertDialog.setView(input);
 
         // Setting Positive "Yes" Btn
         alertDialog.setPositiveButton(getString(R.string.save), (dialog, which) -> {
-            ProgressDialog pg = ProgressDialog.show(getContext(), "", getString(R.string.updating), true);
+            if (input.getText().toString().isEmpty())
+                return;
             String emailAddress = input.getText().toString();
 
-            currentUser.updateEmail(emailAddress).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    Toast.makeText(getContext(), getString(R.string.user_email_changed), Toast.LENGTH_SHORT).show();
-                    updateUserInfo();
-                    // TODO: refresh -> Refresh Token
-                    signOut();
-                } else {
-                    Toast.makeText(getContext(), getString(R.string.user_email_change_fail), Toast.LENGTH_SHORT).show();
-                }
-                pg.dismiss();
-            });
+            if (isValidEmailAddress(emailAddress))
+                reAuthenticateEmail(emailAddress);
+            else
+                Toast.makeText(getContext(), getString(R.string.user_incorrect_email_format), Toast.LENGTH_SHORT).show();
         });
 
         // Setting Negative "NO" Btn
@@ -143,23 +152,11 @@ public class UpdateInformationFragment extends BackFragment {
 
         // Setting Positive "Yes" Btn
         alertDialog.setPositiveButton(getString(R.string.save), (dialog, which) -> {
-            ProgressDialog pg = ProgressDialog.show(getContext(), "", getString(R.string.updating), true);
-            //password.setText(input.getText().toString());
+            if (input.getText().toString().isEmpty())
+                return;
 
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String newPassword = input.getText().toString();
-
-            user.updatePassword(newPassword).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    Toast.makeText(getContext(), getString(R.string.user_password_changed), Toast.LENGTH_SHORT).show();
-                    updateUserInfo();
-                    // TODO: refresh -> Refresh Token
-                    signOut();
-                } else {
-                    Toast.makeText(getContext(), getString(R.string.user_password_change_fail), Toast.LENGTH_SHORT).show();
-                }
-                pg.dismiss();
-            });
+            String password = input.getText().toString();
+            reAuthenticatePassword(password);
         });
 
         // Setting Negative "NO" Btn
@@ -168,17 +165,42 @@ public class UpdateInformationFragment extends BackFragment {
         alertDialog.show();
     }
 
+    private void reAuthenticateEmail(String emailAddress) {
+        ProgressDialog pg = ProgressDialog.show(getContext(), "", getString(R.string.updating), true);
+        AuthCredential credential = EmailAuthProvider.getCredential(currentUser.getEmail(), "pass1234");
+        currentUser.reauthenticate(credential).addOnCompleteListener(task -> {
+            Log.d(TAG, getString(R.string.user_reauthenticated));
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            user.updateEmail(emailAddress).addOnCompleteListener(task1 -> {
+                if (task1.isSuccessful()) {
+                    updateUserInfo();
+                    email.setHint(emailAddress);
+                    Toast.makeText(getContext(), getString(R.string.user_email_changed), Toast.LENGTH_SHORT).show();
+                }
+
+                pg.dismiss();
+            });
+        });
+    }
+
+    private void reAuthenticatePassword(String password) {
+        ProgressDialog pg = ProgressDialog.show(getContext(), "", getString(R.string.updating), true);
+        AuthCredential credential = EmailAuthProvider.getCredential(currentUser.getEmail(), "pass1234");
+        currentUser.reauthenticate(credential).addOnCompleteListener(task -> {
+            Log.d(TAG, getString(R.string.user_reauthenticated));
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            user.updatePassword(password).addOnCompleteListener(task1 -> {
+                if (task1.isSuccessful()) {
+                    Toast.makeText(getContext(), getString(R.string.user_password_changed), Toast.LENGTH_SHORT).show();
+                }
+
+                pg.dismiss();
+            });
+        });
+    }
+
     private void updateUserInfo() {
         name.setHint(currentUser.getDisplayName());
         email.setHint(currentUser.getEmail());
-    }
-
-    private void signOut() {
-        AuthUI.getInstance().signOut(requireContext()).addOnCompleteListener(task -> {
-            FirebaseHelper.destroyInstance();
-            Intent i = new Intent(getActivity(), SplashScreen.class);
-            startActivity(i);
-            getActivity().finish();
-        }).addOnFailureListener(e -> Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }
