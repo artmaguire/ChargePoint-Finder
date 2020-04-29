@@ -19,6 +19,7 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.map.ChargePointCluster;
 import com.example.chargepoint.map.ChargePointClusterRenderer;
 import com.example.chargepoint.map.ChargePointInfoWindowAdapter;
+import com.example.chargepoint.map.MapSpiderifier;
 import com.example.chargepoint.map.MapViewModel;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,6 +43,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private MapView mapView;
     private GoogleMap map;
     private ClusterManager<ChargePointCluster> clusterManager;
+    private MapSpiderifier mapSpiderifier;
     private List<ChargePoint> chargePoints;
     private boolean saved = false;
 
@@ -94,6 +96,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             if (map != null) map.setMyLocationEnabled(true);
 
         clusterManager = new ClusterManager<>(requireContext(), map);
+        mapSpiderifier = new MapSpiderifier(map, clusterManager, getResources().getColor(R.color.textColourHint));
         ChargePointClusterRenderer renderer = new ChargePointClusterRenderer(requireContext(), map, clusterManager);
         clusterManager.setRenderer(renderer);
 
@@ -115,6 +118,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         clusterManager.getMarkerCollection().setOnInfoWindowAdapter(new ChargePointInfoWindowAdapter(getContext()));
         map.setInfoWindowAdapter(clusterManager.getMarkerManager());
+
+        clusterManager.setOnClusterItemClickListener(mapSpiderifier);
+        map.setOnCameraMoveStartedListener(mapSpiderifier);
 
         clusterManager.setOnClusterItemInfoWindowClickListener(this);
         map.setOnInfoWindowClickListener(clusterManager);
@@ -172,6 +178,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onCameraMove() {
         mapViewModel.setMapCameraPosition(map.getCameraPosition());
+
+        mapSpiderifier.updateCameraPosition(map.getCameraPosition());
     }
 
     private void requestLocation() {
