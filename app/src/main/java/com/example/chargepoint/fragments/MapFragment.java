@@ -3,6 +3,7 @@ package com.example.chargepoint.fragments;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.maps.android.clustering.ClusterManager;
@@ -42,6 +46,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private MapViewModel mapViewModel;
     private View progressBar;
     private MapView mapView;
+    private GroundOverlay blackOverlay;
     private GoogleMap map;
     private ClusterManager<ChargePointCluster> clusterManager;
     private MapSpiderifier mapSpiderifier;
@@ -83,9 +88,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onMapReady(GoogleMap m) {
         this.map = m;
 
+
         boolean enabled = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean("Dark Theme", false);
         if (enabled) {
-            map.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.maps_dark_mode));
+            try {
+                map.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.maps_dark_mode));
+                GroundOverlayOptions goo = new GroundOverlayOptions()
+                        .image(BitmapDescriptorFactory.fromResource(R.drawable.black))
+                        .position(mapViewModel.getMapCameraPosition().target, 8600000f, 6500000f);
+                blackOverlay = map.addGroundOverlay(goo);
+
+                new Handler().postDelayed(() -> blackOverlay.remove(), 500);
+            } catch (Exception ignored) {
+            }
         }
 
         map.getUiSettings().setAllGesturesEnabled(false);
@@ -108,7 +123,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         map.setOnMarkerClickListener(clusterManager);
 
         checkIfMapAndDbReady();
-        //new Handler().postDelayed(() -> mapView.setVisibility(View.VISIBLE), 3000);
     }
 
     private void checkIfMapAndDbReady() {
