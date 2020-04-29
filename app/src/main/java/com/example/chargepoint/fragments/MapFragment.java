@@ -40,6 +40,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     private View root;
     private MapViewModel mapViewModel;
+    private View progressBar;
     private MapView mapView;
     private GoogleMap map;
     private ClusterManager<ChargePointCluster> clusterManager;
@@ -71,8 +72,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         // First incarnation of this activity.
         saved = savedInstanceState != null;
-
         mapView.getMapAsync(this);
+
+        progressBar = view.findViewById(R.id.mapLoading);
 
         requestLocation();
     }
@@ -85,6 +87,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         if (enabled) {
             map.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.maps_dark_mode));
         }
+
+        map.getUiSettings().setAllGesturesEnabled(false);
 
         map.setOnCameraMoveListener(this);
 
@@ -104,6 +108,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         map.setOnMarkerClickListener(clusterManager);
 
         checkIfMapAndDbReady();
+        //new Handler().postDelayed(() -> mapView.setVisibility(View.VISIBLE), 3000);
     }
 
     private void checkIfMapAndDbReady() {
@@ -136,6 +141,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         });
 
         clusterManager.cluster();
+
+        progressBar.setVisibility(View.GONE);
+        map.getUiSettings().setAllGesturesEnabled(true);
     }
 
     @Override
