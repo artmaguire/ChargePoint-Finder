@@ -141,7 +141,6 @@
     <string name="chargepoint_fast_charge">Fast Charge: %1$s</string>
     <string name="go_to_buy_power_page">Go To Buy Power Page</string>
 
-
     <!-- Dialogs -->
     <string name="sign_out_question">Are you sure you want to sign out?</string>
     <string name="updating">Updating. Please wait…</string>
