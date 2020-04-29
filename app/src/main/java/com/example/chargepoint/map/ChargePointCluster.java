@@ -28,7 +28,7 @@ public class ChargePointCluster implements ClusterItem {
 
     @Override
     public String getSnippet() {
-        return "";
+        return chargePoint.getMap_id();
     }
 
     public ChargePoint getChargePoint() {

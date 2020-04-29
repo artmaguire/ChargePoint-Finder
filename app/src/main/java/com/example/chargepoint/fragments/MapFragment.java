@@ -3,6 +3,7 @@ package com.example.chargepoint.fragments;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,16 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.map.ChargePointCluster;
 import com.example.chargepoint.map.ChargePointClusterRenderer;
 import com.example.chargepoint.map.ChargePointInfoWindowAdapter;
+import com.example.chargepoint.map.MapSpiderifier;
 import com.example.chargepoint.map.MapViewModel;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.maps.android.clustering.ClusterManager;
@@ -39,9 +44,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     private View root;
     private MapViewModel mapViewModel;
+    private View progressBar;
     private MapView mapView;
+    private GroundOverlay blackOverlay;
     private GoogleMap map;
     private ClusterManager<ChargePointCluster> clusterManager;
+    private MapSpiderifier mapSpiderifier;
     private List<ChargePoint> chargePoints;
     private boolean saved = false;
 
@@ -69,8 +77,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         // First incarnation of this activity.
         saved = savedInstanceState != null;
-
         mapView.getMapAsync(this);
+
+        progressBar = view.findViewById(R.id.mapLoading);
 
         requestLocation();
     }
@@ -79,10 +88,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onMapReady(GoogleMap m) {
         this.map = m;
 
+
         boolean enabled = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean("Dark Theme", false);
         if (enabled) {
-            map.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.maps_dark_mode));
+            try {
+                map.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.maps_dark_mode));
+                GroundOverlayOptions goo = new GroundOverlayOptions()
+                        .image(BitmapDescriptorFactory.fromResource(R.drawable.black))
+                        .position(mapViewModel.getMapCameraPosition().target, 8600000f, 6500000f);
+                blackOverlay = map.addGroundOverlay(goo);
+
+                new Handler().postDelayed(() -> blackOverlay.remove(), 500);
+            } catch (Exception ignored) {
+            }
         }
+
+        map.getUiSettings().setAllGesturesEnabled(false);
 
         map.setOnCameraMoveListener(this);
 
@@ -94,11 +115,34 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             if (map != null) map.setMyLocationEnabled(true);
 
         clusterManager = new ClusterManager<>(requireContext(), map);
+
         ChargePointClusterRenderer renderer = new ChargePointClusterRenderer(requireContext(), map, clusterManager);
         clusterManager.setRenderer(renderer);
 
         map.setOnCameraIdleListener(clusterManager);
         map.setOnMarkerClickListener(clusterManager);
+
+        clusterManager.getMarkerCollection().setOnInfoWindowAdapter(new ChargePointInfoWindowAdapter(getContext()));
+        map.setInfoWindowAdapter(clusterManager.getMarkerManager());
+
+        mapSpiderifier = new MapSpiderifier(map, clusterManager, getResources().getColor(R.color.textColourHint));
+        clusterManager.setOnClusterItemClickListener(mapSpiderifier);
+        map.setOnCameraMoveStartedListener(mapSpiderifier);
+
+        clusterManager.setOnClusterItemInfoWindowClickListener(this);
+        map.setOnInfoWindowClickListener(clusterManager);
+
+        map.setOnMapClickListener(mapSpiderifier);
+
+        clusterManager.setOnClusterClickListener(cluster -> {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (ChargePointCluster chargePointCluster : cluster.getItems()) {
+                builder.include(chargePointCluster.getPosition());
+            }
+            LatLngBounds bounds = builder.build();
+            map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
+            return true;
+        });
 
         checkIfMapAndDbReady();
     }
@@ -113,23 +157,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             clusterManager.addItem(new ChargePointCluster(cp.getLocation(), cp.getOperator(), cp));
         }
 
-        clusterManager.getMarkerCollection().setOnInfoWindowAdapter(new ChargePointInfoWindowAdapter(getContext()));
-        map.setInfoWindowAdapter(clusterManager.getMarkerManager());
-
-        clusterManager.setOnClusterItemInfoWindowClickListener(this);
-        map.setOnInfoWindowClickListener(clusterManager);
-
-        clusterManager.setOnClusterClickListener(cluster -> {
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            for (ChargePointCluster chargePointCluster : cluster.getItems()) {
-                builder.include(chargePointCluster.getPosition());
-            }
-            LatLngBounds bounds = builder.build();
-            map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
-            return true;
-        });
-
         clusterManager.cluster();
+
+        progressBar.setVisibility(View.GONE);
+        map.getUiSettings().setAllGesturesEnabled(true);
     }
 
     @Override
@@ -172,6 +203,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onCameraMove() {
         mapViewModel.setMapCameraPosition(map.getCameraPosition());
+
+        mapSpiderifier.updateCameraPosition(map.getCameraPosition());
     }
 
     private void requestLocation() {

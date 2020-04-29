@@ -24,7 +24,7 @@
             android:maxLines="1"
             android:text="TITLE"
             android:textColor="@color/textColourPrimary"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +48,7 @@
             android:maxWidth="140dp"
             android:text="# Charge Points: 99"
             android:textColor="@color/textColourHint"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iw_separator" />
 
