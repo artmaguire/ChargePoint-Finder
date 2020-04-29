@@ -82,8 +82,12 @@ public class ChargePointClusterRenderer extends DefaultClusterRenderer<ChargePoi
             drawableId = R.drawable.ic_esb_32dp;
         else if (item.getTitle().toLowerCase().contains("pod"))
             drawableId = R.drawable.ic_pod_32dp;
+        else if (item.getTitle().toLowerCase().contains("nissan"))
+            drawableId = R.drawable.ic_nissan_32dp;
         else if (item.getTitle().toLowerCase().contains("ionic"))
             drawableId = R.drawable.ic_ionic_32dp;
+        else if (item.getTitle().toLowerCase().contains("private"))
+            drawableId = R.drawable.ic_private_32dp;
         else
             drawableId = R.drawable.ic_generic_32dp;
 

@@ -115,12 +115,34 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             if (map != null) map.setMyLocationEnabled(true);
 
         clusterManager = new ClusterManager<>(requireContext(), map);
-        mapSpiderifier = new MapSpiderifier(map, clusterManager, getResources().getColor(R.color.textColourHint));
+
         ChargePointClusterRenderer renderer = new ChargePointClusterRenderer(requireContext(), map, clusterManager);
         clusterManager.setRenderer(renderer);
 
         map.setOnCameraIdleListener(clusterManager);
         map.setOnMarkerClickListener(clusterManager);
+
+        clusterManager.getMarkerCollection().setOnInfoWindowAdapter(new ChargePointInfoWindowAdapter(getContext()));
+        map.setInfoWindowAdapter(clusterManager.getMarkerManager());
+
+        mapSpiderifier = new MapSpiderifier(map, clusterManager, getResources().getColor(R.color.textColourHint));
+        clusterManager.setOnClusterItemClickListener(mapSpiderifier);
+        map.setOnCameraMoveStartedListener(mapSpiderifier);
+
+        clusterManager.setOnClusterItemInfoWindowClickListener(this);
+        map.setOnInfoWindowClickListener(clusterManager);
+
+        map.setOnMapClickListener(mapSpiderifier);
+
+        clusterManager.setOnClusterClickListener(cluster -> {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (ChargePointCluster chargePointCluster : cluster.getItems()) {
+                builder.include(chargePointCluster.getPosition());
+            }
+            LatLngBounds bounds = builder.build();
+            map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
+            return true;
+        });
 
         checkIfMapAndDbReady();
     }
@@ -134,25 +156,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         for (ChargePoint cp : chargePoints) {
             clusterManager.addItem(new ChargePointCluster(cp.getLocation(), cp.getOperator(), cp));
         }
-
-        clusterManager.getMarkerCollection().setOnInfoWindowAdapter(new ChargePointInfoWindowAdapter(getContext()));
-        map.setInfoWindowAdapter(clusterManager.getMarkerManager());
-
-        clusterManager.setOnClusterItemClickListener(mapSpiderifier);
-        map.setOnCameraMoveStartedListener(mapSpiderifier);
-
-        clusterManager.setOnClusterItemInfoWindowClickListener(this);
-        map.setOnInfoWindowClickListener(clusterManager);
-
-        clusterManager.setOnClusterClickListener(cluster -> {
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            for (ChargePointCluster chargePointCluster : cluster.getItems()) {
-                builder.include(chargePointCluster.getPosition());
-            }
-            LatLngBounds bounds = builder.build();
-            map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
-            return true;
-        });
 
         clusterManager.cluster();
 

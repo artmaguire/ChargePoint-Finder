@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapSpiderifier implements ClusterManager.OnClusterItemClickListener<ChargePointCluster>, GoogleMap.OnCameraMoveStartedListener {
+public class MapSpiderifier implements ClusterManager.OnClusterItemClickListener<ChargePointCluster>, GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnMapClickListener {
 
     private static final String TAG = "MAP_SPIDERIFY";
 
@@ -46,6 +46,11 @@ public class MapSpiderifier implements ClusterManager.OnClusterItemClickListener
     public MapSpiderifier(GoogleMap map, ClusterManager clusterManager, int lineColor) {
         this(map, clusterManager);
         this.lineColour = lineColor;
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        unspiderfy();
     }
 
     @Override
