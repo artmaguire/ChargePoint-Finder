@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Keys used to switch locale
+        Must match values-* folder
+
+        Language followed by Region denoted by small 'r' e.g. fr-rFR for french (France)
+
+        Language keys must match up exactly with the language array in strings.xml, which is translatable
+    -->
+
+    <string-array name="language_aliases">
+        <item>@string/language_default</item>
+        <item>@string/en_gb</item>
+        <item>@string/fr_fr</item>
+        <item>@string/de_de</item>
+    </string-array>
+
+    <string name="language_default" translatable="false">language_default</string>
+    <string name="en_gb" translatable="false">en_GB</string>
+    <string name="fr_fr" translatable="false">fr_FR</string>
+    <string name="de_de" translatable="false">de_DE</string>
+</resources>

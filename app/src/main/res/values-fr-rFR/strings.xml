@@ -1,0 +1,167 @@
+<resources>
+
+    <!-- Fragment Titles -->
+    <string name="title_home">Accueil</string>
+    <string name="title_map">Carte</string>
+    <string name="title_rates">ChargePoints</string>
+    <string name="title_profile">Profil</string>
+
+    <string name="title_about">À propos de</string>
+    <string name="title_news">Nouvelles</string>
+    <string name="title_terms">Termes et conditions</string>
+    <string name="title_car_details">Détails de la voiture</string>
+
+    <string name="title_buy_power">Acheter de la puissance</string>
+    <string name="receipt">Le reçu</string>
+    <string name="update_information">Mettre à jour les informations</string>
+
+    <!-- Preferences -->
+    <string name="user_information">Informations de l\'utilisateur</string>
+    <string name="account_details">Détails du compte</string>
+    <string name="name_email_password">Nom, email, mot de passe</string>
+    <string name="payment_details">Détails de paiement</string>
+    <string name="bank_details">Coordonnées bancaires</string>
+    <string name="car_details">Détails de la voiture</string>
+    <string name="car_type">Type de voiture</string>
+    <string name="payment_receipts">Reçus de paiement</string>
+    <string name="previous_receipts">Reçus précédents</string>
+
+    <string name="general">Général</string>
+    <string name="dark_theme">Thème sombre</string>
+    <string name="change_theme">Change le thème</string>
+    <string name="sign_in_with_biometrics">Connectez-vous avec la biométrie</string>
+    <string name="enable_fingerprint_unlock">Activer le déverrouillage par empreinte digitale</string>
+    <string name="language">Langue</string>
+    <string name="select_language">Sélectionnez la langue de l\'application</string>
+
+    <string name="about_us">À propos de nous</string>
+    <string name="about_us_info">En savoir plus sur l\'application ChargePoint</string>
+    <string name="sign_out">Déconnexion</string>
+
+    <string-array name="languages">
+        <item>Suivez la langue du système</item>
+        <item>Anglais (RU)</item>
+        <item>Français (FR)</item>
+        <item>Allemand (AL)</item>
+    </string-array>
+
+    <!-- Home -->
+    <string name="check_about_us">En savoir plus sur l\'application ChargePoint</string>
+    <string name="check_news">Consultez les dernières nouvelles de ChargePoint</string>
+    <string name="check_terms">Voir nos conditions</string>
+    <string name="check_car_details">Vérifiez et mettez à jour les détails de votre voiture</string>
+    <string name="go_to_about_page">Aller à la page À propos</string>
+    <string name="go_to_news_page">Aller à la page des actualités</string>
+    <string name="go_to_terms_and_conditions_page">Accéder à la page des conditions générales</string>
+    <string name="go_to_car_details_page">Aller à la page Détails de la voiture</string>
+    <string name="charge_time">Temps de charge</string>
+    <string name="no_car_charging">Pas de chargement de voiture pour le moment</string>
+
+    <!-- Rates -->
+    <string name="sort_by_county">Trier par comté:</string>
+
+    <!-- About -->
+    <string name="about_the_project">À propos du projet</string>
+    <string name="project_description">Ce projet est né grâce au module Mobile Development. Le but de ce projet était de créer une application utile pour les utilisateurs de voitures électriques.</string>
+    <string name="group_description">Nous sommes un groupe de 4 étudiants à l\'Université de Limerick. Nous étudions les sciences informatiques.</string>
+
+    <!-- Terms & Conditions -->
+    <string name="see_terms">Cliquez sur le lien ci-dessous pour voir les termes et conditions.</string>
+
+    <!-- Car Details -->
+    <string name="model_type_saved">Type de modèle enregistré</string>
+    <string name="car_details_about">Sélectionnez les détails de votre voiture</string>
+    <string name="select_manufacturer">Sélectionnez le fabricant</string>
+    <string name="select_model">Sélectionnez le modèle</string>
+    <string name="adding_car">Ajout d\'une voiture…</string>
+    <string name="car_added">Voiture ajoutée avec succès</string>
+
+    <!-- Buy Power -->
+    <string name="rate">Tarif: 0,33 € par KWhr</string>
+    <string name="time">Temps:</string>
+    <string name="time_left">Temps restant:</string>
+    <string name="time_mins">%1$d min</string>
+    <string name="mins">min</string>
+    <string name="cost">Coût:</string>
+    <string name="currency_symbol" translatable="false">€</string>
+    <string name="currency_symbol_with_amount">€% 1 $ .2f</string>
+    <string name="select_card">Sélectionnez la carte…</string>
+    <string name="create_card">Créer une nouvelle carte…</string>
+
+    <!-- Receipt -->
+    <string name="go_to_receipt">Aller à la réception</string>
+    <string name="generateing_receipt">Génération d\'un reçu…</string>
+    <string name="receipt_id">ID de reçu: %1$s</string>
+    <string name="receipt_power_amount">Montant: %1$.2f kWh</string>
+    <string name="receipt_paid_with">Payé avec: %1$s</string>
+    <string name="receipt_amount">Montant: %1$.2f €</string>
+    <string name="receipt_operator">Opérateur: \n%1$s</string>
+    <string name="receipt_address">Adresse: \n%1$s, \n%2$s, \n%3$s, \n%4$s</string>
+    <string name="receipt_missing_county">Comté non fourni.</string>
+
+    <!-- User -->
+    <string name="change_name">Changer de nom</string>
+    <string name="change_email">Changer l\'e-mail</string>
+    <string name="change_password">Changer le mot de passe</string>
+    <string name="user_name_changed">Nom mis à jour</string>
+    <string name="user_name_change_fail">Échec de la mise à jour du nom</string>
+    <string name="user_change_email">Changer l\'e-mail</string>
+    <string name="user_email_changed">Courriel mis à jour</string>
+    <string name="user_email_change_fail">Échec de la mise à jour de l\'e-mail</string>
+    <string name="user_change_password">Changer le mot de passe</string>
+    <string name="user_password_changed">Mot de passe mis à jour</string>
+    <string name="user_password_change_fail">Échec de la mise à jour du mot de passe</string>
+    <string name="user_password_stars">**********</string>
+
+    <string name="enter_new_email">Entrez un nouveau courriel</string>
+    <string name="enter_current_email">Entrez votre e-mail actuel</string>
+    <string name="find_nearest_charge_point">Trouver le point de charge le plus proche</string>
+    <string name="enter_current_password">Saisissez le mot de passe actuel</string>
+    <string name="enter_new_password">Entrez un nouveau mot de passe</string>
+    <string name="confirm_new_password">Confirmer le nouveau mot de passe</string>
+
+    <!-- Payment Details -->
+    <string name="enter_card_number">Entrez le numéro de carte</string>
+    <string name="enter_debit_card_information_here">Entrez les informations de la carte de débit ici</string>
+    <string name="card_name">Nom sur la carte</string>
+    <string name="missing_information">Information manquante</string>
+    <string name="card_num_not_long_enough">Le numéro de carte fourni n\'est pas assez long</string>
+    <string name="adding_card">Ajout de la carte…</string>
+
+    <!-- Card -->
+    <string name="no_cards_available">Aucune carte disponible pour cet utilisateur.</string>
+    <string name="card_name_required">Nom (obligatoire</string>
+    <string name="card_saved">Les détails de la carte ont bien été enregistrés</string>
+    <string name="mm_yy">MM/AA</string>
+    <string name="ccv">CCV</string>
+
+    <!-- ChargePoint -->
+    <string name="num_chargepoints"># ChargePoints:</string>
+    <string name="chargepoint_operational">Opérationnel: %1$s</string>
+    <string name="chargepoint_fast_charge">Charge rapide: %1$s</string>
+    <string name="go_to_buy_power_page">Aller à la page Acheter de l\'énergie</string>
+
+    <!-- Dialogs -->
+    <string name="sign_out_question">Êtes-vous certain de vouloir vous déconnecter?</string>
+    <string name="updating">Mise à jour. S\'il vous plaît, attendez…</string>
+
+    <!-- Buttons -->
+    <string name="accept">J\'accepte</string>
+    <string name="decline">Déclin</string>
+    <string name="save">sauver</string>
+    <string name="back">Retour</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="pay">Payer</string>
+
+    <!-- Units with placeholder-->
+    <string name="kilowatt">%1$.2f kW</string>
+    <string name="kilowatt_hour">%1$.2f kWh</string>
+    <string name="voltage">%1$s V</string>
+    <string name="amp">%1$s A</string>
+
+    <!-- Email -->
+    <string name="email_sent">Email envoyé!</string>
+    <string name="email_wrong_address">Mauvaise adresse email.</string>
+
+</resources>

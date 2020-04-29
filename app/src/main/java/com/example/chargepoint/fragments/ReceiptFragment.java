@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.db.FirebaseHelper;
@@ -24,7 +23,6 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -85,7 +83,7 @@ public class ReceiptFragment extends BackFragment {
         timeView.setText(time);
         cardView.setText(getString(R.string.receipt_paid_with, receipt.getCard()));
         euroView.setText(getString(R.string.receipt_amount, receipt.getCost()));
-        durationView.setText("Time: " + receipt.getDuration() + "mins");
+        durationView.setText(getString(R.string.time_mins, receipt.getDuration()));
 
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
         fbHelper.getChargePoint(receipt.getMap_id(), task -> {
