@@ -84,7 +84,7 @@
     <string name="mins">min</string>
     <string name="cost">Coût:</string>
     <string name="currency_symbol" translatable="false">€</string>
-    <string name="currency_symbol_with_amount">€% 1 $ .2f</string>
+    <string name="currency_symbol_with_amount">%1$.2f €</string>
     <string name="select_card">Sélectionnez la carte…</string>
     <string name="create_card">Créer une nouvelle carte…</string>
 
