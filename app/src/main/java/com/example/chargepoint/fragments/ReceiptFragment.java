@@ -17,10 +17,9 @@ import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.pojo.Mail;
 import com.example.chargepoint.pojo.Receipt;
+import com.example.chargepoint.utils.PreferenceConfiguration;
 
 import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -53,15 +52,12 @@ public class ReceiptFragment extends BackFragment {
         Log.d(TAG, "onCreate: " + receipt.toString());
 
         Date timeToDate = receipt.getDatetime().toDate();
-        Locale current = getResources().getConfiguration().locale;
-        Format formatter = new SimpleDateFormat("HH:mm:ss", current);
-        String time = formatter.format(timeToDate);
-
-        Log.d(TAG, "onCreateTime: " + time);
+        Locale locale = PreferenceConfiguration.getCurrentLocale(requireContext());
+        DateFormat tf = DateFormat.getTimeInstance(DateFormat.SHORT, locale);
+        String time = tf.format(timeToDate);
 
         Date date = receipt.getDatetime().toDate();
-        String pattern = "MMMM dd, yyyy";
-        DateFormat df = new SimpleDateFormat(pattern, Locale.ENGLISH);
+        DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);
         String dateString = df.format(date);
 
         view.findViewById(R.id.button_email).setOnClickListener(v -> showEmail(view));

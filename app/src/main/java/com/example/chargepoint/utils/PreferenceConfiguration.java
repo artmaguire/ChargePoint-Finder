@@ -57,7 +57,7 @@ public class PreferenceConfiguration {
         }
 
         // Get the current set app locale
-        Locale currentLocale = context.getResources().getConfiguration().locale;
+        Locale currentLocale = getCurrentLocale(context);
 
         // If the newLocale and currentLocale are the same, no need to change locale
         return newLocale.equals(currentLocale) ? null : newLocale;
@@ -78,5 +78,9 @@ public class PreferenceConfiguration {
                         Configuration.UI_MODE_NIGHT_MASK;
 
         return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    public static Locale getCurrentLocale(Context context) {
+        return context.getResources().getConfiguration().locale;
     }
 }

@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.pojo.Receipt;
+import com.example.chargepoint.utils.PreferenceConfiguration;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,8 +51,8 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
         Receipt receipt = receipts.get(position);
 
         Date date = receipt.getDatetime().toDate();
-        String pattern = "MMMM dd, yyyy";
-        DateFormat df = new SimpleDateFormat(pattern, Locale.ENGLISH);
+        Locale locale = PreferenceConfiguration.getCurrentLocale(root.getContext());
+        DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
         String dateString = df.format(date);
 
         final double amount = receipt.getCost();
