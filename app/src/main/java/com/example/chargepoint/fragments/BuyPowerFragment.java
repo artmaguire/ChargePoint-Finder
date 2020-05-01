@@ -83,21 +83,24 @@ public class BuyPowerFragment extends BackFragment {
 
         cardNumber = "";
 
-        Bundle b = getArguments();
+        cp = getArguments().getParcelable("ChargePoint");
+
+        Log.d("ChargePoint : ", cp.toString());
+
+        /*Bundle b = getArguments();
         if (b != null) {
             cp = (ChargePoint) b.getSerializable("ChargePoint");
-        }
+        }*/
 
-        Log.d(TAG, cp.getOperator());
-
+        assert cp != null;
         chargePointOperator.setText(cp.getOperator());
         chargePointAddress.setText(cp.getSimpleAddress());
 
-        kwhr = cp.getConnections().get(0).getPowerKW();
+        kwhr = cp.getKw();
         kWhView.setText(getString(R.string.kilowatt_hour, kwhr));
 
-        String voltage = cp.getConnections().get(0).getVoltage() != -1 ? String.valueOf(cp.getConnections().get(0).getVoltage()) : "--";
-        String ampere = cp.getConnections().get(0).getAmps() != -1 ? String.valueOf(cp.getConnections().get(0).getAmps()) : "--";
+        String voltage = cp.getVoltage() != -1 ? String.valueOf(cp.getVoltage()) : "--";
+        String ampere = cp.getAmps() != -1 ? String.valueOf(cp.getAmps()) : "--";
 
         voltsView.setText(getString(R.string.voltage, voltage));
         ampsView.setText(getString(R.string.amp, ampere));

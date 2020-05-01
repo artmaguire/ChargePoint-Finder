@@ -111,9 +111,6 @@ public class ReceiptFragment extends BackFragment {
 
                 locationView.setText(getString(R.string.receipt_address, title, line1, town, county));
                 operatorView.setText(getString(R.string.receipt_operator, cp.getOperator()));
-
-                view.findViewById(R.id.receipt_view).setVisibility(View.VISIBLE);
-                view.findViewById(R.id.receiptPBar).setVisibility(View.GONE);
             }
         });
     }

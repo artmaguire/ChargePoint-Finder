@@ -2,6 +2,7 @@ package com.example.chargepoint.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,21 +21,26 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.RateAdapter;
 import com.example.chargepoint.adapter.ReceiptsAdapter;
 import com.example.chargepoint.db.FirebaseHelper;
-import com.example.chargepoint.pojo.Rate;
-import com.example.chargepoint.pojo.Receipt;
+import com.example.chargepoint.pojo.ChargeConnection;
+import com.example.chargepoint.pojo.ChargePoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import io.opencensus.internal.StringUtils;
 
 public class RatesFragment extends Fragment {
 
     private FirebaseHelper fbHelper = FirebaseHelper.getInstance();
     private RateAdapter adapter;
-    private ArrayList<Rate> rateArrayList;
+    private ArrayList<ChargePoint> rateArrayList = new ArrayList<>();;
     private ArrayList<String> spinnerArray;
     private ArrayAdapter<String> spinnerAdapter;
     private ProgressBar progressBar;
@@ -62,9 +68,9 @@ public class RatesFragment extends Fragment {
         loadRates();
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        rateArrayList = new ArrayList<>();
-        adapter = new RateAdapter(getContext(), rateArrayList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new RateAdapter(view, rateArrayList);
         recyclerView.setAdapter(adapter);
 
         Spinner spinner = view.findViewById(R.id.sort_cities);
@@ -94,7 +100,7 @@ public class RatesFragment extends Fragment {
 
         fbHelper.getAllChargePoints(task -> {
             if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : task.getResult()) {
+                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                     String county = document.getString("address.county");
                     county = county.trim();
                     if (county.contains("Co ")) {
@@ -129,7 +135,7 @@ public class RatesFragment extends Fragment {
 
         fbHelper.getAllChargePoints(task -> {
             if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : task.getResult()) {
+                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                     boolean isOp = false;
                     boolean isFastC = false;
                     ArrayList<String> list = (ArrayList<String>) document.get("connections");
@@ -140,8 +146,22 @@ public class RatesFragment extends Fragment {
                         isOp = true;
                     }
 
-                    Rate rate = new Rate(document.getString("address.town"), document.getString("address.title"), document.getString("address.line1"), isOp, isFastC);
-                    rateArrayList.add(rate);
+                    Map<String, String> address = new HashMap<>();
+                    address.put("town", document.getString("address.town"));
+                    address.put("title", document.getString("address.title"));
+                    address.put("line1", document.getString("address.line1"));
+
+                    String operator = document.getString("operator");
+                    String data = SplitString(list.toString());
+                    String str_kw = returnPowerKW(data);
+                    float kw = Float.parseFloat(str_kw);
+                    String str_voltage = returnVoltage(data);
+                    int voltage = Integer.parseInt(str_voltage);
+                    String str_amps = returnAmps(data);
+                    int amps = Integer.parseInt(str_amps);
+
+                    ChargePoint chargePoint = new ChargePoint(document.getId(), isOp, isFastC, address, operator, kw, voltage, amps);
+                    rateArrayList.add(chargePoint);
                 }
                 adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
@@ -153,19 +173,36 @@ public class RatesFragment extends Fragment {
 
         fbHelper.getAllChargePoints(task -> {
             if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : task.getResult()) {
+                for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                     if (Objects.requireNonNull(document.getString("address.county")).contains(county)) {
                         boolean isOp = false;
                         boolean isFastC = false;
                         ArrayList<String> list = (ArrayList<String>) document.get("connections");
+                        assert list != null;
                         if (list.toString().contains("isFastChargeCapable=true")) {
                             isFastC = true;
                         }
                         if (list.toString().contains("isOperational=true")) {
                             isOp = true;
                         }
-                        Rate rate = new Rate(document.getString("address.town"), document.getString("address.title"), document.getString("address.line1"), isOp, isFastC);
-                        rateArrayList.add(rate);
+
+
+                        Map<String, String> address = new HashMap<>();
+                        address.put("town", document.getString("address.town"));
+                        address.put("title", document.getString("address.title"));
+                        address.put("line1", document.getString("address.line1"));
+
+                        String operator = document.getString("operator");
+                        String data = SplitString(list.toString());
+                        String str_kw = returnPowerKW(data);
+                        float kw = Float.parseFloat(str_kw);
+                        String str_voltage = returnVoltage(data);
+                        int voltage = Integer.parseInt(str_voltage);
+                        String str_amps = returnAmps(data);
+                        int amps = Integer.parseInt(str_amps);
+
+                        ChargePoint chargePoint = new ChargePoint(document.getId(), isOp, isFastC, address, operator, kw, voltage, amps);
+                        rateArrayList.add(chargePoint);
                         adapter.notifyDataSetChanged();
                     }
                 }
@@ -173,4 +210,43 @@ public class RatesFragment extends Fragment {
             }
         });
     }
+
+    private String returnPowerKW(String connections) {
+        Pattern p = Pattern.compile("(?<=powerKW=)\\d+");
+        Matcher m = p.matcher(connections);
+        if(m.find()) {
+            return m.group(0);
+        } else {
+            return "0";
+        }
+    }
+
+    private String returnVoltage(String connections) {
+        Pattern p = Pattern.compile("(?<=voltage=)\\d+");
+        Matcher m = p.matcher(connections);
+        if(m.find()) {
+            return m.group(0);
+        } else {
+            return "0";
+        }
+    }
+
+    private String returnAmps(String connections) {
+        Pattern p = Pattern.compile("(?<=amps=)\\d+");
+        Matcher m = p.matcher(connections);
+        if(m.find()) {
+            return m.group(0);
+        } else {
+            return "0";
+        }
+    }
+
+    private String SplitString(String connections) {
+        connections = connections.replace("{", "");
+        connections = connections.replace("[", "");
+        connections = connections.replace("}", "");
+        connections = connections.replace("]", "");
+        return connections;
+    }
+
 }

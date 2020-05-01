@@ -1,35 +1,82 @@
 package com.example.chargepoint.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.PropertyName;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-public class ChargePoint implements Serializable {
+public class ChargePoint implements Serializable, Parcelable {
+
     private String map_id;
     private String operator;
     private String usageType;
     private boolean isPayAtLocation;
     private boolean isMembershipRequired;
     private boolean isOperational;
+    private boolean isFastC;
     private int numberOfPoints;
     private double latitude;
     private double longitude;
-    private Map<String, String> address;
+    private Map<String, String> address = new HashMap<>();
     private List<ChargeConnection> connections;
-
-    /*
-     * Address consists of {title, line1, town, and county} key,value pairs
-     * Not all of these keys might be present for every ChargePoint
-     */
+    private float kw;
+    private int voltage;
+    private int amps;
 
     public ChargePoint() {
     }
+
+    public ChargePoint(String map_id, boolean isOperational, boolean isFastC, Map<String, String> address, String operator, float kw, int voltage, int amps) {
+        this.map_id = map_id;
+        this.isOperational = isOperational;
+        this.isFastC = isFastC;
+        this.address = address;
+        this.operator = operator;
+        this.kw = kw;
+        this.voltage = voltage;
+        this.amps = amps;
+    }
+
+    protected ChargePoint(Parcel in) {
+        map_id = in.readString();
+        operator = in.readString();
+        usageType = in.readString();
+        isPayAtLocation = in.readByte() != 0;
+        isMembershipRequired = in.readByte() != 0;
+        isOperational = in.readByte() != 0;
+        isFastC = in.readByte() != 0;
+        numberOfPoints = in.readInt();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        kw = in.readFloat();
+        voltage = in.readInt();
+        amps = in.readInt();
+    }
+
+    public static final Creator<ChargePoint> CREATOR = new Creator<ChargePoint>() {
+        @Override
+        public ChargePoint createFromParcel(Parcel in) {
+            return new ChargePoint(in);
+        }
+
+        @Override
+        public ChargePoint[] newArray(int size) {
+            return new ChargePoint[size];
+        }
+    };
 
     public String getMap_id() {
         return map_id;
@@ -85,6 +132,16 @@ public class ChargePoint implements Serializable {
         this.isOperational = isOperational;
     }
 
+    @PropertyName("isFastC")
+    public boolean isFastC() {
+        return isFastC;
+    }
+
+    @PropertyName("isFastC")
+    public void setFastC(boolean isFastC) {
+        this.isFastC = isFastC;
+    }
+
     public int getNumberOfPoints() {
         return numberOfPoints;
     }
@@ -118,6 +175,30 @@ public class ChargePoint implements Serializable {
         this.connections = connections;
     }
 
+    public float getKw() {
+        return kw;
+    }
+
+    public int getVoltage() {
+        return voltage;
+    }
+
+    public int getAmps() {
+        return amps;
+    }
+
+    public void setKw(float kw) {
+        this.kw = kw;
+    }
+
+    public void setVoltage(int voltage) {
+        this.voltage = voltage;
+    }
+
+    public void setAmps(int amps) {
+        this.amps = amps;
+    }
+
     public String getSimpleAddress() {
         StringBuilder sb = new StringBuilder();
         if (address.containsKey("title"))
@@ -140,5 +221,29 @@ public class ChargePoint implements Serializable {
     @Override
     public String toString() {
         return "ChargePoint{" + "map_id='" + map_id + '\'' + "operator='" + operator + '\'' + ", usageType='" + usageType + '\'' + ", isPayAtLocation=" + isPayAtLocation + ", isMembershipRequired=" + isMembershipRequired + ", isOperational=" + isOperational + ", numberOfPoints=" + numberOfPoints + ", location={lat: " + latitude + ", long: " + longitude + "}" + ", address=" + address + ", connections=" + connections + '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(map_id);
+        dest.writeString(operator);
+        dest.writeString(usageType);
+        dest.writeBoolean(isPayAtLocation);
+        dest.writeBoolean(isMembershipRequired);
+        dest.writeBoolean(isOperational);
+        dest.writeBoolean(isFastC);
+        dest.writeInt(numberOfPoints);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeMap(address);
+        dest.writeList(connections);
+        dest.writeList(Collections.singletonList(kw));
+        dest.writeList(Collections.singletonList(voltage));
+        dest.writeList(Collections.singletonList(amps));
     }
 }

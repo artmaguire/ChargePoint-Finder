@@ -24,6 +24,12 @@ public class ChargeConnection implements Serializable {
     public ChargeConnection() {
     }
 
+    public ChargeConnection(int amps, int voltage, float powerKW) {
+        this.amps = amps;
+        this.voltage = voltage;
+        this.powerKW = powerKW;
+    }
+
     public String getTitle() {
         return title;
     }
