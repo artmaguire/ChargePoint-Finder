@@ -2,7 +2,7 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
+    android:id="@+id/chargePointCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
@@ -41,15 +41,10 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/isOp"
+            android:id="@+id/operator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Operational : " />
 
-        <TextView
-            android:id="@+id/isFastC"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fast charge : " />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

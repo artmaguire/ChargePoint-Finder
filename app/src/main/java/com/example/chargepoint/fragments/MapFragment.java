@@ -20,9 +20,10 @@ import com.example.chargepoint.map.ChargePointCluster;
 import com.example.chargepoint.map.ChargePointClusterRenderer;
 import com.example.chargepoint.map.ChargePointInfoWindowAdapter;
 import com.example.chargepoint.map.MapSpiderifier;
-import com.example.chargepoint.map.MapViewModel;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.utils.PreferenceConfiguration;
+import com.example.chargepoint.viewmodel.ChargePointViewModel;
+import com.example.chargepoint.viewmodel.MapViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -65,7 +66,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         super.onViewCreated(view, savedInstanceState);
 
         mapViewModel = new ViewModelProvider(requireActivity()).get(MapViewModel.class);
-        mapViewModel.getObservableChargePoints().observe(getViewLifecycleOwner(), chargePoints -> {
+        ChargePointViewModel cp_vm = new ViewModelProvider(requireActivity()).get(ChargePointViewModel.class);
+        cp_vm.getObservableChargePoints().observe(getViewLifecycleOwner(), chargePoints -> {
             this.chargePoints = chargePoints;
             checkIfMapAndDbReady();
         });

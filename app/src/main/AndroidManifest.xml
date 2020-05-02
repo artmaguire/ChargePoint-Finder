@@ -33,6 +33,9 @@
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_test_QSvOv2icygrK8v" />
+        <meta-data
+            android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
     </application>
 
 </manifest>

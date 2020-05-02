@@ -1,4 +1,4 @@
-package com.example.chargepoint.map;
+package com.example.chargepoint.viewmodel;
 
 import android.util.Log;
 
@@ -8,18 +8,15 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.ChargePoint;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapViewModel extends ViewModel {
-    private final static String TAG = "MAP_VM";
+public class ChargePointViewModel extends ViewModel {
+    private final static String TAG = "CHARGEPOINT_VM";
 
     private MutableLiveData<List<ChargePoint>> chargePoints;
-    private CameraPosition mapCameraPosition = new CameraPosition(new LatLng(53.4, -8), 7, 0, 0);
 
     public LiveData<List<ChargePoint>> getObservableChargePoints() {
         if (chargePoints == null) {
@@ -34,7 +31,8 @@ public class MapViewModel extends ViewModel {
             chargePoints = new MutableLiveData<>();
             FirebaseHelper fbHelper = FirebaseHelper.getInstance();
             fbHelper.getAllChargePoints(task -> {
-                if (task.getResult() == null) return;
+                if (task.getResult() == null)
+                    return;
 
                 List<ChargePoint> cps = new ArrayList<>();
                 for (DocumentSnapshot doc : task.getResult().getDocuments()) {
@@ -48,13 +46,5 @@ public class MapViewModel extends ViewModel {
                 chargePoints.postValue(cps);
             });
         }
-    }
-
-    public CameraPosition getMapCameraPosition() {
-        return mapCameraPosition;
-    }
-
-    public void setMapCameraPosition(CameraPosition mapCameraPosition) {
-        this.mapCameraPosition = mapCameraPosition;
     }
 }

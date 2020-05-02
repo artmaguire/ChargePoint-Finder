@@ -82,6 +82,7 @@ public class ReceiptFragment extends BackFragment {
         durationView.setText(getString(R.string.time_mins, receipt.getDuration()));
 
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
+        Log.d(TAG, "onViewCreated: " + receipt.getMap_id());
         fbHelper.getChargePoint(receipt.getMap_id(), task -> {
             if (task.isSuccessful()) {
                 ChargePoint cp = task.getResult().toObject(ChargePoint.class);
