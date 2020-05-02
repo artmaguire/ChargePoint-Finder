@@ -19,6 +19,7 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
             return new Receipt[size];
         }
     };
+
     private String invoice_id;
     private Timestamp datetime;
     private double cost;

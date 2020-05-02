@@ -39,9 +39,13 @@
 
     <fragment
         android:id="@+id/navigation_rates"
-        android:name="com.example.chargepoint.fragments.RatesFragment"
+        android:name="com.example.chargepoint.fragments.ChargePointsFragment"
         android:label="@string/title_rates"
-        tools:layout="@layout/fragment_rates" />
+        tools:layout="@layout/fragment_chargepoints">
+        <action
+            android:id="@+id/action_navigation_rates_to_fragment_buy_power"
+            app:destination="@id/fragment_buy_power" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"

@@ -49,6 +49,12 @@ public class BuyPowerFragment extends BackFragment {
     private List<String> spinnerCards;
     private Spinner cardSpinner;
     private String cardNumber;
+    private TextView chargePointOperator;
+    private TextView chargePointAddress;
+    private TextView kWhView;
+    private TextView voltsView;
+    private TextView ampsView;
+    private TextView rateView;
 
     // TODO: Get rate from db
     private final double rate = 0.33;
@@ -68,13 +74,13 @@ public class BuyPowerFragment extends BackFragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Initialise UI Elements
-        TextView chargePointOperator = view.findViewById(R.id.chargePointOperator);
-        TextView chargePointAddress = view.findViewById(R.id.chargePointAddress);
-        TextView kWhView = view.findViewById(R.id.kiloWattTextView);
-        TextView voltsView = view.findViewById(R.id.voltageTextView);
-        TextView ampsView = view.findViewById(R.id.ampsTextView);
+        chargePointOperator = view.findViewById(R.id.chargePointOperator);
+        chargePointAddress = view.findViewById(R.id.chargePointAddress);
+        kWhView = view.findViewById(R.id.kiloWattTextView);
+        voltsView = view.findViewById(R.id.voltageTextView);
+        ampsView = view.findViewById(R.id.ampsTextView);
         // TODO: Get rates from db
-        TextView rateView = view.findViewById(R.id.rateTextView);
+        rateView = view.findViewById(R.id.rateTextView);
 
         timeSpinner = view.findViewById(R.id.timeSpinner);
         amountEditText = view.findViewById(R.id.amountCostEditText);
@@ -84,23 +90,13 @@ public class BuyPowerFragment extends BackFragment {
         cardNumber = "";
 
         Bundle b = getArguments();
+
         if (b != null) {
             cp = (ChargePoint) b.getSerializable("ChargePoint");
+            setFromChargePoint();
+        } else {
+            Log.d(TAG, "onViewCreated: No ChargePoint Bundle");
         }
-
-        Log.d(TAG, cp.getOperator());
-
-        chargePointOperator.setText(cp.getOperator());
-        chargePointAddress.setText(cp.getSimpleAddress());
-
-        kwhr = cp.getConnections().get(0).getPowerKW();
-        kWhView.setText(getString(R.string.kilowatt_hour, kwhr));
-
-        String voltage = cp.getConnections().get(0).getVoltage() != -1 ? String.valueOf(cp.getConnections().get(0).getVoltage()) : "--";
-        String ampere = cp.getConnections().get(0).getAmps() != -1 ? String.valueOf(cp.getConnections().get(0).getAmps()) : "--";
-
-        voltsView.setText(getString(R.string.voltage, voltage));
-        ampsView.setText(getString(R.string.amp, ampere));
 
         getCards();
 
@@ -184,6 +180,20 @@ public class BuyPowerFragment extends BackFragment {
                 Toast.makeText(getContext(), getString(R.string.no_cards_available), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void setFromChargePoint() {
+        chargePointOperator.setText(cp.getOperator());
+        chargePointAddress.setText(cp.getSimpleAddress());
+
+        kwhr = cp.getConnections().get(0).getPowerKW();
+        kWhView.setText(getString(R.string.kilowatt_hour, kwhr));
+
+        String voltage = cp.getConnections().get(0).getVoltage() != -1 ? String.valueOf(cp.getConnections().get(0).getVoltage()) : "--";
+        String ampere = cp.getConnections().get(0).getAmps() != -1 ? String.valueOf(cp.getConnections().get(0).getAmps()) : "--";
+
+        voltsView.setText(getString(R.string.voltage, voltage));
+        ampsView.setText(getString(R.string.amp, ampere));
     }
 
     private void setTimeSpinnerAdapter() {

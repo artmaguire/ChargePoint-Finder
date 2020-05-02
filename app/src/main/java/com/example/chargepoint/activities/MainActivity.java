@@ -12,7 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.map.MapViewModel;
+import com.example.chargepoint.viewmodel.ChargePointViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        MapViewModel mvm = new ViewModelProvider(this).get(MapViewModel.class);
-        mvm.loadChargePoints();
+        ChargePointViewModel vm = new ViewModelProvider(this).get(ChargePointViewModel.class);
+        vm.loadChargePoints();
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
