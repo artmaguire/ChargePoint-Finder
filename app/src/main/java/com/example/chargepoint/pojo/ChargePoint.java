@@ -3,7 +3,6 @@ package com.example.chargepoint.pojo;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.PropertyName;
 
 import java.io.Serializable;
@@ -97,9 +96,12 @@ public class ChargePoint implements Serializable {
         return new LatLng(latitude, longitude);
     }
 
-    public void setLocation(GeoPoint location) {
-        this.latitude = location.getLatitude();
-        this.longitude = location.getLongitude();
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public Map<String, String> getAddress() {

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class ReceiptFragment extends BackFragment {
     private TextView locationView;
     private TextView operatorView;
     private TextView durationView;
+    private ImageView receiptIcon;
 
     public ReceiptFragment() {
         // Required empty public constructor
@@ -49,6 +51,7 @@ public class ReceiptFragment extends BackFragment {
         super.onViewCreated(view, savedInstanceState);
 
         receipt = getArguments().getParcelable("Receipt");
+        int iconId = getArguments().getInt("icon");
         Log.d(TAG, "onCreate: " + receipt.toString());
 
         Date timeToDate = receipt.getDatetime().toDate();
@@ -72,6 +75,7 @@ public class ReceiptFragment extends BackFragment {
         TextView euroView = view.findViewById(R.id.receiptAmountEuro);
         operatorView = view.findViewById(R.id.chargePointOperator);
         durationView = view.findViewById(R.id.receiptDuration);
+        receiptIcon = view.findViewById(R.id.receiptIcon);
 
         dateView.setText(dateString);
         invoiceView.setText(getString(R.string.receipt_id, receipt.getInvoice_id()));
@@ -80,6 +84,7 @@ public class ReceiptFragment extends BackFragment {
         cardView.setText(getString(R.string.receipt_paid_with, receipt.getCard()));
         euroView.setText(getString(R.string.receipt_amount, receipt.getCost()));
         durationView.setText(getString(R.string.time_mins, receipt.getDuration()));
+        receiptIcon.setImageResource(iconId);
 
         FirebaseHelper fbHelper = FirebaseHelper.getInstance();
         Log.d(TAG, "onViewCreated: " + receipt.getMap_id());

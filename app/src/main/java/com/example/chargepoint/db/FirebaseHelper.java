@@ -53,20 +53,14 @@ public class FirebaseHelper {
     }
 
     public void getAllChargePoints(OnCompleteListener<QuerySnapshot> listener) {
-        db.collection("map")
+        db.collection("chargepoints")
                 .get()
                 .addOnCompleteListener(listener);
     }
 
     public void getChargePoint(String map_id, OnCompleteListener<DocumentSnapshot> listener) {
-        db.collection("map")
+        db.collection("chargepoints")
                 .document(map_id)
-                .get()
-                .addOnCompleteListener(listener);
-    }
-
-    public void getAllRates(OnCompleteListener<QuerySnapshot> listener) {
-        db.collection("rates")
                 .get()
                 .addOnCompleteListener(listener);
     }
