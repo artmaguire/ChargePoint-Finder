@@ -1,6 +1,7 @@
 package com.example.chargepoint.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,7 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.pojo.Receipt;
+import com.example.chargepoint.services.ChargingService;
 import com.example.chargepoint.viewmodel.ReceiptViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -175,8 +177,13 @@ public class BuyPowerFragment extends BackFragment {
                         .substring(0, 17), cost, duration, now(), cardNumber, Double.parseDouble(amountEditText.getText()
                         .toString()), cp.getMap_id(), FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                        fbHelper.addReceiptToDB(r, task1 -> {
+                fbHelper.addReceiptToDB(r, task -> {
                             dialog.dismiss();
+
+                    Intent i = new Intent(requireActivity(), ChargingService.class);
+                    i.putExtra(ChargingService.CHARGE_RECEIPT, r);
+                    requireActivity().startService(i);
+
                             new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class).destroyReceipts();
                             Navigation.findNavController(view).popBackStack();
                         });

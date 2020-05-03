@@ -1,6 +1,5 @@
 package com.example.chargepoint.utils;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -17,27 +16,27 @@ import com.example.chargepoint.activities.MainActivity;
 
 public class ChargePointNotificationManager {
 
-    public static void displayCarChargedNotification(Activity activity) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(activity, activity.getString(R.string.chargepoint_car_charged)).setSmallIcon(R.drawable.ic_map_blue_24dp)
+    public static void displayCarChargedNotification(Context context) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.chargepoint_car_charged)).setSmallIcon(R.drawable.ic_map_blue_24dp)
                 .setContentTitle("Your car is ready")
                 .setContentText("Tap for more info")
-                .setColor(activity.getResources().getColor(R.color.colorAccent))
+                .setColor(context.getResources().getColor(R.color.colorAccent))
                 .setPriority(NotificationCompat.PRIORITY_MAX);
 
         Notification notification = builder.build();
-        NotificationManager notificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null) {
             notificationManager.notify(0, notification);
         }
     }
 
-    public static void displayCarChargingNotification(Activity activity, long millis) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(activity, activity.getString(R.string.chargepoint_car_charging)).setSmallIcon(R.drawable.ic_map_blue_24dp)
+    public static void displayCarChargingNotification(Context context, long finishMillis) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.chargepoint_car_charging)).setSmallIcon(R.drawable.ic_map_blue_24dp)
                 .setContentTitle("Your car is charging")
                 .setContentText("Tap for more info")
-                .setColor(activity.getResources().getColor(R.color.colorAccent))
-                .setWhen(System.currentTimeMillis() + millis)
-                .setContentIntent(PendingIntent.getActivity(activity, 10, new Intent(activity, MainActivity.class), 0))
+                .setColor(context.getResources().getColor(R.color.colorAccent))
+                .setWhen(finishMillis)
+                .setContentIntent(PendingIntent.getActivity(context, 10, new Intent(context, MainActivity.class), 0))
                 .addExtras(new Bundle())
                 .setUsesChronometer(true)
                 .setChronometerCountDown(true)
@@ -45,25 +44,25 @@ public class ChargePointNotificationManager {
                 .setPriority(NotificationCompat.PRIORITY_MIN);
 
         Notification notification = builder.build();
-        NotificationManager notificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null) {
             notificationManager.notify(0, notification);
         }
     }
 
-    public static void createNotificationChannels(Activity activity) {
+    public static void createNotificationChannels(Context context) {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String chargedName = activity.getString(R.string.chargepoint_car_charged);
-            String ChargedDescription = activity.getString(R.string.chargepoint_car_charged_description);
+            String chargedName = context.getString(R.string.chargepoint_car_charged);
+            String ChargedDescription = context.getString(R.string.chargepoint_car_charged_description);
             int chargedImportance = NotificationManager.IMPORTANCE_HIGH;
 
             NotificationChannel chargedChannel = new NotificationChannel(chargedName, chargedName, chargedImportance);
             chargedChannel.setDescription(ChargedDescription);
 
-            String chargingName = activity.getString(R.string.chargepoint_car_charging);
-            String chargingDescription = activity.getString(R.string.chargepoint_car_charging_description);
+            String chargingName = context.getString(R.string.chargepoint_car_charging);
+            String chargingDescription = context.getString(R.string.chargepoint_car_charging_description);
             int chargingImportance = NotificationManager.IMPORTANCE_MIN;
 
             NotificationChannel chargingChannel = new NotificationChannel(chargingName, chargingName, chargingImportance);
@@ -71,7 +70,7 @@ public class ChargePointNotificationManager {
 
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
-            NotificationManager notificationManager = activity.getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             if (notificationManager != null) {
                 notificationManager.createNotificationChannel(chargedChannel);
                 notificationManager.createNotificationChannel(chargingChannel);

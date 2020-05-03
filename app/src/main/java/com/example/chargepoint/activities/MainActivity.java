@@ -13,6 +13,7 @@ import androidx.preference.PreferenceManager;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.map.MapViewModel;
+import com.example.chargepoint.utils.ChargePointNotificationManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+
+        ChargePointNotificationManager.createNotificationChannels(this);
 
         onFirst();
 

@@ -1,7 +1,11 @@
 package com.example.chargepoint.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,7 +21,7 @@ import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.pojo.Receipt;
-import com.example.chargepoint.utils.ChargePointNotificationManager;
+import com.example.chargepoint.services.ChargingService;
 import com.example.chargepoint.viewmodel.ReceiptViewModel;
 
 import java.text.DateFormat;
@@ -26,90 +31,133 @@ import java.util.TimeZone;
 
 public class HomeFragment extends Fragment {
 
-    private static final String TAG = "HOME_FRAG";
+    private static final String TAG = "CP_HOME_FRAG";
     private Receipt receipt;
     private TextView receiptTimer;
     private ProgressBar chargeProgress;
     private View root;
 
+    private BroadcastReceiver bReceiver;
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        return root;
+    }
+
     private static String formatMilli(long milli) {
         Date date = new Date(milli);
+        // TODO: Change to new locale formatting
         DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         return formatter.format(date);
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        root = inflater.inflate(R.layout.fragment_home, container, false);
-
-        ChargePointNotificationManager.createNotificationChannels(requireActivity());
-        //ChargePointNotificationManager.displayCarChargingNotification(requireActivity());
-
-        receiptTimer = root.findViewById(R.id.receiptTimer);
-        chargeProgress = root.findViewById(R.id.chargeProgress);
+        receiptTimer = view.findViewById(R.id.receiptTimer);
+        chargeProgress = view.findViewById(R.id.chargeProgress);
 
         // Dashboard Navigation by navGraph
-        root.findViewById(R.id.aboutCard).setOnClickListener(v ->
-                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_about));
+        view.findViewById(R.id.aboutCard).setOnClickListener(v ->
+                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_fragment_about));
 
-        root.findViewById(R.id.newsCard).setOnClickListener(v ->
-                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_news));
+        view.findViewById(R.id.newsCard).setOnClickListener(v ->
+                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_fragment_news));
 
-        root.findViewById(R.id.termsCard).setOnClickListener(v ->
-                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_terms));
+        view.findViewById(R.id.termsCard).setOnClickListener(v ->
+                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_fragment_terms));
 
-        root.findViewById(R.id.carDetailsCard).setOnClickListener(v ->
-                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_car_details));
+        view.findViewById(R.id.carDetailsCard).setOnClickListener(v ->
+                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_fragment_car_details));
 
         // If no timer, the 'Charge Time' card goes to the map
-        root.findViewById(R.id.durationCard).setOnClickListener(v -> {
+        view.findViewById(R.id.durationCard).setOnClickListener(v -> {
             if (receipt != null && receipt.isCharging()) {
                 Bundle b = new Bundle();
                 b.putParcelable("Receipt", receipt);
-                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_receipt, b);
+                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_fragment_receipt, b);
             } else
-                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_navigation_map);
+                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_map);
         });
 
-        ReceiptViewModel receiptViewModel = new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class);
-        receiptViewModel.getObservableReceipts().observe(getViewLifecycleOwner(), receipts -> {
-            if (!receipts.isEmpty()) {
-                receipt = receipts.get(0);
-                if (receipt.isCharging()) {
-                    startChargeTimer(receipt.millisUntilChargingOver());
-                }
+        bReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                long millis = intent.getLongExtra(ChargingService.CHARGE_COUNTDOWN, 0);
+
+                if (millis <= 0)
+                    finishCharging();
+                else
+                    updateChargeTimer(millis);
             }
-        });
-
-        return root;
+        };
     }
 
-    private void startChargeTimer(long millis) {
-        if (millis < 0)
-            return;
+    private void getLatestReceipt() {
+        // if we currently don't have a receipt, or or current one isn't charging -> check for new receipt
+        if (receipt == null || !receipt.isCharging()) {
+            ReceiptViewModel receiptViewModel = new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class);
+            receiptViewModel.getObservableReceipts().observe(getViewLifecycleOwner(), receipts -> {
+                if (!receipts.isEmpty()) {
+                    receipt = receipts.get(0);
+                    if (receipt.isCharging()) {
+                        root.findViewById(R.id.chargeProgress).setVisibility(View.VISIBLE);
+                        Intent i = new Intent(requireActivity(), ChargingService.class);
+                        i.putExtra(ChargingService.CHARGE_RECEIPT, receipt);
+                        requireActivity().startService(i);
+                    }
+                }
+            });
+        }
+    }
 
-        ChargePointNotificationManager.displayCarChargingNotification(requireActivity(), millis);
+    private void updateChargeTimer(long millisUntilFinished) {
+        if (receipt == null) return;
 
         long durationMillis = receipt.getDuration() * 60000;
+        receiptTimer.setText(root.getContext().getString(R.string.time_remaining, formatMilli(millisUntilFinished)));
 
-        new CountDownTimer(millis, 200) {
+        long timePast = durationMillis - millisUntilFinished;
+        double percentage = (timePast / (double) durationMillis) * 100;
 
-            public void onTick(long millisUntilFinished) {
-                receiptTimer.setText(root.getContext().getString(R.string.time_remaining, formatMilli(millisUntilFinished)));
+        chargeProgress.setProgress((int) Math.round(percentage));
+    }
 
-                long timePast = durationMillis - millisUntilFinished;
-                double percentage = (timePast / (double) durationMillis) * 100;
+    private void finishCharging() {
+        receiptTimer.setText(R.string.charge_complete);
+    }
 
-                chargeProgress.setProgress((int) Math.round(percentage));
-            }
+    @Override
+    public void onResume() {
+        requireActivity().registerReceiver(bReceiver, new IntentFilter(ChargingService.BROADCAST_RECEIVER));
+        Receipt r = ChargingService.getReceipt();
 
-            public void onFinish() {
-                receiptTimer.setText(R.string.charge_complete);
-                ChargePointNotificationManager.displayCarChargedNotification(requireActivity());
-            }
-        }.start();
+        if (r != null)
+            receipt = r;
+        else
+            getLatestReceipt();
+
+        Log.d(TAG, "onResume: " + (receipt == null));
+
+        if (receipt != null && receipt.isCharging())
+            root.findViewById(R.id.chargeProgress).setVisibility(View.VISIBLE);
+        else
+            root.findViewById(R.id.chargeProgress).setVisibility(View.INVISIBLE);
+
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.d(TAG, "onPause: ");
+        receipt = null;
+        requireActivity().unregisterReceiver(bReceiver);
+        super.onPause();
     }
 
     @Override

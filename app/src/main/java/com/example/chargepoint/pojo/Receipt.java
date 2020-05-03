@@ -119,19 +119,6 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
         this.user_id = user_id;
     }
 
-    private static Date addMinutesToDate(int minutes, Date beforeTime) {
-        final long ONE_MINUTE_IN_MILLIS = 60000;
-
-        long curTimeInMs = beforeTime.getTime();
-        return new Date(curTimeInMs + (minutes * ONE_MINUTE_IN_MILLIS));
-    }
-
-    private static long millisUntilDate(Date time) {
-        long m = time.getTime();
-
-        return m - new Date().getTime();
-    }
-
     public boolean isCharging() {
         Date receiptDate = datetime.toDate();
         receiptDate = addMinutesToDate(duration, receiptDate);
@@ -139,11 +126,18 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
         return receiptDate.after(new Date());
     }
 
-    public long millisUntilChargingOver() {
+    private static Date addMinutesToDate(int minutes, Date beforeTime) {
+        final long ONE_MINUTE_IN_MILLIS = 60000;
+
+        long curTimeInMs = beforeTime.getTime();
+        return new Date(curTimeInMs + (minutes * ONE_MINUTE_IN_MILLIS));
+    }
+
+    public long getFinishTimeInMillis() {
         Date receiptDate = datetime.toDate();
         receiptDate = addMinutesToDate(duration, receiptDate);
 
-        return millisUntilDate(receiptDate);
+        return receiptDate.getTime();
     }
 
     @Override
