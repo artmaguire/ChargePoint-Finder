@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.ChargePointAdapter;
-import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.viewmodel.ChargePointViewModel;
 
@@ -31,15 +31,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ChargePointsFragment extends Fragment {
-
     private final static String TAG = "CHARGEPOINT_FRAGMENT";
 
-    private FirebaseHelper fbHelper = FirebaseHelper.getInstance();
     private ChargePointAdapter adapter;
     private ArrayList<String> spinnerArray;
     private ArrayAdapter<String> spinnerAdapter;
     private ProgressBar progressBar;
     private TextView noChargePointsView;
+    private List<ChargePoint> chargePointsByCounty;
 
     public ChargePointsFragment() {
         // Required empty public constructor
@@ -75,9 +74,10 @@ public class ChargePointsFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println(spinner.getSelectedItem().toString());
-                adapter.notifyDataSetChanged();
-                filterChargePointsByCounty(spinner.getSelectedItem().toString());
+                if (position == 0)
+                    adapter.reset();
+                else
+                    adapter.filterChargePointsByCounty(spinner.getSelectedItem().toString());
             }
 
             @Override
@@ -89,9 +89,8 @@ public class ChargePointsFragment extends Fragment {
             adapter.setChargePoints(chargePoints);
             adapter.notifyDataSetChanged();
 
-            if (adapter.getItemCount() == 0) {
+            if (adapter.getItemCount() == 0)
                 noChargePointsView.setVisibility(View.VISIBLE);
-            }
 
             progressBar.setVisibility(View.GONE);
         });
@@ -104,23 +103,13 @@ public class ChargePointsFragment extends Fragment {
         spinnerAdapter.notifyDataSetChanged();
     }
 
-    // TODO: filter by county
-    private void filterChargePointsByCounty(String county) {
-        fbHelper.getAllChargePoints(task -> {
-            if (task.isSuccessful()) {
-                List<ChargePoint> chargePoints = task.getResult().toObjects(ChargePoint.class);
-                adapter.notifyDataSetChanged();
-            }
-        });
-    }
-
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.titlebar_search, menu);
         MenuItem menuItem = menu.findItem(R.id.searchChargePoints);
-        android.widget.SearchView searchView = (android.widget.SearchView) menuItem.getActionView();
+        SearchView searchView = (SearchView) menuItem.getActionView();
 
-        searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 adapter.getFilter().filter(query);
@@ -128,13 +117,12 @@ public class ChargePointsFragment extends Fragment {
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                adapter.getFilter().filter(s);
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
                 return false;
             }
         });
 
         super.onCreateOptionsMenu(menu, inflater);
     }
-
 }

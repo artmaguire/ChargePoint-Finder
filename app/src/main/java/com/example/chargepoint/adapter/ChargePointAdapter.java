@@ -27,7 +27,7 @@ public class ChargePointAdapter extends RecyclerView.Adapter<ChargePointAdapter.
     private View root;
     private Filter filter = new Filter() {
         @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
+        public FilterResults performFiltering(CharSequence constraint) {
             List<ChargePoint> filteredList = new ArrayList<>();
             Log.d("TAG", "performFiltering: " + constraint.toString());
 
@@ -55,7 +55,6 @@ public class ChargePointAdapter extends RecyclerView.Adapter<ChargePointAdapter.
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            //            chargePoints.clear();
             chargePoints = (ArrayList<ChargePoint>) results.values;
             notifyDataSetChanged();
         }
@@ -127,4 +126,25 @@ public class ChargePointAdapter extends RecyclerView.Adapter<ChargePointAdapter.
         }
     }
 
+    public void reset() {
+        chargePoints = chargePointSearchOriginal;
+        notifyDataSetChanged();
+    }
+
+    // TODO: filter by county
+    public void filterChargePointsByCounty(String county) {
+        List<ChargePoint> cpCounty = new ArrayList<>();
+
+        for (ChargePoint cp : chargePointSearchOriginal) {
+            if (!cp.getAddress().get("county").isEmpty()) {
+                if (cp.getAddress().get("county").contains(county)) {
+                    cpCounty.add(cp);
+                }
+            }
+        }
+
+        Log.d("TAG", "filterChargePointsByCounty: " + cpCounty.toString());
+        chargePoints = cpCounty;
+        notifyDataSetChanged();
+    }
 }
