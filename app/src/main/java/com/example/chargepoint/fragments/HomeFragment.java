@@ -1,10 +1,5 @@
 package com.example.chargepoint.fragments;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -15,13 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.chargepoint.R;
 import com.example.chargepoint.pojo.Receipt;
+import com.example.chargepoint.utils.ChargePointNotificationManager;
 import com.example.chargepoint.viewmodel.ReceiptViewModel;
 
 import java.text.DateFormat;
@@ -45,24 +40,12 @@ public class HomeFragment extends Fragment {
         return formatter.format(date);
     }
 
-    @Override
-    public void onStart() {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-    }
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        createNotificationChannel();
-        displayTimerNotification();
+        ChargePointNotificationManager.createNotificationChannels(requireActivity());
+        //ChargePointNotificationManager.displayCarChargingNotification(requireActivity());
 
         receiptTimer = root.findViewById(R.id.receiptTimer);
         chargeProgress = root.findViewById(R.id.chargeProgress);
@@ -80,7 +63,6 @@ public class HomeFragment extends Fragment {
         root.findViewById(R.id.carDetailsCard).setOnClickListener(v ->
                 Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_car_details));
 
-        // TODO: Implement a duration timer when a user buys electricity add a ChargePoint
         // If no timer, the 'Charge Time' card goes to the map
         root.findViewById(R.id.durationCard).setOnClickListener(v -> {
             if (receipt != null && receipt.isCharging()) {
@@ -108,9 +90,11 @@ public class HomeFragment extends Fragment {
         if (millis < 0)
             return;
 
+        ChargePointNotificationManager.displayCarChargingNotification(requireActivity(), millis);
+
         long durationMillis = receipt.getDuration() * 60000;
 
-        new CountDownTimer(millis, 1000) {
+        new CountDownTimer(millis, 200) {
 
             public void onTick(long millisUntilFinished) {
                 receiptTimer.setText(root.getContext().getString(R.string.time_remaining, formatMilli(millisUntilFinished)));
@@ -123,35 +107,20 @@ public class HomeFragment extends Fragment {
 
             public void onFinish() {
                 receiptTimer.setText(R.string.charge_complete);
-                displayTimerNotification();
+                ChargePointNotificationManager.displayCarChargedNotification(requireActivity());
             }
         }.start();
     }
 
-    private void displayTimerNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getActivity(), getString(R.string.chargepoint_channel)).setSmallIcon(R.drawable.ic_map_blue_24dp)
-                .setContentTitle("Your car is ready")
-                .setContentText("Charge is complete!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        Notification notification = builder.build();
-        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notification);
+    @Override
+    public void onStart() {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        super.onStart();
     }
 
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.chargepoint_channel);
-            String description = getString(R.string.chargepoint_channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(getString(R.string.chargepoint_channel), name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 }

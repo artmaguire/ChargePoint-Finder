@@ -156,7 +156,5 @@
     <!-- Email -->
     <string name="email_sent">Email sent!</string>
     <string name="email_wrong_address">Wrong email address.</string>
-    <string name="chargepoint_channel">chargepoint_channel</string>
-    <string name="chargepoint_channel_description">ChargePoint Notifications</string>
 
 </resources>

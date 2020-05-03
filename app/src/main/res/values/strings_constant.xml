@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ChargePoint</string>
-    <string name="chargepoint_website">www.chargepoint.ie</string>
+    <string name="app_name" translatable="false">ChargePoint</string>
+    <string name="chargepoint_website" translatable="false">www.chargepoint.ie</string>
+
+    <!-- Notification Channels -->
+    <string name="chargepoint_car_charged" translatable="false">chargepoint_car_charged</string>
+    <string name="chargepoint_car_charged_description" translatable="false">ChargePoint Notification when Car Charging has Complete</string>
+    <string name="chargepoint_car_charging" translatable="false">chargepoint_car_charging</string>
+    <string name="chargepoint_car_charging_description" translatable="false">ChargePoint Notification when Car Currently Charging</string>
 
     <string-array name="group_members">
         <item>Art</item>
