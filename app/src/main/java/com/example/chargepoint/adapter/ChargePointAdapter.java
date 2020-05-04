@@ -40,9 +40,7 @@ public class ChargePointAdapter extends RecyclerView.Adapter<ChargePointAdapter.
                             .get("line1")
                             .toLowerCase()
                             .contains(filterPattern) || cp.getAddress().get("town").toLowerCase().contains(filterPattern)) {
-                        Log.d("TAG", "performFiltering: dhjsjdghsdjghasjdh sdjghsdgashdg");
                         filteredList.add(cp);
-                        Log.d("TAG", "performFiltering: " + filteredList.toString());
                     }
                 }
             }

@@ -1,5 +1,7 @@
 package com.example.chargepoint.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +25,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.ChargePointAdapter;
 import com.example.chargepoint.db.FirebaseHelper;
+import com.example.chargepoint.dialogbox.DialogBoxCounty;
+import com.example.chargepoint.dialogbox.DialogBoxDistance;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.viewmodel.ChargePointViewModel;
 
@@ -70,14 +74,20 @@ public class ChargePointsFragment extends Fragment {
         spinnerAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, spinnerArray);
         spinner.setAdapter(spinnerAdapter);
 
-        loadCounty();
+        loadSort();
+        // loadCounty();
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println(spinner.getSelectedItem().toString());
-                adapter.notifyDataSetChanged();
-                filterChargePointsByCounty(spinner.getSelectedItem().toString());
+                if(spinner.getSelectedItem().toString().equals("County")) {
+                    new DialogBoxCounty().show(getActivity().getSupportFragmentManager(), "DialogBoxCounty");
+                } else if(spinner.getSelectedItem().toString().equals("Distance")) {
+                    System.out.println("Distance choose : " + spinner.getSelectedItem().toString());
+                    new DialogBoxDistance().show(getParentFragmentManager(), "DialogBoxDistance");
+                } else {
+                    System.out.println("Nothing selected");
+                }
             }
 
             @Override
@@ -97,11 +107,12 @@ public class ChargePointsFragment extends Fragment {
         });
     }
 
-    private void loadCounty() {
-        List<String> counties = new ArrayList<>(Arrays.asList("All", "Carlow", "Cavan", "Clare", "Cork", "Donegal", "Dublin", "Galway", "Kerry", "Kildare", "Kilkenny", "Laois", "Leitrim", "Limerick", "Longford", "Louth", "Mayo", "Meath", "Monaghan", "Offaly", "Roscommon", "Sligo", "Tipperary", "Waterford", "Westmeath", "Wexford", "Wicklow"));
+    private void loadSort() {
 
-        spinnerArray.addAll(counties);
+        List<String> sort = new ArrayList<>(Arrays.asList("", "County", "Distance"));
+        spinnerArray.addAll(sort);
         spinnerAdapter.notifyDataSetChanged();
+
     }
 
     // TODO: filter by county
@@ -136,5 +147,6 @@ public class ChargePointsFragment extends Fragment {
 
         super.onCreateOptionsMenu(menu, inflater);
     }
+
 
 }

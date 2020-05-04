@@ -58,7 +58,7 @@
     <string name="no_car_charging">No car charging at the moment</string>
 
     <!-- Rates -->
-    <string name="sort_by_county">Sort by County: </string>
+    <string name="sort_by_county">Sort by </string>
 
     <!-- About -->
     <string name="about_the_project">About the project</string>
