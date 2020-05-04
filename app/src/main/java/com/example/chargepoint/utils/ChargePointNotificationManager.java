@@ -21,6 +21,8 @@ public class ChargePointNotificationManager {
                 .setContentTitle("Your car is ready")
                 .setContentText("Tap for more info")
                 .setColor(context.getResources().getColor(R.color.colorAccent))
+                .setContentIntent(PendingIntent.getActivity(context, 11, new Intent(context, MainActivity.class), 0))
+                .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_MAX);
 
         Notification notification = builder.build();

@@ -113,6 +113,9 @@ public class HomeFragment extends Fragment {
                     }
                 }
             });
+        } else {
+            // Stop service in case it was started and couldn't be stopped by receiver
+            requireActivity().stopService(new Intent(requireActivity(), ChargingService.class));
         }
     }
 

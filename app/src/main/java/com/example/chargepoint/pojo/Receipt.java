@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.Exclude;
 
 import java.util.Date;
 
@@ -119,13 +120,7 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
         this.user_id = user_id;
     }
 
-    public boolean isCharging() {
-        Date receiptDate = datetime.toDate();
-        receiptDate = addMinutesToDate(duration, receiptDate);
-
-        return receiptDate.after(new Date());
-    }
-
+    @Exclude
     private static Date addMinutesToDate(int minutes, Date beforeTime) {
         final long ONE_MINUTE_IN_MILLIS = 60000;
 
@@ -133,6 +128,15 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
         return new Date(curTimeInMs + (minutes * ONE_MINUTE_IN_MILLIS));
     }
 
+    @Exclude
+    public boolean isCharging() {
+        Date receiptDate = datetime.toDate();
+        receiptDate = addMinutesToDate(duration, receiptDate);
+
+        return receiptDate.after(new Date());
+    }
+
+    @Exclude
     public long getFinishTimeInMillis() {
         Date receiptDate = datetime.toDate();
         receiptDate = addMinutesToDate(duration, receiptDate);
