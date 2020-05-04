@@ -18,8 +18,8 @@ public class ChargePointNotificationManager {
 
     public static void displayCarChargedNotification(Context context) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.chargepoint_car_charged)).setSmallIcon(R.drawable.ic_map_blue_24dp)
-                .setContentTitle("Your car is ready")
-                .setContentText("Tap for more info")
+                .setContentTitle("Your car is ready!")
+                .setContentText("Please disconnect the charger")
                 .setColor(context.getResources().getColor(R.color.colorAccent))
                 .setContentIntent(PendingIntent.getActivity(context, 11, new Intent(context, MainActivity.class), 0))
                 .setAutoCancel(true)

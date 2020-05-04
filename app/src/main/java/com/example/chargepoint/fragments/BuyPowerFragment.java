@@ -40,7 +40,7 @@ import static com.google.firebase.Timestamp.now;
 
 public class BuyPowerFragment extends BackFragment {
 
-    private final String TAG = "BUY_POWER";
+    private static final String TAG = "BUY_POWER";
 
     private ChargePoint cp;
 
@@ -212,7 +212,6 @@ public class BuyPowerFragment extends BackFragment {
                 spinnerCards.add(getString(R.string.create_card));
             } else {
                 spinnerCards.add(getString(R.string.create_card));
-                Log.d(TAG, "onViewCreated: No card for this user.");
             }
 
             setCardSpinnerAdapter();

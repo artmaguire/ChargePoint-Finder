@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.PowerManager;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -69,7 +68,6 @@ public class ChargingService extends Service {
         cdt = new CountDownTimer(millis, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                Log.d(TAG, "onTick: " + millis);
                 intent.putExtra(CHARGE_COUNTDOWN, millisUntilFinished);
                 sendBroadcast(intent);
             }
@@ -120,7 +118,6 @@ public class ChargingService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "onDestroy: ");
         if (cdt != null)
             cdt.cancel();
         receipt = null;
