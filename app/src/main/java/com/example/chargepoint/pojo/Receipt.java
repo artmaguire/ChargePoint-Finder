@@ -6,6 +6,9 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.Exclude;
+
+import java.util.Date;
 
 public class Receipt implements Parcelable, Comparable<Receipt> {
     public static final Creator<Receipt> CREATOR = new Creator<Receipt>() {
@@ -116,6 +119,30 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    @Exclude
+    private static Date addMinutesToDate(int minutes, Date beforeTime) {
+        final long ONE_MINUTE_IN_MILLIS = 60000;
+
+        long curTimeInMs = beforeTime.getTime();
+        return new Date(curTimeInMs + (minutes * ONE_MINUTE_IN_MILLIS));
+    }
+
+    @Exclude
+    public boolean isCharging() {
+        Date receiptDate = datetime.toDate();
+        receiptDate = addMinutesToDate(duration, receiptDate);
+
+        return receiptDate.after(new Date());
+    }
+
+    @Exclude
+    public long getFinishTimeInMillis() {
+        Date receiptDate = datetime.toDate();
+        receiptDate = addMinutesToDate(duration, receiptDate);
+
+        return receiptDate.getTime();
     }
 
     @Override

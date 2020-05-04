@@ -56,6 +56,8 @@
     <string name="go_to_car_details_page">Go to Car Details Page</string>
     <string name="charge_time">Charge Time</string>
     <string name="no_car_charging">No car charging at the moment</string>
+    <string name="time_remaining">Time Remaining: %1$s</string>
+    <string name="charge_complete">Charge Complete!</string>
 
     <!-- Rates -->
     <string name="sort_by_county">Sort by County: </string>

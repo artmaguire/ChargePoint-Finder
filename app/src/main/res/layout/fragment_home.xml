@@ -71,8 +71,8 @@
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_purple"
-                            android:padding="10dp"
                             android:contentDescription="@string/go_to_about_page"
+                            android:padding="10dp"
                             android:src="@drawable/ic_map_black_24dp" />
 
                         <TextView
@@ -118,8 +118,8 @@
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_pink"
-                            android:padding="10dp"
                             android:contentDescription="@string/go_to_news_page"
+                            android:padding="10dp"
                             android:src="@drawable/ic_assignment_black_24dp" />
 
                         <TextView
@@ -174,8 +174,8 @@
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_green"
-                            android:padding="10dp"
                             android:contentDescription="@string/go_to_terms_and_conditions_page"
+                            android:padding="10dp"
                             android:src="@drawable/ic_profile_black_24dp" />
 
                         <TextView
@@ -221,8 +221,8 @@
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:background="@drawable/circle_background_yellow"
-                            android:padding="10dp"
                             android:contentDescription="@string/go_to_car_details_page"
+                            android:padding="10dp"
                             android:src="@drawable/ic_directions_car_black_24dp" />
 
                         <TextView
@@ -254,30 +254,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:clipToPadding="false"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/durationCard"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/windowBackground"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="4dp"
+                    android:background="@color/windowBackground"
                     android:clickable="true"
                     android:focusable="true">
 
                     <LinearLayout
 
                         android:layout_width="match_parent"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="12dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp">
 
                         <ImageView
                             android:layout_width="64dp"
@@ -300,12 +300,23 @@
                             android:background="@color/textColourHint" />
 
                         <TextView
+                            android:id="@+id/receiptTimer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="@string/no_car_charging"
                             android:textColor="@color/textColourHint" />
+
+                        <ProgressBar
+                            android:id="@+id/chargeProgress"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:max="100"
+                            android:visibility="invisible"
+                            android:progress="1" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
