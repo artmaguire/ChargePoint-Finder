@@ -25,8 +25,9 @@ public class HomeFragment extends Fragment {
         root.findViewById(R.id.newsCard).setOnClickListener(v ->
                 Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_news));
 
-        root.findViewById(R.id.termsCard).setOnClickListener(v ->
-                Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_terms));
+        root.findViewById(R.id.previousReceiptsCard)
+                .setOnClickListener(v -> Navigation.findNavController(root)
+                        .navigate(R.id.action_navigation_home_to_fragment_previous_receipts));
 
         root.findViewById(R.id.carDetailsCard).setOnClickListener(v ->
                 Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_fragment_car_details));

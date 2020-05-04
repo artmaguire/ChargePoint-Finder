@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_map"
             app:destination="@id/navigation_map" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_previous_receipts"
+            app:destination="@id/fragment_previous_receipts" />
     </fragment>
 
     <fragment
@@ -67,6 +70,9 @@
         <action
             android:id="@+id/action_navigation_profile_to_fragment_car_details"
             app:destination="@id/fragment_car_details" />
+        <action
+            android:id="@+id/action_navigation_profile_to_fragment_terms"
+            app:destination="@id/fragment_terms" />
     </fragment>
 
     <fragment

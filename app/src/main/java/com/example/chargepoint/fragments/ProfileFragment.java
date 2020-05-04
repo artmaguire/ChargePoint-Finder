@@ -64,6 +64,8 @@ public class ProfileFragment extends PreferenceFragmentCompat {
             requireActivity().recreate();
         else if (pk.equals(getString(R.string.key_about_us)))
             Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_fragment_about);
+        else if (pk.equals(getString(R.string.title_terms)))
+            Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_fragment_terms);
         else if (pk.equals(getString(R.string.key_sign_out)))
             signOut();
 

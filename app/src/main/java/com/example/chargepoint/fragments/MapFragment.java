@@ -90,7 +90,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onMapReady(GoogleMap m) {
         this.map = m;
 
-
         boolean enabled = PreferenceConfiguration.isNightMode(requireContext());
         if (enabled) {
             try {
@@ -155,9 +154,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
     private void addChargePointsToMap() {
-        for (ChargePoint cp : chargePoints) {
+        for (ChargePoint cp : chargePoints)
             clusterManager.addItem(new ChargePointCluster(cp.getLocation(), cp.getOperator(), cp));
-        }
 
         clusterManager.cluster();
 
