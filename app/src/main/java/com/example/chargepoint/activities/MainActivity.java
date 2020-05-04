@@ -12,6 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.chargepoint.R;
 import com.example.chargepoint.utils.PreferenceConfiguration;
 import com.example.chargepoint.viewmodel.ChargePointViewModel;
+import com.example.chargepoint.utils.ChargePointNotificationManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         PreferenceConfiguration.updateConfiguration(this);
+        ChargePointNotificationManager.createNotificationChannels(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

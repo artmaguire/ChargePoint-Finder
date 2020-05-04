@@ -1,6 +1,7 @@
 package com.example.chargepoint.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,7 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.pojo.Receipt;
+import com.example.chargepoint.services.ChargingService;
 import com.example.chargepoint.viewmodel.ReceiptViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -38,7 +40,7 @@ import static com.google.firebase.Timestamp.now;
 
 public class BuyPowerFragment extends BackFragment {
 
-    private final String TAG = "BUY_POWER";
+    private static final String TAG = "BUY_POWER";
 
     private ChargePoint cp;
 
@@ -171,8 +173,13 @@ public class BuyPowerFragment extends BackFragment {
                         .substring(0, 17), cost, duration, now(), cardNumber, Double.parseDouble(amountEditText.getText()
                         .toString()), cp.getMap_id(), FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                        fbHelper.addReceiptToDB(r, task1 -> {
+                fbHelper.addReceiptToDB(r, task -> {
                             dialog.dismiss();
+
+                    Intent i = new Intent(requireActivity(), ChargingService.class);
+                    i.putExtra(ChargingService.CHARGE_RECEIPT, r);
+                    requireActivity().startService(i);
+
                             new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class).destroyReceipts();
                             Navigation.findNavController(view).popBackStack();
                         });
@@ -215,7 +222,6 @@ public class BuyPowerFragment extends BackFragment {
                 spinnerCards.add(getString(R.string.create_card));
             } else {
                 spinnerCards.add(getString(R.string.create_card));
-                Log.d(TAG, "onViewCreated: No card for this user.");
             }
 
             setCardSpinnerAdapter();

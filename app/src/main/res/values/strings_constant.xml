@@ -14,6 +14,12 @@
     <string name="key_about_us" translatable="false">about_us</string>
     <string name="key_sign_out" translatable="false">sign_out</string>
 
+    <!-- Notification Channels -->
+    <string name="chargepoint_car_charged" translatable="false">chargepoint_car_charged</string>
+    <string name="chargepoint_car_charged_description" translatable="false">ChargePoint Notification when Car Charging has Complete</string>
+    <string name="chargepoint_car_charging" translatable="false">chargepoint_car_charging</string>
+    <string name="chargepoint_car_charging_description" translatable="false">ChargePoint Notification when Car Currently Charging</string>
+
     <string-array name="group_members">
         <item>Art</item>
         <item>Corentin</item>
