@@ -81,6 +81,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/securityNumber"
                     app:layout_constraintHorizontal_weight="6"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:focusable="false"
                     app:layout_constraintTop_toBottomOf="@+id/editTextcardnumber" />
 
                 <EditText

@@ -1,7 +1,5 @@
 package com.example.chargepoint.fragments;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,9 +17,12 @@ import androidx.navigation.Navigation;
 import com.example.chargepoint.R;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.Card;
+import com.github.dewinjm.monthyearpicker.MonthFormat;
+import com.github.dewinjm.monthyearpicker.MonthYearPickerDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 public class PaymentDetailsFragment extends BackFragment {
 
@@ -31,8 +32,8 @@ public class PaymentDetailsFragment extends BackFragment {
     private EditText cardNumber;
     private EditText cardSecurityNumber;
     private EditText txtMonthYear;
+    private String selectedDate;
 
-    private DatePickerDialog datePickerDialog;
     private FirebaseAuth mAuth;
 
     @Nullable
@@ -54,52 +55,84 @@ public class PaymentDetailsFragment extends BackFragment {
         Button saveCardButton = view.findViewById(R.id.saverbutton);
 
         //on click functionality to select the month and date of the card
-        txtMonthYear.setOnClickListener(v -> {
-            Calendar c = Calendar.getInstance();
-            int mYear = c.get(Calendar.YEAR);
-            int mMonth = c.get(Calendar.MONTH);
-            int mDay = c.get(Calendar.DAY_OF_MONTH);
+        txtMonthYear.setOnClickListener(y -> {
+            int yearSelected;
+            int monthSelected;
 
-            datePickerDialog = new DatePickerDialog(getContext(),
-                    AlertDialog.THEME_HOLO_DARK,
-                    (dateView, year, monthOfYear, dayOfMonth) -> txtMonthYear.setText((monthOfYear + 1) + "/" + year), mYear, mMonth, mDay);
-            datePickerDialog.getDatePicker().findViewById(getResources().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
-            datePickerDialog.show();
-        });
+            //Set default values
+            Calendar calendar = Calendar.getInstance();
+            yearSelected = calendar.get(Calendar.YEAR);
+            monthSelected = calendar.get(Calendar.MONTH);
 
-        // Send card to Firestore when save is clicked
-        saveCardButton.setOnClickListener(v -> {
-            String name;
-            String number;
-            String date;
-            String securityNumber;
+            // Use the calendar for create ranges
+            Calendar calendar2 = Calendar.getInstance();
 
-            // Check if user inputted information
-            if (cardName.getText().toString().equals("") || cardNumber.getText().toString().equals("") || cardSecurityNumber.getText()
-                    .toString()
-                    .equals("") || txtMonthYear.getText().toString().equals("")) {
-                Toast.makeText(getContext(), getString(R.string.missing_information), Toast.LENGTH_SHORT).show();
-            } else if (cardNumber.getText().length() < 16) {
-                Toast.makeText(getContext(), getString(R.string.card_num_not_long_enough), Toast.LENGTH_SHORT).show();
-            } else {
-                ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.adding_card), true);
-                name = cardName.getText().toString();
-                number = cardNumber.getText().toString();
-                date = txtMonthYear.getText().toString();
-                securityNumber = cardSecurityNumber.getText().toString();
+            // Min Range
+            calendar2.clear();
+            int currYear = Calendar.getInstance().get(Calendar.YEAR);
+            calendar2.set(currYear, 0, 1); // Set minimum date to show in dialog
+            long minDate = calendar2.getTimeInMillis(); // Get milliseconds of the modified date
 
-                // Create bew card object
-                Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
-                Log.d(TAG, "onViewCreated: " + card.toString());
+            // Max Range
+            calendar2.clear();
+            calendar2.set(currYear + 10, 5, 4); // Set maximum date to show in dialog
+            long maxDate = calendar2.getTimeInMillis(); // Get milliseconds of the modified date
 
-                // Send card to database
-                FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-                fbHelper.addCardToDB(card, task -> {
-                    Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                    Navigation.findNavController(view).popBackStack();
-                });
-            }
+            Locale locale = new Locale("en-IE");
+
+            MonthYearPickerDialogFragment dialogFragment;
+
+            MonthFormat monthFormat = MonthFormat.SHORT; //MonthFormat.LONG or MonthFormat.SHORT
+            //Simple way
+            dialogFragment = MonthYearPickerDialogFragment.getInstance(monthSelected, yearSelected, minDate, maxDate, "Select Date", locale, monthFormat);
+
+            dialogFragment.setOnDateSetListener((year, monthOfYear) -> {
+                if (monthOfYear < 10)
+                    selectedDate = "0" + monthSelected;
+                else
+                    selectedDate = String.valueOf(monthOfYear);
+
+                selectedDate += "/";
+                selectedDate += year;
+                txtMonthYear.setText(selectedDate);
+            });
+
+            dialogFragment.show(getActivity().getSupportFragmentManager(), null);
+
+            // Send card to Firestore when save is clicked
+            saveCardButton.setOnClickListener(v -> {
+                String name;
+                String number;
+                String date;
+                String securityNumber;
+
+                // Check if user inputted information
+                if (cardName.getText().toString().equals("") || cardNumber.getText().toString().equals("") || cardSecurityNumber.getText()
+                        .toString()
+                        .equals("") || txtMonthYear.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), getString(R.string.missing_information), Toast.LENGTH_SHORT).show();
+                } else if (cardNumber.getText().length() < 16) {
+                    Toast.makeText(getContext(), getString(R.string.card_num_not_long_enough), Toast.LENGTH_SHORT).show();
+                } else {
+                    ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.adding_card), true);
+                    name = cardName.getText().toString();
+                    number = cardNumber.getText().toString();
+                    date = selectedDate;
+                    securityNumber = cardSecurityNumber.getText().toString();
+
+                    // Create bew card object
+                    Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
+                    Log.d(TAG, "onViewCreated: " + card.toString());
+
+                    // Send card to database
+                    FirebaseHelper fbHelper = FirebaseHelper.getInstance();
+                    fbHelper.addCardToDB(card, task -> {
+                        Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        Navigation.findNavController(view).popBackStack();
+                    });
+                }
+            });
         });
     }
 }
