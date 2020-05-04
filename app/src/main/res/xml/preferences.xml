@@ -48,12 +48,20 @@
             android:title="@string/language" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="">
+    <PreferenceCategory android:title="About Us">
         <Preference
             android:icon="@drawable/ic_info_24px"
             android:key="@string/key_about_us"
             android:summary="@string/about_us_info"
             android:title="@string/about_us" />
+        <Preference
+            android:icon="@drawable/ic_person_24px"
+            android:key="@string/title_terms"
+            android:summary="@string/check_terms"
+            android:title="@string/title_terms" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="">
         <Preference
             android:icon="@drawable/ic_sign_out_24px"
             android:key="@string/key_sign_out"

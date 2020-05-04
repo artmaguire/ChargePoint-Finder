@@ -17,7 +17,9 @@
             android:id="@+id/receiptIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginStart="6dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -27,9 +29,9 @@
             android:padding="1dp"
             android:textColor="@color/textColourPrimary"
             android:textSize="18sp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/receiptIcon" />
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/receiptIcon"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/go_to_receipt"
@@ -48,7 +50,8 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/textColourPrimary"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/receiptIcon"
             app:layout_constraintTop_toBottomOf="@+id/receiptDate" />
 
         <TextView
@@ -58,7 +61,8 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/textColourPrimary"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/receiptIcon"
             app:layout_constraintTop_toBottomOf="@+id/receiptAmount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
