@@ -1,9 +1,11 @@
 package com.example.chargepoint.fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +18,11 @@ import androidx.preference.PreferenceManager;
 import com.example.chargepoint.R;
 import com.example.chargepoint.activities.SplashScreen;
 import com.example.chargepoint.db.FirebaseHelper;
-import com.firebase.ui.auth.AuthUI;
+import com.example.chargepoint.receivers.ChargingAlarmReceiver;
+import com.example.chargepoint.services.ChargingService;
+import com.example.chargepoint.utils.ChargePointNotificationManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends PreferenceFragmentCompat {
 
@@ -77,16 +82,26 @@ public class ProfileFragment extends PreferenceFragmentCompat {
         alertDialog.setMessage(getString(R.string.sign_out_question));
         alertDialog.setCancelable(true);
         alertDialog.setNegativeButton(R.string.no, null);
+        alertDialog.setPositiveButton(R.string.yes, (dialog, which) -> {
+            requireActivity().stopService(new Intent(requireActivity(), ChargingService.class));
+            ChargePointNotificationManager.cancelAll(requireContext());
+            cancelAlarm();
+            FirebaseAuth.getInstance().signOut();
+            FirebaseHelper.destroyInstance();
 
-        alertDialog.setPositiveButton(R.string.yes, (dialog, which) -> AuthUI.getInstance()
-                .signOut(requireContext())
-                .addOnCompleteListener(task -> {
-                    FirebaseHelper.destroyInstance();
-                    Intent i = new Intent(getActivity(), SplashScreen.class);
-                    startActivity(i);
-                    requireActivity().finish();
-                }).addOnFailureListener(e -> Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show()));
+            startActivity(new Intent(getActivity(), SplashScreen.class));
+            requireActivity().finish();
+        });
 
         alertDialog.show();
+    }
+
+    private void cancelAlarm() {
+        AlarmManager alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
+        Intent alarmIntent = new Intent(requireContext(), ChargingAlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, alarmIntent, PendingIntent.FLAG_NO_CREATE);
+        if (alarmManager != null && pendingIntent != null) {
+            alarmManager.cancel(pendingIntent);
+        }
     }
 }

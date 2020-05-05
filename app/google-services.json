@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "120444106517-lpqpeom0bpnrmkbni02jrb2p05fca2ah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chargepoint",
+            "certificate_hash": "9bb785f1f26e1c59bf6a11c2cfaee60724dc9190"
+          }
+        },
+        {
+          "client_id": "120444106517-sqebcdhemc9p56c9uk705posj4cnbh1h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chargepoint",
+            "certificate_hash": "99dab04b1fd7a79228d3159fd0ee5038b0c45314"
+          }
+        },
+        {
           "client_id": "120444106517-ah5ibr5glievqoak842aqakshrc4jenq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
