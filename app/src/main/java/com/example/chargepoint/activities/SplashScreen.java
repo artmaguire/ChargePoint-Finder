@@ -11,6 +11,7 @@ import androidx.preference.PreferenceManager;
 
 import com.example.chargepoint.R;
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.FirebaseUiException;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -32,10 +33,12 @@ public class SplashScreen extends AppCompatActivity {
         else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        if (FirebaseAuth.getInstance().getCurrentUser() == null)
-            showSignInOptions();
-        else
-            goToMainActivity();
+        if (savedInstanceState == null) {
+            if (FirebaseAuth.getInstance().getCurrentUser() == null)
+                showSignInOptions();
+            else
+                goToMainActivity();
+        }
     }
 
     private void goToMainActivity() {
@@ -54,6 +57,7 @@ public class SplashScreen extends AppCompatActivity {
         startActivityForResult(
                 AuthUI.getInstance().createSignInIntentBuilder()
                         .setAvailableProviders(providers)
+                        .setIsSmartLockEnabled(false, true)
                         .setTheme(R.style.FirebaseUITheme).build(), getResources().getInteger(R.integer.FIREBASE_REQUEST_CODE)
         );
     }
@@ -66,7 +70,14 @@ public class SplashScreen extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 goToMainActivity();
             } else {
-                Toast.makeText(this, "" + response.getError().getMessage(), Toast.LENGTH_SHORT).show();
+                if (response != null) {
+                    FirebaseUiException error = response.getError();
+                    if (error != null) {
+                        Toast.makeText(this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    finish();
+                }
             }
         }
     }

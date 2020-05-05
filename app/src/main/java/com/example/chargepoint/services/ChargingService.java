@@ -73,7 +73,7 @@ public class ChargingService extends Service {
             }
 
             public void onFinish() {
-                intent.putExtra(CHARGE_COUNTDOWN, -1);
+                intent.putExtra(CHARGE_COUNTDOWN, Long.valueOf(-1));
                 sendBroadcast(intent);
 
                 finish();
