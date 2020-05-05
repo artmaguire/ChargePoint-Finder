@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import com.example.chargepoint.R;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.Card;
+import com.example.chargepoint.utils.PreferenceConfiguration;
 import com.github.dewinjm.monthyearpicker.MonthFormat;
 import com.github.dewinjm.monthyearpicker.MonthYearPickerDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -167,7 +168,7 @@ public class PaymentDetailsFragment extends BackFragment {
         calendar2.set(currYear + 10, 5, 4); // Set maximum date to show in dialog
         long maxDate = calendar2.getTimeInMillis(); // Get milliseconds of the modified date
 
-        Locale locale = new Locale("en-IE");
+        Locale locale = PreferenceConfiguration.getCurrentLocale(requireContext());
 
         MonthYearPickerDialogFragment dialogFragment;
 
@@ -182,11 +183,11 @@ public class PaymentDetailsFragment extends BackFragment {
                 selectedDate = String.valueOf(monthOfYear);
 
             selectedDate += "/";
-            selectedDate += year;
+            selectedDate += String.valueOf(year).substring(2);
             txtMonthYear.setText(selectedDate);
         });
 
-        dialogFragment.show(getActivity().getSupportFragmentManager(), null);
+        dialogFragment.show(requireActivity().getSupportFragmentManager(), null);
     }
 
     private void setCard(Card card) {

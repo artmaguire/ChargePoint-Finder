@@ -16,6 +16,7 @@
         <item name="android:buttonStyle">@style/AppTheme.ButtonStyle</item>
         <item name="cardViewStyle">@style/AppTheme.CardViewStyle</item>
         <item name="materialAlertDialogTheme">@style/AppTheme.AlertDialogStyle</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogCustom</item>
         <item name="android:windowAnimationStyle">@style/AppTheme.WindowAnimationStyle</item>
     </style>
 
@@ -34,8 +35,9 @@
         <item name="android:backgroundTint">@color/colorPrimary</item>
     </style>
 
-    <style name="AppTheme.CardViewStyle" parent="CardView.Dark">
+    <style name="AppTheme.CardViewStyle" parent="CardView">
         <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
+        <item name="cardElevation">4dp</item>
     </style>
 
     <style name="AppTheme.AlertDialogStyle" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
@@ -58,6 +60,18 @@
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
+    <style name="AlertDialogCustom" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:textColor">@color/textColourPrimary</item> <!--Title text color-->
+        <item name="android:textColorPrimary">@color/textColourPrimary</item> <!--Item text color-->
+        <item name="android:background">@color/cardBackgroundColor</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/ButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/ButtonStyle</item>
+    </style>
+
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/textColourPrimary</item>
+    </style>
+
     <style name="NavViewTheme" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemBackground">@color/windowBackground</item>
     </style>
@@ -72,7 +86,6 @@
         <item name="colorControlHighlight">@color/textColourPrimary</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorPrimary">@color/textColourPrimary</item>
-        <item name="android:textColorSecondary">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
