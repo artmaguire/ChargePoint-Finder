@@ -38,7 +38,7 @@ public class PaymentDetailsFragment extends BackFragment {
     private EditText cardSecurityNumber;
     private EditText txtMonthYear;
     private String selectedDate;
-    private boolean newCard;
+    private boolean newCard = true;
     private Card cardSelected;
 
     private FirebaseAuth mAuth;
@@ -64,7 +64,7 @@ public class PaymentDetailsFragment extends BackFragment {
         Bundle b = getArguments();
 
         if (b != null) {
-            newCard = b.getBoolean("New Card");
+            newCard = b.getBoolean("New Card", true);
             Log.d(TAG, "onViewCreated: " + newCard);
             if (!newCard) {
                 cardSelected = b.getParcelable("Card");
