@@ -21,6 +21,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Created by Art
+ * Shows all the preferences using a PreferenceScreen
  */
 public class ProfileFragment extends PreferenceFragmentCompat {
 

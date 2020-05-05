@@ -26,6 +26,7 @@ import java.util.Arrays;
 
 /**
  * Created by Art
+ * Adds Users Electric Car type to database
  */
 public class CarDetailsFragment extends BackFragment {
 

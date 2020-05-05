@@ -19,6 +19,9 @@ import com.example.chargepoint.pojo.Card;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Art
+ */
 public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> {
 
     private static final String TAG = "Card_adapter";

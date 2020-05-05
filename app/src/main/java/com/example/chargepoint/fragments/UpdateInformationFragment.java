@@ -27,6 +27,7 @@ import javax.mail.internet.InternetAddress;
 
 /**
  * Created by Art
+ * User can update their name, email and password
  */
 public class UpdateInformationFragment extends BackFragment {
 

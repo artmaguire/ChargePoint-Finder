@@ -11,6 +11,7 @@ import static android.content.Context.POWER_SERVICE;
 
 /**
  * Created by Art
+ * Used for Notifications
  */
 public class ChargingAlarmReceiver extends BroadcastReceiver {
     public static final String CHARGE_WAKE_LOCK = "CHARGEPOINT::WAKE_LOCK";

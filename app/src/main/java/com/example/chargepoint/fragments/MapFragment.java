@@ -41,6 +41,10 @@ import static androidx.core.content.PermissionChecker.checkSelfPermission;
 
 /**
  * Created by Art
+ * All ChargePoints added
+ * Uses clusters to group them
+ * Spider for close ChargePoints
+ * Specific Icons for different ChargePoints
  */
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener, ClusterManager.OnClusterItemInfoWindowClickListener<ChargePointCluster> {
 

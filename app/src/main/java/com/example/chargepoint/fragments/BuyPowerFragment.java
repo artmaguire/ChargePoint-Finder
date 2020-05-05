@@ -40,6 +40,7 @@ import static com.google.firebase.Timestamp.now;
 
 /**
  * Created by Art
+ * Allows User to buy power at a specific ChargePoint
  */
 public class BuyPowerFragment extends BackFragment {
 

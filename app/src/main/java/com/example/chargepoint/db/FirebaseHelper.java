@@ -1,10 +1,3 @@
-/*
- * Created by Art.
- * Helper file for connection to the Firebase db.
- * All firebase code should go here, to ensure only one connection to the db is opened.
- * Access to Firebase by: FirebaseHelper fbHelper = FirebaseHelp.getInstance()
- */
-
 package com.example.chargepoint.db;
 
 import android.util.Log;
@@ -23,8 +16,12 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 /**
- * Created by Art
+ * Created by Art.
+ * Helper file for connection to the Firebase db.
+ * All firebase code should go here, to ensure only one connection to the db is opened.
+ * Access to Firebase by: FirebaseHelper fbHelper = FirebaseHelp.getInstance()
  */
+
 public class FirebaseHelper {
     private static FirebaseHelper instance;
     private final FirebaseFirestore db;

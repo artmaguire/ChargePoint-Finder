@@ -14,6 +14,7 @@ import java.util.Locale;
 
 /**
  * Created by Art
+ * Manages the PreferenceScreen Locale
  */
 public class PreferenceConfiguration {
 

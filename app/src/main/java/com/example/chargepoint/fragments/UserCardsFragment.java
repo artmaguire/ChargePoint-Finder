@@ -23,6 +23,7 @@ import java.util.List;
 
 /**
  * Created By Art
+ * Shows all user cards with an option to Create New Card
  */
 public class UserCardsFragment extends BackFragment {
     private static final String TAG = "USER_CARDS";

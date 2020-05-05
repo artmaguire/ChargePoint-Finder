@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Created by Art
+ * Gets all ChargePoints in the database
  */
 public class ChargePointViewModel extends ViewModel {
     private final static String TAG = "CHARGEPOINT_VM";
@@ -45,6 +46,7 @@ public class ChargePointViewModel extends ViewModel {
                         cps.add(cp);
                     }
                 }
+
                 Log.i(TAG, "" + cps.size());
                 chargePoints.postValue(cps);
             });

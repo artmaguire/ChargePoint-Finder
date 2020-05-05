@@ -19,6 +19,7 @@ import com.example.chargepoint.viewmodel.ReceiptViewModel;
 
 /**
  * Created by Art
+ * User can see a list of all their receipts
  */
 public class PreviousReceiptsFragment extends BackFragment {
 

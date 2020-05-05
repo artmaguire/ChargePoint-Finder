@@ -18,6 +18,8 @@ import com.example.chargepoint.utils.ChargePointNotificationManager;
 
 /**
  * Created by Art
+ * Countdown timer for charging at a ChargePoint
+ * Causes a notification
  */
 public class ChargingService extends Service {
     public static final String BROADCAST_RECEIVER = "com.example.chargepoint.services.ChargingService";
