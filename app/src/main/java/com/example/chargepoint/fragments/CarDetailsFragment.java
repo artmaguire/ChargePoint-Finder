@@ -24,6 +24,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Created by Art
+ * Adds Users Electric Car type to database
+ */
 public class CarDetailsFragment extends BackFragment {
 
     private String TAG = "CAR_DETAILS";

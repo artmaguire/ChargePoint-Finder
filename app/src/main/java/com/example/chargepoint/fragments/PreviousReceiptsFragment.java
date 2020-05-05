@@ -17,6 +17,10 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.adapter.ReceiptsAdapter;
 import com.example.chargepoint.viewmodel.ReceiptViewModel;
 
+/**
+ * Created by Art
+ * User can see a list of all their receipts
+ */
 public class PreviousReceiptsFragment extends BackFragment {
 
     private static final String TAG = "PAYMENT_RECEIPT";

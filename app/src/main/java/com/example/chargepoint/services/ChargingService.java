@@ -16,6 +16,11 @@ import com.example.chargepoint.pojo.Receipt;
 import com.example.chargepoint.receivers.ChargingAlarmReceiver;
 import com.example.chargepoint.utils.ChargePointNotificationManager;
 
+/**
+ * Created by Art
+ * Countdown timer for charging at a ChargePoint
+ * Causes a notification
+ */
 public class ChargingService extends Service {
     public static final String BROADCAST_RECEIVER = "com.example.chargepoint.services.ChargingService";
     public static final String CHARGE_RECEIPT = "CHARGE_RECEIPT";
@@ -88,8 +93,7 @@ public class ChargingService extends Service {
         PowerManager powerManager = (PowerManager) this.getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock;
         if (powerManager != null) {
-            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                    ChargingAlarmReceiver.CHARGE_WAKE_LOCK);
+            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, ChargingAlarmReceiver.CHARGE_WAKE_LOCK);
             if (wakeLock.isHeld())
                 wakeLock.release();
         }

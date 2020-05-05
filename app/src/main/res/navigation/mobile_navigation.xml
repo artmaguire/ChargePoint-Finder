@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_navigation_profile_to_fragment_terms"
             app:destination="@id/fragment_terms" />
+        <action
+            android:id="@+id/action_navigation_profile_to_userCardsFragment"
+            app:destination="@id/userCardsFragment" />
     </fragment>
 
     <fragment
@@ -143,4 +146,13 @@
         android:id="@+id/action_global_navigation_home"
         app:destination="@id/navigation_home"
         app:launchSingleTop="true" />
+    <fragment
+        android:id="@+id/userCardsFragment"
+        android:name="com.example.chargepoint.fragments.UserCardsFragment"
+        android:label="@string/cards"
+        tools:layout="@layout/fragment_user_cards">
+        <action
+            android:id="@+id/action_userCardsFragment_to_fragment_payment_details"
+            app:destination="@id/fragment_payment_details" />
+    </fragment>
 </navigation>

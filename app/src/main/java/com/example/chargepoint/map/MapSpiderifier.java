@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by Art
+ */
 public class MapSpiderifier implements ClusterManager.OnClusterItemClickListener<ChargePointCluster>, GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnMapClickListener {
 
     private static final String TAG = "MAP_SPIDERIFY";
@@ -193,12 +196,9 @@ public class MapSpiderifier implements ClusterManager.OnClusterItemClickListener
             @Override
             public void run() {
                 long elapsed = SystemClock.uptimeMillis() - start;
-                float t = interpolator.getInterpolation((float) elapsed
-                        / duration);
-                double lat = t * toPosition.latitude + (1 - t)
-                        * startLatLng.latitude;
-                double lng = t * toPosition.longitude + (1 - t)
-                        * startLatLng.longitude;
+                float t = interpolator.getInterpolation((float) elapsed / duration);
+                double lat = t * toPosition.latitude + (1 - t) * startLatLng.latitude;
+                double lng = t * toPosition.longitude + (1 - t) * startLatLng.longitude;
 
                 LatLng newLatLng = new LatLng(lat, lng);
                 if (t >= 1)
@@ -210,11 +210,7 @@ public class MapSpiderifier implements ClusterManager.OnClusterItemClickListener
                     if (spiderMarker.line != null)
                         spiderMarker.line.remove();
 
-                    spiderMarker.line = map.addPolyline(new PolylineOptions()
-                            .add(startLatLng,
-                                    new LatLng(lat, lng))
-                            .width(2)
-                            .color(lineColour));
+                    spiderMarker.line = map.addPolyline(new PolylineOptions().add(startLatLng, new LatLng(lat, lng)).width(2).color(lineColour));
                 }
 
                 if (t < 1.0) {
@@ -230,9 +226,7 @@ public class MapSpiderifier implements ClusterManager.OnClusterItemClickListener
 
     private Bounds createBoundsFromSpan(LatLng p, double span) {
         double halfSpan = span / 2;
-        return new Bounds(
-                p.latitude - halfSpan, p.latitude + halfSpan,
-                p.longitude - halfSpan, p.longitude + halfSpan);
+        return new Bounds(p.latitude - halfSpan, p.latitude + halfSpan, p.longitude - halfSpan, p.longitude + halfSpan);
     }
 
     static class SpiderMarker {

@@ -14,6 +14,7 @@
     <string name="title_buy_power">Acheter de la puissance</string>
     <string name="receipt">Le reçu</string>
     <string name="update_information">Mettre à jour les informations</string>
+    <string name="cards">Cartes</string>
 
     <!-- Preferences -->
     <string name="user_information">Informations de l\'utilisateur</string>

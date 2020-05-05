@@ -39,6 +39,13 @@ import java.util.List;
 
 import static androidx.core.content.PermissionChecker.checkSelfPermission;
 
+/**
+ * Created by Art
+ * All ChargePoints added
+ * Uses clusters to group them
+ * Spider for close ChargePoints
+ * Specific Icons for different ChargePoints
+ */
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener, ClusterManager.OnClusterItemInfoWindowClickListener<ChargePointCluster> {
 
     private final static String TAG = "CHARGE_MAP";
@@ -54,8 +61,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private List<ChargePoint> chargePoints;
     private boolean saved = false;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_map, container, false);
 
         return root;
@@ -94,9 +100,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         if (enabled) {
             try {
                 map.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.maps_dark_mode));
-                GroundOverlayOptions goo = new GroundOverlayOptions()
-                        .image(BitmapDescriptorFactory.fromResource(R.drawable.black))
-                        .position(mapViewModel.getMapCameraPosition().target, 8600000f, 6500000f);
+                GroundOverlayOptions goo = new GroundOverlayOptions().image(BitmapDescriptorFactory.fromResource(R.drawable.black)).position(mapViewModel.getMapCameraPosition().target, 8600000f, 6500000f);
                 blackOverlay = map.addGroundOverlay(goo);
 
                 new Handler().postDelayed(() -> blackOverlay.remove(), 500);
@@ -216,8 +220,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
     private boolean haveLocationPermission() {
-        return checkSelfPermission(requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) == PermissionChecker.PERMISSION_GRANTED;
+        return checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PermissionChecker.PERMISSION_GRANTED;
     }
 
     @Override

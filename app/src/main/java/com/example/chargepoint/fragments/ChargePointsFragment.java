@@ -30,6 +30,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Created by Art
+ * List of all ChargePoints in Ireland
+ * Can be filtered by search and by county
+ */
 public class ChargePointsFragment extends Fragment {
     private final static String TAG = "CHARGEPOINT_FRAGMENT";
 

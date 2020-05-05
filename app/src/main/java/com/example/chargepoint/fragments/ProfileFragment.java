@@ -24,6 +24,10 @@ import com.example.chargepoint.utils.ChargePointNotificationManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * Created by Art
+ * Shows all the preferences using a PreferenceScreen
+ */
 public class ProfileFragment extends PreferenceFragmentCompat {
 
     private View view;
@@ -60,7 +64,7 @@ public class ProfileFragment extends PreferenceFragmentCompat {
         if (pk.equals(getString(R.string.key_account_details)))
             Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_fragment_update_information);
         else if (pk.equals(getString(R.string.key_payment_details)))
-            Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_fragment_payment_details);
+            Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_userCardsFragment);
         else if (pk.equals(getString(R.string.key_car_details)))
             Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_fragment_car_details);
         else if (pk.equals(getString(R.string.key_payment_receipts)))

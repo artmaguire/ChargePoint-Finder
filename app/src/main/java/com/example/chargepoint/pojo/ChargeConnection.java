@@ -6,6 +6,9 @@ import com.google.firebase.firestore.PropertyName;
 
 import java.io.Serializable;
 
+/**
+ * Created by Art
+ */
 public class ChargeConnection implements Serializable {
     private String title;
     private int amps;
@@ -95,15 +98,6 @@ public class ChargeConnection implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return "ChargeConnection{" +
-                "title='" + title + '\'' +
-                ", amps=" + amps +
-                ", voltage=" + voltage +
-                ", powerKW=" + powerKW +
-                ", quantity=" + quantity +
-                ", isFastChargeCapable=" + isFastChargeCapable +
-                ", isOperational=" + isOperational +
-                ", currentTitle='" + currentTitle + '\'' +
-                '}';
+        return "ChargeConnection{" + "title='" + title + '\'' + ", amps=" + amps + ", voltage=" + voltage + ", powerKW=" + powerKW + ", quantity=" + quantity + ", isFastChargeCapable=" + isFastChargeCapable + ", isOperational=" + isOperational + ", currentTitle='" + currentTitle + '\'' + '}';
     }
 }

@@ -20,6 +20,9 @@ import com.example.chargepoint.pojo.ChargePoint;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Art
+ */
 public class ChargePointAdapter extends RecyclerView.Adapter<ChargePointAdapter.ChargePointHolder> implements Filterable {
 
     private List<ChargePoint> chargePoints;
@@ -36,10 +39,7 @@ public class ChargePointAdapter extends RecyclerView.Adapter<ChargePointAdapter.
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
                 for (ChargePoint cp : chargePointSearchOriginal) {
-                    if (cp.getAddress().get("title").toLowerCase().contains(filterPattern) || cp.getAddress()
-                            .get("line1")
-                            .toLowerCase()
-                            .contains(filterPattern) || cp.getAddress().get("town").toLowerCase().contains(filterPattern)) {
+                    if (cp.getAddress().get("title").toLowerCase().contains(filterPattern) || cp.getAddress().get("line1").toLowerCase().contains(filterPattern) || cp.getAddress().get("town").toLowerCase().contains(filterPattern)) {
                         Log.d("TAG", "performFiltering: dhjsjdghsdjghasjdh sdjghsdgashdg");
                         filteredList.add(cp);
                         Log.d("TAG", "performFiltering: " + filteredList.toString());
@@ -86,9 +86,7 @@ public class ChargePointAdapter extends RecyclerView.Adapter<ChargePointAdapter.
         if (chargePoint.getAddress().get("town").isEmpty())
             holder.title.setText(chargePoint.getAddress().get("title"));
         else
-            holder.title.setText(chargePoint.getAddress().get("town").substring(0, 1).toUpperCase() + chargePoint.getAddress()
-                    .get("town")
-                    .substring(1));
+            holder.title.setText(chargePoint.getAddress().get("town").substring(0, 1).toUpperCase() + chargePoint.getAddress().get("town").substring(1));
         holder.line.setText(chargePoint.getAddress().get("line1"));
 
         String operator = chargePoint.getOperator();
