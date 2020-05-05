@@ -2,7 +2,6 @@ package com.example.chargepoint.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("TAG", "onCreate Main: ");
         PreferenceConfiguration.updateConfiguration(this);
         ChargePointNotificationManager.createNotificationChannels(this);
 

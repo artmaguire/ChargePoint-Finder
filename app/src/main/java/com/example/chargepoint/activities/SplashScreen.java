@@ -2,7 +2,6 @@ package com.example.chargepoint.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,9 +33,6 @@ public class SplashScreen extends AppCompatActivity {
         else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        Log.d("TAG", "No Saved State: " + (savedInstanceState == null));
-        Log.d("TAG", "Not logged in: " + (FirebaseAuth.getInstance().getCurrentUser() == null));
-
         if (savedInstanceState == null) {
             if (FirebaseAuth.getInstance().getCurrentUser() == null)
                 showSignInOptions();
@@ -46,7 +42,6 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void goToMainActivity() {
-        Log.d("TAG", "goToMainActivity: ");
         findViewById(R.id.splash_screen).setVisibility(View.INVISIBLE);
         Intent i = new Intent(SplashScreen.this, MainActivity.class);
         startActivity(i);
@@ -54,7 +49,6 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void showSignInOptions() {
-        Log.d("TAG", "showSignInOptions: ");
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build()
@@ -70,7 +64,6 @@ public class SplashScreen extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        Log.d("TAG", "onActivityResult: ");
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == getResources().getInteger(R.integer.FIREBASE_REQUEST_CODE)) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
