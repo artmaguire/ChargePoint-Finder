@@ -102,4 +102,10 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
             cardSecurity = view.findViewById(R.id.securityNumber);
         }
     }
+
+    public void removeCard(int pos) {
+        FirebaseHelper.getInstance().removeCard(cards.get(pos));
+        cards.remove(pos);
+        notifyDataSetChanged();
+    }
 }

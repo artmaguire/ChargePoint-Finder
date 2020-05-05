@@ -70,13 +70,21 @@ public class FirebaseHelper {
     }
 
     public void updateCard(Card oldCard, Card newCard, OnCompleteListener<DocumentReference> listener) {
-        // Delete First
+        removeCard(oldCard);
+        addCardToDB(newCard, listener);
+    }
+
+    public void addCardToDB(Card c, OnCompleteListener<DocumentReference> listener) {
+        db.collection("cards").add(c).addOnCompleteListener(listener);
+    }
+
+    public void removeCard(Card c) {
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference itemsRef = rootRef.collection("cards");
-        Query query = itemsRef.whereEqualTo("cardName", oldCard.getCardName())
-                .whereEqualTo("cardNumber", oldCard.getCardNumber())
-                .whereEqualTo("cardDate", oldCard.getCardDate())
-                .whereEqualTo("cardSecurityNumber", oldCard.getCardSecurityNumber());
+        Query query = itemsRef.whereEqualTo("cardName", c.getCardName())
+                .whereEqualTo("cardNumber", c.getCardNumber())
+                .whereEqualTo("cardDate", c.getCardDate())
+                .whereEqualTo("cardSecurityNumber", c.getCardSecurityNumber());
 
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -87,13 +95,6 @@ public class FirebaseHelper {
                 Log.d("TAG", "Error getting documents: ", task.getException());
             }
         });
-
-        //Add Card
-        addCardToDB(newCard, listener);
-    }
-
-    public void addCardToDB(Card c, OnCompleteListener<DocumentReference> listener) {
-        db.collection("cards").add(c).addOnCompleteListener(listener);
     }
 
     public void addCarToDB(Car c, OnCompleteListener<DocumentReference> listener) {
