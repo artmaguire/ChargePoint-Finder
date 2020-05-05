@@ -22,6 +22,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+/**
+ * Created by Art
+ */
 public class FirebaseHelper {
     private static FirebaseHelper instance;
     private final FirebaseFirestore db;

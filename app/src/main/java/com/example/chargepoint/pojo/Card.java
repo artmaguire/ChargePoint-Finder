@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+/**
+ * Created by Art
+ */
 public class Card implements Parcelable {
     private String cardName;
     private String cardNumber;

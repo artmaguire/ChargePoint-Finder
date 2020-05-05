@@ -26,6 +26,9 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Created by Art
+ */
 public class ReceiptFragment extends BackFragment {
     private static final String TAG = "GET RECEIPT";
 

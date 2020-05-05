@@ -13,6 +13,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Art
+ */
 public class ChargePointViewModel extends ViewModel {
     private final static String TAG = "CHARGEPOINT_VM";
 

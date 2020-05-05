@@ -1,5 +1,8 @@
 package com.example.chargepoint.pojo;
 
+/**
+ * Created by Art
+ */
 public class Car {
     private String make;
     private String model;

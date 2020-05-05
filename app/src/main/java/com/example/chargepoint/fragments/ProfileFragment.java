@@ -19,6 +19,9 @@ import com.example.chargepoint.db.FirebaseHelper;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+/**
+ * Created by Art
+ */
 public class ProfileFragment extends PreferenceFragmentCompat {
 
     private View view;
@@ -78,14 +81,12 @@ public class ProfileFragment extends PreferenceFragmentCompat {
         alertDialog.setCancelable(true);
         alertDialog.setNegativeButton(R.string.no, null);
 
-        alertDialog.setPositiveButton(R.string.yes, (dialog, which) -> AuthUI.getInstance()
-                .signOut(requireContext())
-                .addOnCompleteListener(task -> {
-                    FirebaseHelper.destroyInstance();
-                    Intent i = new Intent(getActivity(), SplashScreen.class);
-                    startActivity(i);
-                    requireActivity().finish();
-                }).addOnFailureListener(e -> Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show()));
+        alertDialog.setPositiveButton(R.string.yes, (dialog, which) -> AuthUI.getInstance().signOut(requireContext()).addOnCompleteListener(task -> {
+            FirebaseHelper.destroyInstance();
+            Intent i = new Intent(getActivity(), SplashScreen.class);
+            startActivity(i);
+            requireActivity().finish();
+        }).addOnFailureListener(e -> Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show()));
 
         alertDialog.show();
     }

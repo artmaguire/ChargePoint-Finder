@@ -14,6 +14,9 @@ import androidx.core.app.NotificationCompat;
 import com.example.chargepoint.R;
 import com.example.chargepoint.activities.MainActivity;
 
+/**
+ * Created by Art
+ */
 public class ChargePointNotificationManager {
 
     public static void displayCarChargedNotification(Context context) {

@@ -4,6 +4,9 @@ import com.example.chargepoint.pojo.ChargePoint;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
+/**
+ * Created by Art
+ */
 public class ChargePointCluster implements ClusterItem {
 
     private final LatLng latLng;

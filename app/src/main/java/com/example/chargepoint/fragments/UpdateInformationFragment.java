@@ -25,6 +25,9 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
+/**
+ * Created by Art
+ */
 public class UpdateInformationFragment extends BackFragment {
 
     private final static String TAG = "USER";
@@ -82,27 +85,23 @@ public class UpdateInformationFragment extends BackFragment {
         alertDialog.setView(input);
 
         // Setting Positive "Yes" Btn
-        alertDialog.setPositiveButton(getString(R.string.save),
-                (dialog, which) -> {
-                    if (input.getText().toString().isEmpty())
-                        return;
+        alertDialog.setPositiveButton(getString(R.string.save), (dialog, which) -> {
+            if (input.getText().toString().isEmpty())
+                return;
 
-                    ProgressDialog pg = ProgressDialog.show(getContext(), "",
-                            getString(R.string.updating), true);
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(input.getText().toString())
-                            .build();
+            ProgressDialog pg = ProgressDialog.show(getContext(), "", getString(R.string.updating), true);
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(input.getText().toString()).build();
 
-                    currentUser.updateProfile(profileUpdates).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), getString(R.string.user_name_changed), Toast.LENGTH_SHORT).show();
-                            updateUserInfo();
-                        } else {
-                            Toast.makeText(getContext(), getString(R.string.user_name_change_fail), Toast.LENGTH_SHORT).show();
-                        }
-                        pg.dismiss();
-                    });
-                });
+            currentUser.updateProfile(profileUpdates).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getContext(), getString(R.string.user_name_changed), Toast.LENGTH_SHORT).show();
+                    updateUserInfo();
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.user_name_change_fail), Toast.LENGTH_SHORT).show();
+                }
+                pg.dismiss();
+            });
+        });
 
         // Setting Negative "NO" Btn
         alertDialog.setNegativeButton(R.string.back, null);

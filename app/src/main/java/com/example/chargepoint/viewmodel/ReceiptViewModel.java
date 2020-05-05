@@ -12,6 +12,9 @@ import com.example.chargepoint.pojo.Receipt;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Created by Art
+ */
 public class ReceiptViewModel extends ViewModel {
     private final static String TAG = "RECEIPT_VM";
 

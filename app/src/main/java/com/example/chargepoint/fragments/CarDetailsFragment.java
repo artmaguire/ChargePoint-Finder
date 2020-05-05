@@ -24,6 +24,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Created by Art
+ */
 public class CarDetailsFragment extends BackFragment {
 
     private String TAG = "CAR_DETAILS";

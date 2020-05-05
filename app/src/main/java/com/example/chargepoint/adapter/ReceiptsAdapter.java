@@ -25,6 +25,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Created by Art
+ */
 public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHolder> {
 
     private static final String TAG = "Receipt Adapter";
@@ -75,7 +78,6 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
                 }
             }
         });
-
 
         holder.receiptDate.setText(dateString);
         holder.receiptAmount.setText(root.getContext().getString(R.string.currency_symbol_with_amount, amount));
