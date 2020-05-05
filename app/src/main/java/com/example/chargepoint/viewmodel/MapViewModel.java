@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
+/**
+ * Created by Art
+ */
 public class MapViewModel extends ViewModel {
     private final static String TAG = "MAP_VM";
 

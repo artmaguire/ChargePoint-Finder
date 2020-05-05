@@ -9,6 +9,9 @@ import com.example.chargepoint.services.ChargingService;
 
 import static android.content.Context.POWER_SERVICE;
 
+/**
+ * Created by Art
+ */
 public class ChargingAlarmReceiver extends BroadcastReceiver {
     public static final String CHARGE_WAKE_LOCK = "CHARGEPOINT::WAKE_LOCK";
 
@@ -17,8 +20,7 @@ public class ChargingAlarmReceiver extends BroadcastReceiver {
         PowerManager powerManager = (PowerManager) context.getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock;
         if (powerManager != null) {
-            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                    CHARGE_WAKE_LOCK);
+            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, CHARGE_WAKE_LOCK);
             wakeLock.acquire(2 * 60 * 1000L /*2 minutes*/);
         }
 

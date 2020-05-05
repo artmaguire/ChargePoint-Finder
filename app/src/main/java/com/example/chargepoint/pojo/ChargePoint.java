@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by Art
+ */
 public class ChargePoint implements Serializable {
     private String map_id;
     private String operator;

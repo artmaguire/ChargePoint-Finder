@@ -6,6 +6,9 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+/**
+ * Created by Art
+ */
 abstract class BackFragment extends Fragment {
 
     BackFragment() {

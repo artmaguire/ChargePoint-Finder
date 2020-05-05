@@ -12,6 +12,9 @@ import com.example.chargepoint.R;
 
 import java.util.Locale;
 
+/**
+ * Created by Art
+ */
 public class PreferenceConfiguration {
 
     public static void updateConfiguration(Context context) {
@@ -73,9 +76,7 @@ public class PreferenceConfiguration {
     }
 
     public static boolean isNightMode(Context context) {
-        int nightModeFlags =
-                context.getResources().getConfiguration().uiMode &
-                        Configuration.UI_MODE_NIGHT_MASK;
+        int nightModeFlags = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
 
         return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
     }

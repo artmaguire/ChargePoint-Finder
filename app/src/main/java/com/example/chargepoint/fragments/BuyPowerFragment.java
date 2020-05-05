@@ -38,6 +38,9 @@ import java.util.UUID;
 
 import static com.google.firebase.Timestamp.now;
 
+/**
+ * Created by Art
+ */
 public class BuyPowerFragment extends BackFragment {
 
     private static final String TAG = "BUY_POWER";
@@ -168,21 +171,19 @@ public class BuyPowerFragment extends BackFragment {
 
                 FirebaseHelper fbHelper = FirebaseHelper.getInstance();
 
-                Receipt r = new Receipt(UUID.randomUUID()
-                        .toString()
-                        .substring(0, 17), cost, duration, now(), cardNumber, Double.parseDouble(amountEditText.getText()
+                Receipt r = new Receipt(UUID.randomUUID().toString().substring(0, 17), cost, duration, now(), cardNumber, Double.parseDouble(amountEditText.getText()
                         .toString()), cp.getMap_id(), FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                 fbHelper.addReceiptToDB(r, task -> {
-                            dialog.dismiss();
+                    dialog.dismiss();
 
                     Intent i = new Intent(requireActivity(), ChargingService.class);
                     i.putExtra(ChargingService.CHARGE_RECEIPT, r);
                     requireActivity().startService(i);
 
-                            new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class).destroyReceipts();
-                            Navigation.findNavController(view).popBackStack();
-                        });
+                    new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class).destroyReceipts();
+                    Navigation.findNavController(view).popBackStack();
+                });
             } else {
                 Toast.makeText(getContext(), getString(R.string.no_cards_available), Toast.LENGTH_SHORT).show();
             }

@@ -10,6 +10,9 @@ import com.google.firebase.firestore.Exclude;
 
 import java.util.Date;
 
+/**
+ * Created by Art
+ */
 public class Receipt implements Parcelable, Comparable<Receipt> {
     public static final Creator<Receipt> CREATOR = new Creator<Receipt>() {
         @Override
@@ -165,14 +168,7 @@ public class Receipt implements Parcelable, Comparable<Receipt> {
     @NonNull
     @Override
     public String toString() {
-        return "Invoice ID: " + invoice_id + "\n"
-                + "Cost: " + cost + "\n"
-                + "Duration: " + duration + "\n"
-                + "Datetime: " + datetime + "\n"
-                + "Card: " + card + "\n"
-                + "Electricity: " + electricity + "\n"
-                + "Map ID: " + map_id + "\n"
-                + "User ID: " + user_id;
+        return "Invoice ID: " + invoice_id + "\n" + "Cost: " + cost + "\n" + "Duration: " + duration + "\n" + "Datetime: " + datetime + "\n" + "Card: " + card + "\n" + "Electricity: " + electricity + "\n" + "Map ID: " + map_id + "\n" + "User ID: " + user_id;
     }
 
     @Override

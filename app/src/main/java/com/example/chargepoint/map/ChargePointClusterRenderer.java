@@ -21,6 +21,9 @@ import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 
+/**
+ * Created by Art
+ */
 public class ChargePointClusterRenderer extends DefaultClusterRenderer<ChargePointCluster> {
 
     private final Context context;

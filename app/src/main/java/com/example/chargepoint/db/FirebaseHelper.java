@@ -18,6 +18,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+/**
+ * Created by Art
+ */
 public class FirebaseHelper {
     private static FirebaseHelper instance;
     private FirebaseUser currentFirebaseUser;
@@ -46,23 +49,15 @@ public class FirebaseHelper {
     }
 
     public void getAllReceiptsFromUser(OnCompleteListener<QuerySnapshot> listener) {
-        db.collection("receipts")
-                .whereEqualTo("user_id", currentFirebaseUser.getUid())
-                .get()
-                .addOnCompleteListener(listener);
+        db.collection("receipts").whereEqualTo("user_id", currentFirebaseUser.getUid()).get().addOnCompleteListener(listener);
     }
 
     public void getAllChargePoints(OnCompleteListener<QuerySnapshot> listener) {
-        db.collection("chargepoints")
-                .get()
-                .addOnCompleteListener(listener);
+        db.collection("chargepoints").get().addOnCompleteListener(listener);
     }
 
     public void getChargePoint(String map_id, OnCompleteListener<DocumentSnapshot> listener) {
-        db.collection("chargepoints")
-                .document(map_id)
-                .get()
-                .addOnCompleteListener(listener);
+        db.collection("chargepoints").document(map_id).get().addOnCompleteListener(listener);
     }
 
     public void addReceiptToDB(Receipt r, OnCompleteListener<DocumentReference> listener) {

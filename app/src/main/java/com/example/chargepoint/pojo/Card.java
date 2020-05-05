@@ -2,6 +2,9 @@ package com.example.chargepoint.pojo;
 
 import androidx.annotation.NonNull;
 
+/**
+ * Created by Art
+ */
 public class Card {
     private String cardName;
     private String cardNumber;

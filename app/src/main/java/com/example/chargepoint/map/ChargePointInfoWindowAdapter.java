@@ -10,6 +10,9 @@ import com.example.chargepoint.pojo.ChargePoint;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
+/**
+ * Created by Art
+ */
 public class ChargePointInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     private final View iw_view;
