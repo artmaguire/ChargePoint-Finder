@@ -64,8 +64,7 @@ public class PaymentDetailsFragment extends BackFragment {
             if (!newCard) {
                 cardSelected = b.getParcelable("Card");
                 setCard(cardSelected);
-                // TODO: Add to strings.xml
-                saveCardButton.setText("Update Card");
+                saveCardButton.setText(R.string.update_card);
             }
         } else {
             Log.d(TAG, "onViewCreated: No Card Bundle");
@@ -122,8 +121,7 @@ public class PaymentDetailsFragment extends BackFragment {
                     Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
 
                     if (card.equals(cardSelected)) {
-                        //TODO Add to strings.xml
-                        Toast.makeText(getContext(), "Cards are identical", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.identical_cards, Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                         return;
                     }

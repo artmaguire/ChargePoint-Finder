@@ -131,6 +131,9 @@
     <string name="missing_information">Missing information</string>
     <string name="card_num_not_long_enough">Card number provided is not long enough</string>
     <string name="adding_card">Adding Card…</string>
+    <string name="create_new_card">Create New Card</string>
+    <string name="update_card">Update Card</string>
+    <string name="identical_cards">Cards are identical</string>
 
     <!-- Card -->
     <string name="no_cards_available">No card available for this user.</string>
@@ -169,9 +172,5 @@
     <string name="email_wrong_address">Wrong email address.</string>
     <string name="no_receipts">You have no receipts.</string>
     <string name="check_your_previous_receipts">Check your previous receipts</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="create_new_card">Create New Card</string>
 
 </resources>
