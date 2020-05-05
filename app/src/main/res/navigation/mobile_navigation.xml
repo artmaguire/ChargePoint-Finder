@@ -145,7 +145,7 @@
     <fragment
         android:id="@+id/userCardsFragment"
         android:name="com.example.chargepoint.fragments.UserCardsFragment"
-        android:label="fragment_user_cards"
+        android:label="@string/cards"
         tools:layout="@layout/fragment_user_cards">
         <action
             android:id="@+id/action_userCardsFragment_to_fragment_payment_details"

@@ -14,6 +14,7 @@
     <string name="title_buy_power">Buy Power</string>
     <string name="receipt">Receipt</string>
     <string name="update_information">Update Information</string>
+    <string name="cards">Cards</string>
 
     <!-- Preferences -->
     <string name="user_information">User Information</string>
