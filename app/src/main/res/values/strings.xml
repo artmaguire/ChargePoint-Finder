@@ -90,6 +90,7 @@
     <string name="currency_symbol_with_amount">€%1$.2f</string>
     <string name="select_card">Select Card…</string>
     <string name="create_card">Create New Card…</string>
+    <string name="active_receipt">You currently have a car charging until: %1$s</string>
 
     <!-- Receipt -->
     <string name="go_to_receipt">Go to receipt</string>

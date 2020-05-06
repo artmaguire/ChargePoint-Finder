@@ -27,13 +27,17 @@ import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.pojo.Receipt;
 import com.example.chargepoint.services.ChargingService;
+import com.example.chargepoint.utils.PreferenceConfiguration;
 import com.example.chargepoint.viewmodel.ReceiptViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import static com.google.firebase.Timestamp.now;
@@ -61,6 +65,7 @@ public class BuyPowerFragment extends BackFragment {
     private TextView voltsView;
     private TextView ampsView;
     private TextView rateView;
+    private TextView activeReceipt;
 
     // TODO: Get rate from db
     private final double rate = 0.33;
@@ -92,8 +97,24 @@ public class BuyPowerFragment extends BackFragment {
         amountEditText = view.findViewById(R.id.amountCostEditText);
         payButton = view.findViewById(R.id.payButton);
         cardSpinner = view.findViewById(R.id.cardSpinner);
+        activeReceipt = view.findViewById(R.id.activeReceipt);
 
         cardNumber = "";
+
+        Receipt currR = ChargingService.getReceipt();
+        if (currR != null && currR.isCharging()) {
+            activeReceipt.setVisibility(View.VISIBLE);
+            Date timeToDate = new Date(currR.getFinishTimeInMillis());
+            Locale locale = PreferenceConfiguration.getCurrentLocale(requireContext());
+            DateFormat tf = DateFormat.getTimeInstance(DateFormat.SHORT, locale);
+            String time = tf.format(timeToDate);
+            activeReceipt.setText(requireActivity().getString(R.string.active_receipt, time));
+
+            amountEditText.setEnabled(false);
+            timeSpinner.setEnabled(false);
+            cardSpinner.setEnabled(false);
+            payButton.setEnabled(false);
+        }
 
         Bundle b = getArguments();
 
