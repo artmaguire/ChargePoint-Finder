@@ -17,9 +17,6 @@
             android:id="@+id/action_navigation_home_to_fragment_news"
             app:destination="@id/fragment_news" />
         <action
-            android:id="@+id/action_navigation_home_to_fragment_terms"
-            app:destination="@id/fragment_terms" />
-        <action
             android:id="@+id/action_navigation_home_to_fragment_car_details"
             app:destination="@id/fragment_car_details" />
         <action

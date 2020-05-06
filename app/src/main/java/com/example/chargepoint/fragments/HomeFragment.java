@@ -1,10 +1,12 @@
 package com.example.chargepoint.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -21,11 +25,15 @@ import androidx.navigation.Navigation;
 import com.example.chargepoint.R;
 import com.example.chargepoint.pojo.Receipt;
 import com.example.chargepoint.services.ChargingService;
+import com.example.chargepoint.utils.PreferenceConfiguration;
 import com.example.chargepoint.viewmodel.ReceiptViewModel;
+import com.google.android.material.appbar.AppBarLayout;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 public class HomeFragment extends Fragment {
@@ -39,16 +47,24 @@ public class HomeFragment extends Fragment {
     private BroadcastReceiver bReceiver;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int height = displaymetrics.heightPixels;
+
+        CoordinatorLayout.LayoutParams layoutParams = new CoordinatorLayout.LayoutParams(CoordinatorLayout.LayoutParams.MATCH_PARENT, (int) (height / 2.8));
+        AppBarLayout appBarLayout = root.findViewById(R.id.appbar);
+        appBarLayout.setLayoutParams(layoutParams);
 
         return root;
     }
 
-    private static String formatMilli(long milli) {
+    private String formatMilli(long milli) {
         Date date = new Date(milli);
-        // TODO: Change to new locale formatting
-        DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+
+        Locale locale = PreferenceConfiguration.getCurrentLocale(requireContext());
+        DateFormat formatter = new SimpleDateFormat("HH:mm:ss", locale);
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         return formatter.format(date);
@@ -135,8 +151,17 @@ public class HomeFragment extends Fragment {
         receiptTimer.setText(R.string.charge_complete);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onResume() {
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            try {
+                actionBar.setShowHideAnimationEnabled(false);
+            } catch (Exception ignored) {
+            }
+            actionBar.hide();
+        }
         requireActivity().registerReceiver(bReceiver, new IntentFilter(ChargingService.BROADCAST_RECEIVER));
         Receipt r = ChargingService.getReceipt();
 
@@ -155,20 +180,12 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onPause() {
+        try {
+            Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
+        } catch (Exception ignored) {
+        }
         receipt = null;
         requireActivity().unregisterReceiver(bReceiver);
         super.onPause();
-    }
-
-    @Override
-    public void onStart() {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 }

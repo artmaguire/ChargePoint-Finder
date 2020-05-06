@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chargepoint.activities.MainActivity">
+    tools:context=".fragments.HomeFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="150dp"
         android:theme="@style/AppTheme.ActionBarStyle">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -34,97 +34,101 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_vertical"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:overScrollMode="always"
+        android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/windowBackground"
+            android:clipToPadding="false"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/durationCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:clipToPadding="false"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:clickable="true"
+                android:focusable="true">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/durationCard"
-                    android:layout_width="340dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/windowBackground"
-                    android:clickable="true"
-                    android:focusable="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="12dp">
 
-                    <LinearLayout
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:background="@drawable/circle_background_red"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_access_time_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/charge_time"
+                        android:textStyle="bold" />
+
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="12dp"
+                        android:background="@color/textColourHint" />
+
+                    <TextView
+                        android:id="@+id/receiptTimer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="12dp">
+                        android:padding="5dp"
+                        android:text="@string/no_car_charging"
+                        android:textColor="@color/textColourHint" />
 
-                        <ImageView
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
-                            android:background="@drawable/circle_background_red"
-                            android:padding="10dp"
-                            android:src="@drawable/ic_access_time_black_24dp" />
+                    <ProgressBar
+                        android:id="@+id/chargeProgress"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:max="100"
+                        android:progress="1"
+                        android:visibility="invisible" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/charge_time"
-                            android:textStyle="bold" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_margin="12dp"
-                            android:background="@color/textColourHint" />
-
-                        <TextView
-                            android:id="@+id/receiptTimer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:padding="5dp"
-                            android:text="@string/no_car_charging"
-                            android:textColor="@color/textColourHint" />
-
-                        <ProgressBar
-                            android:id="@+id/chargeProgress"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:max="100"
-                            android:progress="1"
-                            android:visibility="invisible" />
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/aboutCard"
-                    android:layout_width="160dp"
+                    android:id="@+id/carDetailsCard"
+                    android:layout_width="0dp"
                     android:layout_height="190dp"
-                    android:layout_margin="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="0.5"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -169,10 +173,10 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/newsCard"
-                    android:layout_width="160dp"
+                    android:layout_width="0dp"
                     android:layout_height="190dp"
-                    android:layout_margin="12dp"
-                    android:background="@color/windowBackground"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="0.5"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -221,14 +225,18 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/previousReceiptsCard"
-                    android:layout_width="160dp"
+                    android:layout_width="0dp"
                     android:layout_height="190dp"
-                    android:layout_margin="12dp"
-                    android:background="@color/windowBackground"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="0.5"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -271,11 +279,11 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/carDetailsCard"
-                    android:layout_width="160dp"
+                    android:id="@+id/aboutCard"
+                    android:layout_width="0dp"
                     android:layout_height="190dp"
-                    android:layout_margin="12dp"
-                    android:background="@color/windowBackground"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="0.5"
                     android:clickable="true"
                     android:focusable="true">
 
