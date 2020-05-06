@@ -9,45 +9,45 @@
     <string name="title_about">À propos de</string>
     <string name="title_news">Nouvelles</string>
     <string name="title_terms">Termes et conditions</string>
-    <string name="title_car_details">Détails de la voiture</string>
+    <string name="title_car_details">Détails sur la voiture</string>
 
-    <string name="title_buy_power">Acheter de la puissance</string>
-    <string name="receipt">Le reçu</string>
-    <string name="update_information">Mettre à jour les informations</string>
+    <string name="title_buy_power">Achetez de l\'éléctricité</string>
+    <string name="receipt">Reçus</string>
+    <string name="update_information">Mettre à jours vos informations</string>
     <string name="cards">Cartes</string>
 
     <!-- Preferences -->
-    <string name="user_information">Informations de l\'utilisateur</string>
+    <string name="user_information">Information utilisateur</string>
     <string name="account_details">Détails du compte</string>
-    <string name="name_email_password">Nom, email, mot de passe</string>
+    <string name="name_email_password">Nom, Email, Mot de passe</string>
     <string name="payment_details">Détails de paiement</string>
-    <string name="bank_details">Coordonnées bancaires</string>
-    <string name="car_details">Détails de la voiture</string>
+    <string name="bank_details">Information bancaire</string>
+    <string name="car_details">Détails sur la voiture</string>
     <string name="car_type">Type de voiture</string>
     <string name="payment_receipts">Reçus de paiement</string>
     <string name="previous_receipts">Reçus précédents</string>
 
     <string name="general">Général</string>
     <string name="dark_theme">Thème sombre</string>
-    <string name="change_theme">Change le thème</string>
+    <string name="change_theme">Changer le thème</string>
     <string name="sign_in_with_biometrics">Connectez-vous avec la biométrie</string>
-    <string name="enable_fingerprint_unlock">Activer le déverrouillage par empreinte digitale</string>
+    <string name="enable_fingerprint_unlock">Activer le déverrouillage par empreinte</string>
     <string name="language">Langue</string>
-    <string name="select_language">Sélectionnez la langue de l\'application</string>
+    <string name="select_language">Sélectionnez la langue de l\'app</string>
 
     <string name="about_us">À propos de nous</string>
-    <string name="about_us_info">En savoir plus sur l\'application ChargePoint</string>
+    <string name="about_us_info">En savoir plus sur l\'app ChargePoint</string>
     <string name="sign_out">Déconnexion</string>
 
     <string-array name="languages">
-        <item>Suivez la langue du système</item>
-        <item>Anglais (RU)</item>
+        <item>Utiliser la langue du système</item>
+        <item>Anglais (UK)</item>
         <item>Français (FR)</item>
-        <item>Allemand (AL)</item>
+        <item>Allemand (DE)</item>
     </string-array>
 
     <!-- Home -->
-    <string name="check_about_us">En savoir plus sur l\'application ChargePoint</string>
+    <string name="check_about_us">En savoir plus sur l\'app ChargePoint</string>
     <string name="check_news">Consultez les dernières nouvelles de ChargePoint</string>
     <string name="check_terms">Voir nos conditions</string>
     <string name="check_car_details">Vérifiez et mettez à jour les détails de votre voiture</string>
@@ -149,7 +149,7 @@
     <!-- Buttons -->
     <string name="accept">J\'accepte</string>
     <string name="decline">Déclin</string>
-    <string name="save">sauver</string>
+    <string name="save">Sauver</string>
     <string name="back">Retour</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
