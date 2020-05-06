@@ -32,7 +32,7 @@
 
     <style name="AppTheme.ButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:backgroundTint">@color/button_color</item>
     </style>
 
     <style name="AppTheme.CardViewStyle" parent="CardView">
