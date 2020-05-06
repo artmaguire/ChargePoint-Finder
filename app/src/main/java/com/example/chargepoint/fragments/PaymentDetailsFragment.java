@@ -61,6 +61,13 @@ public class PaymentDetailsFragment extends BackFragment {
         cardSecurityNumber = view.findViewById(R.id.securityNumber);
         Button saveCardButton = view.findViewById(R.id.saverbutton);
 
+        if (cardName.getText().toString().equals("") || cardNumber.getText().toString().equals("") || cardSecurityNumber.getText()
+                .toString()
+                .equals("") || txtMonthYear.getText().toString().equals("")) {
+            if (!cardName.getText().toString().matches("\\w+\\.?"))
+                saveCardButton.setEnabled(false);
+        }
+
         Bundle b = getArguments();
 
         if (b != null) {
@@ -78,71 +85,83 @@ public class PaymentDetailsFragment extends BackFragment {
         //on click functionality to select the month and date of the card
         txtMonthYear.setOnClickListener(y -> getMonth());
 
-        // Send card to Firestore when save is clicked
-        saveCardButton.setOnClickListener(v -> {
-            String name;
-            String number;
-            String date;
-            String securityNumber;
+        if (!cardName.getText().toString().equals("") || !cardNumber.getText().toString().equals("") || !cardSecurityNumber.getText()
+                .toString()
+                .equals("") || !txtMonthYear.getText().toString().equals("")) {
+            if (cardName.getText().toString().matches("\\w+\\.?")) {
+                saveCardButton.setEnabled(true);
+                // Send card to Firestore when save is clicked
+                saveCardButton.setOnClickListener(v -> {
+                    String name;
+                    String number;
+                    String date;
+                    String securityNumber;
 
-            // Check if user inputted information
-            if (cardName.getText().toString().equals("") || cardNumber.getText().toString().equals("") || cardSecurityNumber.getText()
-                    .toString()
-                    .equals("") || txtMonthYear.getText().toString().equals("")) {
-                Toast.makeText(getContext(), getString(R.string.missing_information), Toast.LENGTH_SHORT).show();
-            } else if (cardNumber.getText().length() < 16) {
-                Toast.makeText(getContext(), getString(R.string.card_num_not_long_enough), Toast.LENGTH_SHORT).show();
-            } else {
-                if (newCard) {
-                    ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.adding_card), true);
-                    name = cardName.getText().toString();
-                    number = cardNumber.getText().toString();
-                    date = selectedDate;
-                    securityNumber = cardSecurityNumber.getText().toString();
+                    // Check if user inputted information
+                    if (cardName.getText().toString().equals("") || cardNumber.getText()
+                            .toString()
+                            .equals("") || cardSecurityNumber.getText().toString().equals("") || txtMonthYear.getText()
+                            .toString()
+                            .equals("")) {
+                        Toast.makeText(getContext(), getString(R.string.missing_information), Toast.LENGTH_SHORT).show();
+                    } else if (cardNumber.getText().length() < 16) {
+                        Toast.makeText(getContext(), getString(R.string.card_num_not_long_enough), Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (newCard) {
+                            saveCardButton.setEnabled(true);
+                            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.adding_card), true);
+                            name = cardName.getText().toString();
+                            number = cardNumber.getText().toString();
+                            date = selectedDate;
+                            securityNumber = cardSecurityNumber.getText().toString();
 
-                    // Create bew card object
-                    Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
-                    Log.d(TAG, "onViewCreated: " + card.toString());
+                            // Create bew card object
+                            Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
+                            Log.d(TAG, "onViewCreated: " + card.toString());
 
-                    // Send card to database
-                    FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-                    fbHelper.addCardToDB(card, task -> {
-                        Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                        Navigation.findNavController(view).popBackStack();
-                    });
-                } else {
-                    ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.updating), true);
-                    name = cardName.getText().toString();
-                    number = cardNumber.getText().toString();
-                    if (selectedDate == null) {
-                        date = cardSelected.getCardDate();
-                    } else
-                        date = selectedDate;
+                            // Send card to database
+                            FirebaseHelper fbHelper = FirebaseHelper.getInstance();
+                            fbHelper.addCardToDB(card, task -> {
+                                Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Navigation.findNavController(view).popBackStack();
+                            });
+                        } else {
+                            saveCardButton.setEnabled(true);
+                            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.updating), true);
+                            name = cardName.getText().toString();
+                            number = cardNumber.getText().toString();
+                            if (selectedDate == null) {
+                                date = cardSelected.getCardDate();
+                            } else
+                                date = selectedDate;
 
-                    securityNumber = cardSecurityNumber.getText().toString();
+                            securityNumber = cardSecurityNumber.getText().toString();
 
-                    // Create bew card object
-                    Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
+                            // Create bew card object
+                            Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
 
-                    if (card.equals(cardSelected)) {
-                        Toast.makeText(getContext(), R.string.identical_cards, Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                        return;
+                            if (card.equals(cardSelected)) {
+                                Toast.makeText(getContext(), R.string.identical_cards, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                return;
+                            }
+
+                            Log.d(TAG, "onViewCreated: " + card.toString());
+
+                            // Send card to database
+                            FirebaseHelper fbHelper = FirebaseHelper.getInstance();
+                            fbHelper.updateCard(cardSelected, card, task -> {
+                                Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Navigation.findNavController(view).popBackStack();
+                            });
+                        }
+
                     }
-
-                    Log.d(TAG, "onViewCreated: " + card.toString());
-
-                    // Send card to database
-                    FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-                    fbHelper.updateCard(cardSelected, card, task -> {
-                        Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                        Navigation.findNavController(view).popBackStack();
-                    });
-                }
+                });
             }
-        });
+        }
     }
 
     private void getMonth() {
