@@ -5,9 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.chargepoint.R;
 
 public class NewsFragment extends BackFragment {
+
+    RecyclerView recyclerView;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -15,7 +20,19 @@ public class NewsFragment extends BackFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_news, container, false);
+
+
+        recyclerView = v.findViewById(R.id.rv);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager rvLiLayoutManager = layoutManager;
+
+        recyclerView.setLayoutManager(rvLiLayoutManager);
+
+
+
+        return v;
     }
 }

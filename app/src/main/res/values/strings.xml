@@ -174,5 +174,6 @@
     <string name="no_receipts">You have no receipts.</string>
     <string name="check_your_previous_receipts">Check your previous receipts</string>
     <string name="card_deleted">Card deleted</string>
+    <string name="latest_news">LATEST NEWS</string>
 
 </resources>
