@@ -2,6 +2,8 @@ package com.example.chargepoint.fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +31,7 @@ import java.util.Locale;
  * Created by Art
  * User can edit a card in the database and add new card
  */
-public class PaymentDetailsFragment extends BackFragment {
+public class PaymentDetailsFragment extends BackFragment implements TextWatcher {
 
     private String TAG = "PAYMENT_DETAILS";
 
@@ -40,6 +42,7 @@ public class PaymentDetailsFragment extends BackFragment {
     private String selectedDate;
     private boolean newCard = true;
     private Card cardSelected;
+    private Button saveCardButton;
 
     private FirebaseAuth mAuth;
 
@@ -59,7 +62,7 @@ public class PaymentDetailsFragment extends BackFragment {
         cardNumber = view.findViewById(R.id.cardNumber);
         txtMonthYear = view.findViewById(R.id.expiryDate);
         cardSecurityNumber = view.findViewById(R.id.securityNumber);
-        Button saveCardButton = view.findViewById(R.id.saverbutton);
+        saveCardButton = view.findViewById(R.id.saverbutton);
 
         if (cardName.getText().toString().equals("") || cardNumber.getText().toString().equals("") || cardSecurityNumber.getText()
                 .toString()
@@ -84,84 +87,78 @@ public class PaymentDetailsFragment extends BackFragment {
 
         //on click functionality to select the month and date of the card
         txtMonthYear.setOnClickListener(y -> getMonth());
+        cardName.addTextChangedListener(this);
+        cardNumber.addTextChangedListener(this);
+        txtMonthYear.addTextChangedListener(this);
+        cardSecurityNumber.addTextChangedListener(this);
 
-        if (!cardName.getText().toString().equals("") || !cardNumber.getText().toString().equals("") || !cardSecurityNumber.getText()
-                .toString()
-                .equals("") || !txtMonthYear.getText().toString().equals("")) {
-            if (cardName.getText().toString().matches("\\w+\\.?")) {
-                saveCardButton.setEnabled(true);
-                // Send card to Firestore when save is clicked
-                saveCardButton.setOnClickListener(v -> {
-                    String name;
-                    String number;
-                    String date;
-                    String securityNumber;
+        // Send card to Firestore when save is clicked
+        saveCardButton.setOnClickListener(v -> {
+            String name;
+            String number;
+            String date;
+            String securityNumber;
 
-                    // Check if user inputted information
-                    if (cardName.getText().toString().equals("") || cardNumber.getText()
-                            .toString()
-                            .equals("") || cardSecurityNumber.getText().toString().equals("") || txtMonthYear.getText()
-                            .toString()
-                            .equals("")) {
-                        Toast.makeText(getContext(), getString(R.string.missing_information), Toast.LENGTH_SHORT).show();
-                    } else if (cardNumber.getText().length() < 16) {
-                        Toast.makeText(getContext(), getString(R.string.card_num_not_long_enough), Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (newCard) {
-                            saveCardButton.setEnabled(true);
-                            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.adding_card), true);
-                            name = cardName.getText().toString();
-                            number = cardNumber.getText().toString();
-                            date = selectedDate;
-                            securityNumber = cardSecurityNumber.getText().toString();
+            // Check if user inputted information
+            if (cardName.getText().toString().equals("") || cardNumber.getText().toString().equals("") || cardSecurityNumber.getText()
+                    .toString()
+                    .equals("") || txtMonthYear.getText().toString().equals("")) {
+                Toast.makeText(getContext(), getString(R.string.missing_information), Toast.LENGTH_SHORT).show();
+            } else if (cardNumber.getText().length() < 16) {
+                Toast.makeText(getContext(), getString(R.string.card_num_not_long_enough), Toast.LENGTH_SHORT).show();
+            } else {
+                if (newCard) {
+                    saveCardButton.setEnabled(true);
+                    ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.adding_card), true);
+                    name = cardName.getText().toString();
+                    number = cardNumber.getText().toString();
+                    date = selectedDate;
+                    securityNumber = cardSecurityNumber.getText().toString();
 
-                            // Create bew card object
-                            Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
-                            Log.d(TAG, "onViewCreated: " + card.toString());
+                    // Create bew card object
+                    Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
+                    Log.d(TAG, "onViewCreated: " + card.toString());
 
-                            // Send card to database
-                            FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-                            fbHelper.addCardToDB(card, task -> {
-                                Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                                Navigation.findNavController(view).popBackStack();
-                            });
-                        } else {
-                            saveCardButton.setEnabled(true);
-                            ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.updating), true);
-                            name = cardName.getText().toString();
-                            number = cardNumber.getText().toString();
-                            if (selectedDate == null) {
-                                date = cardSelected.getCardDate();
-                            } else
-                                date = selectedDate;
+                    // Send card to database
+                    FirebaseHelper fbHelper = FirebaseHelper.getInstance();
+                    fbHelper.addCardToDB(card, task -> {
+                        Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        Navigation.findNavController(view).popBackStack();
+                    });
+                } else {
+                    saveCardButton.setEnabled(true);
+                    ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.updating), true);
+                    name = cardName.getText().toString();
+                    number = cardNumber.getText().toString();
+                    if (selectedDate == null) {
+                        date = cardSelected.getCardDate();
+                    } else
+                        date = selectedDate;
 
-                            securityNumber = cardSecurityNumber.getText().toString();
+                    securityNumber = cardSecurityNumber.getText().toString();
 
-                            // Create bew card object
-                            Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
+                    // Create bew card object
+                    Card card = new Card(name, number, date, securityNumber, mAuth.getUid());
 
-                            if (card.equals(cardSelected)) {
-                                Toast.makeText(getContext(), R.string.identical_cards, Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                                return;
-                            }
-
-                            Log.d(TAG, "onViewCreated: " + card.toString());
-
-                            // Send card to database
-                            FirebaseHelper fbHelper = FirebaseHelper.getInstance();
-                            fbHelper.updateCard(cardSelected, card, task -> {
-                                Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                                Navigation.findNavController(view).popBackStack();
-                            });
-                        }
-
+                    if (card.equals(cardSelected)) {
+                        Toast.makeText(getContext(), R.string.identical_cards, Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        return;
                     }
-                });
+
+                    Log.d(TAG, "onViewCreated: " + card.toString());
+
+                    // Send card to database
+                    FirebaseHelper fbHelper = FirebaseHelper.getInstance();
+                    fbHelper.updateCard(cardSelected, card, task -> {
+                        Toast.makeText(getContext(), getString(R.string.card_saved), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        Navigation.findNavController(view).popBackStack();
+                    });
+                }
             }
-        }
+        });
     }
 
     private void getMonth() {
@@ -214,5 +211,29 @@ public class PaymentDetailsFragment extends BackFragment {
         cardNumber.setText(card.getCardNumber());
         txtMonthYear.setText(card.getCardDate());
         cardSecurityNumber.setText(card.getCardSecurityNumber());
+    }
+
+    private void changeButtonState() {
+        if (!cardName.getText().toString().equals("") && cardNumber.getText().length() == 16 && cardSecurityNumber.getText()
+                .length() == 3 && !txtMonthYear.getText().toString().equals("")) {
+            saveCardButton.setEnabled(true);
+        } else {
+            saveCardButton.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        changeButtonState();
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }
