@@ -67,7 +67,7 @@
         android:id="@+id/noChargePointsView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No ChargePoints available."
+        android:text="@string/no_chargepoints_available"
         android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"

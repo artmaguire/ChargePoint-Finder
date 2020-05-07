@@ -102,7 +102,8 @@ public class ChargePointsFragment extends Fragment {
     }
 
     private void loadCounty() {
-        List<String> counties = new ArrayList<>(Arrays.asList("All", "Carlow", "Cavan", "Clare", "Cork", "Donegal", "Dublin", "Galway", "Kerry", "Kildare", "Kilkenny", "Laois", "Leitrim", "Limerick", "Longford", "Louth", "Mayo", "Meath", "Monaghan", "Offaly", "Roscommon", "Sligo", "Tipperary", "Waterford", "Westmeath", "Wexford", "Wicklow"));
+        List<String> counties = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.counties)));
+
 
         spinnerArray.addAll(counties);
         spinnerAdapter.notifyDataSetChanged();

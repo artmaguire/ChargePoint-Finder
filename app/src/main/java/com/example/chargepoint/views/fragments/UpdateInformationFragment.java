@@ -3,7 +3,6 @@ package com.example.chargepoint.views.fragments;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -169,7 +168,6 @@ public class UpdateInformationFragment extends BackFragment {
         ProgressDialog pg = ProgressDialog.show(getContext(), "", getString(R.string.updating), true);
         AuthCredential credential = EmailAuthProvider.getCredential(currentUser.getEmail(), "pass1234");
         currentUser.reauthenticate(credential).addOnCompleteListener(task -> {
-            Log.d(TAG, getString(R.string.user_reauthenticated));
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             user.updateEmail(emailAddress).addOnCompleteListener(task1 -> {
                 if (task1.isSuccessful()) {
@@ -187,7 +185,6 @@ public class UpdateInformationFragment extends BackFragment {
         ProgressDialog pg = ProgressDialog.show(getContext(), "", getString(R.string.updating), true);
         AuthCredential credential = EmailAuthProvider.getCredential(currentUser.getEmail(), "pass1234");
         currentUser.reauthenticate(credential).addOnCompleteListener(task -> {
-            Log.d(TAG, getString(R.string.user_reauthenticated));
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             user.updatePassword(password).addOnCompleteListener(task1 -> {
                 if (task1.isSuccessful()) {

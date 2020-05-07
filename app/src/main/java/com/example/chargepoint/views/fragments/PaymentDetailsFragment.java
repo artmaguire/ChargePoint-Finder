@@ -191,7 +191,7 @@ public class PaymentDetailsFragment extends BackFragment implements TextWatcher 
 
         MonthFormat monthFormat = MonthFormat.SHORT; //MonthFormat.LONG or MonthFormat.SHORT
         //Simple way
-        dialogFragment = MonthYearPickerDialogFragment.getInstance(monthSelected, yearSelected, minDate, maxDate, "Select Date", locale, monthFormat);
+        dialogFragment = MonthYearPickerDialogFragment.getInstance(monthSelected, yearSelected, minDate, maxDate, getString(R.string.select_date), locale, monthFormat);
 
         dialogFragment.setOnDateSetListener((year, monthOfYear) -> {
             if (monthOfYear < 10)

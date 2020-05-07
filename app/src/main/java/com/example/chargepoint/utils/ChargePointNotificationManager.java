@@ -22,9 +22,8 @@ import com.example.chargepoint.views.activities.MainActivity;
 public class ChargePointNotificationManager {
 
     public static void displayCarChargedNotification(Context context) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.chargepoint_car_charged))
-                .setContentTitle("Your car is ready!")
-                .setContentText("Please disconnect the charger")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.chargepoint_car_charged)).setContentTitle(context
+                .getString(R.string.car_ready)).setContentText(context.getString(R.string.disconnect_charger))
                 .setColor(context.getResources().getColor(R.color.colorAccent))
                 .setContentIntent(PendingIntent.getActivity(context, 11, new Intent(context, MainActivity.class), 0))
                 .setAutoCancel(true)
@@ -41,9 +40,8 @@ public class ChargePointNotificationManager {
     }
 
     public static void displayCarChargingNotification(Context context, long finishMillis) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.chargepoint_car_charging))
-                .setContentTitle("Your car is charging")
-                .setContentText("Tap for more info")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.chargepoint_car_charging)).setContentTitle(context
+                .getString(R.string.car_charging)).setContentText(context.getString(R.string.tap_more_info))
                 .setColor(context.getResources().getColor(R.color.colorAccent))
                 .setWhen(finishMillis)
                 .setContentIntent(PendingIntent.getActivity(context, 10, new Intent(context, MainActivity.class), 0))
