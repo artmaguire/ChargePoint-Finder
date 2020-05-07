@@ -22,18 +22,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private ArrayList<Items> items;
     private Context context;
 
-    public NewsAdapter(ArrayList<Items> items, Context context){
+    public NewsAdapter(ArrayList<Items> items, Context context) {
         this.items = items;
         this.context = context;
 
     }
 
-
     @NonNull
     @Override
     public NewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_news_items,
-                parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_news_items, parent, false);
 
         return new ViewHolder(view);
     }
@@ -63,13 +61,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         ExpandableTextView descTextView;
         TextView titleTextView;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
             descTextView = itemView.findViewById(R.id.descTextview);

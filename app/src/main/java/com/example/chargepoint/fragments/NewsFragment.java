@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,8 +17,6 @@ public class NewsFragment extends BackFragment {
 
     private ArrayList<Items> items = new ArrayList<>();
 
-
-
     public NewsFragment() {
         // Required empty public constructor
     }
@@ -30,13 +26,9 @@ public class NewsFragment extends BackFragment {
 
         View v = inflater.inflate(R.layout.fragment_news, container, false);
 
+        // boolean recycleviewboolean = true;
 
-       // boolean recycleviewboolean = true;
-
-
-      RecyclerView recyclerView = v.findViewById(R.id.rv);
-
-
+        RecyclerView recyclerView = v.findViewById(R.id.rv);
 
         items.add(new Items(R.drawable.newsimagea, getString(R.string.news_title_1), getString(R.string.news_desc_1)));
         items.add(new Items(R.drawable.newsimagebx, getString(R.string.news_title_2), getString(R.string.news_desc_2)));
