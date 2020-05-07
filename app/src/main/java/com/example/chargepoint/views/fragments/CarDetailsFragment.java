@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.views.fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;

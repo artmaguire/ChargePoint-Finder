@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.pojo;
 
 public class Items {
 

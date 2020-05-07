@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ChargePointsFragment">
+    tools:context=".views.fragments.ChargePointsFragment">
 
     <LinearLayout
         android:id="@+id/sort_by_county"

@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.views.fragments;
 
 import android.app.Activity;
 import android.view.MenuItem;

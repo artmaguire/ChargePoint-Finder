@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.chargepoint.fragments.HomeFragment"
+        android:name="com.example.chargepoint.views.fragments.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/navigation_map"
-        android:name="com.example.chargepoint.fragments.MapFragment"
+        android:name="com.example.chargepoint.views.fragments.MapFragment"
         android:label="@string/title_map"
         tools:layout="@layout/fragment_map">
         <action
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/navigation_rates"
-        android:name="com.example.chargepoint.fragments.ChargePointsFragment"
+        android:name="com.example.chargepoint.views.fragments.ChargePointsFragment"
         android:label="@string/title_rates"
         tools:layout="@layout/fragment_chargepoints">
         <action
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.chargepoint.fragments.ProfileFragment"
+        android:name="com.example.chargepoint.views.fragments.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
         <action
@@ -80,31 +80,31 @@
 
     <fragment
         android:id="@+id/fragment_about"
-        android:name="com.example.chargepoint.fragments.AboutFragment"
+        android:name="com.example.chargepoint.views.fragments.AboutFragment"
         android:label="@string/title_about"
         tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/fragment_news"
-        android:name="com.example.chargepoint.fragments.NewsFragment"
+        android:name="com.example.chargepoint.views.fragments.NewsFragment"
         android:label="@string/title_news"
         tools:layout="@layout/fragment_news" />
 
     <fragment
         android:id="@+id/fragment_terms"
-        android:name="com.example.chargepoint.fragments.TermsFragment"
+        android:name="com.example.chargepoint.views.fragments.TermsFragment"
         android:label="@string/title_terms"
         tools:layout="@layout/fragment_terms" />
 
     <fragment
         android:id="@+id/fragment_car_details"
-        android:name="com.example.chargepoint.fragments.CarDetailsFragment"
+        android:name="com.example.chargepoint.views.fragments.CarDetailsFragment"
         android:label="@string/title_car_details"
         tools:layout="@layout/fragment_car_details" />
 
     <fragment
         android:id="@+id/fragment_buy_power"
-        android:name="com.example.chargepoint.fragments.BuyPowerFragment"
+        android:name="com.example.chargepoint.views.fragments.BuyPowerFragment"
         android:label="@string/title_buy_power"
         tools:layout="@layout/fragment_buy_power">
         <action
@@ -114,13 +114,13 @@
 
     <fragment
         android:id="@+id/fragment_update_information"
-        android:name="com.example.chargepoint.fragments.UpdateInformationFragment"
+        android:name="com.example.chargepoint.views.fragments.UpdateInformationFragment"
         android:label="@string/update_information"
         tools:layout="@layout/fragment_update_information" />
 
     <fragment
         android:id="@+id/fragment_previous_receipts"
-        android:name="com.example.chargepoint.fragments.PreviousReceiptsFragment"
+        android:name="com.example.chargepoint.views.fragments.PreviousReceiptsFragment"
         android:label="@string/previous_receipts"
         tools:layout="@layout/fragment_previous_receipts">
         <action
@@ -130,13 +130,13 @@
 
     <fragment
         android:id="@+id/fragment_receipt"
-        android:name="com.example.chargepoint.fragments.ReceiptFragment"
+        android:name="com.example.chargepoint.views.fragments.ReceiptFragment"
         android:label="@string/receipt"
         tools:layout="@layout/fragment_receipt" />
 
     <fragment
         android:id="@+id/fragment_payment_details"
-        android:name="com.example.chargepoint.fragments.PaymentDetailsFragment"
+        android:name="com.example.chargepoint.views.fragments.PaymentDetailsFragment"
         android:label="@string/payment_details"
         tools:layout="@layout/fragment_payment_details" />
     <action
@@ -145,7 +145,7 @@
         app:launchSingleTop="true" />
     <fragment
         android:id="@+id/userCardsFragment"
-        android:name="com.example.chargepoint.fragments.UserCardsFragment"
+        android:name="com.example.chargepoint.views.fragments.UserCardsFragment"
         android:label="@string/cards"
         tools:layout="@layout/fragment_user_cards">
         <action

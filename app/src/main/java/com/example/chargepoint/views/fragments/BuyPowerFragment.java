@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.views.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -28,7 +28,7 @@ import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.pojo.Receipt;
 import com.example.chargepoint.services.ChargingService;
 import com.example.chargepoint.utils.PreferenceConfiguration;
-import com.example.chargepoint.viewmodel.ReceiptViewModel;
+import com.example.chargepoint.views.viewmodel.ReceiptViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 

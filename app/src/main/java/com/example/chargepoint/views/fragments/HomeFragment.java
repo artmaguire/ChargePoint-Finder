@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.views.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -26,7 +26,7 @@ import com.example.chargepoint.R;
 import com.example.chargepoint.pojo.Receipt;
 import com.example.chargepoint.services.ChargingService;
 import com.example.chargepoint.utils.PreferenceConfiguration;
-import com.example.chargepoint.viewmodel.ReceiptViewModel;
+import com.example.chargepoint.views.viewmodel.ReceiptViewModel;
 import com.google.android.material.appbar.AppBarLayout;
 
 import java.text.DateFormat;

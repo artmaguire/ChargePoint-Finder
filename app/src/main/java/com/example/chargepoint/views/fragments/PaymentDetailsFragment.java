@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.views.fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -28,8 +28,9 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by Art
+ * Created by Michael
  * User can edit a card in the database and add new card
+ * DB implementation by Art
  */
 public class PaymentDetailsFragment extends BackFragment implements TextWatcher {
 

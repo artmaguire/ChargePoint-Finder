@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.views.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.adapter.ReceiptsAdapter;
-import com.example.chargepoint.viewmodel.ReceiptViewModel;
+import com.example.chargepoint.views.adapter.ReceiptsAdapter;
+import com.example.chargepoint.views.viewmodel.ReceiptViewModel;
 
 /**
  * Created by Art

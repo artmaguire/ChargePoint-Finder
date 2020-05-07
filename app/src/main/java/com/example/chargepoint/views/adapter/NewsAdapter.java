@@ -1,4 +1,4 @@
-package com.example.chargepoint.adapter;
+package com.example.chargepoint.views.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.fragments.Items;
+import com.example.chargepoint.pojo.Items;
 
 import java.util.ArrayList;
 

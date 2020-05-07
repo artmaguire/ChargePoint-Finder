@@ -1,4 +1,4 @@
-package com.example.chargepoint.activities;
+package com.example.chargepoint.views.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.chargepoint.R;
 import com.example.chargepoint.utils.ChargePointNotificationManager;
 import com.example.chargepoint.utils.PreferenceConfiguration;
-import com.example.chargepoint.viewmodel.ChargePointViewModel;
+import com.example.chargepoint.views.viewmodel.ChargePointViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 

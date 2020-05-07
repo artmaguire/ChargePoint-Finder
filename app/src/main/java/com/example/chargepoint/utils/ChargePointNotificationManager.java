@@ -13,7 +13,7 @@ import android.os.Bundle;
 import androidx.core.app.NotificationCompat;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.activities.MainActivity;
+import com.example.chargepoint.views.activities.MainActivity;
 
 /**
  * Created by Art

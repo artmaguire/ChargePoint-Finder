@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.views.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.adapter.CardsAdapter;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.pojo.Card;
+import com.example.chargepoint.views.adapter.CardsAdapter;
 
 import java.util.List;
 

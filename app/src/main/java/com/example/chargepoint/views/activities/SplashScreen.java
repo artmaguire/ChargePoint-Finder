@@ -1,4 +1,4 @@
-package com.example.chargepoint.activities;
+package com.example.chargepoint.views.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,10 +6,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.preference.PreferenceManager;
 
 import com.example.chargepoint.R;
+import com.example.chargepoint.utils.PreferenceConfiguration;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseUiException;
 import com.firebase.ui.auth.IdpResponse;
@@ -24,14 +23,9 @@ public class SplashScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        PreferenceConfiguration.updateConfiguration(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
-        boolean enabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("Dark Theme", false);
-        if (enabled)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        else
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         if (savedInstanceState == null) {
             if (FirebaseAuth.getInstance().getCurrentUser() == null)

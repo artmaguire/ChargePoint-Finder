@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:clipToPadding="false"
-    tools:context="com.example.chargepoint.fragments.UpdateInformationFragment">
+    tools:context=".views.fragments.UpdateInformationFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/NameCard"

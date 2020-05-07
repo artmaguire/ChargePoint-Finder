@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.views.fragments;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -22,8 +22,8 @@ import com.example.chargepoint.map.ChargePointInfoWindowAdapter;
 import com.example.chargepoint.map.MapSpiderifier;
 import com.example.chargepoint.pojo.ChargePoint;
 import com.example.chargepoint.utils.PreferenceConfiguration;
-import com.example.chargepoint.viewmodel.ChargePointViewModel;
-import com.example.chargepoint.viewmodel.MapViewModel;
+import com.example.chargepoint.views.viewmodel.ChargePointViewModel;
+import com.example.chargepoint.views.viewmodel.MapViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;

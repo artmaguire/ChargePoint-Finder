@@ -1,4 +1,4 @@
-package com.example.chargepoint.viewmodel;
+package com.example.chargepoint.views.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 

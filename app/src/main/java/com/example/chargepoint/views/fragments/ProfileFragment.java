@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.views.fragments;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -16,11 +16,11 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.activities.SplashScreen;
 import com.example.chargepoint.db.FirebaseHelper;
 import com.example.chargepoint.receivers.ChargingAlarmReceiver;
 import com.example.chargepoint.services.ChargingService;
 import com.example.chargepoint.utils.ChargePointNotificationManager;
+import com.example.chargepoint.views.activities.SplashScreen;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 

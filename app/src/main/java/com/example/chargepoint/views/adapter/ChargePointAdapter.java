@@ -1,4 +1,4 @@
-package com.example.chargepoint.adapter;
+package com.example.chargepoint.views.adapter;
 
 import android.os.Bundle;
 import android.util.Log;

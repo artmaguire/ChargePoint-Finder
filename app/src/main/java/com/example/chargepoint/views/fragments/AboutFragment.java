@@ -1,4 +1,4 @@
-package com.example.chargepoint.fragments;
+package com.example.chargepoint.views.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.GridView;
 import androidx.annotation.NonNull;
 
 import com.example.chargepoint.R;
-import com.example.chargepoint.adapter.GridAdapter;
+import com.example.chargepoint.views.adapter.GridAdapter;
 
 public class AboutFragment extends BackFragment {
 

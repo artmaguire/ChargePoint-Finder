@@ -1,7 +1,6 @@
-package com.example.chargepoint.adapter;
+package com.example.chargepoint.views.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +47,8 @@ public class GridAdapter extends BaseAdapter {
 
             view = new View(context);
             view = layoutInflater.inflate(R.layout.grid_item, null);
-            ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
-            TextView name = (TextView) view.findViewById(R.id.name);
+            ImageView imageView = view.findViewById(R.id.imageView);
+            TextView name = view.findViewById(R.id.name);
             imageView.setImageResource(images[position]);
             name.setText(names[position]);
         }

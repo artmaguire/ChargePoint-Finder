@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:orientation="horizontal"
-        tools:context=".fragments.PaymentDetailsFragment">
+        tools:context=".views.fragments.PaymentDetailsFragment">
 
         <TextView
             android:id="@+id/titlepage"
