@@ -176,4 +176,24 @@
     <string name="card_deleted">Card deleted</string>
     <string name="latest_news">LATEST NEWS</string>
 
+
+    <!-- String for the News Page-->
+
+    <string name="news_title_1" translatable="false"> Tesla Model Releases </string>
+    <string name="news_desc_1" translatable="false">Tesla has started pushing a new software update with improvement to its charging map, a new \'Tesla Toybox\' more. Despite the coronavirus pandemic, Tesla\'s software team is able to push for new features and improvements to the customer fleet.
+    With the new 2020. 16 Updates, the automaker is making a few somewhat minor changes.</string>
+
+    <string name="news_title_2" translatable="false"> 2020 Audi E-tron </string>
+    <string name="news_desc_2" translatable="false"> The new Audi E-tron Sportback brings rakish looks to the elctric SUV forumula, as well as adding extra change.
+    With the price of oil being cheaper than toilet paper, SUV sales will inevitably be strong in the next few months. The Audi e-Tron has been a smashing success, as they boldly entered the EV market. Now they are poised for an encore performance
+        , as the 2020 Audi e-tron Sportback is ready for Summer. </string>
+
+    <string name="news_title_3" translatable="false"> 1000 new ChargePoints </string>
+    <string name="news_desc_3" translatable="false"> Around 1,000 extra charge points for electric vehicles are expected to be put in place over the next five years as part of a new on-street infrastructure scheme.
+Minister for Communications, Climate Action and Environment Richard Bruton has announced funding that will help local authorities provide a widespread rollout of electric cars.</string>
+
+    <string name="news_title_4" translatable="false"> New cars registered in Ireland   </string>
+    <string name="news_desc_4" translatable="false"> MORE THAN 117,000 new cars or vehicles were registered in the Republic of Ireland in 2019, down 6.8% on 2018.
+A total 117,100 new vehicles were registered in last year, down from 125,671 new cars the previous year, according to figures released by the Society of the Irish Motor Industry (Simi) today. </string>
+
 </resources>

@@ -52,6 +52,7 @@
             app:etv_animationTime="20"
             app:etv_expandLines="0"
             app:etv_showLine="false"
+            android:paddingBottom="30dp"
             app:etv_textContentSize="14sp"
             app:etv_textExpand="Show More"
             app:etv_textShrink="Show Less"
