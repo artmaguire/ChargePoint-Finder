@@ -96,7 +96,7 @@
     <string name="currency_symbol_with_amount">%1$.2f €</string>
     <string name="select_card">Sélectionnez la carte…</string>
     <string name="create_card">Créer une nouvelle carte…</string>
-    <string name="active_receipt">Vous avez actuellement une voiture en charge jusqu'à: %1$s</string>
+    <string name="active_receipt">Vous avez actuellement une voiture en charge jusqu\'à: %1$s</string>
 
     <!-- Receipt -->
     <string name="go_to_receipt">Aller à la réception</string>
@@ -124,7 +124,7 @@
     <string name="user_password_changed">Mot de passe mis à jour</string>
     <string name="user_password_change_fail">Échec de la mise à jour du mot de passe</string>
     <string name="user_password_stars">**********</string>
-    <string name="user_incorrect_email_format">L'e-mail n'est pas au bon format</string>
+    <string name="user_incorrect_email_format">L\'e-mail n\'est pas au bon format</string>
 
     <string name="enter_new_email">Entrez un nouveau courriel</string>
     <string name="enter_current_email">Entrez votre e-mail actuel</string>
