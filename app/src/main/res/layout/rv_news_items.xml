@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="12dp">
+        android:paddingBottom="5dp">
 
         <TextView
             android:id="@+id/titleText"
@@ -52,7 +52,7 @@
             app:etv_animationTime="20"
             app:etv_expandLines="0"
             app:etv_showLine="false"
-            android:paddingBottom="30dp"
+            android:paddingBottom="20dp"
             app:etv_textContentSize="14sp"
             app:etv_textExpand="Show More"
             app:etv_textShrink="Show Less"

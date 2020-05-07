@@ -25,10 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Calendar;
 import java.util.Locale;
 
-/**
- * Created by Art
- * User can edit a card in the database and add new card
- */
+
 public class PaymentDetailsFragment extends BackFragment {
 
     private String TAG = "PAYMENT_DETAILS";

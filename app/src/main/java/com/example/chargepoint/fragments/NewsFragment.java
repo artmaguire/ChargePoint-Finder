@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chargepoint.R;
+import com.example.chargepoint.adapter.NewsAdapter;
 
 import java.util.ArrayList;
 
@@ -38,11 +39,9 @@ public class NewsFragment extends BackFragment {
 
 
         items.add(new Items(R.drawable.newsimagea, getString(R.string.news_title_1), getString(R.string.news_desc_1)));
-        items.add(new Items(R.drawable.newsimageb, getString(R.string.news_title_2), getString(R.string.news_desc_2)));
+        items.add(new Items(R.drawable.newsimagebx, getString(R.string.news_title_2), getString(R.string.news_desc_2)));
         items.add(new Items(R.drawable.newsimagec, getString(R.string.news_title_3), getString(R.string.news_desc_3)));
         items.add(new Items(R.drawable.newsimaged, getString(R.string.news_title_4), getString(R.string.news_desc_4)));
-
-
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new NewsAdapter(items, getContext()));
