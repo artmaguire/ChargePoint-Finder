@@ -70,4 +70,5 @@ dependencies {
     implementation 'com.sun.mail:android-mail:1.5.5'
     implementation 'com.sun.mail:android-activation:1.5.5'
     implementation 'com.github.dewinjm:monthyear-picker:1.0.2'
+    implementation 'com.github.gifffert:ExpandableTextView:0.1.6'
 }
