@@ -204,7 +204,7 @@ public class BuyPowerFragment extends BackFragment {
                     requireActivity().startService(i);
 
                     new ViewModelProvider(requireActivity()).get(ReceiptViewModel.class).destroyReceipts();
-                    Navigation.findNavController(view).popBackStack();
+                    Navigation.findNavController(view).navigate(R.id.action_global_navigation_home);
                 });
             } else {
                 Toast.makeText(getContext(), getString(R.string.no_cards_available), Toast.LENGTH_SHORT).show();

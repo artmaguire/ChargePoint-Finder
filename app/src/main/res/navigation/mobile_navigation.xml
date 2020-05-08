@@ -5,6 +5,13 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
+    <action
+        android:id="@+id/action_global_navigation_home"
+        app:destination="@id/navigation_home"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/navigation_home"
+        app:popUpToInclusive="true" />
+
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.chargepoint.views.fragments.HomeFragment"
@@ -64,9 +71,6 @@
         <action
             android:id="@+id/action_navigation_profile_to_fragment_previous_receipts"
             app:destination="@id/fragment_previous_receipts" />
-        <action
-            android:id="@+id/action_navigation_profile_to_fragment_payment_details"
-            app:destination="@id/fragment_payment_details" />
         <action
             android:id="@+id/action_navigation_profile_to_fragment_car_details"
             app:destination="@id/fragment_car_details" />
@@ -139,10 +143,6 @@
         android:name="com.example.chargepoint.views.fragments.PaymentDetailsFragment"
         android:label="@string/payment_details"
         tools:layout="@layout/fragment_payment_details" />
-    <action
-        android:id="@+id/action_global_navigation_home"
-        app:destination="@id/navigation_home"
-        app:launchSingleTop="true" />
     <fragment
         android:id="@+id/userCardsFragment"
         android:name="com.example.chargepoint.views.fragments.UserCardsFragment"

@@ -61,10 +61,14 @@ public class MainActivity extends AppCompatActivity {
             new MaterialAlertDialogBuilder(this)
                     .setTitle(getString(R.string.title_terms))
                     .setMessage(getString(R.string.see_terms))
-                    .setNegativeButton(getString(R.string.decline), (dialog, which) -> {
+                    /*.setNegativeButton(getString(R.string.decline), (dialog, which) -> {
                         finish();
                         System.exit(0);
-                    }).setPositiveButton(R.string.accept, (dialog, which) -> getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("beginRun", false).apply()).show();
+                    })*/
+                    .setPositiveButton(R.string.accept, (dialog, which) -> getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                            .putBoolean("beginRun", false)
+                            .apply())
+                    .show();
         }
     }
 
